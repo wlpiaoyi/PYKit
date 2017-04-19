@@ -1,0 +1,700 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		15CC07E31EA7556C0006B505 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E21EA7556C0006B505 /* main.m */; };
+		15CC07E61EA7556C0006B505 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E51EA7556C0006B505 /* AppDelegate.m */; };
+		15CC07E91EA7556C0006B505 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E81EA7556C0006B505 /* ViewController.m */; };
+		15CC07EC1EA7556C0006B505 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15CC07EA1EA7556C0006B505 /* Main.storyboard */; };
+		15CC07EE1EA7556C0006B505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15CC07ED1EA7556C0006B505 /* Assets.xcassets */; };
+		15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15CC07EF1EA7556C0006B505 /* LaunchScreen.storyboard */; };
+		15CC07FF1EA756120006B505 /* PYAsyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07FC1EA756120006B505 /* PYAsyImageView.m */; };
+		15CC08001EA756120006B505 /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07FE1EA756120006B505 /* PYDisplayImageView.m */; };
+		15CC082F1EA7568B0006B505 /* libpynetworka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CC082D1EA7568B0006B505 /* libpynetworka.a */; };
+		15CC08301EA7568B0006B505 /* libpyutilea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CC082E1EA7568B0006B505 /* libpyutilea.a */; };
+		15CC083D1EA756FA0006B505 /* PYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08311EA756FA0006B505 /* PYCalendarView.m */; };
+		15CC083E1EA756FA0006B505 /* PYCalenderDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08321EA756FA0006B505 /* PYCalenderDateView.m */; };
+		15CC083F1EA756FA0006B505 /* PYCalendarTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08341EA756FA0006B505 /* PYCalendarTimeView.m */; };
+		15CC08401EA756FA0006B505 /* PYCalendarParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08371EA756FA0006B505 /* PYCalendarParam.m */; };
+		15CC08411EA756FA0006B505 /* NSDate+Lunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08391EA756FA0006B505 /* NSDate+Lunar.m */; };
+		15CC08421EA756FA0006B505 /* PYCalendarHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC083B1EA756FA0006B505 /* PYCalendarHeadView.m */; };
+		15CC084D1EA757050006B505 /* PYDatePikerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08431EA757050006B505 /* PYDatePikerView.m */; };
+		15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08451EA757050006B505 /* PYCalendarGraphics.m */; };
+		15CC084F1EA757050006B505 /* PYCalendarLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08461EA757050006B505 /* PYCalendarLocation.m */; };
+		15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08481EA757050006B505 /* PYCalendarLunar.m */; };
+		15CC08511EA757050006B505 /* calendar_lunar.c in Sources */ = {isa = PBXBuildFile; fileRef = 15CC084A1EA757050006B505 /* calendar_lunar.c */; };
+		15CC085B1EA757660006B505 /* libpyinterflowa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CC085A1EA757660006B505 /* libpyinterflowa.a */; };
+		15CC08651EA757A60006B505 /* pykita.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC08621EA757A60006B505 /* pykita.h */; };
+		15CC08691EA757BA0006B505 /* PYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08311EA756FA0006B505 /* PYCalendarView.m */; };
+		15CC086A1EA757BA0006B505 /* PYCalenderDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08321EA756FA0006B505 /* PYCalenderDateView.m */; };
+		15CC086B1EA757BA0006B505 /* PYCalendarTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08341EA756FA0006B505 /* PYCalendarTimeView.m */; };
+		15CC086C1EA757BA0006B505 /* PYCalendarParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08371EA756FA0006B505 /* PYCalendarParam.m */; };
+		15CC086D1EA757BA0006B505 /* NSDate+Lunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08391EA756FA0006B505 /* NSDate+Lunar.m */; };
+		15CC086E1EA757BA0006B505 /* PYCalendarHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC083B1EA756FA0006B505 /* PYCalendarHeadView.m */; };
+		15CC086F1EA757BA0006B505 /* PYAsyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07FC1EA756120006B505 /* PYAsyImageView.m */; };
+		15CC08701EA757BA0006B505 /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07FE1EA756120006B505 /* PYDisplayImageView.m */; };
+		15CC08711EA757C80006B505 /* PYCalenderDateView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC08331EA756FA0006B505 /* PYCalenderDateView.h */; };
+		15CC08721EA757C80006B505 /* PYCalendarTimeView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC08351EA756FA0006B505 /* PYCalendarTimeView.h */; };
+		15CC08731EA757C80006B505 /* PYCalendarParam.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC08361EA756FA0006B505 /* PYCalendarParam.h */; };
+		15CC08741EA757C80006B505 /* PYCalendarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC08381EA756FA0006B505 /* PYCalendarView.h */; };
+		15CC08751EA757C80006B505 /* NSDate+Lunar.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC083A1EA756FA0006B505 /* NSDate+Lunar.h */; };
+		15CC08761EA757C80006B505 /* PYCalendarHeadView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC083C1EA756FA0006B505 /* PYCalendarHeadView.h */; };
+		15CC08771EA757C80006B505 /* PYAsyImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC07FB1EA756120006B505 /* PYAsyImageView.h */; };
+		15CC08781EA757C80006B505 /* PYDisplayImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC07FD1EA756120006B505 /* PYDisplayImageView.h */; };
+		15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15CC08791EA7595A0006B505 /* PYKit.bundle */; };
+		15CC087B1EA759EA0006B505 /* PYCalendarGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08451EA757050006B505 /* PYCalendarGraphics.m */; };
+		15CC087C1EA759EA0006B505 /* PYCalendarLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08461EA757050006B505 /* PYCalendarLocation.m */; };
+		15CC087D1EA759EA0006B505 /* PYCalendarLunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08481EA757050006B505 /* PYCalendarLunar.m */; };
+		15CC087E1EA759EA0006B505 /* PYDatePikerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08431EA757050006B505 /* PYDatePikerView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		15CC085E1EA757A60006B505 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				15CC08711EA757C80006B505 /* PYCalenderDateView.h in CopyFiles */,
+				15CC08721EA757C80006B505 /* PYCalendarTimeView.h in CopyFiles */,
+				15CC08731EA757C80006B505 /* PYCalendarParam.h in CopyFiles */,
+				15CC08741EA757C80006B505 /* PYCalendarView.h in CopyFiles */,
+				15CC08751EA757C80006B505 /* NSDate+Lunar.h in CopyFiles */,
+				15CC08761EA757C80006B505 /* PYCalendarHeadView.h in CopyFiles */,
+				15CC08771EA757C80006B505 /* PYAsyImageView.h in CopyFiles */,
+				15CC08781EA757C80006B505 /* PYDisplayImageView.h in CopyFiles */,
+				15CC08651EA757A60006B505 /* pykita.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		15CC07DE1EA7556C0006B505 /* PYKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15CC07E21EA7556C0006B505 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		15CC07E41EA7556C0006B505 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		15CC07E51EA7556C0006B505 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		15CC07E71EA7556C0006B505 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		15CC07E81EA7556C0006B505 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		15CC07EB1EA7556C0006B505 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		15CC07ED1EA7556C0006B505 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		15CC07F01EA7556C0006B505 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		15CC07F21EA7556C0006B505 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15CC07FB1EA756120006B505 /* PYAsyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAsyImageView.h; sourceTree = "<group>"; };
+		15CC07FC1EA756120006B505 /* PYAsyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAsyImageView.m; sourceTree = "<group>"; };
+		15CC07FD1EA756120006B505 /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
+		15CC07FE1EA756120006B505 /* PYDisplayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageView.m; sourceTree = "<group>"; };
+		15CC08071EA7568B0006B505 /* PYNetDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYNetDownload.h; sourceTree = "<group>"; };
+		15CC08081EA7568B0006B505 /* PYNetNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYNetNormal.h; sourceTree = "<group>"; };
+		15CC08091EA7568B0006B505 /* PYNetUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYNetUpload.h; sourceTree = "<group>"; };
+		15CC080A1EA7568B0006B505 /* PYNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYNetwork.h; sourceTree = "<group>"; };
+		15CC080B1EA7568B0006B505 /* pynetworka.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pynetworka.h; sourceTree = "<group>"; };
+		15CC080D1EA7568B0006B505 /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
+		15CC080E1EA7568B0006B505 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
+		15CC080F1EA7568B0006B505 /* NSArray+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Expand.h"; sourceTree = "<group>"; };
+		15CC08101EA7568B0006B505 /* NSData+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Expand.h"; sourceTree = "<group>"; };
+		15CC08111EA7568B0006B505 /* NSDate+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Expand.h"; sourceTree = "<group>"; };
+		15CC08121EA7568B0006B505 /* NSDictionary+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Expand.h"; sourceTree = "<group>"; };
+		15CC08131EA7568B0006B505 /* NSNumber+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Expand.h"; sourceTree = "<group>"; };
+		15CC08141EA7568B0006B505 /* NSObject+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Expand.h"; sourceTree = "<group>"; };
+		15CC08151EA7568B0006B505 /* NSObject+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Hook.h"; sourceTree = "<group>"; };
+		15CC08161EA7568B0006B505 /* NSString+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Expand.h"; sourceTree = "<group>"; };
+		15CC08171EA7568B0006B505 /* PYGraphicsDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsDraw.h; sourceTree = "<group>"; };
+		15CC08181EA7568B0006B505 /* PYGraphicsThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsThumb.h; sourceTree = "<group>"; };
+		15CC08191EA7568B0006B505 /* PYHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYHook.h; sourceTree = "<group>"; };
+		15CC081A1EA7568B0006B505 /* PYInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYInvoke.h; sourceTree = "<group>"; };
+		15CC081B1EA7568B0006B505 /* PYKeyboardNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYKeyboardNotification.h; sourceTree = "<group>"; };
+		15CC081C1EA7568B0006B505 /* PYMotionNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYMotionNotification.h; sourceTree = "<group>"; };
+		15CC081D1EA7568B0006B505 /* PYOrientationNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYOrientationNotification.h; sourceTree = "<group>"; };
+		15CC081E1EA7568B0006B505 /* PYReachabilityNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYReachabilityNotification.h; sourceTree = "<group>"; };
+		15CC081F1EA7568B0006B505 /* PYUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		15CC08201EA7568B0006B505 /* PYUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUtile.h; sourceTree = "<group>"; };
+		15CC08211EA7568B0006B505 /* pyutilea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pyutilea.h; sourceTree = "<group>"; };
+		15CC08221EA7568B0006B505 /* PYViewAutolayoutCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYViewAutolayoutCenter.h; sourceTree = "<group>"; };
+		15CC08231EA7568B0006B505 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		15CC08241EA7568B0006B505 /* UIColor+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expand.h"; sourceTree = "<group>"; };
+		15CC08251EA7568B0006B505 /* UIImage+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Expand.h"; sourceTree = "<group>"; };
+		15CC08261EA7568B0006B505 /* UILable+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILable+Expand.h"; sourceTree = "<group>"; };
+		15CC08271EA7568B0006B505 /* UIResponder+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+Hook.h"; sourceTree = "<group>"; };
+		15CC08281EA7568B0006B505 /* UIView+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Expand.h"; sourceTree = "<group>"; };
+		15CC08291EA7568B0006B505 /* UIView+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hook.h"; sourceTree = "<group>"; };
+		15CC082A1EA7568B0006B505 /* UIViewController+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Hook.h"; sourceTree = "<group>"; };
+		15CC082B1EA7568B0006B505 /* UIViewController+HookOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookOrientation.h"; sourceTree = "<group>"; };
+		15CC082C1EA7568B0006B505 /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookView.h"; sourceTree = "<group>"; };
+		15CC082D1EA7568B0006B505 /* libpynetworka.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpynetworka.a; sourceTree = "<group>"; };
+		15CC082E1EA7568B0006B505 /* libpyutilea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpyutilea.a; sourceTree = "<group>"; };
+		15CC08311EA756FA0006B505 /* PYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarView.m; sourceTree = "<group>"; };
+		15CC08321EA756FA0006B505 /* PYCalenderDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalenderDateView.m; sourceTree = "<group>"; };
+		15CC08331EA756FA0006B505 /* PYCalenderDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalenderDateView.h; sourceTree = "<group>"; };
+		15CC08341EA756FA0006B505 /* PYCalendarTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarTimeView.m; sourceTree = "<group>"; };
+		15CC08351EA756FA0006B505 /* PYCalendarTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarTimeView.h; sourceTree = "<group>"; };
+		15CC08361EA756FA0006B505 /* PYCalendarParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarParam.h; sourceTree = "<group>"; };
+		15CC08371EA756FA0006B505 /* PYCalendarParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarParam.m; sourceTree = "<group>"; };
+		15CC08381EA756FA0006B505 /* PYCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarView.h; sourceTree = "<group>"; };
+		15CC08391EA756FA0006B505 /* NSDate+Lunar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Lunar.m"; sourceTree = "<group>"; };
+		15CC083A1EA756FA0006B505 /* NSDate+Lunar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Lunar.h"; sourceTree = "<group>"; };
+		15CC083B1EA756FA0006B505 /* PYCalendarHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarHeadView.m; sourceTree = "<group>"; };
+		15CC083C1EA756FA0006B505 /* PYCalendarHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarHeadView.h; sourceTree = "<group>"; };
+		15CC08431EA757050006B505 /* PYDatePikerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDatePikerView.m; sourceTree = "<group>"; };
+		15CC08441EA757050006B505 /* PYCalendarGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarGraphics.h; sourceTree = "<group>"; };
+		15CC08451EA757050006B505 /* PYCalendarGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarGraphics.m; sourceTree = "<group>"; };
+		15CC08461EA757050006B505 /* PYCalendarLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarLocation.m; sourceTree = "<group>"; };
+		15CC08471EA757050006B505 /* PYCalendarLunar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarLunar.h; sourceTree = "<group>"; };
+		15CC08481EA757050006B505 /* PYCalendarLunar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarLunar.m; sourceTree = "<group>"; };
+		15CC08491EA757050006B505 /* PYCalendarLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarLocation.h; sourceTree = "<group>"; };
+		15CC084A1EA757050006B505 /* calendar_lunar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = calendar_lunar.c; sourceTree = "<group>"; };
+		15CC084B1EA757050006B505 /* calendar_lunar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calendar_lunar.h; sourceTree = "<group>"; };
+		15CC084C1EA757050006B505 /* PYDatePikerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDatePikerView.h; sourceTree = "<group>"; };
+		15CC08531EA7575E0006B505 /* pyinterflowa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pyinterflowa.h; sourceTree = "<group>"; };
+		15CC08541EA7575E0006B505 /* PYParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYParams.h; sourceTree = "<group>"; };
+		15CC08551EA7575E0006B505 /* UIView+Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Dialog.h"; sourceTree = "<group>"; };
+		15CC08561EA7575E0006B505 /* UIView+Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Popup.h"; sourceTree = "<group>"; };
+		15CC08571EA7575E0006B505 /* UIView+Remove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Remove.h"; sourceTree = "<group>"; };
+		15CC08581EA7575E0006B505 /* UIView+Sheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Sheet.h"; sourceTree = "<group>"; };
+		15CC08591EA7575E0006B505 /* UIView+Topbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Topbar.h"; sourceTree = "<group>"; };
+		15CC085A1EA757660006B505 /* libpyinterflowa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpyinterflowa.a; sourceTree = "<group>"; };
+		15CC08601EA757A60006B505 /* libpykita.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpykita.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		15CC08621EA757A60006B505 /* pykita.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pykita.h; sourceTree = "<group>"; };
+		15CC08791EA7595A0006B505 /* PYKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PYKit.bundle; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		15CC07DB1EA7556C0006B505 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15CC08301EA7568B0006B505 /* libpyutilea.a in Frameworks */,
+				15CC082F1EA7568B0006B505 /* libpynetworka.a in Frameworks */,
+				15CC085B1EA757660006B505 /* libpyinterflowa.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15CC085D1EA757A60006B505 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15CC07D51EA7556C0006B505 = {
+			isa = PBXGroup;
+			children = (
+				15CC08791EA7595A0006B505 /* PYKit.bundle */,
+				15CC08051EA7568B0006B505 /* include */,
+				15CC082D1EA7568B0006B505 /* libpynetworka.a */,
+				15CC082E1EA7568B0006B505 /* libpyutilea.a */,
+				15CC085A1EA757660006B505 /* libpyinterflowa.a */,
+				15CC07E01EA7556C0006B505 /* PYKit */,
+				15CC08611EA757A60006B505 /* pykita */,
+				15CC07DF1EA7556C0006B505 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		15CC07DF1EA7556C0006B505 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15CC07DE1EA7556C0006B505 /* PYKit.app */,
+				15CC08601EA757A60006B505 /* libpykita.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15CC07E01EA7556C0006B505 /* PYKit */ = {
+			isa = PBXGroup;
+			children = (
+				15CC07F81EA756120006B505 /* Source Code */,
+				15CC07E41EA7556C0006B505 /* AppDelegate.h */,
+				15CC07E51EA7556C0006B505 /* AppDelegate.m */,
+				15CC07E71EA7556C0006B505 /* ViewController.h */,
+				15CC07E81EA7556C0006B505 /* ViewController.m */,
+				15CC07EA1EA7556C0006B505 /* Main.storyboard */,
+				15CC07ED1EA7556C0006B505 /* Assets.xcassets */,
+				15CC07EF1EA7556C0006B505 /* LaunchScreen.storyboard */,
+				15CC07F21EA7556C0006B505 /* Info.plist */,
+				15CC07E11EA7556C0006B505 /* Supporting Files */,
+			);
+			path = PYKit;
+			sourceTree = "<group>";
+		};
+		15CC07E11EA7556C0006B505 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				15CC07E21EA7556C0006B505 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		15CC07F81EA756120006B505 /* Source Code */ = {
+			isa = PBXGroup;
+			children = (
+				15CC07F91EA756120006B505 /* Private */,
+				15CC07FA1EA756120006B505 /* Public */,
+			);
+			path = "Source Code";
+			sourceTree = "<group>";
+		};
+		15CC07F91EA756120006B505 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				15CC084A1EA757050006B505 /* calendar_lunar.c */,
+				15CC084B1EA757050006B505 /* calendar_lunar.h */,
+				15CC08441EA757050006B505 /* PYCalendarGraphics.h */,
+				15CC08451EA757050006B505 /* PYCalendarGraphics.m */,
+				15CC08491EA757050006B505 /* PYCalendarLocation.h */,
+				15CC08461EA757050006B505 /* PYCalendarLocation.m */,
+				15CC08471EA757050006B505 /* PYCalendarLunar.h */,
+				15CC08481EA757050006B505 /* PYCalendarLunar.m */,
+				15CC084C1EA757050006B505 /* PYDatePikerView.h */,
+				15CC08431EA757050006B505 /* PYDatePikerView.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		15CC07FA1EA756120006B505 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				15CC083A1EA756FA0006B505 /* NSDate+Lunar.h */,
+				15CC08391EA756FA0006B505 /* NSDate+Lunar.m */,
+				15CC07FB1EA756120006B505 /* PYAsyImageView.h */,
+				15CC07FC1EA756120006B505 /* PYAsyImageView.m */,
+				15CC083C1EA756FA0006B505 /* PYCalendarHeadView.h */,
+				15CC083B1EA756FA0006B505 /* PYCalendarHeadView.m */,
+				15CC08361EA756FA0006B505 /* PYCalendarParam.h */,
+				15CC08371EA756FA0006B505 /* PYCalendarParam.m */,
+				15CC08351EA756FA0006B505 /* PYCalendarTimeView.h */,
+				15CC08341EA756FA0006B505 /* PYCalendarTimeView.m */,
+				15CC08381EA756FA0006B505 /* PYCalendarView.h */,
+				15CC08311EA756FA0006B505 /* PYCalendarView.m */,
+				15CC08331EA756FA0006B505 /* PYCalenderDateView.h */,
+				15CC08321EA756FA0006B505 /* PYCalenderDateView.m */,
+				15CC07FD1EA756120006B505 /* PYDisplayImageView.h */,
+				15CC07FE1EA756120006B505 /* PYDisplayImageView.m */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		15CC08051EA7568B0006B505 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				15CC08521EA7575E0006B505 /* pyinterflowa */,
+				15CC08061EA7568B0006B505 /* pynetworka */,
+				15CC080C1EA7568B0006B505 /* pyutilea */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		15CC08061EA7568B0006B505 /* pynetworka */ = {
+			isa = PBXGroup;
+			children = (
+				15CC08071EA7568B0006B505 /* PYNetDownload.h */,
+				15CC08081EA7568B0006B505 /* PYNetNormal.h */,
+				15CC08091EA7568B0006B505 /* PYNetUpload.h */,
+				15CC080A1EA7568B0006B505 /* PYNetwork.h */,
+				15CC080B1EA7568B0006B505 /* pynetworka.h */,
+			);
+			path = pynetworka;
+			sourceTree = "<group>";
+		};
+		15CC080C1EA7568B0006B505 /* pyutilea */ = {
+			isa = PBXGroup;
+			children = (
+				15CC080D1EA7568B0006B505 /* EXTScope.h */,
+				15CC080E1EA7568B0006B505 /* metamacros.h */,
+				15CC080F1EA7568B0006B505 /* NSArray+Expand.h */,
+				15CC08101EA7568B0006B505 /* NSData+Expand.h */,
+				15CC08111EA7568B0006B505 /* NSDate+Expand.h */,
+				15CC08121EA7568B0006B505 /* NSDictionary+Expand.h */,
+				15CC08131EA7568B0006B505 /* NSNumber+Expand.h */,
+				15CC08141EA7568B0006B505 /* NSObject+Expand.h */,
+				15CC08151EA7568B0006B505 /* NSObject+Hook.h */,
+				15CC08161EA7568B0006B505 /* NSString+Expand.h */,
+				15CC08171EA7568B0006B505 /* PYGraphicsDraw.h */,
+				15CC08181EA7568B0006B505 /* PYGraphicsThumb.h */,
+				15CC08191EA7568B0006B505 /* PYHook.h */,
+				15CC081A1EA7568B0006B505 /* PYInvoke.h */,
+				15CC081B1EA7568B0006B505 /* PYKeyboardNotification.h */,
+				15CC081C1EA7568B0006B505 /* PYMotionNotification.h */,
+				15CC081D1EA7568B0006B505 /* PYOrientationNotification.h */,
+				15CC081E1EA7568B0006B505 /* PYReachabilityNotification.h */,
+				15CC081F1EA7568B0006B505 /* PYUncaughtExceptionHandler.h */,
+				15CC08201EA7568B0006B505 /* PYUtile.h */,
+				15CC08211EA7568B0006B505 /* pyutilea.h */,
+				15CC08221EA7568B0006B505 /* PYViewAutolayoutCenter.h */,
+				15CC08231EA7568B0006B505 /* Reachability.h */,
+				15CC08241EA7568B0006B505 /* UIColor+Expand.h */,
+				15CC08251EA7568B0006B505 /* UIImage+Expand.h */,
+				15CC08261EA7568B0006B505 /* UILable+Expand.h */,
+				15CC08271EA7568B0006B505 /* UIResponder+Hook.h */,
+				15CC08281EA7568B0006B505 /* UIView+Expand.h */,
+				15CC08291EA7568B0006B505 /* UIView+Hook.h */,
+				15CC082A1EA7568B0006B505 /* UIViewController+Hook.h */,
+				15CC082B1EA7568B0006B505 /* UIViewController+HookOrientation.h */,
+				15CC082C1EA7568B0006B505 /* UIViewController+HookView.h */,
+			);
+			path = pyutilea;
+			sourceTree = "<group>";
+		};
+		15CC08521EA7575E0006B505 /* pyinterflowa */ = {
+			isa = PBXGroup;
+			children = (
+				15CC08531EA7575E0006B505 /* pyinterflowa.h */,
+				15CC08541EA7575E0006B505 /* PYParams.h */,
+				15CC08551EA7575E0006B505 /* UIView+Dialog.h */,
+				15CC08561EA7575E0006B505 /* UIView+Popup.h */,
+				15CC08571EA7575E0006B505 /* UIView+Remove.h */,
+				15CC08581EA7575E0006B505 /* UIView+Sheet.h */,
+				15CC08591EA7575E0006B505 /* UIView+Topbar.h */,
+			);
+			path = pyinterflowa;
+			sourceTree = "<group>";
+		};
+		15CC08611EA757A60006B505 /* pykita */ = {
+			isa = PBXGroup;
+			children = (
+				15CC08621EA757A60006B505 /* pykita.h */,
+			);
+			path = pykita;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		15CC07DD1EA7556C0006B505 /* PYKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15CC07F51EA7556C0006B505 /* Build configuration list for PBXNativeTarget "PYKit" */;
+			buildPhases = (
+				15CC07DA1EA7556C0006B505 /* Sources */,
+				15CC07DB1EA7556C0006B505 /* Frameworks */,
+				15CC07DC1EA7556C0006B505 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PYKit;
+			productName = PYKit;
+			productReference = 15CC07DE1EA7556C0006B505 /* PYKit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		15CC085F1EA757A60006B505 /* pykita */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15CC08661EA757A60006B505 /* Build configuration list for PBXNativeTarget "pykita" */;
+			buildPhases = (
+				15CC085C1EA757A60006B505 /* Sources */,
+				15CC085D1EA757A60006B505 /* Frameworks */,
+				15CC085E1EA757A60006B505 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = pykita;
+			productName = pykita;
+			productReference = 15CC08601EA757A60006B505 /* libpykita.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		15CC07D61EA7556C0006B505 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = wlpiaoyi;
+				TargetAttributes = {
+					15CC07DD1EA7556C0006B505 = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = S4NUSJ3KDJ;
+						ProvisioningStyle = Automatic;
+					};
+					15CC085F1EA757A60006B505 = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = S4NUSJ3KDJ;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 15CC07D91EA7556C0006B505 /* Build configuration list for PBXProject "PYKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 15CC07D51EA7556C0006B505;
+			productRefGroup = 15CC07DF1EA7556C0006B505 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				15CC07DD1EA7556C0006B505 /* PYKit */,
+				15CC085F1EA757A60006B505 /* pykita */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		15CC07DC1EA7556C0006B505 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */,
+				15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */,
+				15CC07EE1EA7556C0006B505 /* Assets.xcassets in Resources */,
+				15CC07EC1EA7556C0006B505 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15CC07DA1EA7556C0006B505 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15CC07E91EA7556C0006B505 /* ViewController.m in Sources */,
+				15CC083E1EA756FA0006B505 /* PYCalenderDateView.m in Sources */,
+				15CC083D1EA756FA0006B505 /* PYCalendarView.m in Sources */,
+				15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */,
+				15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */,
+				15CC08401EA756FA0006B505 /* PYCalendarParam.m in Sources */,
+				15CC084F1EA757050006B505 /* PYCalendarLocation.m in Sources */,
+				15CC07E61EA7556C0006B505 /* AppDelegate.m in Sources */,
+				15CC084D1EA757050006B505 /* PYDatePikerView.m in Sources */,
+				15CC083F1EA756FA0006B505 /* PYCalendarTimeView.m in Sources */,
+				15CC08421EA756FA0006B505 /* PYCalendarHeadView.m in Sources */,
+				15CC07E31EA7556C0006B505 /* main.m in Sources */,
+				15CC08511EA757050006B505 /* calendar_lunar.c in Sources */,
+				15CC08001EA756120006B505 /* PYDisplayImageView.m in Sources */,
+				15CC07FF1EA756120006B505 /* PYAsyImageView.m in Sources */,
+				15CC08411EA756FA0006B505 /* NSDate+Lunar.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15CC085C1EA757A60006B505 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15CC087B1EA759EA0006B505 /* PYCalendarGraphics.m in Sources */,
+				15CC087C1EA759EA0006B505 /* PYCalendarLocation.m in Sources */,
+				15CC087D1EA759EA0006B505 /* PYCalendarLunar.m in Sources */,
+				15CC087E1EA759EA0006B505 /* PYDatePikerView.m in Sources */,
+				15CC08691EA757BA0006B505 /* PYCalendarView.m in Sources */,
+				15CC086A1EA757BA0006B505 /* PYCalenderDateView.m in Sources */,
+				15CC086B1EA757BA0006B505 /* PYCalendarTimeView.m in Sources */,
+				15CC086C1EA757BA0006B505 /* PYCalendarParam.m in Sources */,
+				15CC086D1EA757BA0006B505 /* NSDate+Lunar.m in Sources */,
+				15CC086E1EA757BA0006B505 /* PYCalendarHeadView.m in Sources */,
+				15CC086F1EA757BA0006B505 /* PYAsyImageView.m in Sources */,
+				15CC08701EA757BA0006B505 /* PYDisplayImageView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		15CC07EA1EA7556C0006B505 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15CC07EB1EA7556C0006B505 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		15CC07EF1EA7556C0006B505 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15CC07F01EA7556C0006B505 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		15CC07F31EA7556C0006B505 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		15CC07F41EA7556C0006B505 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		15CC07F61EA7556C0006B505 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				INFOPLIST_FILE = PYKit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		15CC07F71EA7556C0006B505 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				INFOPLIST_FILE = PYKit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		15CC08671EA757A60006B505 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		15CC08681EA757A60006B505 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		15CC07D91EA7556C0006B505 /* Build configuration list for PBXProject "PYKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15CC07F31EA7556C0006B505 /* Debug */,
+				15CC07F41EA7556C0006B505 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15CC07F51EA7556C0006B505 /* Build configuration list for PBXNativeTarget "PYKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15CC07F61EA7556C0006B505 /* Debug */,
+				15CC07F71EA7556C0006B505 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		15CC08661EA757A60006B505 /* Build configuration list for PBXNativeTarget "pykita" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15CC08671EA757A60006B505 /* Debug */,
+				15CC08681EA757A60006B505 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 15CC07D61EA7556C0006B505 /* Project object */;
+}
