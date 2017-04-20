@@ -7,7 +7,6 @@
 //
 
 #import "PYAsyImageView.h"
-#import "PYViewAutolayoutCenter.h"
 #import "PYNetDownload.h"
 
 static NSString * PYAsyImageViewDataCaches;

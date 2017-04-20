@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "PYCalendarLocation.h"
+#import "PYCalendarParam.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [PYCalendarParam loadCalendarData];
     return YES;
 }
 

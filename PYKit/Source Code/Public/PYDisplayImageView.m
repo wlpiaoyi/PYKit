@@ -14,7 +14,7 @@ PYPNSNN PYAsyImageView * imageView;
 PYPNA bool isTouchMove;
 PYPNA NSUInteger countMusulTouch;
 PYPNA CGFloat suffiTouchValue;
-PYPNA CGFloat touchBeginTime;
+PYPNA NSTimeInterval touchBeginTime;
 PYPNA CGPoint preTouch;
 PYPNA CGRect preImageViewRect;
 
@@ -35,6 +35,7 @@ PYINITPARAMS
     self.imageView.imgUrl = imgUrl;
 }
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
     self.isTouchMove = false;
     self.suffiTouchValue = 0;
     UITouch *touch = touches.anyObject;
@@ -45,9 +46,29 @@ PYINITPARAMS
 }
 
 -(void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesMoved:touches withEvent:event];
     self.isTouchMove = true;
-    if(self.countMusulTouch <=2 && [touches count] == 2){
+    
+    if(self.countMusulTouch < 1 && [touches count] == 1){
+        self.countMusulTouch = 1;
+    }else if(self.countMusulTouch < 2 && [touches count] == 2){
         self.countMusulTouch = 2;
+    }else if([touches count] > 2){
+        self.countMusulTouch = [touches count];
+    }
+    
+    if(self.countMusulTouch == 1 && [touches count] == 1){
+        if((self.touchBeginTime > 0 && [NSDate timeIntervalSinceReferenceDate] - self.touchBeginTime < 0.1f)) {
+            return;
+        }else{
+            self.touchBeginTime = 0;
+        }
+        UITouch *touch = touches.anyObject;
+        CGPoint point = [touch locationInView: self];
+        self.imageView.frameX -= self.preTouch.x - point.x;
+        self.imageView.frameY -= self.preTouch.y - point.y;
+        self.preTouch = point;
+    }else if(self.countMusulTouch == 2 && [touches count] == 2){
         CGFloat suffv = -99999;
         NSArray<UITouch *> *touchas = [touches allObjects];
         CGPoint point1 = [touchas.firstObject locationInView: self];
@@ -70,23 +91,11 @@ PYINITPARAMS
         }else{
             self.suffiTouchValue = suffv;
         }
-    }else if([touches count] > 2){
-        self.countMusulTouch = [touches count];
     }
-    
-    if(self.countMusulTouch > 1 || (self.touchBeginTime > 0 &&[NSDate timeIntervalSinceReferenceDate] - self.touchBeginTime < 0.1f)) {
-        self.touchBeginTime = 0;
-        return;
-    }
-    self.countMusulTouch = 1;
-    UITouch *touch = touches.anyObject;
-    CGPoint point = [touch locationInView: self];
-    self.imageView.frameX -= self.preTouch.x - point.x;
-    self.imageView.frameY -= self.preTouch.y - point.y;
-    self.preTouch = point;
 }
 
 -(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesEnded:touches withEvent:event];
     @unsafeify(self);
     [UIView animateWithDuration:0.2 animations:^{
         @strongify(self);
@@ -127,6 +136,19 @@ PYINITPARAMS
                     r.size.width = r.size.width * r.size.height / h;
                     r.origin.x += (w - r.size.width)/2;
                     r.origin.y += (h - r.size.height)/2;
+                }else{
+                    if(r.origin.y > 0){
+                        r.origin.y = 0;
+                    }else if(r.origin.y < self.frameHeight - r.size.height){
+                        r.origin.y = self.frameHeight - r.size.height;
+                    }
+                    if(r.size.width < self.frameWidth){
+                        r.origin.x = (self.frameWidth - r.size.width)/2;
+                    }else if(r.origin.x > 0){
+                        r.origin.x = 0;
+                    }else if(r.origin.x < self.frameWidth - r.size.width){
+                        r.origin.x = self.frameWidth - r.size.width;
+                    }
                 }
             }
             self.imgFrame = r;
@@ -140,6 +162,7 @@ PYINITPARAMS
     self.imgFrame = imgFrame;
 }
 -(CGRect) imgFrame{
+    if(self.imageView.image == nil) return CGRectZero;
     CGSize s = self.imageView.image.size;
     if(s.width/s.height > self.imageView.frameWidth/self.imageView.frameHeight){
         CGFloat w = s.width;

@@ -7,6 +7,7 @@
 //
 
 #import "PYCalendarParam.h"
+#import "PYParams.h"
 
 //int PYDateMinusFotDays(PYDate date1, PYDate date2){
 //    int days = 0;
@@ -84,6 +85,9 @@ UIColor * _Nonnull PYCalendarDisableColor;
     PYCalendarLunarFont = [UIFont systemFontOfSize:10];
     PYCalendarLunarColor = [UIColor orangeColor];
     PYCalendarDisableColor = [UIColor lightGrayColor];
+    [PYParams loadSheetParamsData];
+    [PYParams loadDialogParamsData];
+    [PYParams loadTopbarParamsData];
 }
 
 @end
