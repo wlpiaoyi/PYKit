@@ -15,7 +15,8 @@ PYPNA bool isTouchMove;
 PYPNA NSUInteger countMusulTouch;
 PYPNA CGFloat suffiTouchValue;
 PYPNA NSTimeInterval touchBeginTime;
-PYPNA CGPoint preTouch;
+PYPNA NSTimeInterval touchEndTime;
+PYPNA CGPoint preTouchPoint;
 PYPNA CGRect preImageViewRect;
 
 PYPNA CGRect imgFrame;
@@ -27,6 +28,7 @@ PYINITPARAMS
 -(void) initParams{
     self.imageView = [PYAsyImageView new];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.touchEndTime = self.touchBeginTime = 0;
     [self addSubview:self.imageView];
     self.multipleTouchEnabled = true;
 }
@@ -39,7 +41,7 @@ PYINITPARAMS
     self.isTouchMove = false;
     self.suffiTouchValue = 0;
     UITouch *touch = touches.anyObject;
-    self.preTouch = [touch locationInView: self];
+    self.preTouchPoint = [touch locationInView: self];
     self.touchBeginTime = [NSDate timeIntervalSinceReferenceDate];
     self.countMusulTouch = 0;
     self.preImageViewRect = self.imageView.frame;
@@ -47,7 +49,12 @@ PYINITPARAMS
 
 -(void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesMoved:touches withEvent:event];
-    self.isTouchMove = true;
+    
+    if(self.isTouchMove == false){
+        UITouch *touch = touches.anyObject;
+        CGPoint point = [touch locationInView: self];
+        self.isTouchMove = !CGPointEqualToPoint(point, self.preTouchPoint);
+    }
     
     if(self.countMusulTouch < 1 && [touches count] == 1){
         self.countMusulTouch = 1;
@@ -65,9 +72,9 @@ PYINITPARAMS
         }
         UITouch *touch = touches.anyObject;
         CGPoint point = [touch locationInView: self];
-        self.imageView.frameX -= self.preTouch.x - point.x;
-        self.imageView.frameY -= self.preTouch.y - point.y;
-        self.preTouch = point;
+        self.imageView.frameX -= self.preTouchPoint.x - point.x;
+        self.imageView.frameY -= self.preTouchPoint.y - point.y;
+        self.preTouchPoint = point;
     }else if(self.countMusulTouch == 2 && [touches count] == 2){
         CGFloat suffv = -99999;
         NSArray<UITouch *> *touchas = [touches allObjects];
@@ -96,64 +103,76 @@ PYINITPARAMS
 
 -(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
-    @unsafeify(self);
-    [UIView animateWithDuration:0.2 animations:^{
-        @strongify(self);
-        CGRect imgFrame = self.imgFrame;
-        if(imgFrame.size.width < self.frameWidth && imgFrame.size.height < self.frameWidth){
-            self.imageView.frame = self.bounds;
-            imgFrame = self.imgFrame;
-        }else{
-            CGRect r = self.imgFrame;
-            CGFloat bv = 3;
-            if(r.size.width/r.size.height > self.imageView.frameWidth/self.imageView.frameHeight){
-                if(r.size.width / bv > self.frameWidth){
-                    CGFloat w = r.size.width;
-                    CGFloat h = r.size.height;
-                    r.size.width = self.frameWidth * bv;
-                    r.size.height = r.size.height * r.size.width / w;
-                    r.origin.x += (w - r.size.width)/2;
-                    r.origin.y += (h - r.size.height)/2;
-                }else{
-                    if(r.origin.x > 0){
-                        r.origin.x = 0;
-                    }else if(r.origin.x < self.frameWidth - r.size.width){
-                        r.origin.x = self.frameWidth - r.size.width;
-                    }
-                    if(r.size.height < self.frameHeight){
-                        r.origin.y = (self.frameHeight - r.size.height)/2;
-                    }else if(r.origin.y > 0){
-                        r.origin.y = 0;
-                    }else if(r.origin.y < self.frameHeight - r.size.height){
-                        r.origin.y = self.frameHeight - r.size.height;
-                    }
-                }
+    NSTimeInterval touchEndTime = [NSDate timeIntervalSinceReferenceDate];
+    if(self.isTouchMove){
+        @unsafeify(self);
+        [UIView animateWithDuration:0.2 animations:^{
+            @strongify(self);
+            CGRect imgFrame = self.imgFrame;
+            if(imgFrame.size.width < self.frameWidth && imgFrame.size.height < self.frameWidth){
+                self.imageView.frame = self.bounds;
+                imgFrame = self.imgFrame;
             }else{
-                if(r.size.height / bv > self.frameHeight){
-                    CGFloat w = r.size.width;
-                    CGFloat h = r.size.height;
-                    r.size.height = self.frameHeight * bv;
-                    r.size.width = r.size.width * r.size.height / h;
-                    r.origin.x += (w - r.size.width)/2;
-                    r.origin.y += (h - r.size.height)/2;
-                }else{
-                    if(r.origin.y > 0){
-                        r.origin.y = 0;
-                    }else if(r.origin.y < self.frameHeight - r.size.height){
-                        r.origin.y = self.frameHeight - r.size.height;
+                CGRect r = self.imgFrame;
+                CGFloat bv = 3;
+                if(r.size.width/r.size.height > self.imageView.frameWidth/self.imageView.frameHeight){
+                    if(r.size.width / bv > self.frameWidth){
+                        CGFloat w = r.size.width;
+                        CGFloat h = r.size.height;
+                        r.size.width = self.frameWidth * bv;
+                        r.size.height = r.size.height * r.size.width / w;
+                        r.origin.x += (w - r.size.width)/2;
+                        r.origin.y += (h - r.size.height)/2;
+                    }else{
+                        if(r.origin.x > 0){
+                            r.origin.x = 0;
+                        }else if(r.origin.x < self.frameWidth - r.size.width){
+                            r.origin.x = self.frameWidth - r.size.width;
+                        }
+                        if(r.size.height < self.frameHeight){
+                            r.origin.y = (self.frameHeight - r.size.height)/2;
+                        }else if(r.origin.y > 0){
+                            r.origin.y = 0;
+                        }else if(r.origin.y < self.frameHeight - r.size.height){
+                            r.origin.y = self.frameHeight - r.size.height;
+                        }
                     }
-                    if(r.size.width < self.frameWidth){
-                        r.origin.x = (self.frameWidth - r.size.width)/2;
-                    }else if(r.origin.x > 0){
-                        r.origin.x = 0;
-                    }else if(r.origin.x < self.frameWidth - r.size.width){
-                        r.origin.x = self.frameWidth - r.size.width;
+                }else{
+                    if(r.size.height / bv > self.frameHeight){
+                        CGFloat w = r.size.width;
+                        CGFloat h = r.size.height;
+                        r.size.height = self.frameHeight * bv;
+                        r.size.width = r.size.width * r.size.height / h;
+                        r.origin.x += (w - r.size.width)/2;
+                        r.origin.y += (h - r.size.height)/2;
+                    }else{
+                        if(r.origin.y > 0){
+                            r.origin.y = 0;
+                        }else if(r.origin.y < self.frameHeight - r.size.height){
+                            r.origin.y = self.frameHeight - r.size.height;
+                        }
+                        if(r.size.width < self.frameWidth){
+                            r.origin.x = (self.frameWidth - r.size.width)/2;
+                        }else if(r.origin.x > 0){
+                            r.origin.x = 0;
+                        }else if(r.origin.x < self.frameWidth - r.size.width){
+                            r.origin.x = self.frameWidth - r.size.width;
+                        }
                     }
                 }
+                self.imgFrame = r;
             }
-            self.imgFrame = r;
+        }];
+    }else{
+        if(self.touchEndTime > 0 && touchEndTime- self.touchEndTime < 0.4f && touchEndTime-self.touchBeginTime<0.2f){
+            @unsafeify(self);
+            [UIView animateWithDuration:0.2f animations:^{
+                @strongify(self);
+                [self showDefualt];
+            }];
         }
-    }];
+    }
+    self.touchEndTime = touchEndTime;
 }
 -(void) showDefualt{
     CGRect imgFrame = self.imgFrame;
