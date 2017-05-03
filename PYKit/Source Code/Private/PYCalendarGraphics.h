@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PYCalendarParam.h"
+extern NSArray * _Nonnull PYCalendarWeekNames;
 
 @interface PYCalendarGraphics : NSObject
 

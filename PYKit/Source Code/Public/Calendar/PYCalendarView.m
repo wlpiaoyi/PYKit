@@ -150,22 +150,7 @@
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender{
     if (sender.state == UIGestureRecognizerStateBegan) {
-        PYDatePikerView * dpv = [PYDatePikerView new];
-        dpv.selectedDate = self.date;
-        @unsafeify(self);
-        [dpv dialogShowWithTitle:@"年月调整" block:^(UIView * _Nonnull view, NSUInteger index) {
-            @strongify(self);
-            [view dialogHidden];
-            switch (index) {
-                case 0:{
-                    self.date = ((PYDatePikerView *) view).selectedDate;
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-        } buttonNames:@[@"确定",@"取消"]];
+        [self showDataOperationView];
     }
 }
 - (void)handleSwipes:(UISwipeGestureRecognizer *)sender {
@@ -276,6 +261,24 @@
         }
         orgSize = self.frameSize;
     }
+}
+-(void) showDataOperationView{
+    PYDatePikerView * dpv = [PYDatePikerView new];
+    dpv.selectedDate = self.date;
+    @unsafeify(self);
+    [dpv dialogShowWithTitle:@"年月调整" block:^(UIView * _Nonnull view, NSUInteger index) {
+        @strongify(self);
+        [view dialogHidden];
+        switch (index) {
+            case 0:{
+                self.date = ((PYDatePikerView *) view).selectedDate;
+            }
+                break;
+                
+            default:
+                break;
+        }
+    } buttonNames:@[@"确定",@"取消"]];
 }
 -(void) dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

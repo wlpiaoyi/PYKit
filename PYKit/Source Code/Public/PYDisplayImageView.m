@@ -34,6 +34,11 @@ PYINITPARAMS
 }
 -(void) setImgUrl:(NSString *)imgUrl{
     _imgUrl = imgUrl;
+    @unsafeify(self);
+    [self.imageView setBlockDisplay:^(bool isSuccess, bool isCahes, PYAsyImageView * _Nonnull imageView){
+        @strongify(self);
+        [self showDefualt];
+    }];
     self.imageView.imgUrl = imgUrl;
 }
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -109,58 +114,58 @@ PYINITPARAMS
         [UIView animateWithDuration:0.2 animations:^{
             @strongify(self);
             CGRect imgFrame = self.imgFrame;
-            if(imgFrame.size.width < self.frameWidth && imgFrame.size.height < self.frameWidth){
+            if(imgFrame.size.width < self.frameWidth && imgFrame.size.height < self.frameHeight){
                 self.imageView.frame = self.bounds;
                 imgFrame = self.imgFrame;
             }else{
-                CGRect r = self.imgFrame;
+                CGRect imgFrame = self.imgFrame;
                 CGFloat bv = 3;
-                if(r.size.width/r.size.height > self.imageView.frameWidth/self.imageView.frameHeight){
-                    if(r.size.width / bv > self.frameWidth){
-                        CGFloat w = r.size.width;
-                        CGFloat h = r.size.height;
-                        r.size.width = self.frameWidth * bv;
-                        r.size.height = r.size.height * r.size.width / w;
-                        r.origin.x += (w - r.size.width)/2;
-                        r.origin.y += (h - r.size.height)/2;
+                if(imgFrame.size.width/imgFrame.size.height > self.imageView.frameWidth/self.imageView.frameHeight){
+                    if(imgFrame.size.width / bv > self.frameWidth){
+                        CGFloat w = imgFrame.size.width;
+                        CGFloat h = imgFrame.size.height;
+                        imgFrame.size.width = self.frameWidth * bv;
+                        imgFrame.size.height = imgFrame.size.height * imgFrame.size.width / w;
+                        imgFrame.origin.x += (w - imgFrame.size.width)/2;
+                        imgFrame.origin.y += (h - imgFrame.size.height)/2;
                     }else{
-                        if(r.origin.x > 0){
-                            r.origin.x = 0;
-                        }else if(r.origin.x < self.frameWidth - r.size.width){
-                            r.origin.x = self.frameWidth - r.size.width;
+                        if(imgFrame.origin.x > 0){
+                            imgFrame.origin.x = 0;
+                        }else if(imgFrame.origin.x < self.frameWidth - imgFrame.size.width){
+                            imgFrame.origin.x = self.frameWidth - imgFrame.size.width;
                         }
-                        if(r.size.height < self.frameHeight){
-                            r.origin.y = (self.frameHeight - r.size.height)/2;
-                        }else if(r.origin.y > 0){
-                            r.origin.y = 0;
-                        }else if(r.origin.y < self.frameHeight - r.size.height){
-                            r.origin.y = self.frameHeight - r.size.height;
+                        if(imgFrame.size.height < self.frameHeight){
+                            imgFrame.origin.y = (self.frameHeight - imgFrame.size.height)/2;
+                        }else if(imgFrame.origin.y > 0){
+                            imgFrame.origin.y = 0;
+                        }else if(imgFrame.origin.y < self.frameHeight - imgFrame.size.height){
+                            imgFrame.origin.y = self.frameHeight - imgFrame.size.height;
                         }
                     }
                 }else{
-                    if(r.size.height / bv > self.frameHeight){
-                        CGFloat w = r.size.width;
-                        CGFloat h = r.size.height;
-                        r.size.height = self.frameHeight * bv;
-                        r.size.width = r.size.width * r.size.height / h;
-                        r.origin.x += (w - r.size.width)/2;
-                        r.origin.y += (h - r.size.height)/2;
+                    if(imgFrame.size.height / bv > self.frameHeight){
+                        CGFloat w = imgFrame.size.width;
+                        CGFloat h = imgFrame.size.height;
+                        imgFrame.size.height = self.frameHeight * bv;
+                        imgFrame.size.width = imgFrame.size.width * imgFrame.size.height / h;
+                        imgFrame.origin.x += (w - imgFrame.size.width)/2;
+                        imgFrame.origin.y += (h - imgFrame.size.height)/2;
                     }else{
-                        if(r.origin.y > 0){
-                            r.origin.y = 0;
-                        }else if(r.origin.y < self.frameHeight - r.size.height){
-                            r.origin.y = self.frameHeight - r.size.height;
+                        if(imgFrame.origin.y > 0){
+                            imgFrame.origin.y = 0;
+                        }else if(imgFrame.origin.y < self.frameHeight - imgFrame.size.height){
+                            imgFrame.origin.y = self.frameHeight - imgFrame.size.height;
                         }
-                        if(r.size.width < self.frameWidth){
-                            r.origin.x = (self.frameWidth - r.size.width)/2;
-                        }else if(r.origin.x > 0){
-                            r.origin.x = 0;
-                        }else if(r.origin.x < self.frameWidth - r.size.width){
-                            r.origin.x = self.frameWidth - r.size.width;
+                        if(imgFrame.size.width < self.frameWidth){
+                            imgFrame.origin.x = (self.frameWidth - imgFrame.size.width)/2;
+                        }else if(imgFrame.origin.x > 0){
+                            imgFrame.origin.x = 0;
+                        }else if(imgFrame.origin.x < self.frameWidth - imgFrame.size.width){
+                            imgFrame.origin.x = self.frameWidth - imgFrame.size.width;
                         }
                     }
                 }
-                self.imgFrame = r;
+                self.imgFrame = imgFrame;
             }
         }];
     }else{
@@ -177,6 +182,7 @@ PYINITPARAMS
 -(void) showDefualt{
     CGRect imgFrame = self.imgFrame;
     self.imageView.frame = self.bounds;
+    if(CGRectEqualToRect(imgFrame, CGRectZero))return;
     imgFrame = self.imgFrame;
     self.imgFrame = imgFrame;
 }

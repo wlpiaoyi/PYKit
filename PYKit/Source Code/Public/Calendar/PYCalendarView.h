@@ -11,4 +11,5 @@
 @interface PYCalendarView : UIView
 @property (nonatomic, strong, nonnull) NSDate * date;
 @property (nonatomic, copy, nullable) void (^blockSelected) (PYCalendarView * _Nonnull view);
+-(void) showDataOperationView;
 @end

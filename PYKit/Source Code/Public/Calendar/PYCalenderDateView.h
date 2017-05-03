@@ -22,12 +22,12 @@
     int locationLength;
 }
 @property (nonatomic, assign, nullable) id<PYCalenderDateView> delegate;
-@property (nonatomic, strong, nonnull) NSDate * date;
-@property (nonatomic, strong, nonnull) UIFont * fontDay;
-@property (nonatomic, strong, nonnull) UIColor * colorDay;
-@property (nonatomic, strong, nonnull) UIFont * fontLunar;
-@property (nonatomic, strong, nonnull) UIColor * colorLunar;
-@property (nonatomic, strong, nonnull) UIColor * colorDisable;
+PYPNSNN NSDate * date;
+PYPNSNN UIFont * fontDay;
+PYPNSNN UIColor * colorDay;
+PYPNSNN UIFont * fontLunar;
+PYPNSNN UIColor * colorLunar;
+PYPNSNN UIColor * colorDisable;
 -(void) reloadDate;
 -(void) reloadOther;
 @end

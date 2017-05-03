@@ -75,7 +75,9 @@ UIFont * _Nonnull PYCalendarLunarFont;
 UIColor * _Nonnull PYCalendarLunarColor;
 UIColor * _Nonnull PYCalendarDisableColor;
 @implementation PYCalendarParam
-
++(void) initialize{
+    [PYCalendarParam loadCalendarData];
+}
 +(void) loadCalendarData{
     PYCalendarBGC = [UIColor clearColor];
     PYCalendarWeekFont = [UIFont systemFontOfSize:10];
@@ -91,3 +93,5 @@ UIColor * _Nonnull PYCalendarDisableColor;
 }
 
 @end
+
+
