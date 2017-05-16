@@ -51,7 +51,6 @@
 		15CC087C1EA759EA0006B505 /* PYCalendarLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08461EA757050006B505 /* PYCalendarLocation.m */; };
 		15CC087D1EA759EA0006B505 /* PYCalendarLunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08481EA757050006B505 /* PYCalendarLunar.m */; };
 		15CC087E1EA759EA0006B505 /* PYDatePikerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08431EA757050006B505 /* PYDatePikerView.m */; };
-		15FDD1051EAF816500E85040 /* PYAVAudioTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FDD1041EAF816500E85040 /* PYAVAudioTools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -161,8 +160,6 @@
 		15CC08601EA757A60006B505 /* libpykita.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpykita.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CC08621EA757A60006B505 /* pykita.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pykita.h; sourceTree = "<group>"; };
 		15CC08791EA7595A0006B505 /* PYKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PYKit.bundle; sourceTree = "<group>"; };
-		15FDD1031EAF816500E85040 /* PYAVAudioTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAVAudioTools.h; sourceTree = "<group>"; };
-		15FDD1041EAF816500E85040 /* PYAVAudioTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAVAudioTools.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,8 +284,6 @@
 				15CC07FC1EA756120006B505 /* PYAsyImageView.m */,
 				15CC07FD1EA756120006B505 /* PYDisplayImageView.h */,
 				15CC07FE1EA756120006B505 /* PYDisplayImageView.m */,
-				15FDD1031EAF816500E85040 /* PYAVAudioTools.h */,
-				15FDD1041EAF816500E85040 /* PYAVAudioTools.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -475,7 +470,6 @@
 				15CC07E91EA7556C0006B505 /* ViewController.m in Sources */,
 				15417B401EADCF4B009C894F /* PYCalendarParam.m in Sources */,
 				15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */,
-				15FDD1051EAF816500E85040 /* PYAVAudioTools.m in Sources */,
 				15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */,
 				15417B3E1EADCF4B009C894F /* NSDate+Lunar.m in Sources */,
 				15CC084F1EA757050006B505 /* PYCalendarLocation.m in Sources */,
