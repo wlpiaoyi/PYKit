@@ -87,9 +87,7 @@ UIColor * _Nonnull PYCalendarDisableColor;
     PYCalendarLunarFont = [UIFont systemFontOfSize:10];
     PYCalendarLunarColor = [UIColor orangeColor];
     PYCalendarDisableColor = [UIColor lightGrayColor];
-    [PYParams loadSheetParamsData];
-    [PYParams loadDialogParamsData];
-    [PYParams loadTopbarParamsData];
+    [PYParams loadInterflowParamsData];
 }
 
 @end

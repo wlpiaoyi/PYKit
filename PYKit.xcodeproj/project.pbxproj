@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C31931F0DD6EC006FD18C /* PYAudioRecord.m */; };
 		15417B3E1EADCF4B009C894F /* NSDate+Lunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B331EADCF4B009C894F /* NSDate+Lunar.m */; };
 		15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B351EADCF4B009C894F /* PYCalendarHeadView.m */; };
 		15417B401EADCF4B009C894F /* PYCalendarParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B371EADCF4B009C894F /* PYCalendarParam.m */; };
@@ -25,6 +26,18 @@
 		15417B4D1EADCF6B009C894F /* PYCalendarTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B391EADCF4B009C894F /* PYCalendarTimeView.m */; };
 		15417B4E1EADCF6B009C894F /* PYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B3B1EADCF4B009C894F /* PYCalendarView.m */; };
 		15417B4F1EADCF6B009C894F /* PYCalenderDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B3D1EADCF4B009C894F /* PYCalenderDateView.m */; };
+		155B8F531F064D90007FE5A9 /* UITextField+Check.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15AD1EE21F02907A00AD2568 /* UITextField+Check.h */; };
+		155B8F541F064D97007FE5A9 /* UITextField+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AD1EE31F02907A00AD2568 /* UITextField+Check.m */; };
+		15611F271F0B7DE900CD8848 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15611F261F0B7DE900CD8848 /* AVFoundation.framework */; };
+		15AA33451F15C0900070631E /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AA33441F15C0900070631E /* libmp3lame.a */; };
+		15AA33481F1609ED0070631E /* PYAudioTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F3291F0F2510002276A9 /* PYAudioTools.m */; };
+		15AA33491F1609ED0070631E /* PYAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F32A1F0F2510002276A9 /* PYAudioPlayer.m */; };
+		15AA334A1F1609ED0070631E /* PYAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C31931F0DD6EC006FD18C /* PYAudioRecord.m */; };
+		15AA334B1F160A030070631E /* PYAudio.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152C31961F0DE198006FD18C /* PYAudio.h */; };
+		15AA334C1F160A030070631E /* PYAudioTools.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15D9F32C1F0F2510002276A9 /* PYAudioTools.h */; };
+		15AA334D1F160A030070631E /* PYAudioPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15D9F32B1F0F2510002276A9 /* PYAudioPlayer.h */; };
+		15AA334E1F160A030070631E /* PYAudioRecord.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152C31921F0DD6EC006FD18C /* PYAudioRecord.h */; };
+		15AD1EE41F02907A00AD2568 /* UITextField+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AD1EE31F02907A00AD2568 /* UITextField+Check.m */; };
 		15B8D6611EA8855A00B8487E /* calendar_lunar.c in Sources */ = {isa = PBXBuildFile; fileRef = 15CC084A1EA757050006B505 /* calendar_lunar.c */; };
 		15B8D6681EA8859200B8487E /* PYAsyImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC07FB1EA756120006B505 /* PYAsyImageView.h */; };
 		15B8D66E1EA8859200B8487E /* PYDisplayImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC07FD1EA756120006B505 /* PYDisplayImageView.h */; };
@@ -51,6 +64,10 @@
 		15CC087C1EA759EA0006B505 /* PYCalendarLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08461EA757050006B505 /* PYCalendarLocation.m */; };
 		15CC087D1EA759EA0006B505 /* PYCalendarLunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08481EA757050006B505 /* PYCalendarLunar.m */; };
 		15CC087E1EA759EA0006B505 /* PYDatePikerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08431EA757050006B505 /* PYDatePikerView.m */; };
+		15D9F32D1F0F2510002276A9 /* PYAudioTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F3291F0F2510002276A9 /* PYAudioTools.m */; };
+		15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F32A1F0F2510002276A9 /* PYAudioPlayer.m */; };
+		15DA7DB21F09E899002FE132 /* TextFieldCheckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */; };
+		15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +77,11 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				15AA334B1F160A030070631E /* PYAudio.h in CopyFiles */,
+				15AA334C1F160A030070631E /* PYAudioTools.h in CopyFiles */,
+				15AA334D1F160A030070631E /* PYAudioPlayer.h in CopyFiles */,
+				15AA334E1F160A030070631E /* PYAudioRecord.h in CopyFiles */,
+				155B8F531F064D90007FE5A9 /* UITextField+Check.h in CopyFiles */,
 				15417B441EADCF62009C894F /* NSDate+Lunar.h in CopyFiles */,
 				15417B451EADCF62009C894F /* PYCalendarHeadView.h in CopyFiles */,
 				15417B461EADCF62009C894F /* PYCalendarParam.h in CopyFiles */,
@@ -74,6 +96,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		152C31921F0DD6EC006FD18C /* PYAudioRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAudioRecord.h; sourceTree = "<group>"; };
+		152C31931F0DD6EC006FD18C /* PYAudioRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAudioRecord.m; sourceTree = "<group>"; };
+		152C31961F0DE198006FD18C /* PYAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAudio.h; sourceTree = "<group>"; };
+		152C319D1F0DEE4F006FD18C /* libmp3lame.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmp3lame.dylib; sourceTree = "<group>"; };
 		15417B321EADCF4B009C894F /* NSDate+Lunar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Lunar.h"; sourceTree = "<group>"; };
 		15417B331EADCF4B009C894F /* NSDate+Lunar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Lunar.m"; sourceTree = "<group>"; };
 		15417B341EADCF4B009C894F /* PYCalendarHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarHeadView.h; sourceTree = "<group>"; };
@@ -86,6 +112,11 @@
 		15417B3B1EADCF4B009C894F /* PYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarView.m; sourceTree = "<group>"; };
 		15417B3C1EADCF4B009C894F /* PYCalenderDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalenderDateView.h; sourceTree = "<group>"; };
 		15417B3D1EADCF4B009C894F /* PYCalenderDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalenderDateView.m; sourceTree = "<group>"; };
+		15611F261F0B7DE900CD8848 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		15AA33431F15C0900070631E /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		15AA33441F15C0900070631E /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		15AD1EE21F02907A00AD2568 /* UITextField+Check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Check.h"; sourceTree = "<group>"; };
+		15AD1EE31F02907A00AD2568 /* UITextField+Check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Check.m"; sourceTree = "<group>"; };
 		15CC07DE1EA7556C0006B505 /* PYKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CC07E21EA7556C0006B505 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		15CC07E41EA7556C0006B505 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -160,6 +191,13 @@
 		15CC08601EA757A60006B505 /* libpykita.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpykita.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CC08621EA757A60006B505 /* pykita.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pykita.h; sourceTree = "<group>"; };
 		15CC08791EA7595A0006B505 /* PYKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PYKit.bundle; sourceTree = "<group>"; };
+		15D9F3291F0F2510002276A9 /* PYAudioTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAudioTools.m; sourceTree = "<group>"; };
+		15D9F32A1F0F2510002276A9 /* PYAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAudioPlayer.m; sourceTree = "<group>"; };
+		15D9F32B1F0F2510002276A9 /* PYAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAudioPlayer.h; sourceTree = "<group>"; };
+		15D9F32C1F0F2510002276A9 /* PYAudioTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAudioTools.h; sourceTree = "<group>"; };
+		15DA7DAF1F09E899002FE132 /* TextFieldCheckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCheckController.h; sourceTree = "<group>"; };
+		15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCheckController.m; sourceTree = "<group>"; };
+		15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCheckController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15CC08301EA7568B0006B505 /* libpyutilea.a in Frameworks */,
+				15AA33451F15C0900070631E /* libmp3lame.a in Frameworks */,
 				15CC082F1EA7568B0006B505 /* libpynetworka.a in Frameworks */,
 				15CC085B1EA757660006B505 /* libpyinterflowa.a in Frameworks */,
 			);
@@ -177,12 +216,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15611F271F0B7DE900CD8848 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		152C31911F0DD6A0006FD18C /* AudioRecord */ = {
+			isa = PBXGroup;
+			children = (
+				152C31921F0DD6EC006FD18C /* PYAudioRecord.h */,
+				152C31931F0DD6EC006FD18C /* PYAudioRecord.m */,
+			);
+			path = AudioRecord;
+			sourceTree = "<group>";
+		};
+		152C31951F0DE17A006FD18C /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				152C31961F0DE198006FD18C /* PYAudio.h */,
+				15D9F32C1F0F2510002276A9 /* PYAudioTools.h */,
+				15D9F3291F0F2510002276A9 /* PYAudioTools.m */,
+				15D9F32B1F0F2510002276A9 /* PYAudioPlayer.h */,
+				15D9F32A1F0F2510002276A9 /* PYAudioPlayer.m */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
 		15417B311EADCF4B009C894F /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +263,24 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		15611F251F0B7DE800CD8848 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				152C319D1F0DEE4F006FD18C /* libmp3lame.dylib */,
+				15611F261F0B7DE900CD8848 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		15AA33421F15C0900070631E /* libmp3lame */ = {
+			isa = PBXGroup;
+			children = (
+				15AA33431F15C0900070631E /* lame.h */,
+				15AA33441F15C0900070631E /* libmp3lame.a */,
+			);
+			path = libmp3lame;
+			sourceTree = "<group>";
+		};
 		15CC07D51EA7556C0006B505 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +292,7 @@
 				15CC07E01EA7556C0006B505 /* PYKit */,
 				15CC08611EA757A60006B505 /* pykita */,
 				15CC07DF1EA7556C0006B505 /* Products */,
+				15611F251F0B7DE800CD8848 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -238,6 +318,9 @@
 				15CC07EF1EA7556C0006B505 /* LaunchScreen.storyboard */,
 				15CC07F21EA7556C0006B505 /* Info.plist */,
 				15CC07E11EA7556C0006B505 /* Supporting Files */,
+				15DA7DAF1F09E899002FE132 /* TextFieldCheckController.h */,
+				15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */,
+				15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */,
 			);
 			path = PYKit;
 			sourceTree = "<group>";
@@ -279,11 +362,15 @@
 		15CC07FA1EA756120006B505 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				152C31951F0DE17A006FD18C /* AudioPlayer */,
+				152C31911F0DD6A0006FD18C /* AudioRecord */,
 				15417B311EADCF4B009C894F /* Calendar */,
 				15CC07FB1EA756120006B505 /* PYAsyImageView.h */,
 				15CC07FC1EA756120006B505 /* PYAsyImageView.m */,
 				15CC07FD1EA756120006B505 /* PYDisplayImageView.h */,
 				15CC07FE1EA756120006B505 /* PYDisplayImageView.m */,
+				15AD1EE21F02907A00AD2568 /* UITextField+Check.h */,
+				15AD1EE31F02907A00AD2568 /* UITextField+Check.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -291,6 +378,7 @@
 		15CC08051EA7568B0006B505 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				15AA33421F15C0900070631E /* libmp3lame */,
 				15CC08521EA7575E0006B505 /* pyinterflowa */,
 				15CC08061EA7568B0006B505 /* pynetworka */,
 				15CC080C1EA7568B0006B505 /* pyutilea */,
@@ -419,7 +507,7 @@
 				TargetAttributes = {
 					15CC07DD1EA7556C0006B505 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = S4NUSJ3KDJ;
+						DevelopmentTeam = W4BV9LWK5W;
 						ProvisioningStyle = Automatic;
 					};
 					15CC085F1EA757A60006B505 = {
@@ -455,6 +543,7 @@
 			files = (
 				15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */,
 				15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */,
+				15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */,
 				15CC07EE1EA7556C0006B505 /* Assets.xcassets in Resources */,
 				15CC07EC1EA7556C0006B505 /* Main.storyboard in Resources */,
 			);
@@ -471,6 +560,7 @@
 				15417B401EADCF4B009C894F /* PYCalendarParam.m in Sources */,
 				15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */,
 				15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */,
+				15AD1EE41F02907A00AD2568 /* UITextField+Check.m in Sources */,
 				15417B3E1EADCF4B009C894F /* NSDate+Lunar.m in Sources */,
 				15CC084F1EA757050006B505 /* PYCalendarLocation.m in Sources */,
 				15CC07E61EA7556C0006B505 /* AppDelegate.m in Sources */,
@@ -481,7 +571,11 @@
 				15CC07E31EA7556C0006B505 /* main.m in Sources */,
 				15CC08511EA757050006B505 /* calendar_lunar.c in Sources */,
 				15CC08001EA756120006B505 /* PYDisplayImageView.m in Sources */,
+				15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */,
+				152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */,
 				15CC07FF1EA756120006B505 /* PYAsyImageView.m in Sources */,
+				15D9F32D1F0F2510002276A9 /* PYAudioTools.m in Sources */,
+				15DA7DB21F09E899002FE132 /* TextFieldCheckController.m in Sources */,
 				15417B431EADCF4B009C894F /* PYCalenderDateView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +584,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15AA33481F1609ED0070631E /* PYAudioTools.m in Sources */,
+				15AA33491F1609ED0070631E /* PYAudioPlayer.m in Sources */,
+				15AA334A1F1609ED0070631E /* PYAudioRecord.m in Sources */,
+				155B8F541F064D97007FE5A9 /* UITextField+Check.m in Sources */,
 				15417B4A1EADCF6B009C894F /* NSDate+Lunar.m in Sources */,
 				15417B4B1EADCF6B009C894F /* PYCalendarHeadView.m in Sources */,
 				15417B4C1EADCF6B009C894F /* PYCalendarParam.m in Sources */,
@@ -553,6 +651,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -571,7 +670,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -602,6 +701,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -624,13 +724,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				DEVELOPMENT_TEAM = W4BV9LWK5W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PYKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Speex/ogg",
+					"$(PROJECT_DIR)/Speex/speex",
+					"$(PROJECT_DIR)/Speex/speexdsp",
+					"$(PROJECT_DIR)/lame",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/libmp3lame/.libs",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/libmp3lame/.libs",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/libmp3lame/.libs/libmp3lame.lax",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/libmp3lame/vector/.libs",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/mpglib/.libs",
+					"$(PROJECT_DIR)/include/libmp3lame",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYKit;
@@ -642,13 +756,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				DEVELOPMENT_TEAM = W4BV9LWK5W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PYKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Speex/ogg",
+					"$(PROJECT_DIR)/Speex/speex",
+					"$(PROJECT_DIR)/Speex/speexdsp",
+					"$(PROJECT_DIR)/lame",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/libmp3lame/.libs",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/libmp3lame/.libs",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/libmp3lame/.libs/libmp3lame.lax",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/libmp3lame/vector/.libs",
+					"$(PROJECT_DIR)/PYKit/Source\\ Code/Private/mpglib/.libs",
+					"$(PROJECT_DIR)/include/libmp3lame",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYKit;
@@ -660,7 +788,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
-				OTHER_LDFLAGS = "-ObjC";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -670,7 +806,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
-				OTHER_LDFLAGS = "-ObjC";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

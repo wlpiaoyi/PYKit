@@ -16,6 +16,7 @@
 #import "calendar_lunar.h"
 #import "PYDatePikerView.h"
 #import "pyinterflowa.h"
+BOOL PYCalendarHasGuide = false;
 
 @interface PYCalendarView()<PYCalenderDateView>
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
@@ -58,39 +59,9 @@
 }
 -(void) initParams{
     
-    viewGuide = [UIView new];
-    viewGuide.backgroundColor = [UIColor clearColor];
-    [self addSubview: viewGuide];
-    [PYViewAutolayoutCenter persistConstraint:viewGuide relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
-    UIImageView * imageTop = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_top.png"]];
-    UIImageView * imageLeft = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_left.png"]];
-    UIImageView * imageButtom = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_buttom.png"]];
-    UIImageView * imageRight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_right.png"]];
-    UIImageView * imageTap = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/circle_tap.png"]];
-    [viewGuide addSubview:imageTop];
-    [viewGuide addSubview:imageLeft];
-    [viewGuide addSubview:imageButtom];
-    [viewGuide addSubview:imageRight];
-    [viewGuide addSubview:imageTap];
-    [PYViewAutolayoutCenter persistConstraint:imageTop size:CGSizeMake(30, 71)];
-    [PYViewAutolayoutCenter persistConstraint:imageButtom size:CGSizeMake(30, 71)];
-    [PYViewAutolayoutCenter persistConstraint:imageLeft size:CGSizeMake(71, 30)];
-    [PYViewAutolayoutCenter persistConstraint:imageRight size:CGSizeMake(71,30)];
-    [PYViewAutolayoutCenter persistConstraint:imageTap size:CGSizeMake(50, 50)];
-    [PYViewAutolayoutCenter persistConstraint:imageTop centerPointer:CGPointMake(0, DisableConstrainsValueMAX)];
-    [PYViewAutolayoutCenter persistConstraint:imageButtom centerPointer:CGPointMake(0, DisableConstrainsValueMAX)];
-    [PYViewAutolayoutCenter persistConstraint:imageLeft centerPointer:CGPointMake(DisableConstrainsValueMAX, 0)];
-    [PYViewAutolayoutCenter persistConstraint:imageRight centerPointer:CGPointMake(DisableConstrainsValueMAX, 0)];
-    [PYViewAutolayoutCenter persistConstraint:imageTap centerPointer:CGPointMake(0, 0)];
-    [PYViewAutolayoutCenter persistConstraint:imageTop relationmargins:UIEdgeInsetsMake(0, DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-    [PYViewAutolayoutCenter persistConstraint:imageTop relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-    [PYViewAutolayoutCenter persistConstraint:imageButtom relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, 0, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-    [PYViewAutolayoutCenter persistConstraint:imageLeft relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, 0, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-    [PYViewAutolayoutCenter persistConstraint:imageRight relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX, 0) relationToItems:PYEdgeInsetsItemNull()];
-    
     dateView = [PYCalenderDateView new];
     weeakView = [PYCalendarHeadView new];
-    self.date = [NSDate date];
+    self.date = [[NSDate date] setCompentsWithBinary:0b111000];
     orgSize = CGSizeZero;
     [self addSubview:weeakView];
     [self addSubview:dateView];
@@ -119,10 +90,41 @@
     [PYViewAutolayoutCenter persistConstraint:dateView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:e];
     isTouched = false;
     dateView.delegate = self;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animationHidden) name:@"animationHidden" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animationShow) name:@"animationShow" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"animationHidden" object:nil];
+    if(PYCalendarHasGuide){
+        viewGuide = [UIView new];
+        viewGuide.backgroundColor = [UIColor clearColor];
+        [self addSubview: viewGuide];
+        [PYViewAutolayoutCenter persistConstraint:viewGuide relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
+        UIImageView * imageTop = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_top.png"]];
+        UIImageView * imageLeft = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_left.png"]];
+        UIImageView * imageButtom = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_buttom.png"]];
+        UIImageView * imageRight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_right.png"]];
+        UIImageView * imageTap = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/circle_tap.png"]];
+        [viewGuide addSubview:imageTop];
+        [viewGuide addSubview:imageLeft];
+        [viewGuide addSubview:imageButtom];
+        [viewGuide addSubview:imageRight];
+        [viewGuide addSubview:imageTap];
+        [PYViewAutolayoutCenter persistConstraint:imageTop size:CGSizeMake(30, 71)];
+        [PYViewAutolayoutCenter persistConstraint:imageButtom size:CGSizeMake(30, 71)];
+        [PYViewAutolayoutCenter persistConstraint:imageLeft size:CGSizeMake(71, 30)];
+        [PYViewAutolayoutCenter persistConstraint:imageRight size:CGSizeMake(71,30)];
+        [PYViewAutolayoutCenter persistConstraint:imageTap size:CGSizeMake(50, 50)];
+        [PYViewAutolayoutCenter persistConstraint:imageTop centerPointer:CGPointMake(0, DisableConstrainsValueMAX)];
+        [PYViewAutolayoutCenter persistConstraint:imageButtom centerPointer:CGPointMake(0, DisableConstrainsValueMAX)];
+        [PYViewAutolayoutCenter persistConstraint:imageLeft centerPointer:CGPointMake(DisableConstrainsValueMAX, 0)];
+        [PYViewAutolayoutCenter persistConstraint:imageRight centerPointer:CGPointMake(DisableConstrainsValueMAX, 0)];
+        [PYViewAutolayoutCenter persistConstraint:imageTap centerPointer:CGPointMake(0, 0)];
+        [PYViewAutolayoutCenter persistConstraint:imageTop relationmargins:UIEdgeInsetsMake(0, DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
+        [PYViewAutolayoutCenter persistConstraint:imageTop relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
+        [PYViewAutolayoutCenter persistConstraint:imageButtom relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, 0, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
+        [PYViewAutolayoutCenter persistConstraint:imageLeft relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, 0, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
+        [PYViewAutolayoutCenter persistConstraint:imageRight relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX, 0) relationToItems:PYEdgeInsetsItemNull()];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animationHidden) name:@"animationHidden" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animationShow) name:@"animationShow" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"animationHidden" object:nil];
+    }
 }
 
 -(void) animationHidden{
@@ -167,6 +169,9 @@
     currentMonth = dateView.date;
     _date = [NSDate dateWithYear:currentMonth.year month:currentMonth.month day:1 hour:0 munite:0 second:0];
     [dateView reloadDate];
+    if(self.blockChangeDate){
+        _blockChangeDate(self);
+    }
 }
 -(void) setDate:(NSDate *)date{
     _date = date;
@@ -233,7 +238,7 @@
 }
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-    if(!isTouched){
+    if(!isTouched && PYCalendarHasGuide){
         [[NSNotificationCenter defaultCenter] postNotificationName:@"animationHidden" object:nil];
     }
     isTouched = true;
@@ -277,6 +282,9 @@
                 
             default:
                 break;
+        }
+        if(self.blockChangeDate){
+            _blockChangeDate(self);
         }
     } buttonNames:@[@"确定",@"取消"]];
 }

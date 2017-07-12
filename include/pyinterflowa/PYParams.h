@@ -57,9 +57,7 @@ typedef void (^BlockPopupAnimation) (UIView * _Nonnull view, BlockPopupEndAnmati
 typedef void(^BlockDialogOpt)(UIView * _Nonnull view, NSUInteger index);
 
 @interface PYParams : NSObject
-+(void) loadDialogParamsData;
-+(void) loadSheetParamsData;
-+(void) loadTopbarParamsData;
++(void) loadInterflowParamsData;
 +(void) setView:(nonnull UIView *) view shadowOffset:(CGSize) size;
 @end
 

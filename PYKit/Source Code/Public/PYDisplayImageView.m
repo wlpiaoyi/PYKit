@@ -221,7 +221,7 @@ PYINITPARAMS
 PYSOULDLAYOUTM
 -(void) layoutSubviews{
     [super layoutSubviews];
-    if(PYSOULDLAYOUTE){
+    if([self __layoutSubviews_Size_Compare]){
         [self showDefualt];
     }
 }

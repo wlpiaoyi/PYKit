@@ -44,16 +44,33 @@
 
 #define is64BitArm  __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
 
+#if __LP64__
+typedef unsigned int                    PYUInt32;
+typedef unsigned long                 PYUInt64;
+typedef int                                    PYInt32;
+typedef long                                 PYInt64;
+#else
+typedef unsigned long                 PYUInt32;
+typedef unsigned long long         PYUInt64;
+typedef long                                 PYInt32;
+typedef long long                         PYInt64;
+#endif
+
 #define PYPNSNA @property (nonatomic, strong, nullable)
 #define PYPNSNN @property (nonatomic, strong, nonnull)
+#define PYPNRNA @property (nonatomic, readonly, nullable)
 #define PYPNRNN @property (nonatomic, readonly, nonnull)
 #define PYPNCNA @property (nonatomic, copy, nullable)
+#define PYPNCNN @property (nonatomic, copy, nonnull)
+#define PYPNANA @property (nonatomic, assign, nullable)
+#define PYPNANN @property (nonatomic, assign, nonnull)
 #define PYPNA @property (nonatomic, assign)
+#define PYPNAR @property (nonatomic, assign, readonly)
+
 #define PYINITPARAMS -(instancetype) initWithFrame:(CGRect)frame{if(self = [super initWithFrame:frame]){[self initParams];}return self;} -(instancetype) initWithCoder:(NSCoder *)aDecoder{ if(self = [super initWithCoder:aDecoder]){ [self initParams];}return self;}
 
 #define PYSOULDLAYOUTP @property (nonatomic) CGSize __layoutSubviews_UseSize;
 #define PYSOULDLAYOUTM -(BOOL) __layoutSubviews_Size_Compare{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize, self.bounds.size)){return false;}self.__layoutSubviews_UseSize = self.bounds.size;return true;}
-#define PYSOULDLAYOUTE [self __layoutSubviews_Size_Compare]
 
 extern const NSString * _Nonnull documentDir;
 extern const NSString * _Nonnull cachesDir;
@@ -126,6 +143,6 @@ float cpu_usage();
 /**
  简易发声
  */
-+(BOOL) soundWithPath:(nonnull NSString *) path isShake:(BOOL) isShake;
++(BOOL) soundWithPath:(nullable NSString *) path isShake:(BOOL) isShake;
 
 @end
