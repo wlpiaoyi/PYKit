@@ -12,14 +12,15 @@
 #import "TextFieldCheckController.h"
 #import "PYAudioRecord.h"
 #import "PYAudioPlayer.h"
+#import "UITextView+Check.h"
 
 
 
 @interface ViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet PYDisplayImageView *viewImage;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (strong, nonatomic) IBOutlet UITextView * textView;
 @property (nonatomic,strong) PYAudioPlayer *player;
-
 @end
 
 @implementation ViewController
@@ -28,7 +29,9 @@
     [super viewDidLoad];
     [self.textField clearTextFieldCheck];
     self.textField.delegate = self;
-    [self.textField checkFloatForMax:9999.99 min:0.00 precision:2];
+//    [self.textField checkFloatForMax:9999.99 min:0.00 precision:2];
+    [self.textView clearTextViewCheck];
+    [self.textView checkIDCard];
 //    [self.textField checkIntegerForMax:8888 min:-9999];
 //    [self.textField checkEmail];
 //    [self.textField checkMobliePhone];

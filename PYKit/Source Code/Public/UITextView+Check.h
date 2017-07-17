@@ -1,16 +1,17 @@
 //
-//  UITextField+Check.h
+//  UITextView+Check.h
 //  PYKit
 //
-//  Created by wlpiaoyi on 2017/6/27.
+//  Created by wlpiaoyi on 2017/7/15.
 //  Copyright © 2017年 wlpiaoyi. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "PYUtile.h"
 
-@interface UITextField(Check)
+@interface UITextView(Check)
 PYPNCNA void (^blockInputEndMatch) (NSString * _Nonnull identify, BOOL * _Nonnull checkResult);
--(void) clearTextFieldCheck;
+-(void) clearTextViewCheck;
 -(void) checkInteger;
 -(void) checkIntegerForMax:(PYInt64) max min:(PYInt64) min;
 -(void) checkFloat;

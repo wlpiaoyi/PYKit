@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
 		152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C31931F0DD6EC006FD18C /* PYAudioRecord.m */; };
+		15325E5A1F1C725A00DD1633 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
+		15325E5B1F1C725A00DD1633 /* UITextView+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 155C74B21F1A556200E7CEE3 /* UITextView+Check.m */; };
+		15325E5C1F1C726500DD1633 /* UITextView+Check.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 155C74B11F1A556200E7CEE3 /* UITextView+Check.h */; };
 		15417B3E1EADCF4B009C894F /* NSDate+Lunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B331EADCF4B009C894F /* NSDate+Lunar.m */; };
 		15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B351EADCF4B009C894F /* PYCalendarHeadView.m */; };
 		15417B401EADCF4B009C894F /* PYCalendarParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B371EADCF4B009C894F /* PYCalendarParam.m */; };
@@ -28,6 +32,7 @@
 		15417B4F1EADCF6B009C894F /* PYCalenderDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B3D1EADCF4B009C894F /* PYCalenderDateView.m */; };
 		155B8F531F064D90007FE5A9 /* UITextField+Check.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15AD1EE21F02907A00AD2568 /* UITextField+Check.h */; };
 		155B8F541F064D97007FE5A9 /* UITextField+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AD1EE31F02907A00AD2568 /* UITextField+Check.m */; };
+		155C74B31F1A556200E7CEE3 /* UITextView+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 155C74B21F1A556200E7CEE3 /* UITextView+Check.m */; };
 		15611F271F0B7DE900CD8848 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15611F261F0B7DE900CD8848 /* AVFoundation.framework */; };
 		15AA33451F15C0900070631E /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AA33441F15C0900070631E /* libmp3lame.a */; };
 		15AA33481F1609ED0070631E /* PYAudioTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F3291F0F2510002276A9 /* PYAudioTools.m */; };
@@ -77,6 +82,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				15325E5C1F1C726500DD1633 /* UITextView+Check.h in CopyFiles */,
 				15AA334B1F160A030070631E /* PYAudio.h in CopyFiles */,
 				15AA334C1F160A030070631E /* PYAudioTools.h in CopyFiles */,
 				15AA334D1F160A030070631E /* PYAudioPlayer.h in CopyFiles */,
@@ -96,6 +102,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1522C7BC1F18A1BC003CB0D0 /* PYTextInputCheckParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTextInputCheckParams.h; sourceTree = "<group>"; };
+		1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTextInputCheckParams.m; sourceTree = "<group>"; };
 		152C31921F0DD6EC006FD18C /* PYAudioRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAudioRecord.h; sourceTree = "<group>"; };
 		152C31931F0DD6EC006FD18C /* PYAudioRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAudioRecord.m; sourceTree = "<group>"; };
 		152C31961F0DE198006FD18C /* PYAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAudio.h; sourceTree = "<group>"; };
@@ -112,6 +120,8 @@
 		15417B3B1EADCF4B009C894F /* PYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarView.m; sourceTree = "<group>"; };
 		15417B3C1EADCF4B009C894F /* PYCalenderDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalenderDateView.h; sourceTree = "<group>"; };
 		15417B3D1EADCF4B009C894F /* PYCalenderDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalenderDateView.m; sourceTree = "<group>"; };
+		155C74B11F1A556200E7CEE3 /* UITextView+Check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Check.h"; sourceTree = "<group>"; };
+		155C74B21F1A556200E7CEE3 /* UITextView+Check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Check.m"; sourceTree = "<group>"; };
 		15611F261F0B7DE900CD8848 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		15AA33431F15C0900070631E /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		15AA33441F15C0900070631E /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
@@ -355,6 +365,8 @@
 				15CC08481EA757050006B505 /* PYCalendarLunar.m */,
 				15CC084C1EA757050006B505 /* PYDatePikerView.h */,
 				15CC08431EA757050006B505 /* PYDatePikerView.m */,
+				1522C7BC1F18A1BC003CB0D0 /* PYTextInputCheckParams.h */,
+				1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -371,6 +383,8 @@
 				15CC07FE1EA756120006B505 /* PYDisplayImageView.m */,
 				15AD1EE21F02907A00AD2568 /* UITextField+Check.h */,
 				15AD1EE31F02907A00AD2568 /* UITextField+Check.m */,
+				155C74B11F1A556200E7CEE3 /* UITextView+Check.h */,
+				155C74B21F1A556200E7CEE3 /* UITextView+Check.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -507,7 +521,7 @@
 				TargetAttributes = {
 					15CC07DD1EA7556C0006B505 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = W4BV9LWK5W;
+						DevelopmentTeam = S4NUSJ3KDJ;
 						ProvisioningStyle = Automatic;
 					};
 					15CC085F1EA757A60006B505 = {
@@ -567,6 +581,8 @@
 				15417B421EADCF4B009C894F /* PYCalendarView.m in Sources */,
 				15CC084D1EA757050006B505 /* PYDatePikerView.m in Sources */,
 				15417B411EADCF4B009C894F /* PYCalendarTimeView.m in Sources */,
+				1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */,
+				155C74B31F1A556200E7CEE3 /* UITextView+Check.m in Sources */,
 				15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */,
 				15CC07E31EA7556C0006B505 /* main.m in Sources */,
 				15CC08511EA757050006B505 /* calendar_lunar.c in Sources */,
@@ -584,6 +600,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15325E5A1F1C725A00DD1633 /* PYTextInputCheckParams.m in Sources */,
+				15325E5B1F1C725A00DD1633 /* UITextView+Check.m in Sources */,
 				15AA33481F1609ED0070631E /* PYAudioTools.m in Sources */,
 				15AA33491F1609ED0070631E /* PYAudioPlayer.m in Sources */,
 				15AA334A1F1609ED0070631E /* PYAudioRecord.m in Sources */,
@@ -724,7 +742,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W4BV9LWK5W;
+				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -756,7 +774,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W4BV9LWK5W;
+				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

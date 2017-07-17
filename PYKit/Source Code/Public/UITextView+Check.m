@@ -1,12 +1,12 @@
 //
-//  UITextField+Check.m
+//  UITextView+Check.m
 //  PYKit
 //
-//  Created by wlpiaoyi on 2017/6/27.
+//  Created by wlpiaoyi on 2017/7/15.
 //  Copyright © 2017年 wlpiaoyi. All rights reserved.
 //
 
-#import "UITextField+Check.h"
+#import "UITextView+Check.h"
 #import "NSNumber+Expand.h"
 #import "NSString+Expand.h"
 #import "UIResponder+Hook.h"
@@ -14,23 +14,24 @@
 #import <objc/runtime.h>
 #import "PYTextInputCheckParams.h"
 
-@interface UITextField(_pytextinputcheckparams)
+@interface UITextView(_pytextinputcheckparams)
 PYPNRNN PYTextInputCheckParams * _pytextinputcheckparams;
 @end
-void * _Nonnull PYTextFieldCheckParamPointer = &PYTextFieldCheckParamPointer;
+void * _Nonnull PYTextViewCheckParamPointer = &PYTextViewCheckParamPointer;
 
-@implementation UITextField(_pytextinputcheckparams)
+@implementation UITextView(_pytextinputcheckparams)
 -(nonnull PYTextInputCheckParams *) _pytextinputcheckparams{
-    PYTextInputCheckParams * params = objc_getAssociatedObject(self, PYTextFieldCheckParamPointer);
+    PYTextInputCheckParams * params = objc_getAssociatedObject(self, PYTextViewCheckParamPointer);
     if(params == nil){
-        @synchronized ([UITextField class]) {
-            params = objc_getAssociatedObject(self, PYTextFieldCheckParamPointer);
+        @synchronized ([UITextView class]) {
+            params = objc_getAssociatedObject(self, PYTextViewCheckParamPointer);
             if(params == nil){
                 params = [PYTextInputCheckParams new];
-                objc_setAssociatedObject(self, PYTextFieldCheckParamPointer, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                objc_setAssociatedObject(self, PYTextViewCheckParamPointer, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
                 static dispatch_once_t ui_textfiled_check_once_token;
                 dispatch_once(&ui_textfiled_check_once_token, ^{
-                    [UITextField hookMethodWithName:@"setDelegate:"];
+                    NSString * name = @"setDelegate:";
+                    [UITextView hookMethodWithName:name];
                 });
             }
         }
@@ -38,17 +39,18 @@ void * _Nonnull PYTextFieldCheckParamPointer = &PYTextFieldCheckParamPointer;
     return params;
 }
 @end
-#pragma clang diagnostic push
+
+
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 
-BOOL _pyexchangetextfield_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextField * textField, NSRange range, NSString * string);
-BOOL _pyexchangetextFieldShouldEndEditing(id target, SEL action, UITextField *textField);
+BOOL _pyexchangetextview_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextView * textInput, NSRange range, NSString * string);
+BOOL _pyexchangetextview_shouldEndEditing(id target, SEL action, UITextView *textInput);
 
-BOOL _pytextfield_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextField * textField, NSRange range, NSString * string);
-BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField);
+BOOL _pytextview_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextView * textInput, NSRange range, NSString * string);
+BOOL _pytextview_shouldEndEditing(id target, SEL action, UITextView *textInput);
 
-@implementation UITextField(Check)
--(void) clearTextFieldCheck{
+@implementation UITextView(Check)
+-(void) clearTextViewCheck{
     [self._pytextinputcheckparams.dictMatch removeAllObjects];
     if(!self.delegate){
         self.delegate = [self._pytextinputcheckparams getDelegateWithTextInput:self];
@@ -83,7 +85,7 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
                                 @(3):@"^(\\+(\\d{1,2}))|((13)|(14)|(15)|(18)|(19)|(17))\\d{1}$",
                                 @(4):@"^(\\+(\\d{1,2})1)|((13)|(14)|(15)|(18)|(19)|(17))\\d{2}$",
                                 @(5):@"^(\\+(\\d{2})){0,1}((13)|(14)|(15)|(18)|(19)|(17))\\d{0,9}$"
-                                 };
+                                };
     NSString * matchEnd = @"^(\\+(\\d{2})){0,1}((13)|(14)|(15)|(18)|(19)|(17))\\d{9}$";
     [self checkMatchWithIdentify:_UITextInputCheckDictKeyMobilePhone inputing:matchIng inputEnd:matchEnd];
     
@@ -113,9 +115,9 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
 
 -(void) checkMatchWithIdentify:(NSString *) identify inputing:(nonnull id) inputing inputEnd:(nonnull NSString *) inputEnd{
     self._pytextinputcheckparams.dictMatch[identify] =@{
-                                                                                  _UITextInputCheckDictSubKeyIng:inputing,
-                                                                                  _UITextInputCheckDictSubKeyEnd:inputEnd
-                                                                                  };
+                                                        _UITextInputCheckDictSubKeyIng:inputing,
+                                                        _UITextInputCheckDictSubKeyEnd:inputEnd
+                                                        };
 }
 -(void) setBlockInputEndMatch:(void (^)(NSString * _Nonnull identify, BOOL * _Nonnull checkResult))blockInputEndMatch{
     self._pytextinputcheckparams.blockInputEnd = blockInputEndMatch;
@@ -124,31 +126,31 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
     return self._pytextinputcheckparams.blockInputEnd;
 }
 
--(void) exchangeSetDelegate:(id<UITextFieldDelegate>) delegate{
+-(void) exchangeSetDelegate:(id<UITextViewDelegate>) delegate{
     [self exchangeSetDelegate:delegate];
     if(delegate && ![delegate conformsToProtocol:@protocol(UITextInputCheckDelegateHookTag)]){
         @synchronized ([delegate class]) {
             if(![delegate conformsToProtocol:@protocol(UITextInputCheckDelegateHookTag)]){
                 class_addProtocol([delegate class], @protocol(UITextInputCheckDelegateHookTag));
-                SEL action1 = @selector(textField:shouldChangeCharactersInRange:replacementString:);
-                SEL action2 = @selector(checktextField:shouldChangeCharactersInRange:replacementString:);
+                SEL action1 = @selector(textView:shouldChangeTextInRange:replacementText:);
+                SEL action2 = @selector(checktextView:shouldChangeTextInRange:replacementText:);
                 if(![delegate respondsToSelector:action1]){
-                    IMP imp = (IMP)_pyexchangetextfield_shouldChangeCharactersInRange_replacementString;
+                    IMP imp = (IMP)_pyexchangetextview_shouldChangeCharactersInRange_replacementString;
                     class_addMethod([delegate class], action1, imp, "c24@0:4@8{_NSRange=II}12@20");
                 }else{
-                    IMP imp = (IMP)_pytextfield_shouldChangeCharactersInRange_replacementString;
+                    IMP imp = (IMP)_pytextview_shouldChangeCharactersInRange_replacementString;
                     class_addMethod([delegate class], action2, imp, "c24@0:4@8{_NSRange=II}12@20");
                     Method m1 = class_getInstanceMethod([delegate class], action1);
                     Method m2 = class_getInstanceMethod([delegate class], action2);
                     method_exchangeImplementations(m1, m2);
                 }
-                action1 = @selector(textFieldShouldEndEditing:);
-                action2 = @selector(checktextFieldShouldEndEditing:);
+                action1 = @selector(textViewShouldEndEditing:);
+                action2 = @selector(checktextViewShouldEndEditing:);
                 if(![delegate respondsToSelector:action1]){
-                    IMP imp = (IMP)_pyexchangetextFieldShouldEndEditing;
+                    IMP imp = (IMP)_pyexchangetextview_shouldEndEditing;
                     class_addMethod([delegate class], action1, imp, "c12@0:4@8");
                 }else{
-                    IMP imp = (IMP)_pytextField_shouldEndEditing;
+                    IMP imp = (IMP)_pytextview_shouldEndEditing;
                     class_addMethod([delegate class], action2, imp, "c12@0:4@8");
                     Method m1 = class_getInstanceMethod([delegate class], action1);
                     Method m2 = class_getInstanceMethod([delegate class], action2);
@@ -160,26 +162,26 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
 }
 @end
 
-BOOL _pyexchangetextfield_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextField * textField, NSRange range, NSString * string){
-    PYTextInputCheckParams * params = textField._pytextinputcheckparams;
-    return _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(params, textField, range, string);
+BOOL _pyexchangetextview_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextView * textInput, NSRange range, NSString * string){
+    PYTextInputCheckParams * params = textInput._pytextinputcheckparams;
+    return _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(params, textInput, range, string);
 }
-BOOL _pyexchangetextFieldShouldEndEditing(id target, SEL action, UITextField *textField){
-    PYTextInputCheckParams * params = textField._pytextinputcheckparams;
-    return _pyexchangetextinput_shouldendediting(params, target, action, textField);
+BOOL _pyexchangetextview_shouldEndEditing(id target, SEL action, UITextView *textInput){
+    PYTextInputCheckParams * params = textInput._pytextinputcheckparams;
+    return _pyexchangetextinput_shouldendediting(params, target, action, textInput);
 }
 
-BOOL _pytextfield_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextField * textField, NSRange range, NSString * string){
-    BOOL result = _pyexchangetextfield_shouldChangeCharactersInRange_replacementString(target, action, textField, range, string);
-    action = @selector(checktextField:shouldChangeCharactersInRange:replacementString:);
-    _pytextinput_shouldchangecharactersinrange_replacementstring(target, action, textField, range, string);
+BOOL _pytextview_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextView * textInput, NSRange range, NSString * string){
+    BOOL result = _pyexchangetextview_shouldChangeCharactersInRange_replacementString(target, action, textInput, range, string);
+    action = @selector(checktextView:shouldChangeTextInRange:replacementText:);
+    _pytextinput_shouldchangecharactersinrange_replacementstring(target, action, textInput, range, string);
     return result;
 }
-BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField){
-    _pyexchangetextFieldShouldEndEditing(target, action, textField);
-    action = @selector(checktextFieldShouldEndEditing:);
+BOOL _pytextview_shouldEndEditing(id target, SEL action, UITextView *textInput){
+    _pyexchangetextview_shouldEndEditing(target, action, textInput);
+    action = @selector(checktextViewShouldEndEditing:);
     BOOL result;
-    _pytextinput_shouldendediting(target, action, textField, &result);
+    _pytextinput_shouldendediting(target, action, textInput, &result);
     return result;
 }
 #pragma clang diagnostic pop

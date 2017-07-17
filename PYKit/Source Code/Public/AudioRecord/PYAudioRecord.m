@@ -6,10 +6,13 @@
 //  Copyright © 2017年 wlpiaoyi. All rights reserved.
 //
 
+#ifdef pylame
 #include "lame.h"
+#endif
 #import "PYAudioRecord.h"
 #import <AVFoundation/AVFoundation.h>
 
+#ifdef pylame
 typedef struct _py_audio_PCMtoMP3_params {
     float samplerate;
     unsigned short quality;
@@ -64,13 +67,16 @@ void py_audio_PCMtoMP3( const char *audioPath,
     }
     
 }
+#endif
 
 static PYAudioRecord * xPYAudioRecord;
 @interface PYAudioRecord()<AVAudioRecorderDelegate>{
 @private
+#ifdef pylame
     py_audio_PCMtoMP3_params _params;
     bool _isMp3Record;
     NSURL * _tempPath;
+#endif
 }
 @property (nonatomic, strong, nonnull) AVAudioSession *session;
 @property (nonatomic, strong, nonnull) AVAudioRecorder * recorder;
@@ -97,12 +103,9 @@ static PYAudioRecord * xPYAudioRecord;
     _status = PYAudioRecordPrepare;
     AVAudioSession *session =[AVAudioSession sharedInstance];
     NSError *error;
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
+    [session setActive:YES error:&error];
     if (error) {
-        NSLog(@"Error creating session: %@",[error description]);
-        return false;
-    }else{
-        [session setActive:YES error:&error];
+        NSLog(@"Alert setActive true session: %@",[error description]);
     }
     self.session = session;
 
@@ -131,7 +134,7 @@ static PYAudioRecord * xPYAudioRecord;
         //录音质量
         mutableSettings[AVEncoderAudioQualityKey] = [NSNumber numberWithInt:AVAudioQualityMedium];
     }
-    
+#ifdef pylame
     _isMp3Record = false;
     if(((NSNumber *)mutableSettings[AVFormatIDKey]).intValue == kAudioFormatMPEGLayer3){
         mutableSettings[AVFormatIDKey] = [NSNumber numberWithInt:kAudioFormatLinearPCM];
@@ -142,6 +145,7 @@ static PYAudioRecord * xPYAudioRecord;
         _tempPath = self.path;
         self.path = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/tempPCM",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject]];
     }
+#endif
     
     self.recorder = [[AVAudioRecorder alloc] initWithURL:self.path settings:mutableSettings error:&error];
     if (error) {
@@ -187,11 +191,14 @@ static PYAudioRecord * xPYAudioRecord;
     }else{
         return false;
     }
+    
+#ifdef pylame
     if(_isMp3Record){
         [[NSFileManager defaultManager] removeItemAtPath:_tempPath.relativePath error:nil];
         py_audio_PCMtoMP3([self.path.relativePath UTF8String], [_tempPath.relativePath UTF8String], _params);
         self.path = _tempPath;
     }
+#endif
     NSURL * result = self.path;
     self.path = nil;
     _status = PYAudioRecordEnd;

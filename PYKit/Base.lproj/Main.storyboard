@@ -24,6 +24,15 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44F-JR-zPp" customClass="PYDisplayImageView">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="e8e-9O-vZJ">
+                                        <rect key="frame" x="18" y="68" width="252" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agg-Cz-6CA" customClass="PYCalendarView">
@@ -85,6 +94,7 @@
                     </view>
                     <connections>
                         <outlet property="textField" destination="Dqd-5D-gfT" id="Ytx-9u-7d2"/>
+                        <outlet property="textView" destination="e8e-9O-vZJ" id="mbx-Bc-Tqu"/>
                         <outlet property="viewImage" destination="44F-JR-zPp" id="b5T-al-ZsB"/>
                     </connections>
                 </viewController>
