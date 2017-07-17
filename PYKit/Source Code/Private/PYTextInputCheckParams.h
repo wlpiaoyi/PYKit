@@ -39,6 +39,6 @@ void  _pytexttnputcheck_settext( id<UITextInput> _Nonnull textInput, NSString * 
 
 bool _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(PYTextInputCheckParams * _Nonnull params, id<UITextInput> _Nonnull textInput, NSRange range, NSString * _Nullable string);
 bool _pyexchangetextinput_shouldendediting(PYTextInputCheckParams * _Nonnull params, id _Nullable target, SEL _Nullable action, id<UITextInput> _Nullable textInput);
-void _pytextinput_shouldchangecharactersinrange_replacementstring(id _Nonnull target, SEL _Nonnull action, id<UITextInput> _Nonnull textinput, NSRange range, NSString * _Nonnull string);
+void _pytextinput_shouldchangecharactersinrange_replacementstring(id _Nonnull target, SEL _Nonnull action, id<UITextInput> _Nonnull textinput, NSRange range, NSString * _Nonnull string, BOOL * _Nonnull result);
 void _pytextinput_shouldendediting(id _Nonnull target, SEL _Nonnull action, id<UITextInput> _Nonnull textinput, BOOL * _Nonnull result);
 

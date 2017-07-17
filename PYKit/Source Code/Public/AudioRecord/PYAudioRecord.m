@@ -6,13 +6,14 @@
 //  Copyright © 2017年 wlpiaoyi. All rights reserved.
 //
 
-#ifdef pylame
-#include "lame.h"
-#endif
 #import "PYAudioRecord.h"
 #import <AVFoundation/AVFoundation.h>
+#ifdef pylameforparsemp3
+#include "lame.h"
+#endif
 
-#ifdef pylame
+
+#ifdef pylameforparsemp3
 typedef struct _py_audio_PCMtoMP3_params {
     float samplerate;
     unsigned short quality;
@@ -20,59 +21,13 @@ typedef struct _py_audio_PCMtoMP3_params {
 } py_audio_PCMtoMP3_params;
 void py_audio_PCMtoMP3( const char *audioPath,
                        const char *mp3Path,
-                       py_audio_PCMtoMP3_params params) {
-    
-    @try {
-        int read, write;
-        
-        FILE *pcm = fopen(audioPath, "rb");  //source 被转换的音频文件位置
-        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
-        FILE *mp3 = fopen(mp3Path, "wb");  //output 输出生成的Mp3文件位置
-        
-        const int PCM_SIZE = 8192;
-        const int MP3_SIZE = 8192;
-        short int pcm_buffer[PCM_SIZE*2];
-        unsigned char mp3_buffer[MP3_SIZE];
-        
-        lame_t lame = lame_init();
-        params.samplerate = params.samplerate <= 0 ? 22050.0 : params.samplerate;
-        params.quality = params.quality == 0 ? 0x40 : params.quality;
-        params.channels = params.channels == 0 ? 2 : params.channels;
-        lame_set_in_samplerate(lame, params.samplerate);
-        lame_set_quality(lame, params.quality);
-        lame_set_num_channels(lame, params.channels);
-        lame_set_VBR(lame, vbr_default);
-        lame_init_params(lame);
-        
-        do {
-            read = (typeof(read))fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
-            if (read == 0)
-                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-            else
-                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
-            
-            fwrite(mp3_buffer, write, 1, mp3);
-            
-        } while (read != 0);
-        
-        lame_close(lame);
-        fclose(mp3);
-        fclose(pcm);
-    }
-    @catch (NSException *exception) {
-        NSLog(@"%@",[exception description]);
-    }
-    @finally {
-        NSLog(@"MP3生成成功: %s", mp3Path);
-    }
-    
-}
+                       py_audio_PCMtoMP3_params params);
 #endif
 
 static PYAudioRecord * xPYAudioRecord;
 @interface PYAudioRecord()<AVAudioRecorderDelegate>{
 @private
-#ifdef pylame
+#ifdef pylameforparsemp3
     py_audio_PCMtoMP3_params _params;
     bool _isMp3Record;
     NSURL * _tempPath;
@@ -134,7 +89,7 @@ static PYAudioRecord * xPYAudioRecord;
         //录音质量
         mutableSettings[AVEncoderAudioQualityKey] = [NSNumber numberWithInt:AVAudioQualityMedium];
     }
-#ifdef pylame
+#ifdef pylameforparsemp3
     _isMp3Record = false;
     if(((NSNumber *)mutableSettings[AVFormatIDKey]).intValue == kAudioFormatMPEGLayer3){
         mutableSettings[AVFormatIDKey] = [NSNumber numberWithInt:kAudioFormatLinearPCM];
@@ -192,7 +147,7 @@ static PYAudioRecord * xPYAudioRecord;
         return false;
     }
     
-#ifdef pylame
+#ifdef pylameforparsemp3
     if(_isMp3Record){
         [[NSFileManager defaultManager] removeItemAtPath:_tempPath.relativePath error:nil];
         py_audio_PCMtoMP3([self.path.relativePath UTF8String], [_tempPath.relativePath UTF8String], _params);
@@ -211,3 +166,55 @@ static PYAudioRecord * xPYAudioRecord;
 - (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError * __nullable)error{
 }
 @end
+
+#ifdef pylameforparsemp3
+void py_audio_PCMtoMP3( const char *audioPath,
+                       const char *mp3Path,
+                       py_audio_PCMtoMP3_params params) {
+    
+    @try {
+        int read, write;
+        
+        FILE *pcm = fopen(audioPath, "rb");  //source 被转换的音频文件位置
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        FILE *mp3 = fopen(mp3Path, "wb");  //output 输出生成的Mp3文件位置
+        
+        const int PCM_SIZE = 8192;
+        const int MP3_SIZE = 8192;
+        short int pcm_buffer[PCM_SIZE*2];
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        params.samplerate = params.samplerate <= 0 ? 22050.0 : params.samplerate;
+        params.quality = params.quality == 0 ? 0x40 : params.quality;
+        params.channels = params.channels == 0 ? 2 : params.channels;
+        lame_set_in_samplerate(lame, params.samplerate);
+        lame_set_quality(lame, params.quality);
+        lame_set_num_channels(lame, params.channels);
+        lame_set_VBR(lame, vbr_default);
+        lame_init_params(lame);
+        
+        do {
+            read = (typeof(read))fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            
+            fwrite(mp3_buffer, write, 1, mp3);
+            
+        } while (read != 0);
+        
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",[exception description]);
+    }
+    @finally {
+        NSLog(@"MP3生成成功: %s", mp3Path);
+    }
+    
+}
+#endif

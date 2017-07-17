@@ -21,28 +21,11 @@ void * _Nonnull PYTextViewCheckParamPointer = &PYTextViewCheckParamPointer;
 
 @implementation UITextView(_pytextinputcheckparams)
 -(nonnull PYTextInputCheckParams *) _pytextinputcheckparams{
-    PYTextInputCheckParams * params = objc_getAssociatedObject(self, PYTextViewCheckParamPointer);
-    if(params == nil){
-        @synchronized ([UITextView class]) {
-            params = objc_getAssociatedObject(self, PYTextViewCheckParamPointer);
-            if(params == nil){
-                params = [PYTextInputCheckParams new];
-                objc_setAssociatedObject(self, PYTextViewCheckParamPointer, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-                static dispatch_once_t ui_textfiled_check_once_token;
-                dispatch_once(&ui_textfiled_check_once_token, ^{
-                    NSString * name = @"setDelegate:";
-                    [UITextView hookMethodWithName:name];
-                });
-            }
-        }
-    }
-    return params;
+    return objc_getAssociatedObject(self, PYTextViewCheckParamPointer);;
 }
 @end
 
-
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-
+#pragma clang diagnostic ignored "-Wundeclared-selector" //忽略为定义的selector
 BOOL _pyexchangetextview_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextView * textInput, NSRange range, NSString * string);
 BOOL _pyexchangetextview_shouldEndEditing(id target, SEL action, UITextView *textInput);
 
@@ -51,6 +34,21 @@ BOOL _pytextview_shouldEndEditing(id target, SEL action, UITextView *textInput);
 
 @implementation UITextView(Check)
 -(void) clearTextViewCheck{
+    PYTextInputCheckParams * params = self._pytextinputcheckparams;
+    if(params == nil){
+        @synchronized ([UITextView class]) {
+            params = self._pytextinputcheckparams;
+            if(params == nil){
+                params = [PYTextInputCheckParams new];
+                objc_setAssociatedObject(self, PYTextViewCheckParamPointer, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                static dispatch_once_t ui_textview_check_once_token;
+                dispatch_once(&ui_textview_check_once_token, ^{
+                    NSString * name = @"setDelegate:";
+                    [UITextView hookMethodWithName:name];
+                });
+            }
+        }
+    }
     [self._pytextinputcheckparams.dictMatch removeAllObjects];
     if(!self.delegate){
         self.delegate = [self._pytextinputcheckparams getDelegateWithTextInput:self];
@@ -174,8 +172,9 @@ BOOL _pyexchangetextview_shouldEndEditing(id target, SEL action, UITextView *tex
 BOOL _pytextview_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextView * textInput, NSRange range, NSString * string){
     BOOL result = _pyexchangetextview_shouldChangeCharactersInRange_replacementString(target, action, textInput, range, string);
     action = @selector(checktextView:shouldChangeTextInRange:replacementText:);
-    _pytextinput_shouldchangecharactersinrange_replacementstring(target, action, textInput, range, string);
-    return result;
+    BOOL usrResult;
+    _pytextinput_shouldchangecharactersinrange_replacementstring(target, action, textInput, range, string, &usrResult);
+    return result && usrResult;
 }
 BOOL _pytextview_shouldEndEditing(id target, SEL action, UITextView *textInput){
     _pyexchangetextview_shouldEndEditing(target, action, textInput);

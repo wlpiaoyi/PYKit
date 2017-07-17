@@ -21,21 +21,7 @@ void * _Nonnull PYTextFieldCheckParamPointer = &PYTextFieldCheckParamPointer;
 
 @implementation UITextField(_pytextinputcheckparams)
 -(nonnull PYTextInputCheckParams *) _pytextinputcheckparams{
-    PYTextInputCheckParams * params = objc_getAssociatedObject(self, PYTextFieldCheckParamPointer);
-    if(params == nil){
-        @synchronized ([UITextField class]) {
-            params = objc_getAssociatedObject(self, PYTextFieldCheckParamPointer);
-            if(params == nil){
-                params = [PYTextInputCheckParams new];
-                objc_setAssociatedObject(self, PYTextFieldCheckParamPointer, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-                static dispatch_once_t ui_textfiled_check_once_token;
-                dispatch_once(&ui_textfiled_check_once_token, ^{
-                    [UITextField hookMethodWithName:@"setDelegate:"];
-                });
-            }
-        }
-    }
-    return params;
+    return objc_getAssociatedObject(self, PYTextFieldCheckParamPointer);
 }
 @end
 #pragma clang diagnostic push
@@ -49,6 +35,20 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
 
 @implementation UITextField(Check)
 -(void) clearTextFieldCheck{
+    PYTextInputCheckParams * params = self._pytextinputcheckparams;
+    if(params == nil){
+        @synchronized ([UITextField class]) {
+            params = self._pytextinputcheckparams;
+            if(params == nil){
+                params = [PYTextInputCheckParams new];
+                objc_setAssociatedObject(self, PYTextFieldCheckParamPointer, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                static dispatch_once_t ui_textfiled_check_once_token;
+                dispatch_once(&ui_textfiled_check_once_token, ^{
+                    [UITextField hookMethodWithName:@"setDelegate:"];
+                });
+            }
+        }
+    }
     [self._pytextinputcheckparams.dictMatch removeAllObjects];
     if(!self.delegate){
         self.delegate = [self._pytextinputcheckparams getDelegateWithTextInput:self];
@@ -172,8 +172,9 @@ BOOL _pyexchangetextFieldShouldEndEditing(id target, SEL action, UITextField *te
 BOOL _pytextfield_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextField * textField, NSRange range, NSString * string){
     BOOL result = _pyexchangetextfield_shouldChangeCharactersInRange_replacementString(target, action, textField, range, string);
     action = @selector(checktextField:shouldChangeCharactersInRange:replacementString:);
-    _pytextinput_shouldchangecharactersinrange_replacementstring(target, action, textField, range, string);
-    return result;
+    BOOL usrResult;
+    _pytextinput_shouldchangecharactersinrange_replacementstring(target, action, textField, range, string, &usrResult);
+    return result && usrResult;
 }
 BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField){
     _pyexchangetextFieldShouldEndEditing(target, action, textField);

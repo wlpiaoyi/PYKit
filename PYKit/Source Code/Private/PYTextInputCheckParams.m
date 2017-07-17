@@ -164,11 +164,10 @@ bool _pyexchangetextinput_shouldendediting(PYTextInputCheckParams * _Nonnull par
     }
     if(!result){
         AudioServicesPlaySystemSound(1305);
-        _pytexttnputcheck_settext(textInput, @"");
     }
-    return false;
+    return true;
 }
-void _pytextinput_shouldchangecharactersinrange_replacementstring(id target, SEL action, id<UITextInput> textinput, NSRange range, NSString * string){
+void _pytextinput_shouldchangecharactersinrange_replacementstring(id target, SEL action, id<UITextInput> textinput, NSRange range, NSString * string, BOOL * result){
     NSMethodSignature * sig  = [[target class] instanceMethodSignatureForSelector:action];
     NSInvocation * invocatin = [NSInvocation invocationWithMethodSignature:sig];
     [invocatin setTarget:target];
@@ -178,6 +177,7 @@ void _pytextinput_shouldchangecharactersinrange_replacementstring(id target, SEL
     [invocatin setArgument:&string atIndex:4];
     [invocatin retainArguments];
     [invocatin invoke];
+    [invocatin getReturnValue:result];
 }
 void _pytextinput_shouldendediting(id target, SEL action, id<UITextInput> textinput, BOOL * result){
     NSMethodSignature * sig  = [[target class] instanceMethodSignatureForSelector:action];
@@ -187,5 +187,5 @@ void _pytextinput_shouldendediting(id target, SEL action, id<UITextInput> textin
     [invocatin setArgument:&textinput atIndex:2];
     [invocatin retainArguments];
     [invocatin invoke];
-    [invocatin getReturnValue:&result];
+    [invocatin getReturnValue:result];
 }

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudio/CoreAudioTypes.h>
-
+#define pylameforparsemp3 true;
 typedef enum {
     PYAudioRecordPrepare = 1,
     PYAudioRecordIng = PYAudioRecordPrepare << 1,
