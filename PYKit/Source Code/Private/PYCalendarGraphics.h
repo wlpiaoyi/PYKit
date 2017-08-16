@@ -19,7 +19,7 @@ extern NSArray * _Nonnull PYCalendarWeekNames;
 /**
  日期标签
  */
-+(void) drawDayWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds borderWith:(CGFloat) borderWith dateRect:(PYCalendarRect) dateRect heightDay:(CGFloat) heightDay  heightLunar:(CGFloat) heightLunar fontDay:(nonnull UIFont*) fontDay fontLunar:(nullable UIFont*) fontLunar colorDay:(nonnull UIColor*) colorDay colorLunar:(nullable UIColor*) colorLunar;
++(CGRect) drawDayWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds borderWith:(CGFloat) borderWith dateRect:(PYCalendarRect *_Nonnull) dateRect heightDay:(CGFloat) heightDay  heightLunar:(CGFloat) heightLunar fontDay:(nonnull UIFont*) fontDay fontLunar:(nullable UIFont*) fontLunar colorDay:(nonnull UIColor*) colorDay colorLunar:(nullable UIColor*) colorLunar;
 /**
  显示指定时间
  */
@@ -32,5 +32,7 @@ extern NSArray * _Nonnull PYCalendarWeekNames;
  时间点位
  */
 +(void) drawClockPointWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds;
++(void) drawSpecalWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds spesal:(nonnull const char *) spesal specalColor:(nonnull UIColor *) specalColor specalFont:(nonnull UIFont *) specalFont resultRect:(CGRect)resultRect calendarRect:(PYCalendarRect) calendarRect heightFontLunar:(CGFloat) heightFontLunar;
++(void) drawMarkWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds mark:(nonnull const char *) mark markFont:(nonnull UIFont *) markFont markColor:(nonnull UIColor *) markColor resultRect:(CGRect)resultRect calendarRect:(PYCalendarRect) calendarRect;
 
 @end

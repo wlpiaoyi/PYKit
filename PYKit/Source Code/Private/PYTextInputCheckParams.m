@@ -112,14 +112,31 @@ bool _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(PYText
         }
         BOOL flag = [NSString matchArg:text regex:ing];
         if(!flag) continue;
-        
         if([key isEqual:_UITextInputCheckDictKeyInteger]){
             if(params.maxInteger != 0 || params.minInteger != 0){
-                flag = text.longLongValue <= params.maxInteger && text.longLongValue >= params.minInteger;
+                if(params.maxInteger >= 0){
+                    flag = text.longLongValue <= params.maxInteger;
+                }else if(flag){
+                    flag = text.longLongValue < 0;
+                }
+                if(flag && params.minInteger <=0){
+                    flag = text.longLongValue >= params.minInteger;
+                }else if(flag){
+                    flag = text.longLongValue < 0;
+                }
             }
         }else if([key isEqual:_UITextInputCheckDictKeyFloat]){
             if(params.maxFloat != 0 || params.minFloat != 0){
-                flag = text.doubleValue <= params.maxFloat && text.doubleValue >= params.minFloat;
+                if(params.maxFloat >= 0){
+                    flag = text.doubleValue <= params.maxFloat;
+                }else if(flag){
+                    flag = text.doubleValue >= 0;
+                }
+                if(flag && params.minFloat <= 0){
+                    flag = text.doubleValue >= params.minFloat;
+                }else if(flag){
+                    flag = text.doubleValue >= 0;
+                }
             }
         }
         result = result | flag;

@@ -66,6 +66,16 @@
 //    return  days;
 //}
 
+int PYDateCompareDate(PYDate date1, PYDate date2){
+    if(date1.year > date2.year) return 1;
+    if(date1.year < date2.year) return -1;
+    if(date1.month > date2.month) return 1;
+    if(date1.month < date2.month) return -1;
+    if(date1.day > date2.day) return 1;
+    if(date1.day < date2.day) return -1;
+    return 0;
+}
+
 UIColor * _Nonnull PYCalendarBGC;
 UIFont * _Nonnull PYCalendarWeekFont;
 UIColor * _Nonnull PYCalendarWeekColor;
@@ -74,6 +84,8 @@ UIColor * _Nonnull PYCalendarDayColor;
 UIFont * _Nonnull PYCalendarLunarFont;
 UIColor * _Nonnull PYCalendarLunarColor;
 UIColor * _Nonnull PYCalendarDisableColor;
+UIColor * _Nonnull PYCalendarWeeakEndColor;
+UIFont * _Nonnull PYCalendarSpesalFont;
 @implementation PYCalendarParam
 +(void) initialize{
     [PYCalendarParam loadCalendarData];
@@ -85,8 +97,10 @@ UIColor * _Nonnull PYCalendarDisableColor;
     PYCalendarDayFont = [UIFont systemFontOfSize:14];
     PYCalendarDayColor = [UIColor darkGrayColor];
     PYCalendarLunarFont = [UIFont systemFontOfSize:10];
+    PYCalendarSpesalFont = [UIFont systemFontOfSize:8];
     PYCalendarLunarColor = [UIColor orangeColor];
     PYCalendarDisableColor = [UIColor lightGrayColor];
+    PYCalendarWeeakEndColor = [UIColor redColor];
     [PYParams loadInterflowParamsData];
 }
 

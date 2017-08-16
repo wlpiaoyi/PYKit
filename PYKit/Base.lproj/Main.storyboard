@@ -93,6 +93,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calendarView" destination="Agg-Cz-6CA" id="HvN-Do-a6b"/>
                         <outlet property="textField" destination="Dqd-5D-gfT" id="Ytx-9u-7d2"/>
                         <outlet property="textView" destination="e8e-9O-vZJ" id="mbx-Bc-Tqu"/>
                         <outlet property="viewImage" destination="44F-JR-zPp" id="b5T-al-ZsB"/>

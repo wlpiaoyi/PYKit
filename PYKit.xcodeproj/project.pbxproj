@@ -79,7 +79,7 @@
 		15CC085E1EA757A60006B505 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = "include/$(PRODUCT_NAME)";
+			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
 				15325E5C1F1C726500DD1633 /* UITextView+Check.h in CopyFiles */,
@@ -748,7 +748,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PYKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -780,7 +780,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PYKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -806,6 +806,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				ENABLE_BITCODE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -824,6 +826,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				ENABLE_BITCODE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

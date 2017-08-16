@@ -182,12 +182,6 @@ PYCalendarSolarTerm * PRECALENDERSOLARTERMS;
             break;
         }
     }
-    
-    if(lunarSt.date.month == 12 && lunarSt.date.day == [PYCalendarLunar getLunarMonthDaysWithYear:lunarSt.date.year month:lunarSt.date.month]){
-        lunarSt.name = "除夕";
-    }else if(lunarSt.date.month == 1 && lunarSt.date.day == 15){
-        lunarSt.name = "元宵";
-    }
     return lunarSt;
 }
 

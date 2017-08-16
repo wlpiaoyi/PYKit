@@ -41,10 +41,11 @@ NSArray *PYCalendarWeekNames;
 /**
  日期标签
  */
-+(void) drawDayWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds borderWith:(CGFloat) borderWith dateRect:(PYCalendarRect) dateRect heightDay:(CGFloat) heightDay  heightLunar:(CGFloat) heightLunar fontDay:(nonnull UIFont*) fontDay fontLunar:(nullable UIFont*) fontLunar colorDay:(nonnull UIColor*) colorDay colorLunar:(nullable UIColor*) colorLunar{
-    
++(CGRect) drawDayWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds borderWith:(CGFloat) borderWith dateRect:(PYCalendarRect *) dateRectP heightDay:(CGFloat) heightDay  heightLunar:(CGFloat) heightLunar fontDay:(nonnull UIFont*) fontDay fontLunar:(nullable UIFont*) fontLunar colorDay:(nonnull UIColor*) colorDay colorLunar:(nullable UIColor*) colorLunar{
+    PYCalendarRect  dateRect = * dateRectP;
     NSAttributedString * attributeDay = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", (long)dateRect.date.day] attributes:@{(NSString*)NSForegroundColorAttributeName:colorDay,(NSString*)NSFontAttributeName:fontDay}];
     PYCalendarSolarTerm lunarSt = [PYCalendarLocation getLunarStrWithDate:dateRect.date];
+    (*dateRectP).lunarDate = lunarSt.date;
     NSAttributedString * attributeLunar = [[NSAttributedString alloc] initWithString:[NSString stringWithUTF8String:lunarSt.solarTerm ? lunarSt.solarTerm : lunarSt.name] attributes:@{(NSString*)NSForegroundColorAttributeName:colorLunar,(NSString*)NSFontAttributeName:fontLunar}];
     
     CGRect rectDay;
@@ -53,6 +54,8 @@ NSArray *PYCalendarWeekNames;
     
     [PYGraphicsDraw drawTextWithContext:context attribute:attributeDay rect:rectDay y:bounds.size.height scaleFlag:false];
     [PYGraphicsDraw drawTextWithContext:context attribute:attributeLunar rect:rectLuar y:bounds.size.height scaleFlag:false];
+    CGRect returnRect = CGRectMake(MIN(rectDay.origin.x, rectLuar.origin.x), rectDay.origin.y, MAX(rectDay.size.width, rectLuar.size.width), rectLuar.size.height + rectLuar.origin.y - rectDay.origin.y);
+    return returnRect;
 }
 /**
  显示指定时间
@@ -117,6 +120,31 @@ NSArray *PYCalendarWeekNames;
             [PYGraphicsDraw drawLineWithContext:context startPoint:center endPoint:center strokeColor:[UIColor blackColor].CGColor strokeWidth:strokeWidth lengthPointer:nil length:0];
         }
     }];
+}
++(void) drawSpecalWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds spesal:(const char *) spesal specalColor:(nonnull UIColor *) specalColor specalFont:(nonnull UIFont *) specalFont resultRect:(CGRect)resultRect calendarRect:(PYCalendarRect) calendarRect heightFontLunar:(CGFloat) heightFontLunar{
+    NSAttributedString * attributeTarget = [[NSAttributedString alloc] initWithString:[NSString stringWithUTF8String:spesal] attributes:@{(NSString*)NSForegroundColorAttributeName:specalColor,(NSString*)NSFontAttributeName:specalFont}];
+    CGRect rectTarget = CGRectMake(resultRect.origin.x + resultRect.size.width, calendarRect.frame.origin.y, calendarRect.frame.size.width - resultRect.size.width - (resultRect.origin.x - calendarRect.frame.origin.x), heightFontLunar*3);
+    resultRect.origin.y +=  calendarRect.frame.size.height * 0.2;
+    [PYGraphicsDraw drawTextWithContext:context attribute:attributeTarget rect:rectTarget y:bounds.size.height scaleFlag:false];
+}
+
++(void) drawMarkWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds mark:(const char *) mark markFont:(nonnull UIFont *) markFont markColor:(nonnull UIColor *) markColor resultRect:(CGRect)resultRect calendarRect:(PYCalendarRect) calendarRect{
+    NSAttributedString * attributeTarget = [[NSAttributedString alloc] initWithString:[NSString stringWithUTF8String:mark] attributes:@{(NSString*)NSForegroundColorAttributeName:[UIColor whiteColor] ,(NSString*)NSFontAttributeName:markFont}];
+    CGRect rectTarget = CGRectMake(calendarRect.frame.origin.x, calendarRect.frame.origin.y, 0, 0);
+    rectTarget.size = [PYUtile getBoundSizeWithAttributeTxt:attributeTarget size:CGSizeMake(999, markFont.pointSize)];
+    rectTarget.origin.y +=  calendarRect.frame.size.height * 0.1;
+    rectTarget.origin.x += (resultRect.origin.x - calendarRect.frame.origin.x - rectTarget.size.width)/2;
+    CGRect rectCirl = rectTarget;
+    CGFloat cirlbw = MIN(calendarRect.frame.size.height, calendarRect.frame.size.width) * 0.02;
+    rectCirl.origin.y = bounds.size.height - rectCirl.origin.y - rectCirl.size.height;
+    rectCirl.origin.y -= cirlbw;
+    rectCirl.origin.x -= cirlbw;
+    rectCirl.size.width += cirlbw *2;
+    rectCirl.size.height += cirlbw *2;
+    [PYGraphicsDraw drawEllipseWithContext:context rect:rectCirl strokeColor:markColor.CGColor fillColor:markColor.CGColor strokeWidth:1];
+    rectTarget.size.width += 1;
+    rectTarget.size.height += 1;
+    [PYGraphicsDraw drawTextWithContext:context attribute:attributeTarget rect:rectTarget y:bounds.size.height scaleFlag:false];
 }
 
 +(void) drawClickWithLineB:(CGFloat)  lineB circelB:(CGFloat) circelB size:(CGSize) size blockDraw:(void (^)(CGPoint center, CGFloat strokeWidth, NSUInteger index)) blockDraw{

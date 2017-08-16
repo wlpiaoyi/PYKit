@@ -26,14 +26,25 @@ PYUTILE_STATIC_INLINE PYDate PYDateMake(NSInteger year, NSInteger month, NSInteg
     return date;
 }
 //int PYDateMinusFotDays(PYDate date1, PYDate date2);
-
+int PYDateCompareDate(PYDate date1, PYDate date2);
 typedef struct _PYCalendarRect {
     int index;
     CGRect frame;
     PYDate date;
+    PYDate lunarDate;
+    bool flagEnable;
 } PYCalendarRect;
 PYUTILE_STATIC_INLINE PYCalendarRect PYCalendarRectMake(int index, CGRect frame, PYDate date){
-    PYCalendarRect rect = {index, frame, date};
+    PYCalendarRect rect = {index, frame, date, PYDateMake(0, 0, 0), true};
+    return rect;
+}
+typedef struct _PYSpesalInfo {
+    PYDate date;
+    char *_Nonnull spesal;
+    bool isLunar;
+} PYSpesalInfo;
+PYUTILE_STATIC_INLINE PYSpesalInfo PYSpesalInfoMake(PYDate date, char * _Nonnull spesal, bool isLunar){
+    PYSpesalInfo rect = { date, spesal, isLunar};
     return rect;
 }
 
@@ -56,6 +67,8 @@ extern UIColor * _Nonnull PYCalendarDayColor;
 extern UIFont * _Nonnull PYCalendarLunarFont;
 extern UIColor * _Nonnull PYCalendarLunarColor;
 extern UIColor * _Nonnull PYCalendarDisableColor;
+extern UIColor * _Nonnull PYCalendarWeeakEndColor;
+extern UIFont * _Nonnull PYCalendarSpesalFont;
 
 @interface  PYCalendarParam : NSObject
 +(void) loadCalendarData;

@@ -58,10 +58,12 @@ BOOL PYCalendarHasGuide = false;
     return self;
 }
 -(void) initParams{
-    
-    dateView = [PYCalenderDateView new];
+    _dateEnableStart = [[NSDate date] offsetMonth:-3];
+    _dateEnableEnd = [self.dateEnableStart offsetMonth:6];
+    _date = [[NSDate date] setCompentsWithBinary:0b111000];
+    dateView = [[PYCalenderDateView alloc] initWithDate:self.date DateStart:self.dateEnableStart dateEnd:self.dateEnableEnd];
     weeakView = [PYCalendarHeadView new];
-    self.date = [[NSDate date] setCompentsWithBinary:0b111000];
+    self.date = self.date;
     orgSize = CGSizeZero;
     [self addSubview:weeakView];
     [self addSubview:dateView];
@@ -125,6 +127,32 @@ BOOL PYCalendarHasGuide = false;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animationShow) name:@"animationShow" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"animationHidden" object:nil];
     }
+    self->spesalLength = 0;
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 1), "元旦节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 14), "情人节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 14), "情人节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 3, 8), "妇女节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 3, 12), "植树节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 4, 4), "清明节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 1), "劳动节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 4), "青年节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 6, 1), "儿童节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 1), "建党节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 8, 1), "建军节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 9, 10), "教师节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 10, 1), "国庆节",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 24), "平安夜",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 25), "圣诞夜",false);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 1), "春节",true);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 5), "端午节",true);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 7), "七夕节",true);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 15), "中原节",true);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 8, 15), "中秋节",true);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 9, 9), "重阳节",true);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 8), "腊八节",true);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 30), "除夕夜",true);
+    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 15), "元宵节",true);
+    [self synSpesqlInfo];
 }
 
 -(void) animationHidden{
@@ -179,6 +207,20 @@ BOOL PYCalendarHasGuide = false;
     dateView.date = currentMonth;
     [dateView reloadDate];
 }
+-(void) setDateEnableStart:(NSDate *)dateEnableStart{
+    _dateEnableStart = dateEnableStart;
+    dateView.dateEnableStart = dateEnableStart;
+}
+-(void) setDateEnableEnd:(NSDate *)dateEnableEnd{
+    _dateEnableEnd = dateEnableEnd;
+    dateView.dateEnableEnd = dateEnableEnd;
+}
+-(void) synSpesqlInfo{
+    dateView->spesalLength = spesalLength;
+    for (int i = 0; i < spesalLength; i++) {
+        dateView->spesals[i] = spesals[i];
+    }
+}
 -(void) drawOtherWithContext:(CGContextRef)context bounds:(CGRect)bounds locationLength:(int)locationLength locations:(PYCalendarRect *)locations{
     crs = locations;
     crsLength = locationLength;
@@ -186,10 +228,24 @@ BOOL PYCalendarHasGuide = false;
     year = self.date.year;
     month = self.date.month;
     day = self.date.day;
+    PYDate currentDate = PYDateMake(year, month, day);
+    year = _dateEnableStart.year;
+    month = _dateEnableStart.month;
+    day = _dateEnableStart.day;
+    PYDate dateStart = PYDateMake(year, month, day);
+    year = _dateEnableEnd.year;
+    month = _dateEnableEnd.month;
+    day = _dateEnableEnd.day;
+    PYDate dateEnd = PYDateMake(year, month, day);
+    if(PYDateCompareDate(currentDate, dateStart) < 0){
+        currentDate = dateStart;
+    }else if(PYDateCompareDate(currentDate, dateEnd) > 0){
+        currentDate = dateEnd;
+    }
     PYCalendarRect  pcr = PYCalendarRectMake(-1, CGRectNull, PYDateMake(0, 0, 0));
     for (int i = 0; i < locationLength; i++) {
         PYCalendarRect cr = locations[i];
-        if(cr.date.year == year && cr.date.month == month && cr.date.day == day){
+        if(cr.flagEnable && PYDateCompareDate(currentDate, cr.date) == 0){
             pcr = cr;
             break;
         }
@@ -250,6 +306,7 @@ BOOL PYCalendarHasGuide = false;
         PYCalendarRect  cr = crs[i];
         if(cr.frame.origin.x > touchPoint.x || cr.frame.origin.y > touchPoint.y) continue;
         if(cr.frame.origin.x + cr.frame.size.width < touchPoint.x || cr.frame.origin.y + cr.frame.size.height < touchPoint.y) continue;
+        if(cr.flagEnable == false) return;
         _date = [NSDate dateWithYear:cr.date.year month:cr.date.month day:cr.date.day hour:0 munite:0 second:0];
         break;
     }
