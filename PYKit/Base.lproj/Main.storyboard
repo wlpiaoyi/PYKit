@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -73,6 +73,39 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZa-cD-erf" customClass="PYSelectorBarView">
+                                <rect key="frame" x="0.0" y="90" width="375" height="54"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gA-bK-Vp6">
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="54"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mh6-OF-Ee2">
+                                        <rect key="frame" x="125" y="0.0" width="125" height="54"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1n-dh-Pz9">
+                                        <rect key="frame" x="250" y="0.0" width="125" height="54"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Mh6-OF-Ee2" firstAttribute="top" secondItem="RZa-cD-erf" secondAttribute="top" id="80P-ce-0k7"/>
+                                    <constraint firstAttribute="bottom" secondItem="c1n-dh-Pz9" secondAttribute="bottom" id="8lo-v8-B8q"/>
+                                    <constraint firstItem="c1n-dh-Pz9" firstAttribute="leading" secondItem="Mh6-OF-Ee2" secondAttribute="trailing" id="Doj-Wn-ese"/>
+                                    <constraint firstAttribute="height" constant="54" id="K5J-xo-p6r"/>
+                                    <constraint firstAttribute="trailing" secondItem="c1n-dh-Pz9" secondAttribute="trailing" id="ZGV-67-kza"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mh6-OF-Ee2" secondAttribute="bottom" id="hqs-h9-Qdm"/>
+                                    <constraint firstItem="0gA-bK-Vp6" firstAttribute="top" secondItem="RZa-cD-erf" secondAttribute="top" id="jOs-6Q-2wd"/>
+                                    <constraint firstItem="0gA-bK-Vp6" firstAttribute="leading" secondItem="RZa-cD-erf" secondAttribute="leading" id="kb1-ZJ-355"/>
+                                    <constraint firstItem="c1n-dh-Pz9" firstAttribute="width" secondItem="0gA-bK-Vp6" secondAttribute="width" id="pRX-St-ftE"/>
+                                    <constraint firstItem="c1n-dh-Pz9" firstAttribute="top" secondItem="RZa-cD-erf" secondAttribute="top" id="sD9-mu-chN"/>
+                                    <constraint firstItem="Mh6-OF-Ee2" firstAttribute="leading" secondItem="0gA-bK-Vp6" secondAttribute="trailing" id="sOO-dF-FUo"/>
+                                    <constraint firstAttribute="bottom" secondItem="0gA-bK-Vp6" secondAttribute="bottom" id="w7c-TA-cNx"/>
+                                    <constraint firstItem="Mh6-OF-Ee2" firstAttribute="width" secondItem="0gA-bK-Vp6" secondAttribute="width" id="y6e-60-58n"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -84,11 +117,14 @@
                             <constraint firstItem="Agg-Cz-6CA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Azy-YH-maB"/>
                             <constraint firstAttribute="trailing" secondItem="44F-JR-zPp" secondAttribute="trailing" id="Lc2-fP-J4g"/>
                             <constraint firstItem="Dqd-5D-gfT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NL4-Kb-def"/>
+                            <constraint firstItem="RZa-cD-erf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NL4-jM-UAN"/>
                             <constraint firstItem="44F-JR-zPp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="NhY-z2-tlD"/>
+                            <constraint firstItem="RZa-cD-erf" firstAttribute="top" secondItem="pXv-7E-95Z" secondAttribute="bottom" id="PsM-5u-pLl"/>
                             <constraint firstItem="pXv-7E-95Z" firstAttribute="leading" secondItem="Thj-7V-Q5U" secondAttribute="trailing" id="SMJ-Ew-Sch"/>
                             <constraint firstItem="pXv-7E-95Z" firstAttribute="top" secondItem="Dqd-5D-gfT" secondAttribute="bottom" id="XOR-af-lpm"/>
                             <constraint firstItem="Dqd-5D-gfT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iAW-e4-1Df"/>
                             <constraint firstAttribute="trailing" secondItem="Agg-Cz-6CA" secondAttribute="trailing" id="nhT-F2-lHP"/>
+                            <constraint firstAttribute="trailing" secondItem="RZa-cD-erf" secondAttribute="trailing" id="twY-dG-e3c"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Dqd-5D-gfT" secondAttribute="trailing" id="v1P-ow-uPg"/>
                         </constraints>
                     </view>

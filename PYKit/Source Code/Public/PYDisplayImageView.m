@@ -24,8 +24,7 @@ PYSOULDLAYOUTP
 @end
 
 @implementation PYDisplayImageView
-PYINITPARAMS
--(void) initParams{
+PYINITPARAMS{
     self.imageView = [PYAsyImageView new];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.touchEndTime = self.touchBeginTime = 0;
@@ -218,12 +217,8 @@ PYINITPARAMS
     }
     self.imageView.frameOrigin = pv;
 }
-PYSOULDLAYOUTM
--(void) layoutSubviews{
-    [super layoutSubviews];
-    if([self __layoutSubviews_Size_Compare]){
+PYSOULDLAYOUTMSTART
         [self showDefualt];
-    }
-}
+PYSOULDLAYOUTMEND
 
 @end

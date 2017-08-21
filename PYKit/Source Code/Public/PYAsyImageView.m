@@ -24,8 +24,6 @@ PYPNSNA NSString * cachesUrl;
     [PYAsyImageView checkCachesPath];
 }
 
-PYINITPARAMS;
-
 +(NSString *) parseImageUrlToImagePath:(NSString *) imageUrl{
     
     if(![[imageUrl substringWithRange:NSMakeRange(0, 4)] isEqual:@"http"]){
@@ -46,7 +44,7 @@ PYINITPARAMS;
     return imagePath;
 }
 
--(void) initParams{
+PYINITPARAMS{
     
     self.dnw = [PYNetDownload new];
     [self.dnw setBlockReceiveChallenge:^BOOL(id  _Nullable data, PYNetwork * _Nonnull target) {
