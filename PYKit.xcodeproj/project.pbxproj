@@ -21,6 +21,11 @@
 		150C6EED1F4AC7D400731FC7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */; };
 		1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
 		152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C31931F0DD6EC006FD18C /* PYAudioRecord.m */; };
+		152F58B01F4BDCE0006528C7 /* PYHybirdUtile.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE51F4AC7B200731FC7 /* PYHybirdUtile.m */; };
+		152F58B11F4BDCE0006528C7 /* PYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE71F4AC7B200731FC7 /* PYWebView.m */; };
+		152F58B31F4BDD09006528C7 /* PYHybirdUtile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 150C6EE41F4AC7B200731FC7 /* PYHybirdUtile.h */; };
+		152F58B41F4BDD09006528C7 /* PYWebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 150C6EE61F4AC7B200731FC7 /* PYWebView.h */; };
+		152F58B51F4BDD13006528C7 /* hybird.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 150C6EE31F4AC7B200731FC7 /* hybird.js */; };
 		15325E5A1F1C725A00DD1633 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
 		15325E5B1F1C725A00DD1633 /* UITextView+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 155C74B21F1A556200E7CEE3 /* UITextView+Check.m */; };
 		15325E5C1F1C726500DD1633 /* UITextView+Check.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 155C74B11F1A556200E7CEE3 /* UITextView+Check.h */; };
@@ -90,6 +95,9 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				152F58B51F4BDD13006528C7 /* hybird.js in CopyFiles */,
+				152F58B31F4BDD09006528C7 /* PYHybirdUtile.h in CopyFiles */,
+				152F58B41F4BDD09006528C7 /* PYWebView.h in CopyFiles */,
 				150C6DA91F46EB8000731FC7 /* PYSelectorBarView.h in CopyFiles */,
 				15325E5C1F1C726500DD1633 /* UITextView+Check.h in CopyFiles */,
 				15AA334B1F160A030070631E /* PYAudio.h in CopyFiles */,
@@ -647,6 +655,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				152F58B01F4BDCE0006528C7 /* PYHybirdUtile.m in Sources */,
+				152F58B11F4BDCE0006528C7 /* PYWebView.m in Sources */,
 				150C6DAA1F46EB8900731FC7 /* PYSelectorBarView.m in Sources */,
 				15325E5A1F1C725A00DD1633 /* PYTextInputCheckParams.m in Sources */,
 				15325E5B1F1C725A00DD1633 /* UITextView+Check.m in Sources */,
@@ -796,7 +806,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PYKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -830,7 +840,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PYKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -15,6 +15,8 @@
 #import "UITextView+Check.h"
 #import "PYCalendarView.h"
 
+#import "PYWebView.h"
+#import "PYViewAutolayoutCenter.h"
 
 
 @interface ViewController () <UITextFieldDelegate>
@@ -44,6 +46,11 @@
         @strongify(self);
         NSLog(@"");
     }];
+    
+    PYWebView * webView = [PYWebView new];
+    [self.view addSubview:webView];
+    [PYViewAutolayoutCenter persistConstraint:webView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
+    [webView loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
     ((PYDisplayImageView*)self.viewImage).imgUrl = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494325479616&di=12bf378980ba10da9c81426c753c952c&imgtype=0&src=http%3A%2F%2Fimg2.niutuku.com%2F1312%2F0850%2F0850-niutuku.com-30110.jpg";//@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492615837709&di=d1557b3e4bc4106d8969cc023f29a3c6&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F8601a18b87d6277fc422bbe028381f30e924fc32.jpg";
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField{

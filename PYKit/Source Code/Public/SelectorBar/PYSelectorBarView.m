@@ -62,6 +62,7 @@ PYINITPARAMS{
 }
 -(void) onclickSelect:(UIButton *) button{
     unsigned int index = (unsigned int)[self.buttons indexOfObject:button];
+    if(index == self.selectIndex) return;
     if(self.blockSelecteItem && !_blockSelecteItem(index)){
         return;
     }
