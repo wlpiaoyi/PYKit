@@ -108,8 +108,7 @@ CGPoint PY_CGPointAdd(CGPoint p1, CGPoint p2){
 /**
  根据图片的最适位置，定点，移动点的变化计算出下一个展示的 位置和大小
  */
-+(void) analyzeDisplayRect:(nonnull CGRect *) displayRectp fitRect:(CGRect) fitRect nailOrigin:(CGPoint) nailOrigin preTouchPoint:(CGPoint) preTouchPoint curTouchPoint:(CGPoint) curTouchPoint;{
-    if((*displayRectp).size.width < fitRect.size.width/3 || (*displayRectp).size.height < fitRect.size.height/3) return;
++(void) analyzeDisplayRect:(nonnull CGRect *) displayRectp fitRect:(CGRect) fitRect nailOrigin:(CGPoint) nailOrigin preTouchPoint:(CGPoint) preTouchPoint curTouchPoint:(CGPoint) curTouchPoint{
     //==>
     //ratioNailOrigin 定点相对 displaySize 的比例
     //ratioTouchPoint 触控点相对 displaySize 的比例
@@ -158,6 +157,13 @@ CGPoint PY_CGPointAdd(CGPoint p1, CGPoint p2){
 +(void) checkCurTouchPoint:(nonnull CGPoint *) curTouchPointp nailOrigin:(CGPoint) nailOrigin preTouchPoint:(CGPoint) preTouchPoint{
     
     if(CGPointEqualToPoint((*curTouchPointp), preTouchPoint)) return;
+    
+    if(ABS((*curTouchPointp).x - nailOrigin.x) < 10){
+        (*curTouchPointp).x = preTouchPoint.x;
+    }
+    if(ABS((*curTouchPointp).y - nailOrigin.y) < 10){
+        (*curTouchPointp).y = preTouchPoint.y;
+    }
     
     CGFloat preOffx =  preTouchPoint.x - nailOrigin.x;
     CGFloat preOffy =  preTouchPoint.y - nailOrigin.y;

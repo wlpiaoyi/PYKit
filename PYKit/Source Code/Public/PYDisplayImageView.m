@@ -16,7 +16,6 @@
     CGRect _imgFitRect;
     CGPoint _preTouchPoint;
     CGPoint _movePoint;
-//    NSUInteger _preTouchesCount;
     NSUInteger _touchIndex;
 }
 PYPNA PYDisplayImageTouchEnum touchState;
@@ -46,7 +45,6 @@ PYINITPARAMS{
     _imageView.contentMode = UIViewContentModeScaleToFill;
     self.multipleTouchEnabled = YES;
     _viewImgContext.multipleTouchEnabled = YES;
-    [self.imageView setCornerRadiusAndBorder:1 borderWidth:1 borderColor:[UIColor redColor]];
 }
 
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -60,8 +58,7 @@ PYINITPARAMS{
 
 -(void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesMoved:touches withEvent:event];
-//    NSUInteger touchesCount = touches.count;
-//    //感觉手机触控反应比较迟钝，导致touchesCount不能及时响应，这里由此产生的point变化异常的bug处理一下
+    //感觉手机触控反应比较迟钝，导致touchesCount不能及时响应，这里由此产生的point变化异常的bug处理一下
     if (touches.count != _touchIndex) {
         _preTouch = nil;
         _preTouchPoint = CGPointZero;
@@ -110,7 +107,6 @@ PYINITPARAMS{
             break;
         
             //缩放移动图片处理
-#warning TODO has no end for display
         case PYDisplayImageTouchMultiple:{
             //==>
             //计算并设置movePoint
@@ -138,10 +134,9 @@ PYINITPARAMS{
                 UITouch * touch;
                 CGPoint point;
                 [self.class getTouchPoint:&point touch:&touch touchFirst:self.touchFirst touchSecond:self.touchSecond tagView:self];
-                if(_preTouch && !CGPointEqualToPoint(_preTouchPoint, CGPointZero)){
+                if(touch && _preTouch && !CGPointEqualToPoint(_preTouchPoint, CGPointZero)){
                     CGRect displayRect = self.imageView.frame;
                     CGPoint touchPoint = PY_CGPointAdd(offPoint, _preTouchPoint);
-                    NSLog(@"movePoint:%@ touchPoint:%@ point:%@", NSStringFromCGPoint(_movePoint), NSStringFromCGPoint(touchPoint), NSStringFromCGPoint(point));
                     [PYDisplayImageTools analyzeDisplayRect:&displayRect fitRect:_imgFitRect nailOrigin:_movePoint preTouchPoint:touchPoint curTouchPoint:point];
                     self.imageView.frame = displayRect;
                 }
@@ -172,12 +167,15 @@ PYINITPARAMS{
     CGFloat v1 = sqrt(pow(op1.x, 2) + pow(op1.y, 2));
     CGFloat v2 = sqrt(pow(op2.x, 2) + pow(op2.y, 2));
     
-    if(v1 >= v2){
+    if(ABS(v1) > 5 && v1 >= v2){
         (*touchPointp) = p1;
         (*touchp) = touchFist;
-    }else{
+    }else if(ABS(v2) < 5 && v2 >= v1){
         (*touchPointp) = p2;
         (*touchp) = touchSecond;
+    }else{
+        (*touchPointp) = CGPointZero;
+        *(touchp) = nil;
     }
     
 }

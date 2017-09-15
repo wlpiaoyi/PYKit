@@ -56,6 +56,7 @@
 		1598847B1F6B7F5200E589D3 /* PYDisplayImageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B586B1F5E49670070ECEE /* PYDisplayImageTools.m */; };
 		1598847C1F6B7F5200E589D3 /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */; };
 		1598847D1F6B7F6100E589D3 /* PYDisplayImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */; };
+		159884801F6B99FE00E589D3 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1598847F1F6B99FE00E589D3 /* icon.png */; };
 		159C3A811F555B9800167B3E /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 159C3A801F555B9800167B3E /* 1.jpg */; };
 		159C3A851F56AF6900167B3E /* py_webview_hybird.js in Resources */ = {isa = PBXBuildFile; fileRef = 159C3A841F56AF6900167B3E /* py_webview_hybird.js */; };
 		159C3A8A1F56C35800167B3E /* py_webview_hybird.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 159C3A841F56AF6900167B3E /* py_webview_hybird.js */; };
@@ -207,6 +208,7 @@
 		15611F261F0B7DE900CD8848 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
 		1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageView.m; sourceTree = "<group>"; };
+		1598847F1F6B99FE00E589D3 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		159C3A801F555B9800167B3E /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		159C3A841F56AF6900167B3E /* py_webview_hybird.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = py_webview_hybird.js; sourceTree = "<group>"; };
 		15CC07DE1EA7556C0006B505 /* PYKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -429,6 +431,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1598847E1F6B99FE00E589D3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1598847F1F6B99FE00E589D3 /* icon.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		15CC07D51EA7556C0006B505 = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +493,7 @@
 		15CC07F81EA756120006B505 /* Source Code */ = {
 			isa = PBXGroup;
 			children = (
+				1598847E1F6B99FE00E589D3 /* Images */,
 				15CC07F91EA756120006B505 /* Private */,
 				15CC07FA1EA756120006B505 /* Public */,
 			);
@@ -621,6 +632,7 @@
 			files = (
 				15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */,
 				159C3A851F56AF6900167B3E /* py_webview_hybird.js in Resources */,
+				159884801F6B99FE00E589D3 /* icon.png in Resources */,
 				152289F21F4E6C9000E02321 /* timg.jpeg in Resources */,
 				15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */,
 				15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */,
