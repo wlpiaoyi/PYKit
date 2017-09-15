@@ -1,224 +1,254 @@
 //
 //  PYDisplayImageView.m
-//  PYNetwork
+//  PYKit
 //
-//  Created by wlpiaoyi on 2017/4/18.
+//  Created by wlpiaoyi on 2017/9/4.
 //  Copyright © 2017年 wlpiaoyi. All rights reserved.
 //
 
 #import "PYDisplayImageView.h"
+#import "PYAsyImageView.h"
+#import "PYDisplayImageTools.h"
 
-@interface PYDisplayImageView()
-PYPNSNN PYAsyImageView * imageView;
+@interface PYDisplayImageView(){
+@private
+    CGSize _imgSize;
+    CGRect _imgFitRect;
+    CGPoint _preTouchPoint;
+    CGPoint _movePoint;
+//    NSUInteger _preTouchesCount;
+    NSUInteger _touchIndex;
+}
+PYPNA PYDisplayImageTouchEnum touchState;
+PYPNSNA UITouch * touchFirst;
+PYPNSNA UITouch * touchSecond;
+PYPNSNA UITouch * preTouch;
 
-PYPNA bool isTouchMove;
-PYPNA NSUInteger countMusulTouch;
-PYPNA CGFloat suffiTouchValue;
-PYPNA NSTimeInterval touchBeginTime;
-PYPNA NSTimeInterval touchEndTime;
-PYPNA CGPoint preTouchPoint;
-PYPNA CGRect preImageViewRect;
-
-PYPNA CGRect imgFrame;
+PYPNSNN UIView * viewImgContext;
 PYSOULDLAYOUTP
 @end
 
 @implementation PYDisplayImageView
+
 PYINITPARAMS{
+    self.maxMultiple = 6;
+    _movePoint = CGPointZero;
+    _preTouchPoint = CGPointZero;
+    _imgSize = CGSizeZero;
+    _imgFitRect = CGRectZero;
+    _touchIndex = 0;
+    [self initTouchData];
+    _viewImgContext = [UIView new];
+    _viewImgContext.backgroundColor = [UIColor clearColor];
+    [self addSubview:_viewImgContext];
+    [PYViewAutolayoutCenter persistConstraint:_viewImgContext relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
     self.imageView = [PYAsyImageView new];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.touchEndTime = self.touchBeginTime = 0;
-    [self addSubview:self.imageView];
-    self.multipleTouchEnabled = true;
+    _imageView.contentMode = UIViewContentModeScaleToFill;
+    self.multipleTouchEnabled = YES;
+    _viewImgContext.multipleTouchEnabled = YES;
+    [self.imageView setCornerRadiusAndBorder:1 borderWidth:1 borderColor:[UIColor redColor]];
 }
--(void) setImgUrl:(NSString *)imgUrl{
-    _imgUrl = imgUrl;
-    @unsafeify(self);
-    [self.imageView setBlockDisplay:^(bool isSuccess, bool isCahes, PYAsyImageView * _Nonnull imageView){
-        @strongify(self);
-        [self showDefualt];
-    }];
-    self.imageView.imgUrl = imgUrl;
-}
+
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-    self.isTouchMove = false;
-    self.suffiTouchValue = 0;
-    UITouch *touch = touches.anyObject;
-    self.preTouchPoint = [touch locationInView: self];
-    self.touchBeginTime = [NSDate timeIntervalSinceReferenceDate];
-    self.countMusulTouch = 0;
-    self.preImageViewRect = self.imageView.frame;
+    _touchIndex += touches.count;
+    _movePoint = [touches.anyObject locationInView: self];
+    if(_touchState != PYDisplayImageTouchUnkown){
+        _touchState = PYDisplayImageTouchChange;
+    }
 }
 
 -(void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesMoved:touches withEvent:event];
-    
-    if(self.isTouchMove == false){
-        UITouch *touch = touches.anyObject;
-        CGPoint point = [touch locationInView: self];
-        self.isTouchMove = !CGPointEqualToPoint(point, self.preTouchPoint);
+//    NSUInteger touchesCount = touches.count;
+//    //感觉手机触控反应比较迟钝，导致touchesCount不能及时响应，这里由此产生的point变化异常的bug处理一下
+    if (touches.count != _touchIndex) {
+        _preTouch = nil;
+        _preTouchPoint = CGPointZero;
+        return;
     }
-    
-    if(self.countMusulTouch < 1 && [touches count] == 1){
-        self.countMusulTouch = 1;
-    }else if(self.countMusulTouch < 2 && [touches count] == 2){
-        self.countMusulTouch = 2;
-    }else if([touches count] > 2){
-        self.countMusulTouch = [touches count];
-    }
-    
-    if(self.countMusulTouch == 1 && [touches count] == 1){
-        if((self.touchBeginTime > 0 && [NSDate timeIntervalSinceReferenceDate] - self.touchBeginTime < 0.1f)) {
-            return;
-        }else{
-            self.touchBeginTime = 0;
+    //==>
+    bool hasChange = false;
+    //判断是移动还是缩放移动
+    if(_touchState != PYDisplayImageTouchOne && _touchIndex == 1 ){
+        hasChange = true;
+        _touchState = PYDisplayImageTouchOne;
+        self.touchFirst = touches.anyObject;
+    }else if(_touchState != PYDisplayImageTouchMultiple && _touchIndex >= 2){
+        hasChange = true;
+        _touchState = PYDisplayImageTouchMultiple;
+        if(self.touchFirst == nil || ![touches containsObject:self.touchFirst]){
+            if(self.touchSecond && [touches containsObject:self.touchSecond]){
+                self.touchFirst = self.touchSecond;
+                self.touchSecond = nil;
+            }else{
+                self.touchFirst = touches.anyObject;
+            }
         }
-        UITouch *touch = touches.anyObject;
-        CGPoint point = [touch locationInView: self];
-        self.imageView.frameX -= self.preTouchPoint.x - point.x;
-        self.imageView.frameY -= self.preTouchPoint.y - point.y;
-        self.preTouchPoint = point;
-    }else if(self.countMusulTouch == 2 && [touches count] == 2){
-        CGFloat suffv = -99999;
-        NSArray<UITouch *> *touchas = [touches allObjects];
-        CGPoint point1 = [touchas.firstObject locationInView: self];
-        CGPoint point2 = [touchas.lastObject locationInView: self];
-        CGFloat suffx = ABS(point1.x - point2.x), suffy = ABS(point1.y - point2.y);
-        if(ABS(suffx) > ABS(suffy)){
-            suffv = suffx;
-        }else{
-            suffv = suffy;
-        }
-        if(self.suffiTouchValue != 0 ){
-            CGRect r = self.imageView.frame;
-            r.size.width = self.preImageViewRect.size.width +  suffv - self.suffiTouchValue;
-            r.size.height = r.size.width * self.frameHeight/self.frameWidth;
-            r.origin.x = (self.preImageViewRect.size.width - self.imageView.frameWidth)/2.0f;
-            r.origin.y =  (self.frameHeight * (self.preImageViewRect.size.width / self.frameWidth) - self.imageView.frameHeight)/2.0f;
-            r.origin.x += self.preImageViewRect.origin.x;
-            r.origin.y += self.preImageViewRect.origin.y;
-            self.imageView.frame = r;
-        }else{
-            self.suffiTouchValue = suffv;
+        if(!self.touchSecond || ![touches containsObject:self.touchSecond]){
+            self.touchSecond = nil;
+            for (UITouch * touch in touches) {
+                if(touch != self.touchFirst){
+                    self.touchSecond = touch;
+                    break;
+                }
+            }
         }
     }
+    ///<==
+
+    switch (_touchState) {
+            //移动图片处理
+        case PYDisplayImageTouchOne:{
+            CGPoint movePoint = [self.touchFirst locationInView: self];
+            if(hasChange){
+                _movePoint = movePoint;
+            }else{
+                self.movePoint = movePoint;
+            }
+        }
+            break;
+        
+            //缩放移动图片处理
+#warning TODO has no end for display
+        case PYDisplayImageTouchMultiple:{
+            //==>
+            //计算并设置movePoint
+            CGPoint movePoint;
+            if(self.touchFirst && !self.touchSecond){
+                movePoint = [self.touchFirst locationInView: self];
+            }else if(self.touchFirst && self.touchSecond){
+                movePoint = [PYDisplayImageTools getCenterPointWithTouchFirst:self.touchFirst touchSecond:self.touchSecond tagView:self];
+            }else{
+                movePoint = CGPointZero;
+            }
+            //如果没有movePoint等于 0 就不设置
+            if(CGPointEqualToPoint(movePoint, CGPointZero)){
+                return;
+            }
+            CGPoint offPoint = PY_CGPointSubtract(movePoint, _movePoint);
+            //如果触控手指没有变化将设置否则仅赋值
+            if(hasChange){
+                _movePoint = movePoint;
+            }else{
+                self.movePoint = movePoint;
+            }
+            ///<==
+            if(self.touchFirst && self.touchSecond){
+                UITouch * touch;
+                CGPoint point;
+                [self.class getTouchPoint:&point touch:&touch touchFirst:self.touchFirst touchSecond:self.touchSecond tagView:self];
+                if(_preTouch && !CGPointEqualToPoint(_preTouchPoint, CGPointZero)){
+                    CGRect displayRect = self.imageView.frame;
+                    CGPoint touchPoint = PY_CGPointAdd(offPoint, _preTouchPoint);
+                    NSLog(@"movePoint:%@ touchPoint:%@ point:%@", NSStringFromCGPoint(_movePoint), NSStringFromCGPoint(touchPoint), NSStringFromCGPoint(point));
+                    [PYDisplayImageTools analyzeDisplayRect:&displayRect fitRect:_imgFitRect nailOrigin:_movePoint preTouchPoint:touchPoint curTouchPoint:point];
+                    self.imageView.frame = displayRect;
+                }
+                _preTouch = touch;
+                _preTouchPoint = point;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
+
++(void) getTouchPoint:(nonnull CGPoint *) touchPointp
+                touch:(UITouch * _Nullable __autoreleasing * _Nullable) touchp
+           touchFirst:(nonnull UITouch *) touchFist
+          touchSecond:(nonnull UITouch *) touchSecond
+              tagView:(nonnull UIView *) tagView{
+    
+    CGPoint p1 = CGPointZero,p2 = CGPointZero,p3 = CGPointZero;
+    p1 = [touchFist locationInView:tagView];
+    p2 = [touchSecond locationInView:tagView];
+    p3 = [PYDisplayImageTools getCenterPointWithTouchFirst:touchFist touchSecond:touchSecond tagView:tagView];
+    
+    CGPoint op1 = PY_CGPointSubtract(p3, p1);
+    CGPoint op2 = PY_CGPointSubtract(p3, p2);
+    CGFloat v1 = sqrt(pow(op1.x, 2) + pow(op1.y, 2));
+    CGFloat v2 = sqrt(pow(op2.x, 2) + pow(op2.y, 2));
+    
+    if(v1 >= v2){
+        (*touchPointp) = p1;
+        (*touchp) = touchFist;
+    }else{
+        (*touchPointp) = p2;
+        (*touchp) = touchSecond;
+    }
+    
 }
 
 -(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
-    NSTimeInterval touchEndTime = [NSDate timeIntervalSinceReferenceDate];
-    if(self.isTouchMove){
-        @unsafeify(self);
-        [UIView animateWithDuration:0.2 animations:^{
-            @strongify(self);
-            CGRect imgFrame = self.imgFrame;
-            if(imgFrame.size.width < self.frameWidth && imgFrame.size.height < self.frameHeight){
-                self.imageView.frame = self.bounds;
-                imgFrame = self.imgFrame;
-            }else{
-                CGRect imgFrame = self.imgFrame;
-                CGFloat bv = 3;
-                if(imgFrame.size.width/imgFrame.size.height > self.imageView.frameWidth/self.imageView.frameHeight){
-                    if(imgFrame.size.width / bv > self.frameWidth){
-                        CGFloat w = imgFrame.size.width;
-                        CGFloat h = imgFrame.size.height;
-                        imgFrame.size.width = self.frameWidth * bv;
-                        imgFrame.size.height = imgFrame.size.height * imgFrame.size.width / w;
-                        imgFrame.origin.x += (w - imgFrame.size.width)/2;
-                        imgFrame.origin.y += (h - imgFrame.size.height)/2;
-                    }else{
-                        if(imgFrame.origin.x > 0){
-                            imgFrame.origin.x = 0;
-                        }else if(imgFrame.origin.x < self.frameWidth - imgFrame.size.width){
-                            imgFrame.origin.x = self.frameWidth - imgFrame.size.width;
-                        }
-                        if(imgFrame.size.height < self.frameHeight){
-                            imgFrame.origin.y = (self.frameHeight - imgFrame.size.height)/2;
-                        }else if(imgFrame.origin.y > 0){
-                            imgFrame.origin.y = 0;
-                        }else if(imgFrame.origin.y < self.frameHeight - imgFrame.size.height){
-                            imgFrame.origin.y = self.frameHeight - imgFrame.size.height;
-                        }
-                    }
-                }else{
-                    if(imgFrame.size.height / bv > self.frameHeight){
-                        CGFloat w = imgFrame.size.width;
-                        CGFloat h = imgFrame.size.height;
-                        imgFrame.size.height = self.frameHeight * bv;
-                        imgFrame.size.width = imgFrame.size.width * imgFrame.size.height / h;
-                        imgFrame.origin.x += (w - imgFrame.size.width)/2;
-                        imgFrame.origin.y += (h - imgFrame.size.height)/2;
-                    }else{
-                        if(imgFrame.origin.y > 0){
-                            imgFrame.origin.y = 0;
-                        }else if(imgFrame.origin.y < self.frameHeight - imgFrame.size.height){
-                            imgFrame.origin.y = self.frameHeight - imgFrame.size.height;
-                        }
-                        if(imgFrame.size.width < self.frameWidth){
-                            imgFrame.origin.x = (self.frameWidth - imgFrame.size.width)/2;
-                        }else if(imgFrame.origin.x > 0){
-                            imgFrame.origin.x = 0;
-                        }else if(imgFrame.origin.x < self.frameWidth - imgFrame.size.width){
-                            imgFrame.origin.x = self.frameWidth - imgFrame.size.width;
-                        }
-                    }
-                }
-                self.imgFrame = imgFrame;
-            }
-        }];
-    }else{
-        if(self.touchEndTime > 0 && touchEndTime- self.touchEndTime < 0.4f && touchEndTime-self.touchBeginTime<0.2f){
-            @unsafeify(self);
-            [UIView animateWithDuration:0.2f animations:^{
-                @strongify(self);
-                [self showDefualt];
-            }];
+    _touchState = PYDisplayImageTouchChange;
+    _touchIndex -= touches.count;
+    if(_touchIndex > 0) return;
+    @unsafeify(self);
+    [UIView animateWithDuration:0.15 animations:^{
+        @strongify(self);
+        CGRect displayRect = self.imageView.frame;
+        [PYDisplayImageTools checkDisplayRect:&displayRect fitRect:_imgFitRect maxMultiple:self.maxMultiple];
+        self.imageView.frame = displayRect;
+    }];
+    [self initTouchData];
+}
+-(void) touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesCancelled:touches withEvent:event];
+    _touchState = PYDisplayImageTouchChange;
+    _touchIndex -= touches.count;
+    if(_touchIndex > 0) return;
+    @unsafeify(self);
+    [UIView animateWithDuration:0.15 animations:^{
+        @strongify(self);
+        CGRect displayRect = self.imageView.frame;
+        [PYDisplayImageTools checkDisplayRect:&displayRect fitRect:_imgFitRect maxMultiple:self.maxMultiple];
+        self.imageView.frame = displayRect;
+    }];
+    [self initTouchData];
+}
+-(void) initTouchData{
+    _touchState = PYDisplayImageTouchUnkown;
+    _touchIndex = 0;
+    _preTouch = nil;
+    _preTouchPoint = CGPointZero;
+    _movePoint = CGPointZero;
+}
+
+-(void) setImageView:(UIImageView *)imageView{
+    if(_imageView != nil && _imageView != imageView){
+        [_imageView removeFromSuperview];
+    }
+    _imageView = imageView;
+    _imageView.frame = CGRectZero;
+    [self.viewImgContext addSubview:_imageView];
+}
+
+-(void) setMaxMultiple:(NSUInteger)maxMultiple{
+    _maxMultiple = MIN(10, MAX(0, maxMultiple));
+}
+-(void) setMovePoint:(CGPoint)movePoint{
+    CGPoint offPoint = PY_CGPointSubtract(movePoint, _movePoint);
+    self.imageView.frameOrigin = PY_CGPointAdd(self.imageView.frameOrigin, offPoint);
+    _movePoint = movePoint;
+}
+
+-(void) synchronizedImageSize{
+    @synchronized (_imageView) {
+        if(!_imageView || !_imageView.image){
+            _imgSize = CGSizeZero;
+            return;
         }
+        _imgSize = self.imageView.image.size;
+        _imgFitRect = [PYDisplayImageTools getFitImgRectWithDisplaySize:self.frameSize imgSize:_imgSize];
+        _imageView.frame = _imgFitRect;
     }
-    self.touchEndTime = touchEndTime;
-}
--(void) showDefualt{
-    CGRect imgFrame = self.imgFrame;
-    self.imageView.frame = self.bounds;
-    if(CGRectEqualToRect(imgFrame, CGRectZero))return;
-    imgFrame = self.imgFrame;
-    self.imgFrame = imgFrame;
-}
--(CGRect) imgFrame{
-    if(self.imageView.image == nil) return CGRectZero;
-    CGSize s = self.imageView.image.size;
-    if(s.width/s.height > self.imageView.frameWidth/self.imageView.frameHeight){
-        CGFloat w = s.width;
-        s.width = self.imageView.frameWidth;
-        s.height = s.height * self.imageView.frameWidth/w;
-    }else{
-        CGFloat h = s.height;
-        s.height = self.imageView.frameHeight;
-        s.width = s.width * self.imageView.frameHeight/h;
-    }
-    CGPoint p = CGPointMake((self.imageView.frameWidth - s.width)/2.0f, (self.imageView.frameHeight - s.height)/2.0f);
-    p.x += self.imageView.frameX;
-    p.y += self.imageView.frameY;
-    return CGRectMake(p.x, p.y, s.width, s.height);
-}
--(void) setImgFrame:(CGRect)imgFrame{
-    CGPoint pv = imgFrame.origin;
-    if(imgFrame.size.width/imgFrame.size.height > self.imageView.frameWidth/self.imageView.frameHeight){
-        CGFloat w = self.imageView.frameWidth;
-        self.imageView.frameWidth = imgFrame.size.width;
-        self.imageView.frameHeight = self.imageView.frameHeight * imgFrame.size.width / w;
-        pv.y -= (self.imageView.frameHeight - imgFrame.size.height)/2;
-    }else{
-        CGFloat h = self.imageView.frameHeight;
-        self.imageView.frameHeight = imgFrame.size.height;
-        self.imageView.frameWidth = self.imageView.frameWidth * imgFrame.size.height / h;
-        pv.x -= (self.imageView.frameWidth - imgFrame.size.width)/2;
-    }
-    self.imageView.frameOrigin = pv;
 }
 PYSOULDLAYOUTMSTART
-        [self showDefualt];
+[self synchronizedImageSize];
 PYSOULDLAYOUTMEND
 
 @end

@@ -8,16 +8,15 @@
 
 #import "ViewController.h"
 #import "PYDisplayImageView.h"
-#import "UITextField+Check.h"
+#import "UITextField+PYCheck.h"
 #import "TextFieldCheckController.h"
 #import "PYAudioRecord.h"
 #import "PYAudioPlayer.h"
-#import "UITextView+Check.h"
+#import "UITextView+PYCheck.h"
 #import "PYCalendarView.h"
-
 #import "PYWebView.h"
 #import "PYViewAutolayoutCenter.h"
-
+#import "UIView+Dialog.h"
 
 @interface ViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet PYDisplayImageView *viewImage;
@@ -31,27 +30,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.textField clearTextFieldCheck];
+    [self.textField py_clearTextFieldCheck];
     self.textField.delegate = self;
-    [self.textField checkFloatForMax:9999.99 min:33 precision:2];
-    [self.textView clearTextViewCheck];
-    [self.textView checkIDCard];
+    [self.textField py_checkFloatForMax:9999.99 min:33 precision:2];
+    [self.textView py_clearTextViewCheck];
+    [self.textView py_checkIDCard];
     [self.calendarView synSpesqlInfo];
 //    [self.textField checkIntegerForMax:8888 min:-9999];
 //    [self.textField checkEmail];
 //    [self.textField checkMobliePhone];
 //    [self.textField checkIDCard];
-    @unsafeify(self);
-    [self.textField setBlockInputEndMatch:^(NSString * _Nonnull identify, BOOL * _Nonnull checkResult){
-        @strongify(self);
-        NSLog(@"");
-    }];
+//    @unsafeify(self);
+//    [self.textField setBlockInputEndMatch:^(NSString * _Nonnull identify, BOOL * _Nonnull checkResult){
+//        @strongify(self);
+//        NSLog(@"");
+//    }];
+
+//    PYWebView * webView = [PYWebView new];
+//    [self.view addSubview:webView];
+//    webView.frameSize = CGSizeMake(100, 100);
+//    webView.center = CGPointMake(0, 0);
+////    [PYViewAutolayoutCenter persistConstraint:webView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
+//    [webView loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
+    ((PYDisplayImageView*)self.viewImage).imageView.image = [UIImage imageNamed:@"timg.jpeg"];//@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494325479616&di=12bf378980ba10da9c81426c753c952c&imgtype=0&src=http%3A%2F%2Fimg2.niutuku.com%2F1312%2F0850%2F0850-niutuku.com-30110.jpg";//@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492615837709&di=d1557b3e4bc4106d8969cc023f29a3c6&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F8601a18b87d6277fc422bbe028381f30e924fc32.jpg";
+    [((PYDisplayImageView*)self.viewImage) synchronizedImageSize];
+        
     
-    PYWebView * webView = [PYWebView new];
-    [self.view addSubview:webView];
-    [PYViewAutolayoutCenter persistConstraint:webView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
-    [webView loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
-    ((PYDisplayImageView*)self.viewImage).imgUrl = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494325479616&di=12bf378980ba10da9c81426c753c952c&imgtype=0&src=http%3A%2F%2Fimg2.niutuku.com%2F1312%2F0850%2F0850-niutuku.com-30110.jpg";//@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492615837709&di=d1557b3e4bc4106d8969cc023f29a3c6&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F8601a18b87d6277fc422bbe028381f30e924fc32.jpg";
+}
+- (void)py_attributeTapReturnString:(NSString *)string range:(NSRange)range index:(NSInteger)index
+{
+    NSString *message = [NSString stringWithFormat:@"点击了“%@”字符\nrange: %@\nindex: %ld",string,NSStringFromRange(range),index];
+    UIView * view = [UIView new];
+    [view dialogShowWithTitle:nil message:message block:^(UIView * _Nonnull view, NSUInteger index) {
+        [view dialogHidden];
+    } buttonNames:@[@"确定"]];
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
 }

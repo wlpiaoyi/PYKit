@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@interface PYWebView : UIView
+@interface PYWebView : WKWebView
 //==>加载web
--(nullable id ) loadRequest:(nonnull NSURLRequest *)request;
--(nullable id) loadHTMLString:(nonnull NSString *)HTMLString baseURL:(nullable NSURL *)baseURL;
--(nullable id) loadHTMLString:(nonnull NSString *)HTMLString;
--(nullable id) loadFileURL:(nonnull NSURL *)URL;
--(nullable id) loadFileURL:(nonnull NSURL *)URL allowingReadAccessToURL:(nullable NSURL *)readAccessURL;
+
+- (nullable WKNavigation *)loadRequest:(NSURLRequest *)request;
+- (nullable WKNavigation *)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL;
+- (nullable WKNavigation *)loadHTMLString:(NSString *)string baseURL:(nullable NSURL *)baseURL;
 ///<=加载web
 -(void) addJavascriptInterface:(nonnull NSObject *) interface name:(nullable NSString *) name;
 -(void) removeJavascriptInterfaceWithName:(nullable NSString *) name;

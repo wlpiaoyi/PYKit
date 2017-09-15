@@ -10,6 +10,7 @@
 #import "PYCalendarLocation.h"
 #import "PYCalendarParam.h"
 #import "PYSelectorBarView.h"
+#import "PYDisplayImageTools.h"
 @interface AppDelegate ()
 
 @end
@@ -19,8 +20,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [PYCalendarParam loadCalendarData];
+    [PYDisplayImageTools class];
     return YES;
 }
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

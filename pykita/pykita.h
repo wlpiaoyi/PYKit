@@ -22,5 +22,5 @@
 #import "PYAudioPlayer.h"
 #import "PYAudioRecord.h"
 
-#import "UITextField+Check.h"
-#import "UITextView+Check.h"
+#import "UITextField+PYCheck.h"
+#import "UITextView+PYCheck.h"

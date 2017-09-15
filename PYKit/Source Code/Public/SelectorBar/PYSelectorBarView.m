@@ -63,10 +63,10 @@ PYINITPARAMS{
 -(void) onclickSelect:(UIButton *) button{
     unsigned int index = (unsigned int)[self.buttons indexOfObject:button];
     if(index == self.selectIndex) return;
+    self.selectIndex = index;
     if(self.blockSelecteItem && !_blockSelecteItem(index)){
         return;
     }
-    self.selectIndex = index;
 }
 -(void) setSelectorLine:(UIImageView *)selectorLine{
     if(_selectorLine){

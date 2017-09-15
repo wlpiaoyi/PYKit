@@ -14,21 +14,18 @@
 		150C6EAE1F49956D00731FC7 /* libpyinterflowa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6E7B1F49956D00731FC7 /* libpyinterflowa.a */; };
 		150C6EAF1F49956D00731FC7 /* libpynetworka.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6E7C1F49956D00731FC7 /* libpynetworka.a */; };
 		150C6EB01F49956D00731FC7 /* libpyutilea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6E7D1F49956D00731FC7 /* libpyutilea.a */; };
-		150C6EE81F4AC7B200731FC7 /* hybird.js in Resources */ = {isa = PBXBuildFile; fileRef = 150C6EE31F4AC7B200731FC7 /* hybird.js */; };
 		150C6EE91F4AC7B200731FC7 /* PYHybirdUtile.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE51F4AC7B200731FC7 /* PYHybirdUtile.m */; };
 		150C6EEA1F4AC7B200731FC7 /* PYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE71F4AC7B200731FC7 /* PYWebView.m */; };
 		150C6EEC1F4AC7C700731FC7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */; };
 		150C6EED1F4AC7D400731FC7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */; };
+		152289F21F4E6C9000E02321 /* timg.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 152289F11F4E6C9000E02321 /* timg.jpeg */; };
 		1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
 		152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C31931F0DD6EC006FD18C /* PYAudioRecord.m */; };
 		152F58B01F4BDCE0006528C7 /* PYHybirdUtile.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE51F4AC7B200731FC7 /* PYHybirdUtile.m */; };
 		152F58B11F4BDCE0006528C7 /* PYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE71F4AC7B200731FC7 /* PYWebView.m */; };
 		152F58B31F4BDD09006528C7 /* PYHybirdUtile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 150C6EE41F4AC7B200731FC7 /* PYHybirdUtile.h */; };
 		152F58B41F4BDD09006528C7 /* PYWebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 150C6EE61F4AC7B200731FC7 /* PYWebView.h */; };
-		152F58B51F4BDD13006528C7 /* hybird.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 150C6EE31F4AC7B200731FC7 /* hybird.js */; };
 		15325E5A1F1C725A00DD1633 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
-		15325E5B1F1C725A00DD1633 /* UITextView+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 155C74B21F1A556200E7CEE3 /* UITextView+Check.m */; };
-		15325E5C1F1C726500DD1633 /* UITextView+Check.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 155C74B11F1A556200E7CEE3 /* UITextView+Check.h */; };
 		15417B3E1EADCF4B009C894F /* NSDate+Lunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B331EADCF4B009C894F /* NSDate+Lunar.m */; };
 		15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B351EADCF4B009C894F /* PYCalendarHeadView.m */; };
 		15417B401EADCF4B009C894F /* PYCalendarParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B371EADCF4B009C894F /* PYCalendarParam.m */; };
@@ -47,10 +44,21 @@
 		15417B4D1EADCF6B009C894F /* PYCalendarTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B391EADCF4B009C894F /* PYCalendarTimeView.m */; };
 		15417B4E1EADCF6B009C894F /* PYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B3B1EADCF4B009C894F /* PYCalendarView.m */; };
 		15417B4F1EADCF6B009C894F /* PYCalenderDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15417B3D1EADCF4B009C894F /* PYCalenderDateView.m */; };
-		155B8F531F064D90007FE5A9 /* UITextField+Check.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15AD1EE21F02907A00AD2568 /* UITextField+Check.h */; };
-		155B8F541F064D97007FE5A9 /* UITextField+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AD1EE31F02907A00AD2568 /* UITextField+Check.m */; };
-		155C74B31F1A556200E7CEE3 /* UITextView+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 155C74B21F1A556200E7CEE3 /* UITextView+Check.m */; };
+		1555E0CC1F5CF1C10017B436 /* UITextField+PYCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 1555E0C91F5CF1C10017B436 /* UITextField+PYCheck.m */; };
+		1555E0CD1F5CF1C10017B436 /* UITextView+PYCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 1555E0CB1F5CF1C10017B436 /* UITextView+PYCheck.m */; };
+		155B586C1F5E49670070ECEE /* PYDisplayImageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B586B1F5E49670070ECEE /* PYDisplayImageTools.m */; };
 		15611F271F0B7DE900CD8848 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15611F261F0B7DE900CD8848 /* AVFoundation.framework */; };
+		1597CB011F5D2D5500690BBB /* UITextField+PYCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 1555E0C91F5CF1C10017B436 /* UITextField+PYCheck.m */; };
+		1597CB021F5D2D5500690BBB /* UITextView+PYCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 1555E0CB1F5CF1C10017B436 /* UITextView+PYCheck.m */; };
+		1597CB031F5D2D6300690BBB /* UITextField+PYCheck.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1555E0C81F5CF1C10017B436 /* UITextField+PYCheck.h */; };
+		1597CB041F5D2D6300690BBB /* UITextView+PYCheck.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1555E0CA1F5CF1C10017B436 /* UITextView+PYCheck.h */; };
+		1597CB0A1F5D42AE00690BBB /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */; };
+		1598847B1F6B7F5200E589D3 /* PYDisplayImageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B586B1F5E49670070ECEE /* PYDisplayImageTools.m */; };
+		1598847C1F6B7F5200E589D3 /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */; };
+		1598847D1F6B7F6100E589D3 /* PYDisplayImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */; };
+		159C3A811F555B9800167B3E /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 159C3A801F555B9800167B3E /* 1.jpg */; };
+		159C3A851F56AF6900167B3E /* py_webview_hybird.js in Resources */ = {isa = PBXBuildFile; fileRef = 159C3A841F56AF6900167B3E /* py_webview_hybird.js */; };
+		159C3A8A1F56C35800167B3E /* py_webview_hybird.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 159C3A841F56AF6900167B3E /* py_webview_hybird.js */; };
 		15AA33481F1609ED0070631E /* PYAudioTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F3291F0F2510002276A9 /* PYAudioTools.m */; };
 		15AA33491F1609ED0070631E /* PYAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F32A1F0F2510002276A9 /* PYAudioPlayer.m */; };
 		15AA334A1F1609ED0070631E /* PYAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C31931F0DD6EC006FD18C /* PYAudioRecord.m */; };
@@ -58,10 +66,8 @@
 		15AA334C1F160A030070631E /* PYAudioTools.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15D9F32C1F0F2510002276A9 /* PYAudioTools.h */; };
 		15AA334D1F160A030070631E /* PYAudioPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15D9F32B1F0F2510002276A9 /* PYAudioPlayer.h */; };
 		15AA334E1F160A030070631E /* PYAudioRecord.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152C31921F0DD6EC006FD18C /* PYAudioRecord.h */; };
-		15AD1EE41F02907A00AD2568 /* UITextField+Check.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AD1EE31F02907A00AD2568 /* UITextField+Check.m */; };
 		15B8D6611EA8855A00B8487E /* calendar_lunar.c in Sources */ = {isa = PBXBuildFile; fileRef = 15CC084A1EA757050006B505 /* calendar_lunar.c */; };
 		15B8D6681EA8859200B8487E /* PYAsyImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC07FB1EA756120006B505 /* PYAsyImageView.h */; };
-		15B8D66E1EA8859200B8487E /* PYDisplayImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC07FD1EA756120006B505 /* PYDisplayImageView.h */; };
 		15CC07E31EA7556C0006B505 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E21EA7556C0006B505 /* main.m */; };
 		15CC07E61EA7556C0006B505 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E51EA7556C0006B505 /* AppDelegate.m */; };
 		15CC07E91EA7556C0006B505 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E81EA7556C0006B505 /* ViewController.m */; };
@@ -69,14 +75,12 @@
 		15CC07EE1EA7556C0006B505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15CC07ED1EA7556C0006B505 /* Assets.xcassets */; };
 		15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15CC07EF1EA7556C0006B505 /* LaunchScreen.storyboard */; };
 		15CC07FF1EA756120006B505 /* PYAsyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07FC1EA756120006B505 /* PYAsyImageView.m */; };
-		15CC08001EA756120006B505 /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07FE1EA756120006B505 /* PYDisplayImageView.m */; };
 		15CC084D1EA757050006B505 /* PYDatePikerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08431EA757050006B505 /* PYDatePikerView.m */; };
 		15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08451EA757050006B505 /* PYCalendarGraphics.m */; };
 		15CC084F1EA757050006B505 /* PYCalendarLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08461EA757050006B505 /* PYCalendarLocation.m */; };
 		15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08481EA757050006B505 /* PYCalendarLunar.m */; };
 		15CC08511EA757050006B505 /* calendar_lunar.c in Sources */ = {isa = PBXBuildFile; fileRef = 15CC084A1EA757050006B505 /* calendar_lunar.c */; };
 		15CC086F1EA757BA0006B505 /* PYAsyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07FC1EA756120006B505 /* PYAsyImageView.m */; };
-		15CC08701EA757BA0006B505 /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07FE1EA756120006B505 /* PYDisplayImageView.m */; };
 		15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15CC08791EA7595A0006B505 /* PYKit.bundle */; };
 		15CC087B1EA759EA0006B505 /* PYCalendarGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08451EA757050006B505 /* PYCalendarGraphics.m */; };
 		15CC087C1EA759EA0006B505 /* PYCalendarLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08461EA757050006B505 /* PYCalendarLocation.m */; };
@@ -95,16 +99,17 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				152F58B51F4BDD13006528C7 /* hybird.js in CopyFiles */,
+				1598847D1F6B7F6100E589D3 /* PYDisplayImageView.h in CopyFiles */,
+				1597CB031F5D2D6300690BBB /* UITextField+PYCheck.h in CopyFiles */,
+				1597CB041F5D2D6300690BBB /* UITextView+PYCheck.h in CopyFiles */,
+				159C3A8A1F56C35800167B3E /* py_webview_hybird.js in CopyFiles */,
 				152F58B31F4BDD09006528C7 /* PYHybirdUtile.h in CopyFiles */,
 				152F58B41F4BDD09006528C7 /* PYWebView.h in CopyFiles */,
 				150C6DA91F46EB8000731FC7 /* PYSelectorBarView.h in CopyFiles */,
-				15325E5C1F1C726500DD1633 /* UITextView+Check.h in CopyFiles */,
 				15AA334B1F160A030070631E /* PYAudio.h in CopyFiles */,
 				15AA334C1F160A030070631E /* PYAudioTools.h in CopyFiles */,
 				15AA334D1F160A030070631E /* PYAudioPlayer.h in CopyFiles */,
 				15AA334E1F160A030070631E /* PYAudioRecord.h in CopyFiles */,
-				155B8F531F064D90007FE5A9 /* UITextField+Check.h in CopyFiles */,
 				15417B441EADCF62009C894F /* NSDate+Lunar.h in CopyFiles */,
 				15417B451EADCF62009C894F /* PYCalendarHeadView.h in CopyFiles */,
 				15417B461EADCF62009C894F /* PYCalendarParam.h in CopyFiles */,
@@ -112,7 +117,6 @@
 				15417B481EADCF62009C894F /* PYCalendarView.h in CopyFiles */,
 				15417B491EADCF62009C894F /* PYCalenderDateView.h in CopyFiles */,
 				15B8D6681EA8859200B8487E /* PYAsyImageView.h in CopyFiles */,
-				15B8D66E1EA8859200B8487E /* PYDisplayImageView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,12 +174,12 @@
 		150C6EAA1F49956D00731FC7 /* UIViewController+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Hook.h"; sourceTree = "<group>"; };
 		150C6EAB1F49956D00731FC7 /* UIViewController+HookOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookOrientation.h"; sourceTree = "<group>"; };
 		150C6EAC1F49956D00731FC7 /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookView.h"; sourceTree = "<group>"; };
-		150C6EE31F4AC7B200731FC7 /* hybird.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hybird.js; sourceTree = "<group>"; };
 		150C6EE41F4AC7B200731FC7 /* PYHybirdUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYHybirdUtile.h; sourceTree = "<group>"; };
 		150C6EE51F4AC7B200731FC7 /* PYHybirdUtile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYHybirdUtile.m; sourceTree = "<group>"; };
 		150C6EE61F4AC7B200731FC7 /* PYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYWebView.h; sourceTree = "<group>"; };
 		150C6EE71F4AC7B200731FC7 /* PYWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYWebView.m; sourceTree = "<group>"; };
 		150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		152289F11F4E6C9000E02321 /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
 		1522C7BC1F18A1BC003CB0D0 /* PYTextInputCheckParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTextInputCheckParams.h; sourceTree = "<group>"; };
 		1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTextInputCheckParams.m; sourceTree = "<group>"; };
 		152C31921F0DD6EC006FD18C /* PYAudioRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAudioRecord.h; sourceTree = "<group>"; };
@@ -194,11 +198,17 @@
 		15417B3B1EADCF4B009C894F /* PYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarView.m; sourceTree = "<group>"; };
 		15417B3C1EADCF4B009C894F /* PYCalenderDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalenderDateView.h; sourceTree = "<group>"; };
 		15417B3D1EADCF4B009C894F /* PYCalenderDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalenderDateView.m; sourceTree = "<group>"; };
-		155C74B11F1A556200E7CEE3 /* UITextView+Check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Check.h"; sourceTree = "<group>"; };
-		155C74B21F1A556200E7CEE3 /* UITextView+Check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Check.m"; sourceTree = "<group>"; };
+		1555E0C81F5CF1C10017B436 /* UITextField+PYCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+PYCheck.h"; sourceTree = "<group>"; };
+		1555E0C91F5CF1C10017B436 /* UITextField+PYCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+PYCheck.m"; sourceTree = "<group>"; };
+		1555E0CA1F5CF1C10017B436 /* UITextView+PYCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+PYCheck.h"; sourceTree = "<group>"; };
+		1555E0CB1F5CF1C10017B436 /* UITextView+PYCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+PYCheck.m"; sourceTree = "<group>"; };
+		155B586A1F5E49670070ECEE /* PYDisplayImageTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageTools.h; sourceTree = "<group>"; };
+		155B586B1F5E49670070ECEE /* PYDisplayImageTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageTools.m; sourceTree = "<group>"; };
 		15611F261F0B7DE900CD8848 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		15AD1EE21F02907A00AD2568 /* UITextField+Check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Check.h"; sourceTree = "<group>"; };
-		15AD1EE31F02907A00AD2568 /* UITextField+Check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Check.m"; sourceTree = "<group>"; };
+		1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
+		1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageView.m; sourceTree = "<group>"; };
+		159C3A801F555B9800167B3E /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		159C3A841F56AF6900167B3E /* py_webview_hybird.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = py_webview_hybird.js; sourceTree = "<group>"; };
 		15CC07DE1EA7556C0006B505 /* PYKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CC07E21EA7556C0006B505 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		15CC07E41EA7556C0006B505 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -211,8 +221,6 @@
 		15CC07F21EA7556C0006B505 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15CC07FB1EA756120006B505 /* PYAsyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAsyImageView.h; sourceTree = "<group>"; };
 		15CC07FC1EA756120006B505 /* PYAsyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAsyImageView.m; sourceTree = "<group>"; };
-		15CC07FD1EA756120006B505 /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
-		15CC07FE1EA756120006B505 /* PYDisplayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageView.m; sourceTree = "<group>"; };
 		15CC08431EA757050006B505 /* PYDatePikerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDatePikerView.m; sourceTree = "<group>"; };
 		15CC08441EA757050006B505 /* PYCalendarGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalendarGraphics.h; sourceTree = "<group>"; };
 		15CC08451EA757050006B505 /* PYCalendarGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarGraphics.m; sourceTree = "<group>"; };
@@ -360,7 +368,7 @@
 		150C6EE21F4AC7B200731FC7 /* Hybird */ = {
 			isa = PBXGroup;
 			children = (
-				150C6EE31F4AC7B200731FC7 /* hybird.js */,
+				159C3A841F56AF6900167B3E /* py_webview_hybird.js */,
 				150C6EE41F4AC7B200731FC7 /* PYHybirdUtile.h */,
 				150C6EE51F4AC7B200731FC7 /* PYHybirdUtile.m */,
 				150C6EE61F4AC7B200731FC7 /* PYWebView.h */,
@@ -375,12 +383,14 @@
 				152C31921F0DD6EC006FD18C /* PYAudioRecord.h */,
 				152C31931F0DD6EC006FD18C /* PYAudioRecord.m */,
 			);
-			path = AudioRecord;
+			name = AudioRecord;
+			path = ../AudioRecord;
 			sourceTree = "<group>";
 		};
 		152C31951F0DE17A006FD18C /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				152C31911F0DD6A0006FD18C /* AudioRecord */,
 				152C31961F0DE198006FD18C /* PYAudio.h */,
 				15D9F32C1F0F2510002276A9 /* PYAudioTools.h */,
 				15D9F3291F0F2510002276A9 /* PYAudioTools.m */,
@@ -443,6 +453,8 @@
 		15CC07E01EA7556C0006B505 /* PYKit */ = {
 			isa = PBXGroup;
 			children = (
+				159C3A801F555B9800167B3E /* 1.jpg */,
+				152289F11F4E6C9000E02321 /* timg.jpeg */,
 				15CC07F81EA756120006B505 /* Source Code */,
 				15CC07E41EA7556C0006B505 /* AppDelegate.h */,
 				15CC07E51EA7556C0006B505 /* AppDelegate.m */,
@@ -492,6 +504,8 @@
 				15CC08431EA757050006B505 /* PYDatePikerView.m */,
 				1522C7BC1F18A1BC003CB0D0 /* PYTextInputCheckParams.h */,
 				1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */,
+				155B586A1F5E49670070ECEE /* PYDisplayImageTools.h */,
+				155B586B1F5E49670070ECEE /* PYDisplayImageTools.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -499,19 +513,18 @@
 		15CC07FA1EA756120006B505 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				1555E0C81F5CF1C10017B436 /* UITextField+PYCheck.h */,
+				1555E0C91F5CF1C10017B436 /* UITextField+PYCheck.m */,
+				1555E0CA1F5CF1C10017B436 /* UITextView+PYCheck.h */,
+				1555E0CB1F5CF1C10017B436 /* UITextView+PYCheck.m */,
 				150C6EE21F4AC7B200731FC7 /* Hybird */,
 				150C6DA51F46D71500731FC7 /* SelectorBar */,
 				152C31951F0DE17A006FD18C /* AudioPlayer */,
-				152C31911F0DD6A0006FD18C /* AudioRecord */,
 				15417B311EADCF4B009C894F /* Calendar */,
 				15CC07FB1EA756120006B505 /* PYAsyImageView.h */,
 				15CC07FC1EA756120006B505 /* PYAsyImageView.m */,
-				15CC07FD1EA756120006B505 /* PYDisplayImageView.h */,
-				15CC07FE1EA756120006B505 /* PYDisplayImageView.m */,
-				15AD1EE21F02907A00AD2568 /* UITextField+Check.h */,
-				15AD1EE31F02907A00AD2568 /* UITextField+Check.m */,
-				155C74B11F1A556200E7CEE3 /* UITextView+Check.h */,
-				155C74B21F1A556200E7CEE3 /* UITextView+Check.m */,
+				1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */,
+				1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -607,10 +620,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */,
+				159C3A851F56AF6900167B3E /* py_webview_hybird.js in Resources */,
+				152289F21F4E6C9000E02321 /* timg.jpeg in Resources */,
 				15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */,
 				15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */,
 				15CC07EE1EA7556C0006B505 /* Assets.xcassets in Resources */,
-				150C6EE81F4AC7B200731FC7 /* hybird.js in Resources */,
+				159C3A811F555B9800167B3E /* 1.jpg in Resources */,
 				15CC07EC1EA7556C0006B505 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,21 +642,22 @@
 				150C6EE91F4AC7B200731FC7 /* PYHybirdUtile.m in Sources */,
 				15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */,
 				15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */,
-				15AD1EE41F02907A00AD2568 /* UITextField+Check.m in Sources */,
 				15417B3E1EADCF4B009C894F /* NSDate+Lunar.m in Sources */,
 				15CC084F1EA757050006B505 /* PYCalendarLocation.m in Sources */,
+				1555E0CD1F5CF1C10017B436 /* UITextView+PYCheck.m in Sources */,
+				1597CB0A1F5D42AE00690BBB /* PYDisplayImageView.m in Sources */,
 				15CC07E61EA7556C0006B505 /* AppDelegate.m in Sources */,
 				15417B421EADCF4B009C894F /* PYCalendarView.m in Sources */,
 				15CC084D1EA757050006B505 /* PYDatePikerView.m in Sources */,
+				1555E0CC1F5CF1C10017B436 /* UITextField+PYCheck.m in Sources */,
 				15417B411EADCF4B009C894F /* PYCalendarTimeView.m in Sources */,
 				1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */,
-				155C74B31F1A556200E7CEE3 /* UITextView+Check.m in Sources */,
+				155B586C1F5E49670070ECEE /* PYDisplayImageTools.m in Sources */,
 				150C6EEA1F4AC7B200731FC7 /* PYWebView.m in Sources */,
 				15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */,
 				15CC07E31EA7556C0006B505 /* main.m in Sources */,
 				15CC08511EA757050006B505 /* calendar_lunar.c in Sources */,
 				150C6DA81F46D74800731FC7 /* PYSelectorBarView.m in Sources */,
-				15CC08001EA756120006B505 /* PYDisplayImageView.m in Sources */,
 				15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */,
 				152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */,
 				15CC07FF1EA756120006B505 /* PYAsyImageView.m in Sources */,
@@ -655,15 +671,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1598847B1F6B7F5200E589D3 /* PYDisplayImageTools.m in Sources */,
+				1598847C1F6B7F5200E589D3 /* PYDisplayImageView.m in Sources */,
+				1597CB011F5D2D5500690BBB /* UITextField+PYCheck.m in Sources */,
+				1597CB021F5D2D5500690BBB /* UITextView+PYCheck.m in Sources */,
 				152F58B01F4BDCE0006528C7 /* PYHybirdUtile.m in Sources */,
 				152F58B11F4BDCE0006528C7 /* PYWebView.m in Sources */,
 				150C6DAA1F46EB8900731FC7 /* PYSelectorBarView.m in Sources */,
 				15325E5A1F1C725A00DD1633 /* PYTextInputCheckParams.m in Sources */,
-				15325E5B1F1C725A00DD1633 /* UITextView+Check.m in Sources */,
 				15AA33481F1609ED0070631E /* PYAudioTools.m in Sources */,
 				15AA33491F1609ED0070631E /* PYAudioPlayer.m in Sources */,
 				15AA334A1F1609ED0070631E /* PYAudioRecord.m in Sources */,
-				155B8F541F064D97007FE5A9 /* UITextField+Check.m in Sources */,
 				15417B4A1EADCF6B009C894F /* NSDate+Lunar.m in Sources */,
 				15417B4B1EADCF6B009C894F /* PYCalendarHeadView.m in Sources */,
 				15417B4C1EADCF6B009C894F /* PYCalendarParam.m in Sources */,
@@ -676,7 +694,6 @@
 				15CC087D1EA759EA0006B505 /* PYCalendarLunar.m in Sources */,
 				15CC087E1EA759EA0006B505 /* PYDatePikerView.m in Sources */,
 				15CC086F1EA757BA0006B505 /* PYAsyImageView.m in Sources */,
-				15CC08701EA757BA0006B505 /* PYDisplayImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
