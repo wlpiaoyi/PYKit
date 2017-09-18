@@ -163,7 +163,9 @@
             value = [NSString stringWithUTF8String:v];
         }else if(strcasecmp(encode, @encode(id)) == 0){
             [PYInvoke excuInvoke:&value returnType:nil invocation:invocaton];
-        }else if(strcasecmp(encode, @encode(void)) != 0){
+        }else if(strcasecmp(encode, @encode(void)) == 0){
+            [PYInvoke excuInvoke:nil returnType:nil invocation:invocaton];
+        }else{
             NSAssert(false, @"PYWebView return value type does not support!", self);
         }
         if (value) {

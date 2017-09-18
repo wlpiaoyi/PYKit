@@ -91,6 +91,7 @@
 		15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F32A1F0F2510002276A9 /* PYAudioPlayer.m */; };
 		15DA7DB21F09E899002FE132 /* TextFieldCheckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */; };
 		15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */; };
+		15E2335E1F6FB8EA00C87D9D /* SelecteBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -243,6 +244,8 @@
 		15DA7DAF1F09E899002FE132 /* TextFieldCheckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCheckController.h; sourceTree = "<group>"; };
 		15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCheckController.m; sourceTree = "<group>"; };
 		15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCheckController.xib; sourceTree = "<group>"; };
+		15E2335B1F6FB8EA00C87D9D /* SelecteBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelecteBarController.h; sourceTree = "<group>"; };
+		15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelecteBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,6 +442,13 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		159884811F6BA0BB00E589D3 /* Experiment */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Experiment;
+			sourceTree = "<group>";
+		};
 		15CC07D51EA7556C0006B505 = {
 			isa = PBXGroup;
 			children = (
@@ -475,6 +485,8 @@
 				15CC07EF1EA7556C0006B505 /* LaunchScreen.storyboard */,
 				15CC07F21EA7556C0006B505 /* Info.plist */,
 				15CC07E11EA7556C0006B505 /* Supporting Files */,
+				15E2335B1F6FB8EA00C87D9D /* SelecteBarController.h */,
+				15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */,
 				15DA7DAF1F09E899002FE132 /* TextFieldCheckController.h */,
 				15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */,
 				15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */,
@@ -493,6 +505,7 @@
 		15CC07F81EA756120006B505 /* Source Code */ = {
 			isa = PBXGroup;
 			children = (
+				159884811F6BA0BB00E589D3 /* Experiment */,
 				1598847E1F6B99FE00E589D3 /* Images */,
 				15CC07F91EA756120006B505 /* Private */,
 				15CC07FA1EA756120006B505 /* Public */,
@@ -660,6 +673,7 @@
 				1597CB0A1F5D42AE00690BBB /* PYDisplayImageView.m in Sources */,
 				15CC07E61EA7556C0006B505 /* AppDelegate.m in Sources */,
 				15417B421EADCF4B009C894F /* PYCalendarView.m in Sources */,
+				15E2335E1F6FB8EA00C87D9D /* SelecteBarController.m in Sources */,
 				15CC084D1EA757050006B505 /* PYDatePikerView.m in Sources */,
 				1555E0CC1F5CF1C10017B436 /* UITextField+PYCheck.m in Sources */,
 				15417B411EADCF4B009C894F /* PYCalendarTimeView.m in Sources */,

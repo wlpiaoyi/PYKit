@@ -11,31 +11,44 @@
 #import "UIImage+Expand.h"
 #import "EXTScope.h"
 
-@interface PYSelectorBarView()
+@interface PYSelectorBarView(){
+@private
+    UIScrollView * _scrollView;
+    UIView * _contentView;
+}
 PYSOULDLAYOUTP
 PYPNCNA NSArray<NSDictionary<NSString *, NSLayoutConstraint *> *> * lcButtons;
-PYPNCNA NSDictionary<NSString *, NSLayoutConstraint *> * lcSelectorLine;
 @end
 
 @implementation PYSelectorBarView
 PYINITPARAMS{
+    _contentWidth = 0;
+    _scrollView = [UIScrollView new];
+    _scrollView.backgroundColor = [UIColor clearColor];
+    [self addSubview:_scrollView];
+    [PYViewAutolayoutCenter persistConstraint:_scrollView relationmargins:UIEdgeInsetsZero relationToItems:PYEdgeInsetsItemNull()];
+    
+    _contentView = [UIView new];
+    _contentView.backgroundColor = [UIColor clearColor];
+    [_scrollView addSubview:_contentView];
+    
     NSMutableArray * mButtons = [NSMutableArray new];
     for(UIButton * button in self.subviews){
         if([button isKindOfClass:[UIButton class]]){
             [mButtons addObject:button];
+            [button removeTarget:self action:@selector(onclickSelect:) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(onclickSelect:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
-    self.buttons = mButtons;
-    if(self.selectorLine == nil){
-        UIImageView * selectorLine = [UIImageView new];
-        selectorLine.image = [UIImage imageWithColor:[UIColor orangeColor]];
-        CGRect r = selectorLine.frame;
-        r.size.height = 3;
-        selectorLine.frame = r;
-        self.selectorLine = selectorLine;
+    _buttons = mButtons;
+    _selectIndex = 0;
+    _selectorTagHeight = 3;
+    if(self.selectorTag == nil){
+        UIImageView * selectorTag = [UIImageView new];
+        selectorTag.backgroundColor = [UIColor orangeColor];
+        selectorTag.contentMode = UIViewContentModeScaleAspectFit;
+        self.selectorTag = selectorTag;
     }
-    if(!self.selectorColor)[self bringSubviewToFront:self.selectorLine];
-    else [self sendSubviewToBack:self.selectorLine];
 }
 -(void) setButtons:(NSArray *)buttons{
     if(self.lcButtons){
@@ -47,118 +60,95 @@ PYINITPARAMS{
         self.lcButtons = nil;
     }
     _buttons = buttons;
-    BOOL flag = false;
     for (UIButton * button in _buttons) {
         if(![button isKindOfClass:[UIButton class]]){
             @throw [NSException exceptionWithName:@"erro type" reason:@"buttons containts erro type" userInfo:nil];
         }
         [button removeTarget:self action:@selector(onclickSelect:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(onclickSelect:) forControlEvents:UIControlEventTouchUpInside];
-        if(button.superview != self) [self addSubview:button];
-        else flag = true;
+        [_contentView addSubview:button];
     }
-    if(!flag) self.lcButtons = [PYViewAutolayoutCenter persistConstraintHorizontal:_buttons relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull() offset:0];
-    self.selectorLine = self.selectorLine;
+    self.lcButtons = [PYViewAutolayoutCenter persistConstraintHorizontal:_buttons relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull() offset:0];
+    self.selectorTag = _selectorTag;
 }
 -(void) onclickSelect:(UIButton *) button{
     unsigned int index = (unsigned int)[self.buttons indexOfObject:button];
     if(index == self.selectIndex) return;
-    self.selectIndex = index;
     if(self.blockSelecteItem && !_blockSelecteItem(index)){
         return;
     }
+    [self setSelectIndex:index animation:YES];
 }
--(void) setSelectorLine:(UIImageView *)selectorLine{
-    if(_selectorLine){
-        [self removeConstraints:self.lcSelectorLine.allValues];
-        [_selectorLine removeConstraints:self.lcSelectorLine.allValues];
-        [_selectorLine removeFromSuperview];
+-(void) setSelectorTag:(UIImageView *)selectorTag{
+    _selectorTag = selectorTag;
+    if(!_selectorTag) return;
+    if(self.lcButtons == nil || self.lcButtons.count == 0){
+        [self addSubview:_selectorTag];
+        [self bringSubviewToFront:_selectorTag];
+        _scrollView.hidden = YES;
+    }else{
+        [_contentView addSubview:_selectorTag];
+        [_contentView bringSubviewToFront:_selectorTag];
+        _scrollView.hidden = NO;
     }
-    _selectorLine = selectorLine;
-    if(!_selectorLine) return;
-    [self addSubview:_selectorLine];
-    [self bringSubviewToFront:_selectorLine];
-    self.lcSelectorLine = nil;
-    [self refreshImageView];
-    
+    self.selectIndex = _selectIndex;
 }
--(void) setSelectorColor:(UIColor *)selectorColor{
-    _selectorColor = selectorColor;
-    if(_selectorLine){
-        [self removeConstraints:self.lcSelectorLine.allValues];
-        [_selectorLine removeConstraints:self.lcSelectorLine.allValues];
-        [_selectorLine removeFromSuperview];
-    }
-    if(!_selectorColor) return;
-    _selectorLine = [UIImageView new];
-    _selectorLine.image = [UIImage imageWithColor:_selectorColor];
-    [self addSubview:_selectorLine];
-    [self sendSubviewToBack:_selectorLine];
-    self.lcSelectorLine = nil;
-    [self refreshImageView];
-    
-}
--(void) setSelectIndex:(unsigned int)selectIndex{
-    
+
+-(void) setSelectIndex:(NSUInteger)selectIndex animation:(BOOL) animation{
     _selectIndex = selectIndex;
-    if(!self.lcSelectorLine || !self.lcSelectorLine[@"superLeft"]) return;
-    
-    if(!self.selectorColor)[self bringSubviewToFront:self.selectorLine];
-    else [self sendSubviewToBack:self.selectorLine];
-    
+    if(self.buttons.count == 0) return;
     @unsafeify(self);
-    [UIView animateWithDuration:0.25f animations:^{
+    void (^block)() = ^() {
         @strongify(self);
-        NSLayoutConstraint * lc = self.lcSelectorLine[@"superLeft"];
-        lc.constant = self.frame.size.width / self.buttons.count * self.selectIndex;
-        CGRect r = self.selectorLine.frame;
-        r.origin.x = lc.constant;
-        self.selectorLine.frame = r;
-        self.userInteractionEnabled = NO;
-    } completion:^(BOOL finished) {
-        @strongify(self);
+        CGFloat width = _contentView.frame.size.width / self.buttons.count;
+        CGFloat height = MIN(MAX(0, _selectorTagHeight), _contentView.frame.size.height);
+        CGRect rect = CGRectMake(width * self.selectIndex
+                                 ,  _contentView.frame.size.height - height
+                                 , width, height);
+        self.selectorTag.frame = rect;
+        if(_contentWidth > 0){
+            CGPoint contentOffset = _scrollView.contentOffset;
+            if(contentOffset.x  > width * _selectIndex){
+                contentOffset.x  =  width * _selectIndex;
+            }else if(contentOffset.x + _scrollView.frame.size.width < width * _selectIndex + width){
+                contentOffset.x =  width * _selectIndex + width - _scrollView.frame.size.width;
+            }
+            _scrollView.contentOffset = contentOffset;
+        }else{
+            _scrollView.contentOffset = CGPointMake(0, 0);
+        }
+    };
+    if(animation){
+        [UIView animateWithDuration:0.25f animations:^{
+            @strongify(self);
+            self.userInteractionEnabled = NO;
+            block();
+        } completion:^(BOOL finished) {
+            @strongify(self);
+            self.userInteractionEnabled = YES;
+        }];
+    }else{
         self.userInteractionEnabled = YES;
-    }];
+        block();
+    }
     
     int index = 0;
     for (UIButton * button in self.buttons) {
         [button setSelected:index == _selectIndex];
         index++;
     }
-    
 }
--(void) refreshImageView{
-    if(!_selectorLine || _selectorLine.superview !=self) return;
-    if(!self.lcSelectorLine){
-        if(self.buttons.count == 0 || self.frame.size.width == 0) return;
-        CGFloat w = self.frame.size.width/self.buttons.count;
-        if(w <= 0) return;
-        if(self.selectorColor){
-            NSMutableDictionary * mDict = [NSMutableDictionary dictionaryWithDictionary:[PYViewAutolayoutCenter persistConstraint:self.selectorLine size:CGSizeMake(w, DisableConstrainsValueMAX)]];
-            NSDictionary * tDict = [PYViewAutolayoutCenter persistConstraint:self.selectorLine relationmargins:UIEdgeInsetsMake(0, 0, 0, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-            for (NSString * key in tDict) {
-                [mDict setValue:tDict[key] forKey:key];
-            }
-            self.lcSelectorLine = mDict;
-        }else{
-            NSMutableDictionary * mDict = [NSMutableDictionary dictionaryWithDictionary:[PYViewAutolayoutCenter persistConstraint:self.selectorLine size:CGSizeMake(w, _selectorLine.frame.size.height)]];
-            NSDictionary * tDict = [PYViewAutolayoutCenter persistConstraint:self.selectorLine relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, 0, 0, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-            for (NSString * key in tDict) {
-                [mDict setValue:tDict[key] forKey:key];
-            }
-            self.lcSelectorLine = mDict;
-        }
-    }else{
-        CGFloat w = self.frame.size.width/self.buttons.count;
-        NSLayoutConstraint * lc = self.lcSelectorLine[@"selfWith"];
-        lc.constant = w;
-        lc = self.lcSelectorLine[@"selfHeight"];
-        lc.constant = _selectorLine.frame.size.height;
-    }
-    self.selectIndex = self.selectIndex;
+-(void) setSelectIndex:(NSUInteger)selectIndex{
+    [self setSelectIndex:selectIndex animation:NO];
+}
+-(void) setContentWidth:(CGFloat)contentWidth{
+    _contentWidth = contentWidth;
+    _contentView.frame = CGRectMake(0, 0, MAX(_contentWidth, _scrollView.frame.size.width), _scrollView.frame.size.height);
+    _scrollView.contentSize = _contentView.frame.size;
+    self.selectIndex = _selectIndex;
 }
 PYSOULDLAYOUTMSTART
-    [self refreshImageView];
+self.contentWidth = _contentWidth;
 PYSOULDLAYOUTMEND
 
 @end

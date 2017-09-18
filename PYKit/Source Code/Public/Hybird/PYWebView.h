@@ -18,4 +18,5 @@
 ///<=加载web
 -(void) addJavascriptInterface:(nonnull NSObject *) interface name:(nullable NSString *) name;
 -(void) removeJavascriptInterfaceWithName:(nullable NSString *) name;
+-(void) reloadInjectJS;
 @end

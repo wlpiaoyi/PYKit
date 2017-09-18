@@ -90,7 +90,10 @@ PYPNSNN WKNavigation * navigation;
 PYPNSNA NSTimer * timer;
 @end
 
-@implementation PYWebView
+@implementation PYWebView{
+@private
+    WKUserScript * _baseScript;
+}
 
 PYINITPARAMS{
     _interfacesDict = [NSMutableDictionary new];
@@ -110,10 +113,6 @@ PYINITPARAMS{
     // 默认是不能通过JS自动打开窗口的，必须通过用户交互才能打开
 //    configuration.preferences.javaScriptCanOpenWindowsAutomatically = YES;
     
-    NSString * javaScript = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/py_webview_hybird.js",[[NSBundle mainBundle] resourcePath]] encoding:NSUTF8StringEncoding error:nil];
-    WKUserScript * userScript = [[WKUserScript alloc] initWithSource:javaScript  injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:false];
-    [configuration.userContentController addUserScript:userScript];
-    
     _progressView = [PYScheduleView new];
     [self addSubview:_progressView];
     [PYViewAutolayoutCenter persistConstraint:_progressView size:CGSizeMake(DisableConstrainsValueMAX, 20)];
@@ -122,6 +121,26 @@ PYINITPARAMS{
     
     self.UIDelegate = self;
     self.navigationDelegate = self;
+}
+
+-(void) reloadInjectJS{
+    @synchronized (self.configuration.userContentController.userScripts) {
+        if(_baseScript){
+            NSArray * allScript = [self.configuration.userContentController userScripts];
+            if(allScript && allScript.count){
+                [self.configuration.userContentController removeAllUserScripts];
+                NSMutableArray * mds = [NSMutableArray new];
+                [mds addObjectsFromArray:allScript];
+                [mds removeObject:_baseScript];
+                for (WKUserScript * userScript in mds) {
+                    [self.configuration.userContentController addUserScript:userScript];
+                }
+            }
+        }
+        NSString * javaScript = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/py_webview_hybird.js",[[NSBundle mainBundle] resourcePath]] encoding:NSUTF8StringEncoding error:nil];
+        _baseScript = [[WKUserScript alloc] initWithSource:javaScript  injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:false];
+        [self.configuration.userContentController addUserScript:_baseScript];
+    }
 }
 
 - (nullable WKNavigation *)loadRequest:(NSURLRequest *)request{
@@ -154,11 +173,12 @@ PYINITPARAMS{
     @synchronized (self.interfacesDict) {
         
         [self removeJavascriptInterfaceWithName:name];
-        WKUserScript * userScript = [[WKUserScript alloc] initWithSource:[PYHybirdUtile parseInstanceToJsObject:interface name:name] injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:false];
+        NSString * injectJS = [PYHybirdUtile parseInstanceToJsObject:interface name:name];
+        WKUserScript * userScript = [[WKUserScript alloc] initWithSource:injectJS injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:false];
         [self.configuration.userContentController addUserScript:userScript];
         NSNumber * interfacePointer = @(((NSInteger)((__bridge void *)(interface))));
         [self.interfacesDict setObject:@{@"interfacePointer": interfacePointer, @"userScript":userScript} forKey:name];
-        
+        printf("injectJS:\n%s",injectJS.UTF8String);
     }
 }
 -(void) removeJavascriptInterfaceWithName:(nullable NSString *) name{
@@ -171,12 +191,16 @@ PYINITPARAMS{
     _progressView.hidden = NO;
     _progressView.alpha = 1;
     if(self.timer) [self.timer invalidate];
-    @unsafeify(self);
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:30 repeats:NO block:^(NSTimer * _Nonnull timer) {
-        @strongify(self);
-        NSError * erro = [NSError errorWithDomain:NSNetServicesErrorDomain code:408 userInfo:@{@"name":@"timeout"}];
-        [self webView:self didFailProvisionalNavigation:self.navigation withError:erro];
-    }];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(scheduledTimerEnd) userInfo:nil repeats:NO];
+//    @unsafeify(self);
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:30 repeats:NO block:^(NSTimer * _Nonnull timer) {
+//        @strongify(self);
+//        [self scheduledTimerEnd];
+//    }];
+}
+-(void) scheduledTimerEnd{
+    NSError * erro = [NSError errorWithDomain:NSNetServicesErrorDomain code:408 userInfo:@{@"name":@"timeout"}];
+    [self webView:self didFailProvisionalNavigation:self.navigation withError:erro];
 }
 -(void) hiddenProgress{
     if(self.timer) [self.timer invalidate];

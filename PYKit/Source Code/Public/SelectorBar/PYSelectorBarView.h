@@ -11,8 +11,11 @@
 
 @interface PYSelectorBarView : UIView
 PYPNSNN NSArray * buttons;
-PYPNSNN UIImageView * selectorLine;
-PYPNSNN UIColor * selectorColor;
-PYPNA unsigned int selectIndex;
+PYPNSNN UIImageView * selectorTag;
+PYPNA BOOL isBackground;
+PYPNA CGFloat selectorTagHeight;
+PYPNA NSUInteger selectIndex;
+PYPNA CGFloat contentWidth;
 PYPNCNA BOOL (^blockSelecteItem)(int index);
+-(void) setSelectIndex:(NSUInteger)selectIndex animation:(BOOL) animation;
 @end
