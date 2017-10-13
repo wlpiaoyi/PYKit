@@ -18,18 +18,18 @@
     CGPoint _movePoint;
     NSUInteger _touchIndex;
 }
-PYPNA PYDisplayImageTouchEnum touchState;
-PYPNSNA UITouch * touchFirst;
-PYPNSNA UITouch * touchSecond;
-PYPNSNA UITouch * preTouch;
+kPNA PYDisplayImageTouchEnum touchState;
+kPNSNA UITouch * touchFirst;
+kPNSNA UITouch * touchSecond;
+kPNSNA UITouch * preTouch;
 
-PYPNSNN UIView * viewImgContext;
-PYSOULDLAYOUTP
+kPNSNN UIView * viewImgContext;
+kSOULDLAYOUTP
 @end
 
 @implementation PYDisplayImageView
 
-PYINITPARAMS{
+kINITPARAMS{
     self.maxMultiple = 6;
     _movePoint = CGPointZero;
     _preTouchPoint = CGPointZero;
@@ -245,8 +245,8 @@ PYINITPARAMS{
         _imageView.frame = _imgFitRect;
     }
 }
-PYSOULDLAYOUTMSTART
+kSOULDLAYOUTMSTART
 [self synchronizedImageSize];
-PYSOULDLAYOUTMEND
-
+kSOULDLAYOUTMEND
 @end
+

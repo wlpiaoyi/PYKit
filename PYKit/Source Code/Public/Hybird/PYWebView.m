@@ -16,10 +16,10 @@
 #import "pyinterflowa.h"
 
 @interface PYScheduleView:UIView
-PYPNA CGFloat schedule;
-PYPNSNN UIColor * pColor;
-PYPNSNN UIColor * bColor;
-PYSOULDLAYOUTP
+kPNA CGFloat schedule;
+kPNSNN UIColor * pColor;
+kPNSNN UIColor * bColor;
+kSOULDLAYOUTP
 @end
 @implementation PYScheduleView{
     UIView * _pView;
@@ -71,11 +71,11 @@ PYSOULDLAYOUTP
 -(void) setBackgroundColor:(UIColor *)backgroundColor{
     [super setBackgroundColor:[UIColor clearColor]];
 }
-PYSOULDLAYOUTMSTART
+kSOULDLAYOUTMSTART
 self.schedule = self.schedule;
 [_bsView setCornerRadiusAndBorder:self.frameHeight/2 -3 borderWidth:0 borderColor:[UIColor clearColor]];
 [_psView setCornerRadiusAndBorder:self.frameHeight/2 - 3 borderWidth:0 borderColor:[UIColor clearColor]];
-PYSOULDLAYOUTMEND
+kSOULDLAYOUTMEND
 @end
 
 static NSString * PYWebViewPrompt = @"qqpiaoyi_prompt";
@@ -85,9 +85,9 @@ static NSString * PYWebViewPrompt = @"qqpiaoyi_prompt";
 @property (nullable, nonatomic, weak) id <WKUIDelegate> UIDelegatec;
 
 @property (nonatomic, strong) NSMutableDictionary<NSString* , NSDictionary *> * interfacesDict;
-PYPNSNN PYScheduleView * progressView;
-PYPNSNN WKNavigation * navigation;
-PYPNSNA NSTimer * timer;
+kPNSNN PYScheduleView * progressView;
+kPNSNN WKNavigation * navigation;
+kPNSNA NSTimer * timer;
 @end
 
 @implementation PYWebView{
@@ -95,7 +95,7 @@ PYPNSNA NSTimer * timer;
     WKUserScript * _baseScript;
 }
 
-PYINITPARAMS{
+kINITPARAMS{
     _interfacesDict = [NSMutableDictionary new];
     WKWebViewConfiguration * configuration = self.configuration;
     if(configuration.preferences == nil){
@@ -191,15 +191,10 @@ PYINITPARAMS{
     _progressView.hidden = NO;
     _progressView.alpha = 1;
     if(self.timer) [self.timer invalidate];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(scheduledTimerEnd) userInfo:nil repeats:NO];
-//    @unsafeify(self);
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:30 repeats:NO block:^(NSTimer * _Nonnull timer) {
-//        @strongify(self);
-//        [self scheduledTimerEnd];
-//    }];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:300 target:self selector:@selector(scheduledTimerEnd) userInfo:nil repeats:NO];
 }
 -(void) scheduledTimerEnd{
-    NSError * erro = [NSError errorWithDomain:NSNetServicesErrorDomain code:408 userInfo:@{@"name":@"timeout"}];
+    NSError * erro = [NSError errorWithDomain:NSNetServicesErrorDomain code:1860504 userInfo:@{@"describle":@"Gateway Timeout"}];
     [self webView:self didFailProvisionalNavigation:self.navigation withError:erro];
 }
 -(void) hiddenProgress{

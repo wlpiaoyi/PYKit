@@ -7,26 +7,25 @@
 //
 
 #import "pyutilea.h"
-#ifndef pyutilea
-#import <UIKit/UIKit.h>
-#import <Utile/EXTScope.h>
-#import <Utile/PYUtile.h>
-#import <Utile/NSString+Expand.h>
-#import <Utile/NSData+Expand.h>
-#import <Utile/NSDictionary+Expand.h>
-#import <Utile/PYReachabilityListener.h>
-#import <Utile/PYViewAutolayoutCenter.h>
-#define PYPNSNA @property (nonatomic, strong, nullable)
-#define PYPNSNN @property (nonatomic, strong, nonnull)
-#define PYPNRNN @property (nonatomic, readonly, nonnull)
-#define PYPNCNA @property (nonatomic, copy, nullable)
-#define PYPNA @property (nonatomic, assign)
-#define PYINITPARAMS -(instancetype) initWithFrame:(CGRect)frame{if(self = [super initWithFrame:frame]){[self initParams];}return self;} -(instancetype) initWithCoder:(NSCoder *)aDecoder{ if(self = [super initWithCoder:aDecoder]){ [self initParams];}return self;}
-
-#define PYSOULDLAYOUTP @property (nonatomic) CGSize __layoutSubviews_UseSize;
-#define PYSOULDLAYOUTM -(BOOL) __layoutSubviews_Size_Compare{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize, self.bounds.size)){return false;}self.__layoutSubviews_UseSize = self.bounds.size;return true;}
-#define PYSOULDLAYOUTE [self __layoutSubviews_Size_Compare]
-#endif
+//#ifndef pyutilea
+//#import <UIKit/UIKit.h>
+//#import <Utile/EXTScope.h>
+//#import <Utile/PYUtile.h>
+//#import <Utile/NSString+Expand.h>
+//#import <Utile/NSData+Expand.h>
+//#import <Utile/NSDictionary+Expand.h>
+//#import <Utile/PYReachabilityListener.h>
+//#import <Utile/PYViewAutolayoutCenter.h>
+//#define kPNSNA @property (nonatomic, strong, nullable)
+//#define kPNSNN @property (nonatomic, strong, nonnull)
+//#define kPNRNN @property (nonatomic, readonly, nonnull)
+//#define kPNCNA @property (nonatomic, copy, nullable)
+//#define kPNA @property (nonatomic, assign)
+//#define kINITPARAMS -(instancetype) initWithFrame:(CGRect)frame{if(self = [super initWithFrame:frame]){[self initParams];}return self;} -(instancetype) initWithCoder:(NSCoder *)aDecoder{ if(self = [super initWithCoder:aDecoder]){ [self initParams];}return self;}
+//#define kSOULDLAYOUTP @property (nonatomic) CGSize __layoutSubviews_UseSize;
+//#define PYSOULDLAYOUTM -(BOOL) __layoutSubviews_Size_Compare{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize, self.bounds.size)){return false;}self.__layoutSubviews_UseSize = self.bounds.size;return true;}
+//#define PYSOULDLAYOUTE [self __layoutSubviews_Size_Compare]
+//#endif
 
 
 static NSString * _Nonnull  PYNetworkCache;
@@ -34,30 +33,30 @@ static NSTimeInterval   PYNetworkOutTime;
 
 
 //==>传输方法
-extern const NSString * _Nonnull PYNET_HTTP_GET;
-extern const NSString * _Nonnull PYNET_HTTP_POST;
-extern const NSString * _Nonnull PYNET_HTTP_PUT ;
-extern const NSString * _Nonnull PYNET_HTTP_DELETE;
+extern NSString * _Nonnull PYNET_HTTP_GET;
+extern NSString * _Nonnull PYNET_HTTP_POST;
+extern NSString * _Nonnull PYNET_HTTP_PUT ;
+extern NSString * _Nonnull PYNET_HTTP_DELETE;
 ///<==
 
 @interface PYNetwork : NSObject
 @property (nonatomic) NSTimeInterval outTime;
-PYPNSNA id userInfo;
-PYPNSNN NSURLSession * session;
+kPNSNA id userInfo;
+kPNSNN NSURLSession * session;
 
 
-PYPNSNN NSString * url;
-PYPNSNN NSString * method;
-PYPNSNA NSDictionary<NSString *, id> * params;
-PYPNSNA NSDictionary<NSString *, NSString *> * heads;
-PYPNSNN NSURLSessionTask * sessionTask;
+kPNSNN NSString * url;
+kPNSNN NSString * method;
+kPNSNA NSDictionary<NSString *, id> * params;
+kPNSNA NSDictionary<NSString *, NSString *> * heads;
+kPNSNA NSURLSessionTask * sessionTask;
 
-PYPNCNA void (^blockSendProgress) (PYNetwork * _Nonnull target, int64_t currentBytes, int64_t totalBytes);
-PYPNCNA BOOL (^blockReceiveChallenge)(id _Nullable data, PYNetwork * _Nonnull target) ;
-PYPNCNA void (^blockComplete)(id _Nullable data, PYNetwork * _Nonnull target);
+kPNCNA void (^blockSendProgress) (PYNetwork * _Nonnull target, int64_t currentBytes, int64_t totalBytes);
+kPNCNA BOOL (^blockReceiveChallenge)(id _Nullable data, PYNetwork * _Nonnull target) ;
+kPNCNA void (^blockComplete)(id _Nullable data, PYNetwork * _Nonnull target);
 
-PYPNSNA NSString * certificationName;
-PYPNSNA NSString * certificationPassword;
+kPNSNA NSString * certificationName;
+kPNSNA NSString * certificationPassword;
 -(BOOL) resume;
 -(BOOL) suspend;
 -(BOOL) cancel;

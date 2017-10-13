@@ -16,12 +16,12 @@
     UIScrollView * _scrollView;
     UIView * _contentView;
 }
-PYSOULDLAYOUTP
-PYPNCNA NSArray<NSDictionary<NSString *, NSLayoutConstraint *> *> * lcButtons;
+kSOULDLAYOUTP
+kPNCNA NSArray<NSDictionary<NSString *, NSLayoutConstraint *> *> * lcButtons;
 @end
 
 @implementation PYSelectorBarView
-PYINITPARAMS{
+kINITPARAMS{
     _contentWidth = 0;
     _scrollView = [UIScrollView new];
     _scrollView.backgroundColor = [UIColor clearColor];
@@ -147,8 +147,8 @@ PYINITPARAMS{
     _scrollView.contentSize = _contentView.frame.size;
     self.selectIndex = _selectIndex;
 }
-PYSOULDLAYOUTMSTART
+kSOULDLAYOUTMSTART
 self.contentWidth = _contentWidth;
-PYSOULDLAYOUTMEND
+kSOULDLAYOUTMEND
 
 @end

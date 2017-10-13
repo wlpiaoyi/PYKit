@@ -13,7 +13,7 @@ typedef struct _PYTime {
     NSInteger minute;
     NSInteger second;
 } PYTime;
-PYUTILE_STATIC_INLINE PYTime PYTimeMake(NSInteger hour, NSInteger minute, NSInteger second){
+kUTILE_STATIC_INLINE PYTime PYTimeMake(NSInteger hour, NSInteger minute, NSInteger second){
     PYTime time = {hour, minute, second};
     return time;
 }
@@ -21,7 +21,7 @@ PYUTILE_STATIC_INLINE PYTime PYTimeMake(NSInteger hour, NSInteger minute, NSInte
 typedef struct _PYDate {
     NSInteger year,month,day;
 } PYDate;
-PYUTILE_STATIC_INLINE PYDate PYDateMake(NSInteger year, NSInteger month, NSInteger day){
+kUTILE_STATIC_INLINE PYDate PYDateMake(NSInteger year, NSInteger month, NSInteger day){
     PYDate date = {year, month, day};
     return date;
 }
@@ -34,7 +34,7 @@ typedef struct _PYCalendarRect {
     PYDate lunarDate;
     bool flagEnable;
 } PYCalendarRect;
-PYUTILE_STATIC_INLINE PYCalendarRect PYCalendarRectMake(int index, CGRect frame, PYDate date){
+kUTILE_STATIC_INLINE PYCalendarRect PYCalendarRectMake(int index, CGRect frame, PYDate date){
     PYCalendarRect rect = {index, frame, date, PYDateMake(0, 0, 0), true};
     return rect;
 }
@@ -43,7 +43,7 @@ typedef struct _PYSpesalInfo {
     char *_Nonnull spesal;
     bool isLunar;
 } PYSpesalInfo;
-PYUTILE_STATIC_INLINE PYSpesalInfo PYSpesalInfoMake(PYDate date, char * _Nonnull spesal, bool isLunar){
+kUTILE_STATIC_INLINE PYSpesalInfo PYSpesalInfoMake(PYDate date, char * _Nonnull spesal, bool isLunar){
     PYSpesalInfo rect = { date, spesal, isLunar};
     return rect;
 }
@@ -54,7 +54,7 @@ typedef struct _PYCalendarSolarTerm {
     char * _Nullable solarTerm;
 } PYCalendarSolarTerm;
 
-PYUTILE_STATIC_INLINE PYCalendarSolarTerm PYCalendarSolarTermMake(PYDate date, char * _Nonnull name, char * _Nullable solarTerm){
+kUTILE_STATIC_INLINE PYCalendarSolarTerm PYCalendarSolarTermMake(PYDate date, char * _Nonnull name, char * _Nullable solarTerm){
     PYCalendarSolarTerm st =  {date, name, solarTerm};
     return st;
 }

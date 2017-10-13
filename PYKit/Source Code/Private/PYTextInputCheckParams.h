@@ -23,13 +23,13 @@ extern NSString * _Nonnull _UITextInputCheckDictSubKeyEnd;
 @interface _UITextViewCheckDelegateImp : NSObject<UITextViewDelegate>@end
 
 @interface PYTextInputCheckParams : NSObject
-PYPNSNN NSMutableDictionary * dictMatch;
-PYPNA PYInt64 maxInteger;
-PYPNA PYInt64 minInteger;
-PYPNA CGFloat maxFloat;
-PYPNA CGFloat minFloat;
-PYPNA int precisionFloat;
-PYPNCNA void (^ blockInputEnd) (NSString * _Nonnull identify, BOOL * _Nonnull checkResult);
+kPNSNN NSMutableDictionary * dictMatch;
+kPNA kInt64 maxInteger;
+kPNA kInt64 minInteger;
+kPNA CGFloat maxFloat;
+kPNA CGFloat minFloat;
+kPNA int precisionFloat;
+kPNCNA void (^ blockInputEnd) (NSString * _Nonnull identify, BOOL * _Nonnull checkResult);
 -(nullable id) getDelegateWithTextInput:(nonnull id<UITextInput>) textInput;
 @end
 

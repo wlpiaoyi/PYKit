@@ -442,13 +442,6 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		159884811F6BA0BB00E589D3 /* Experiment */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Experiment;
-			sourceTree = "<group>";
-		};
 		15CC07D51EA7556C0006B505 = {
 			isa = PBXGroup;
 			children = (
@@ -505,7 +498,6 @@
 		15CC07F81EA756120006B505 /* Source Code */ = {
 			isa = PBXGroup;
 			children = (
-				159884811F6BA0BB00E589D3 /* Experiment */,
 				1598847E1F6B99FE00E589D3 /* Images */,
 				15CC07F91EA756120006B505 /* Private */,
 				15CC07FA1EA756120006B505 /* Public */,

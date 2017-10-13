@@ -24,16 +24,16 @@
     unsigned int spesalLength;
 }
 @property (nonatomic, assign, nullable) id<PYCalenderDateView> delegate;
-PYPNSNN NSDate * dateEnableStart;
-PYPNSNN NSDate * dateEnableEnd;
-PYPNSNN NSDate * date;
-PYPNSNN UIFont * fontDay;
-PYPNSNN UIColor * colorDay;
-PYPNSNN UIFont * fontLunar;
-PYPNSNN UIColor * colorLunar;
-PYPNSNN UIColor * colorDisable;
-PYPNSNN UIColor * colorWeekend;
-PYPNSNN UIFont * fontSpesal;
+kPNSNN NSDate * dateEnableStart;
+kPNSNN NSDate * dateEnableEnd;
+kPNSNN NSDate * date;
+kPNSNN UIFont * fontDay;
+kPNSNN UIColor * colorDay;
+kPNSNN UIFont * fontLunar;
+kPNSNN UIColor * colorLunar;
+kPNSNN UIColor * colorDisable;
+kPNSNN UIColor * colorWeekend;
+kPNSNN UIFont * fontSpesal;
 -(nonnull instancetype) initWithDate:(nonnull NSDate *) date DateStart:(nonnull NSDate *) dateStart dateEnd:(nonnull NSDate *) dateEnd;
 -(void) reloadDate;
 -(void) reloadOther;

@@ -17,7 +17,7 @@
 #import "PYViewAutolayoutCenter.h"
 
 @interface UITextView(_pytextinputcheckparams)
-PYPNRNN PYTextInputCheckParams * _pytextinputcheckparams;
+kPNRNN PYTextInputCheckParams * _pytextinputcheckparams;
 @end
 void * _Nonnull PYTextViewCheckParamPointer = &PYTextViewCheckParamPointer;
 
@@ -59,7 +59,7 @@ BOOL _pytextview_shouldEndEditing(id target, SEL action, UITextView *textInput);
 -(void) py_checkInteger{
     [self py_checkIntegerForMax:0 min:0];
 }
--(void) py_checkIntegerForMax:(PYInt64) max min:(PYInt64) min{
+-(void) py_checkIntegerForMax:(kInt64) max min:(kInt64) min{
     PYTextInputCheckParams * params = self._pytextinputcheckparams;
     params.maxInteger = max;
     params.minInteger = min;

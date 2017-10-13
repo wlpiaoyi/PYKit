@@ -10,12 +10,12 @@
 #import "PYUtile.h"
 
 @interface PYSelectorBarView : UIView
-PYPNSNN NSArray * buttons;
-PYPNSNN UIImageView * selectorTag;
-PYPNA BOOL isBackground;
-PYPNA CGFloat selectorTagHeight;
-PYPNA NSUInteger selectIndex;
-PYPNA CGFloat contentWidth;
-PYPNCNA BOOL (^blockSelecteItem)(int index);
+kPNSNN NSArray * buttons;
+kPNSNN UIImageView * selectorTag;
+kPNA BOOL isBackground;
+kPNA CGFloat selectorTagHeight;
+kPNA NSUInteger selectIndex;
+kPNA CGFloat contentWidth;
+kPNCNA BOOL (^blockSelecteItem)(int index);
 -(void) setSelectIndex:(NSUInteger)selectIndex animation:(BOOL) animation;
 @end

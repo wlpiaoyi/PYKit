@@ -12,9 +12,9 @@
 static NSString * PYAsyImageViewDataCaches;
 
 @interface PYAsyImageView()
-PYPNSNN UIActivityIndicatorView * aiv;
-PYPNSNN PYNetDownload * dnw;
-PYPNSNA NSString * cachesUrl;
+kPNSNN UIActivityIndicatorView * aiv;
+kPNSNN PYNetDownload * dnw;
+kPNSNA NSString * cachesUrl;
 @end
 
 @implementation PYAsyImageView
@@ -44,7 +44,7 @@ PYPNSNA NSString * cachesUrl;
     return imagePath;
 }
 
-PYINITPARAMS{
+kINITPARAMS{
     
     self.dnw = [PYNetDownload new];
     [self.dnw setBlockReceiveChallenge:^BOOL(id  _Nullable data, PYNetwork * _Nonnull target) {

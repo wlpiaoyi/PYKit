@@ -10,7 +10,7 @@
 
 @interface PYNetDownload : PYNetwork
 
-PYPNRNN NSString * identifier;
+kPNRNN NSString * identifier;
 -(BOOL) resumeWithData:(nonnull NSData *) data;
 /**
  请求反馈

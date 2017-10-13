@@ -11,7 +11,7 @@
 #import "pyutilea.h"
 
 @interface SelecteBarController ()<UIScrollViewDelegate>
-PYPNSNN UIView * contentView;
+kPNSNN UIView * contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet PYSelectorBarView *selectorBarView;
 @end

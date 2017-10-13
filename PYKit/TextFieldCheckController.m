@@ -23,8 +23,8 @@
 @end
 
 @interface TextFieldCheckController ()
-PYPNSNN UITextField * texField;
-PYPNSNN UIButton * button;
+kPNSNN UITextField * texField;
+kPNSNN UIButton * button;
 @end
 
 @implementation TextFieldCheckController

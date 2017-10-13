@@ -10,7 +10,7 @@
 #import "PYUtile.h"
 @interface PYDisplayImageView : UIView
 //默认的imageView是PYAsyImageView
-PYPNSNA UIImageView * imageView;
-PYPNA NSUInteger maxMultiple;
+kPNSNA UIImageView * imageView;
+kPNA NSUInteger maxMultiple;
 -(void) synchronizedImageSize;
 @end

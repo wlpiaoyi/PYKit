@@ -12,10 +12,11 @@
  */
 @protocol UIResponderHookBaseDelegate<NSObject>
 @optional
--(void) beforeExcuteDealloc:(nonnull BOOL *) isExcute target:(nonnull NSObject *) target;
+-(void) beforeExcuteDeallocWithTarget:(nonnull NSObject *) target;
 @end
 
 @interface UIResponder(Hook)
++(nonnull NSMutableDictionary *) paramsDictForHookExpand;
 +(nullable NSHashTable<id<UIResponderHookBaseDelegate>> *) delegateBase;
 /**
  hook Controller 的方法

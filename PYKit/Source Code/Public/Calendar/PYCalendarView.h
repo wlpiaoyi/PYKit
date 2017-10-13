@@ -17,8 +17,8 @@ extern BOOL PYCalendarHasGuide;
     unsigned int spesalLength;
 }
 @property (nonatomic, strong, nonnull) NSDate * date;
-PYPNSNN NSDate * dateEnableStart;
-PYPNSNN NSDate * dateEnableEnd;
+kPNSNN NSDate * dateEnableStart;
+kPNSNN NSDate * dateEnableEnd;
 @property (nonatomic, copy, nullable) void (^blockSelected) (PYCalendarView * _Nonnull view);
 @property (nonatomic, copy, nullable) void (^blockChangeDate) (PYCalendarView * _Nonnull view);
 -(void) synSpesqlInfo;
