@@ -10,43 +10,33 @@
 #import "PYViewAutolayoutCenter.h"
 #import "UIImage+Expand.h"
 #import "EXTScope.h"
-
+#import "UIView+Expand.h"
 @interface PYSelectorBarView(){
-@private
-    UIScrollView * _scrollView;
-    UIView * _contentView;
 }
-kSOULDLAYOUTP
+kSOULDLAYOUTPForType(PYSelectorBarView)
 kPNCNA NSArray<NSDictionary<NSString *, NSLayoutConstraint *> *> * lcButtons;
 @end
 
 @implementation PYSelectorBarView
-kINITPARAMS{
-    _contentWidth = 0;
-    _scrollView = [UIScrollView new];
-    _scrollView.backgroundColor = [UIColor clearColor];
-    [self addSubview:_scrollView];
-    [PYViewAutolayoutCenter persistConstraint:_scrollView relationmargins:UIEdgeInsetsZero relationToItems:PYEdgeInsetsItemNull()];
-    
+kINITPARAMSForType(PYSelectorBarView){
     _contentView = [UIView new];
     _contentView.backgroundColor = [UIColor clearColor];
-    [_scrollView addSubview:_contentView];
-    
+    [self addContentView:_contentView];
+    [PYViewAutolayoutCenter persistConstraint:_contentView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
     NSMutableArray * mButtons = [NSMutableArray new];
     for(UIButton * button in self.subviews){
         if([button isKindOfClass:[UIButton class]]){
             [mButtons addObject:button];
-            [button removeTarget:self action:@selector(onclickSelect:) forControlEvents:UIControlEventTouchUpInside];
-            [button addTarget:self action:@selector(onclickSelect:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
-    _buttons = mButtons;
+    self.buttons = mButtons;
     _selectIndex = 0;
     _selectorTagHeight = 3;
     if(self.selectorTag == nil){
         UIImageView * selectorTag = [UIImageView new];
         selectorTag.backgroundColor = [UIColor orangeColor];
         selectorTag.contentMode = UIViewContentModeScaleAspectFit;
+        [selectorTag setCornerRadiusAndBorder:2 borderWidth:1 borderColor:[UIColor clearColor]];
         self.selectorTag = selectorTag;
     }
 }
@@ -54,7 +44,7 @@ kINITPARAMS{
     if(self.lcButtons){
         for (NSDictionary * lcDict in self.lcButtons) {
             for (NSLayoutConstraint * lc in lcDict.allKeys) {
-                [self removeConstraint:lc];
+                [_contentView removeConstraint:lc];
             }
         }
         self.lcButtons = nil;
@@ -64,12 +54,16 @@ kINITPARAMS{
         if(![button isKindOfClass:[UIButton class]]){
             @throw [NSException exceptionWithName:@"erro type" reason:@"buttons containts erro type" userInfo:nil];
         }
+        [button removeFromSuperview];
         [button removeTarget:self action:@selector(onclickSelect:) forControlEvents:UIControlEventTouchUpInside];
         [button addTarget:self action:@selector(onclickSelect:) forControlEvents:UIControlEventTouchUpInside];
         [_contentView addSubview:button];
     }
     self.lcButtons = [PYViewAutolayoutCenter persistConstraintHorizontal:_buttons relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull() offset:0];
     self.selectorTag = _selectorTag;
+}
+-(void) addContentView:(UIView *) contentView{
+    [self addSubview:contentView];
 }
 -(void) onclickSelect:(UIButton *) button{
     unsigned int index = (unsigned int)[self.buttons indexOfObject:button];
@@ -80,56 +74,53 @@ kINITPARAMS{
     [self setSelectIndex:index animation:YES];
 }
 -(void) setSelectorTag:(UIImageView *)selectorTag{
+    if (_selectorTag) {
+        [_selectorTag removeFromSuperview];
+    }
     _selectorTag = selectorTag;
     if(!_selectorTag) return;
-    if(self.lcButtons == nil || self.lcButtons.count == 0){
-        [self addSubview:_selectorTag];
-        [self bringSubviewToFront:_selectorTag];
-        _scrollView.hidden = YES;
-    }else{
-        [_contentView addSubview:_selectorTag];
-        [_contentView bringSubviewToFront:_selectorTag];
-        _scrollView.hidden = NO;
-    }
+    [self.contentView addSubview:_selectorTag];
     self.selectIndex = _selectIndex;
 }
 
 -(void) setSelectIndex:(NSUInteger)selectIndex animation:(BOOL) animation{
     _selectIndex = selectIndex;
     if(self.buttons.count == 0) return;
-    @unsafeify(self);
-    void (^block)() = ^() {
-        @strongify(self);
-        CGFloat width = _contentView.frame.size.width / self.buttons.count;
-        CGFloat height = MIN(MAX(0, _selectorTagHeight), _contentView.frame.size.height);
-        CGRect rect = CGRectMake(width * self.selectIndex
-                                 ,  _contentView.frame.size.height - height
-                                 , width, height);
-        self.selectorTag.frame = rect;
-        if(_contentWidth > 0){
-            CGPoint contentOffset = _scrollView.contentOffset;
-            if(contentOffset.x  > width * _selectIndex){
-                contentOffset.x  =  width * _selectIndex;
-            }else if(contentOffset.x + _scrollView.frame.size.width < width * _selectIndex + width){
-                contentOffset.x =  width * _selectIndex + width - _scrollView.frame.size.width;
+    if(_blockSelectedOpt){
+        _blockSelectedOpt(selectIndex);
+    }
+    if(self.selectorTag){
+        @unsafeify(self);
+        void (^block)() = ^() {
+            @strongify(self);
+            CGFloat width = self.contentView.frame.size.width / self.buttons.count;
+            CGFloat height;
+            if(_selectorTagHeight < 0){
+                height = self.contentView.frame.size.height;
+                [self.selectorTag.superview sendSubviewToBack:self.selectorTag];
+            }else{
+                height = MIN(MAX(0, _selectorTagHeight), self.contentView.frame.size.height);
+                [self.selectorTag.superview bringSubviewToFront:self.selectorTag];
             }
-            _scrollView.contentOffset = contentOffset;
+            CGRect rect = CGRectMake(width * self.selectIndex
+                                     ,  self.contentView.frame.size.height - height
+                                     , width, height);
+            self.selectorTag.frame = rect;
+        };
+        
+        if(animation){
+            [UIView animateWithDuration:0.25f animations:^{
+                @strongify(self);
+                self.userInteractionEnabled = NO;
+                block();
+            } completion:^(BOOL finished) {
+                @strongify(self);
+                self.userInteractionEnabled = YES;
+            }];
         }else{
-            _scrollView.contentOffset = CGPointMake(0, 0);
-        }
-    };
-    if(animation){
-        [UIView animateWithDuration:0.25f animations:^{
-            @strongify(self);
-            self.userInteractionEnabled = NO;
-            block();
-        } completion:^(BOOL finished) {
-            @strongify(self);
             self.userInteractionEnabled = YES;
-        }];
-    }else{
-        self.userInteractionEnabled = YES;
-        block();
+            block();
+        }
     }
     
     int index = 0;
@@ -141,14 +132,8 @@ kINITPARAMS{
 -(void) setSelectIndex:(NSUInteger)selectIndex{
     [self setSelectIndex:selectIndex animation:NO];
 }
--(void) setContentWidth:(CGFloat)contentWidth{
-    _contentWidth = contentWidth;
-    _contentView.frame = CGRectMake(0, 0, MAX(_contentWidth, _scrollView.frame.size.width), _scrollView.frame.size.height);
-    _scrollView.contentSize = _contentView.frame.size;
-    self.selectIndex = _selectIndex;
-}
-kSOULDLAYOUTMSTART
-self.contentWidth = _contentWidth;
+kSOULDLAYOUTMSTARTForType(PYSelectorBarView)
+self.selectIndex = _selectIndex;
 kSOULDLAYOUTMEND
 
 @end

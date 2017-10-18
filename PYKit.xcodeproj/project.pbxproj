@@ -18,6 +18,7 @@
 		150C6EEA1F4AC7B200731FC7 /* PYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE71F4AC7B200731FC7 /* PYWebView.m */; };
 		150C6EEC1F4AC7C700731FC7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */; };
 		150C6EED1F4AC7D400731FC7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */; };
+		150D4D871F95B0720058FB83 /* PYSelectorScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150D4D861F95B0720058FB83 /* PYSelectorScrollView.m */; };
 		152289F21F4E6C9000E02321 /* timg.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 152289F11F4E6C9000E02321 /* timg.jpeg */; };
 		1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
 		152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C31931F0DD6EC006FD18C /* PYAudioRecord.m */; };
@@ -152,7 +153,6 @@
 		150C6E921F49956D00731FC7 /* NSDictionary+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Expand.h"; sourceTree = "<group>"; };
 		150C6E931F49956D00731FC7 /* NSNumber+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Expand.h"; sourceTree = "<group>"; };
 		150C6E941F49956D00731FC7 /* NSObject+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Expand.h"; sourceTree = "<group>"; };
-		150C6E951F49956D00731FC7 /* NSObject+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Hook.h"; sourceTree = "<group>"; };
 		150C6E961F49956D00731FC7 /* NSString+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Expand.h"; sourceTree = "<group>"; };
 		150C6E971F49956D00731FC7 /* PYGraphicsDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsDraw.h; sourceTree = "<group>"; };
 		150C6E981F49956D00731FC7 /* PYGraphicsThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsThumb.h; sourceTree = "<group>"; };
@@ -181,6 +181,8 @@
 		150C6EE61F4AC7B200731FC7 /* PYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYWebView.h; sourceTree = "<group>"; };
 		150C6EE71F4AC7B200731FC7 /* PYWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYWebView.m; sourceTree = "<group>"; };
 		150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		150D4D851F95B0720058FB83 /* PYSelectorScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYSelectorScrollView.h; sourceTree = "<group>"; };
+		150D4D861F95B0720058FB83 /* PYSelectorScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYSelectorScrollView.m; sourceTree = "<group>"; };
 		152289F11F4E6C9000E02321 /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
 		1522C7BC1F18A1BC003CB0D0 /* PYTextInputCheckParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTextInputCheckParams.h; sourceTree = "<group>"; };
 		1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTextInputCheckParams.m; sourceTree = "<group>"; };
@@ -278,6 +280,8 @@
 			children = (
 				150C6DA61F46D74800731FC7 /* PYSelectorBarView.h */,
 				150C6DA71F46D74800731FC7 /* PYSelectorBarView.m */,
+				150D4D851F95B0720058FB83 /* PYSelectorScrollView.h */,
+				150D4D861F95B0720058FB83 /* PYSelectorScrollView.m */,
 			);
 			path = SelectorBar;
 			sourceTree = "<group>";
@@ -342,7 +346,6 @@
 				150C6E921F49956D00731FC7 /* NSDictionary+Expand.h */,
 				150C6E931F49956D00731FC7 /* NSNumber+Expand.h */,
 				150C6E941F49956D00731FC7 /* NSObject+Expand.h */,
-				150C6E951F49956D00731FC7 /* NSObject+Hook.h */,
 				150C6E961F49956D00731FC7 /* NSString+Expand.h */,
 				150C6E971F49956D00731FC7 /* PYGraphicsDraw.h */,
 				150C6E981F49956D00731FC7 /* PYGraphicsThumb.h */,
@@ -602,7 +605,7 @@
 					15CC07DD1EA7556C0006B505 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = S4NUSJ3KDJ;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					15CC085F1EA757A60006B505 = {
 						CreatedOnToolsVersion = 8.3;
@@ -670,6 +673,7 @@
 				1555E0CC1F5CF1C10017B436 /* UITextField+PYCheck.m in Sources */,
 				15417B411EADCF4B009C894F /* PYCalendarTimeView.m in Sources */,
 				1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */,
+				150D4D871F95B0720058FB83 /* PYSelectorScrollView.m in Sources */,
 				155B586C1F5E49670070ECEE /* PYDisplayImageTools.m in Sources */,
 				150C6EEA1F4AC7B200731FC7 /* PYWebView.m in Sources */,
 				15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */,
@@ -835,6 +839,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Leo Cloudless (SFR9NKH7W5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Leo Cloudless (SFR9NKH7W5)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -862,6 +869,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "92230d38-511e-4a5f-a695-8e0a257cfb77";
+				PROVISIONING_PROFILE_SPECIFIER = dev_all;
 			};
 			name = Debug;
 		};
@@ -869,6 +878,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Leo Cloudless (SFR9NKH7W5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Leo Cloudless (SFR9NKH7W5)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -896,6 +908,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "92230d38-511e-4a5f-a695-8e0a257cfb77";
+				PROVISIONING_PROFILE_SPECIFIER = dev_all;
 			};
 			name = Release;
 		};

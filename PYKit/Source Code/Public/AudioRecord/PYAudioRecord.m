@@ -8,6 +8,8 @@
 
 #import "PYAudioRecord.h"
 #import <AVFoundation/AVFoundation.h>
+#import "PYUtile.h"
+
 #ifdef pylameforparsemp3
 #include "lame.h"
 #endif
@@ -210,10 +212,10 @@ void py_audio_PCMtoMP3( const char *audioPath,
         fclose(pcm);
     }
     @catch (NSException *exception) {
-        NSLog(@"%@",[exception description]);
+        kPrintExceptionln("%s", [exception description].UTF8String);
     }
     @finally {
-        NSLog(@"MP3生成成功: %s", mp3Path);
+        kPrintLogln("MP3生成成功: %s", mp3Path);
     }
     
 }

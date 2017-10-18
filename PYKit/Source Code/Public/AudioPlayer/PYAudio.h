@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-
+#import "PYUtile.h"
 /**
  播放状态
  */

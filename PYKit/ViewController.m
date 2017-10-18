@@ -85,7 +85,7 @@
     NSFileManager *fm = [NSFileManager defaultManager];
 //    [fm removeItemAtPath:[pathWav relativePath] error:&erro];
     
-    self.player = [PYAudioPlayer new];
+    self.player = [PYAudioPlayer sharedPYAudioPlayer];
     NSError *error;
     NSArray<NSString *> * array =  [fm subpathsOfDirectoryAtPath:documentDir error:&error];
     if (!error) {

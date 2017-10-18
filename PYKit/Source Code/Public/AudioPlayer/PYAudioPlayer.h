@@ -15,8 +15,7 @@ extern float DEFAULT_VOLUME;
 extern unsigned int DEFAULT_NUMBEROFLOOPS;
 //默认进度
 extern float DEFAULT_PROGRESS;
-
-@interface PYAudioPlayer : NSObject<PYAudioPlayer>
+SINGLETON_SYNTHESIZE_FOR_hCLASS(PYAudioPlayer, NSObject, <PYAudioPlayer>)
 @property (nonatomic, strong,readonly) AVAudioPlayer *player;
 //播放文件的index
 @property (nonatomic) NSUInteger indexPlay;

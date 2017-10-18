@@ -23,12 +23,15 @@ float DEFAULT_PROGRESS = -1;
 @interface PYAudioPlayer()<AVAudioPlayerDelegate>{
 }
 @end
-@implementation PYAudioPlayer
+SINGLETON_SYNTHESIZE_FOR_mCLASS(PYAudioPlayer){
+    
+}
 -(id) init{
     if (self=[super init]) {
         _arrayAudiosURL = [NSMutableArray new];
         _playerStatus = PYAudioPlayerStatusPrepare;
         [PYAudioTools backgourndPlay:YES];
+        [self initShareParams];
     }
     return self;
 }
