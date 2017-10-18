@@ -157,8 +157,10 @@ kSOULDLAYOUTMEND
         x += 1;
     }
     self.selectIndex = x;
-    if(self.blockSelecteItem){
-        self.blockSelecteItem(x);
+    if(self.delegate && ![self.delegate selectorBarView:self selecteItemIndex:x]){
+        return;
+    }else if(!self.delegate && self.blockSelecteItem && !self.blockSelecteItem(x)){
+        return;
     }
     
 }
