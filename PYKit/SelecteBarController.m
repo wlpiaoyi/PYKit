@@ -10,7 +10,9 @@
 #import "PYSelectorScrollView.h"
 #import "pyutilea.h"
 
-@interface SelecteBarController ()<UIScrollViewDelegate>
+@interface SelecteBarController ()<UIScrollViewDelegate,PYSelectorBarViewDelegate>{
+    BOOL a;
+}
 kPNSNN UIView * contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet PYSelectorScrollView *selectorBarView;
@@ -22,17 +24,19 @@ kPNSNN UIView * contentView;
     [super viewDidLoad];
     _contentView = [UIView new];
     [self.scrollView addSubview:_contentView];
-    _selectorBarView.contentWidth = 400;
     _scrollView.pagingEnabled = YES;
     for (int i = 0; i < _selectorBarView.buttons.count; i++) {
         [_contentView addSubview:[self createView:i]];
     }
+    _selectorBarView.delegate = self;
     _selectorBarView.contentWidth = 700;
     _scrollView.delegate = self;
-    _selectorBarView.isScorllSelected = false;
+    _selectorBarView.isScorllSelected = true;
     [PYViewAutolayoutCenter persistConstraintHorizontal:_contentView.subviews relationmargins:UIEdgeInsetsZero relationToItems:PYEdgeInsetsItemNull() offset:0];
+    kAssign(self);
     [_selectorBarView setBlockSelecteItem:^BOOL(NSUInteger index){
-        [_scrollView setContentOffset:CGPointMake(index * _scrollView.frameWidth , 0) animated:YES];
+        kStrong(self);
+        [self.scrollView setContentOffset:CGPointMake(index * self.scrollView.frameWidth , 0) animated:YES];
         return YES;
     }];
 }
@@ -43,6 +47,11 @@ kPNSNN UIView * contentView;
     view.font = kFontB(30);
     view.textColor = kRGB(255, 0, 0);
     return view;
+}
+
+-(BOOL) selectorBarView:(nonnull PYSelectorBarView *) selectorBarView selecteItemIndex:(NSUInteger) selecteItemIndex{
+    [self.scrollView setContentOffset:CGPointMake(selecteItemIndex * self.scrollView.frameWidth , 0) animated:YES];
+    return YES;
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [_selectorBarView setSelectIndex:((NSUInteger)(scrollView.contentOffset.x/scrollView.frameWidth)) animation:YES];
@@ -56,7 +65,9 @@ kPNSNN UIView * contentView;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
+-(void) dealloc{
+    
+}
 /*
 #pragma mark - Navigation
 

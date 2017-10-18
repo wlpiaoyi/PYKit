@@ -24,7 +24,7 @@ kPNSNA UITouch * touchSecond;
 kPNSNA UITouch * preTouch;
 
 kPNSNN UIView * viewImgContext;
-kSOULDLAYOUTP
+kSOULDLAYOUTPForType(PYDisplayImageView)
 @end
 
 @implementation PYDisplayImageView
@@ -245,7 +245,7 @@ kINITPARAMS{
         _imageView.frame = _imgFitRect;
     }
 }
-kSOULDLAYOUTMSTART
+kSOULDLAYOUTMSTARTForType(PYDisplayImageView)
 [self synchronizedImageSize];
 kSOULDLAYOUTMEND
 @end

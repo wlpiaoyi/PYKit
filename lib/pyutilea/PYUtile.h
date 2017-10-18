@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define is64BitArm  __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
+
 #define kRGB(R,G,B) [UIColor colorWithRed:(R)/255.0 green:(G)/255.0 blue:(B)/255.0 alpha:1.0]
 #define kRGBA(R,G,B,A) [UIColor colorWithRed:(R)/255.0 green:(G)/255.0 blue:(B)/255.0 alpha:(A)/255.0]
 
@@ -51,9 +53,6 @@
 #define kPNARA                          @property (nonatomic, assign, readonly, nullable)
 #define kPNARN                          @property (nonatomic, assign, readonly, nonnull)
 
-
-#define is64BitArm  __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
-
 #if __LP64__
 typedef unsigned int                        kUInt32;
 typedef unsigned long                      kUInt64;
@@ -67,14 +66,11 @@ typedef long long                           kInt64;
 #endif
 
 #pragma mark UIResponder初始化自定义方法
-#define kINITPARAMS -(instancetype) initWithFrame:(CGRect)frame{if(self = [super initWithFrame:frame]){[self initParams];}return self;} -(instancetype) initWithCoder:(NSCoder *)aDecoder{ if(self = [super initWithCoder:aDecoder]){ [self initParams];}return self;} -(void) initParams
 #define kINITPARAMSForType(type) -(instancetype) initWithFrame:(CGRect)frame{if(self = [super initWithFrame:frame]){[self initParams##type];}return self;} -(instancetype) initWithCoder:(NSCoder *)aDecoder{ if(self = [super initWithCoder:aDecoder]){ [self initParams##type];}return self;} -(void) initParams##type
 
-#define kSOULDLAYOUTP @property (nonatomic) CGSize __layoutSubviews_UseSize;
+#pragma mark autolayout回调
 #define kSOULDLAYOUTPForType(type) @property (nonatomic) CGSize __layoutSubviews_UseSize##type;
-#define kSOULDLAYOUTMSTART -(BOOL) __layoutSubviews_Size_Compare{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize, self.bounds.size)){return false;}self.__layoutSubviews_UseSize = self.bounds.size;return true;} -(void) layoutSubviews{ [super layoutSubviews]; if([self __layoutSubviews_Size_Compare ]){
 #define kSOULDLAYOUTMSTARTForType(type)  -(BOOL) __layoutSubviews_Size_Compare##type{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize##type, self.bounds.size)){return false;}self.__layoutSubviews_UseSize##type = self.bounds.size;return true;} -(void) layoutSubviews{ [super layoutSubviews]; if([self __layoutSubviews_Size_Compare##type]){
-#define kSOULDLAYOUTVMSTART -(BOOL) __layoutSubviews_Size_Compare{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize, self.view.bounds.size)){return false;}self.__layoutSubviews_UseSize = self.view.bounds.size;return true;} -(void) viewDidLayoutSubviews{ [super viewDidLayoutSubviews]; if([self __layoutSubviews_Size_Compare ]){
 #define kSOULDLAYOUTVMSTARTForType(type) -(BOOL) __layoutSubviews_Size_Compare##type{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize##type, self.view.bounds.size)){return false;}self.__layoutSubviews_UseSize = self.view.bounds.size;return true;} -(void) viewDidLayoutSubviews{ [super viewDidLayoutSubviews]; if([self __layoutSubviews_Size_Compare##type]){
 #define kSOULDLAYOUTMEND }}
 
@@ -100,7 +96,6 @@ typedef long long                           kInt64;
 #pragma mark GCD - 一次性执行
 #define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&onceToken, onceBlock);
 
-
 #pragma mark 弱引用/强引用
 #define kWeak(type)  __weak typeof(type) py_weak_or_assign_##type = type;
 #define kAssign(type)  __unsafe_unretained typeof(type) py_weak_or_assign_##type = type;
@@ -124,7 +119,7 @@ static classname *pyshared##classname = nil; \
 @synchronized(self) { \
 if (pyshared##classname == nil){\
 pyshared##classname = [[self alloc] init]; \
-[pyshared##classname initShareParams];\
+[pyshared##classname initShareParams##classname];\
 }\
 } \
 return pyshared##classname; \
@@ -134,7 +129,7 @@ return pyshared##classname; \
 @synchronized(self) { \
 if (pyshared##classname == nil) { \
 pyshared##classname = [super allocWithZone:zone]; \
-[pyshared##classname initShareParams];\
+[pyshared##classname initShareParams##classname];\
 return pyshared##classname; \
 } \
 } \
@@ -142,7 +137,7 @@ return nil; \
 } \
 \
 - (id)copyWithZone:(NSZone *)zone {return self;}\
-- (void) initShareParams
+- (void) initShareParams##classname
 
 #pragma mark 常用沙盒路径
 extern const NSString * _Nonnull documentDir;
@@ -286,5 +281,9 @@ float cpu_usage();
 #define PYPNAR kPNAR
 #define PYPNARA kPNARA
 #define PYPNARN kPNARN
+#define kSOULDLAYOUTP @property (nonatomic) CGSize __layoutSubviews_UseSize;
+#define kINITPARAMS -(instancetype) initWithFrame:(CGRect)frame{if(self = [super initWithFrame:frame]){[self initParams];}return self;} -(instancetype) initWithCoder:(NSCoder *)aDecoder{ if(self = [super initWithCoder:aDecoder]){ [self initParams];}return self;} -(void) initParams
+#define kSOULDLAYOUTMSTART -(BOOL) __layoutSubviews_Size_Compare{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize, self.bounds.size)){return false;}self.__layoutSubviews_UseSize = self.bounds.size;return true;} -(void) layoutSubviews{ [super layoutSubviews]; if([self __layoutSubviews_Size_Compare ]){
+#define kSOULDLAYOUTVMSTART -(BOOL) __layoutSubviews_Size_Compare{ if(CGSizeEqualToSize(self.__layoutSubviews_UseSize, self.view.bounds.size)){return false;}self.__layoutSubviews_UseSize = self.view.bounds.size;return true;} -(void) viewDidLayoutSubviews{ [super viewDidLayoutSubviews]; if([self __layoutSubviews_Size_Compare ]){
 
 

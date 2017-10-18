@@ -9,7 +9,6 @@
 #import "PYSelectorBarView.h"
 #import "PYViewAutolayoutCenter.h"
 #import "UIImage+Expand.h"
-#import "EXTScope.h"
 #import "UIView+Expand.h"
 @interface PYSelectorBarView(){
 }
@@ -68,7 +67,9 @@ kINITPARAMSForType(PYSelectorBarView){
 -(void) onclickSelect:(UIButton *) button{
     unsigned int index = (unsigned int)[self.buttons indexOfObject:button];
     if(index == self.selectIndex) return;
-    if(self.blockSelecteItem && !_blockSelecteItem(index)){
+    if(self.delegate && ![self.delegate selectorBarView:self selecteItemIndex:index]){
+        return;
+    }else if(!self.delegate && self.blockSelecteItem && !_blockSelecteItem(index)){
         return;
     }
     [self setSelectIndex:index animation:YES];
@@ -90,9 +91,9 @@ kINITPARAMSForType(PYSelectorBarView){
         _blockSelectedOpt(selectIndex);
     }
     if(self.selectorTag){
-        @unsafeify(self);
+        kAssign(self);
         void (^block)() = ^() {
-            @strongify(self);
+            kStrong(self);
             CGFloat width = self.contentView.frame.size.width / self.buttons.count;
             CGFloat height;
             if(_selectorTagHeight < 0){
@@ -110,11 +111,11 @@ kINITPARAMSForType(PYSelectorBarView){
         
         if(animation){
             [UIView animateWithDuration:0.25f animations:^{
-                @strongify(self);
+                kStrong(self);
                 self.userInteractionEnabled = NO;
                 block();
             } completion:^(BOOL finished) {
-                @strongify(self);
+                kStrong(self);
                 self.userInteractionEnabled = YES;
             }];
         }else{
@@ -135,5 +136,7 @@ kINITPARAMSForType(PYSelectorBarView){
 kSOULDLAYOUTMSTARTForType(PYSelectorBarView)
 self.selectIndex = _selectIndex;
 kSOULDLAYOUTMEND
-
+-(void) dealloc{
+    
+}
 @end

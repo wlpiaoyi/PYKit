@@ -31,7 +31,7 @@ SINGLETON_SYNTHESIZE_FOR_mCLASS(PYAudioPlayer){
         _arrayAudiosURL = [NSMutableArray new];
         _playerStatus = PYAudioPlayerStatusPrepare;
         [PYAudioTools backgourndPlay:YES];
-        [self initShareParams];
+        [self initShareParamsPYAudioPlayer];
     }
     return self;
 }

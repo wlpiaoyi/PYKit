@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "PYUtile.h"
 
+@class PYSelectorBarView;
+@protocol PYSelectorBarViewDelegate<NSObject>
+@required
+-(BOOL) selectorBarView:(nonnull PYSelectorBarView *) selectorBarView selecteItemIndex:(NSUInteger) selecteItemIndex;
+@end
+
 @interface PYSelectorBarView : UIView
 kPNRNN UIView * contentView;
 /**
@@ -33,10 +39,12 @@ kPNA NSUInteger selectIndex;
 /**
  仅用户选择变化回调
  适合用于功能开发
+ delegate优先级大于blockSelecteItem
  */
+kPNANA id<PYSelectorBarViewDelegate> delegate;
 kPNCNA BOOL (^blockSelecteItem)(NSUInteger index);
 /**
- 强制选择，blockSelecteItem不会回调
+ 强制选择，delegate,blockSelecteItem不会回调
  @param selectIndex 第几个
  @param animation 是否有动画
  */
@@ -44,6 +52,6 @@ kPNCNA BOOL (^blockSelecteItem)(NSUInteger index);
 
 #pragma mark 用于二次开发,所有选择变化回调
 kPNCNA void (^blockSelectedOpt)(NSUInteger index);
-#pragma mark 用于二次开发,重写此类将contentView添加到指定的地方使用了自动布局不建议直接加载scorllview中
+#pragma mark 用于二次开发,重写此类将contentView添加到指定的地方, 由于使用了自动布局不建议直接加在scorllview中
 -(void) addContentView:(nonnull UIView *) contentView;
 @end

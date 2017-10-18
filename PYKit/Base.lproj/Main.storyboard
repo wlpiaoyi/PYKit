@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l8E-ra-icP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="I4Y-hE-wzC">
+            <objects>
+                <navigationController id="l8E-ra-icP" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UFe-CL-aw8">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zp9-4K-slm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nmY-LJ-X3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1017" y="37"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -23,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44F-JR-zPp" customClass="PYDisplayImageView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agg-Cz-6CA" customClass="PYCalendarView">
@@ -34,7 +50,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thj-7V-Q5U">
-                                <rect key="frame" x="16" y="60" width="46" height="30"/>
+                                <rect key="frame" x="16" y="104" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="VKS-g7-KPL"/>
                                     <constraint firstAttribute="height" constant="30" id="pNH-uj-RtL"/>
@@ -45,7 +61,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXv-7E-95Z">
-                                <rect key="frame" x="62" y="60" width="46" height="30"/>
+                                <rect key="frame" x="62" y="104" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="Bac-de-Bgg"/>
                                     <constraint firstAttribute="height" constant="30" id="MOP-BG-hix"/>
@@ -56,7 +72,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dqd-5D-gfT">
-                                <rect key="frame" x="16" y="20" width="343" height="40"/>
+                                <rect key="frame" x="16" y="64" width="343" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="pbh-u0-fHs"/>
                                 </constraints>
@@ -65,7 +81,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcZ-Zd-5yT">
-                                <rect key="frame" x="259" y="60" width="100" height="44"/>
+                                <rect key="frame" x="259" y="104" width="100" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="IVz-l7-g7a"/>
                                     <constraint firstAttribute="height" constant="44" id="VhV-Dl-0wg"/>
@@ -96,6 +112,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Dqd-5D-gfT" secondAttribute="trailing" id="v1P-ow-uPg"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="TLO-zW-sGV"/>
                     <connections>
                         <outlet property="calendarView" destination="Agg-Cz-6CA" id="HvN-Do-a6b"/>
                         <outlet property="textField" destination="Dqd-5D-gfT" id="Ytx-9u-7d2"/>
@@ -119,7 +136,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3D-B9-sgB" customClass="PYSelectorScrollView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3EG-Lu-23A">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="44"/>
@@ -170,7 +187,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfI-iw-b2c">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -181,7 +198,7 @@
                             <constraint firstItem="DL5-st-f0V" firstAttribute="top" secondItem="VfI-iw-b2c" secondAttribute="bottom" id="FhG-Bg-9Rd"/>
                             <constraint firstAttribute="trailing" secondItem="A3D-B9-sgB" secondAttribute="trailing" id="Rri-er-YMX"/>
                             <constraint firstItem="VfI-iw-b2c" firstAttribute="leading" secondItem="s7p-Km-ez3" secondAttribute="leading" id="Zka-US-FCd"/>
-                            <constraint firstItem="A3D-B9-sgB" firstAttribute="top" secondItem="s7p-Km-ez3" secondAttribute="top" constant="20" id="bNK-4x-q82"/>
+                            <constraint firstItem="A3D-B9-sgB" firstAttribute="top" secondItem="FoR-2V-xt0" secondAttribute="bottom" id="teL-Ml-o4T"/>
                         </constraints>
                     </view>
                     <connections>
