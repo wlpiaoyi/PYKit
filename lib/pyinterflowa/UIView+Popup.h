@@ -22,28 +22,27 @@ typedef NS_ENUM(NSInteger, PYPopupEnum) {
  */
 @interface UIView(Popup)
 //是否正在进行动画
-@property (nonatomic, readonly) BOOL isAnimationing;
+@property (nonatomic, readonly) BOOL popupisAnimation;
 //是否显示了
-@property (nonatomic, readonly) BOOL isShow;
+@property (nonatomic, readonly) BOOL popupIsShow;
 //显示靠近中心的偏移量
-@property (nonatomic) CGPoint centerPoint;
+@property (nonatomic) CGPoint popupCenterPoint;
 //显示靠近边缘的偏移量
-@property (nonatomic) UIEdgeInsets borderEdgeInsets;
-@property (nonatomic,copy, nullable) void (^blockStart)(UIView * _Nullable view);
-@property (nonatomic,copy, nullable) void (^blockEnd)(UIView * _Nullable view);
-//动画类型
-//@property (nonatomic) PYPopupEnum popupType;
+@property (nonatomic) UIEdgeInsets popupEdgeInsets;
+@property (nonatomic,copy, nullable) void (^popupBlockStart)(UIView * _Nullable view);
+@property (nonatomic,copy, nullable) void (^popupBlockEnd)(UIView * _Nullable view);
 //=====================显示和隐藏自定义动画=========================>
 @property (nonatomic,copy, nullable) BlockPopupAnimation blockShowAnimation;
 @property (nonatomic,copy, nullable) BlockPopupAnimation blockHiddenAnimation;
 ///<=====================显示和隐藏自定义动画=========================
 
-//基础层
-@property (nonatomic, assign, nonnull) UIView * baseView;
+@property (nonatomic, assign, nonnull) UIView * popupBaseView;
+@property (nonatomic, assign, nonnull) UIView * popupContentView;
 
 -(void) popupShow;
 -(void) popupHidden;
 
--(void) resetBoundPoint;
+-(void) resetTransform;
+-(void) resetAutoLayout;
 
 @end

@@ -12,7 +12,6 @@
 #import "TextFieldCheckController.h"
 #import "PYAudioRecord.h"
 #import "PYAudioPlayer.h"
-#import "UITextView+PYCheck.h"
 #import "PYCalendarView.h"
 #import "PYWebView.h"
 #import "PYViewAutolayoutCenter.h"
@@ -30,11 +29,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.textField py_clearTextFieldCheck];
+    [self.textField pyClearTextFieldCheck];
     self.textField.delegate = self;
-    [self.textField py_checkFloatForMax:9999.99 min:33 precision:2];
-    [self.textView py_clearTextViewCheck];
-    [self.textView py_checkIDCard];
+    [self.textField pyCheckFloatForMax:9999.99 min:33 precision:2];
     [self.calendarView synSpesqlInfo];
 //    [self.textField checkIntegerForMax:8888 min:-9999];
 //    [self.textField checkEmail];

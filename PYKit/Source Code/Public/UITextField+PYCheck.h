@@ -10,13 +10,13 @@
 
 @interface UITextField(PYCheck)
 kPNCNA void (^blockInputEndMatch) (NSString * _Nonnull identify, BOOL * _Nonnull checkResult);
--(void) py_clearTextFieldCheck;
--(void) py_checkInteger;
--(void) py_checkIntegerForMax:(kInt64) max min:(kInt64) min;
--(void) py_checkFloat;
--(void) py_checkFloatForMax:(CGFloat) max min:(CGFloat) min precision:(int) precision;
--(void) py_checkMobliePhone;
--(void) py_checkEmail;
--(void) py_checkIDCard;
--(void) py_checkMatchWithIdentify:(nonnull NSString *) identify inputing:(nonnull id) inputing inputEnd:(nonnull NSString *) inputEnd;
+-(void) pyClearTextFieldCheck;
+-(void) pyCheckInteger;
+-(void) pyCheckIntegerForMax:(kInt64) max min:(kInt64) min;
+-(void) pyCheckFloat;
+-(void) pyCheckFloatForMax:(CGFloat) max min:(CGFloat) min precision:(int) precision;
+-(void) pyCheckMobliePhone;
+-(void) pyCheckEmail;
+-(void) pyCheckIDCard;
+-(void) pyCheckMatchWithIdentify:(nonnull NSString *) identify inputing:(nonnull id) inputing inputEnd:(nonnull NSString *) inputEnd;
 @end

@@ -34,7 +34,7 @@ BOOL _pytextfield_shouldChangeCharactersInRange_replacementString(id target, SEL
 BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField);
 
 @implementation UITextField(PYCheck)
--(void) py_clearTextFieldCheck{
+-(void) pyClearTextFieldCheck{
     PYTextInputCheckParams * params = self._pytextinputcheckparams;
     if(params == nil){
         @synchronized ([UITextField class]) {
@@ -54,29 +54,29 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
         self.delegate = [self._pytextinputcheckparams getDelegateWithTextInput:self];
     }
 }
--(void) py_checkInteger{
-    [self py_checkIntegerForMax:0 min:0];
+-(void) pyCheckInteger{
+    [self pyCheckIntegerForMax:0 min:0];
 }
--(void) py_checkIntegerForMax:(kInt64) max min:(kInt64) min{
+-(void) pyCheckIntegerForMax:(kInt64) max min:(kInt64) min{
     PYTextInputCheckParams * params = self._pytextinputcheckparams;
     params.maxInteger = max;
     params.minInteger = min;
-    [self py_checkMatchWithIdentify:_UITextInputCheckDictKeyInteger inputing:@"^\\-{0,1}\\d{0,}$" inputEnd:@"^\\-{0,1}\\d{1,}$"];
+    [self pyCheckMatchWithIdentify:_UITextInputCheckDictKeyInteger inputing:@"^\\-{0,1}\\d{0,}$" inputEnd:@"^\\-{0,1}\\d{1,}$"];
 }
--(void) py_checkFloat{
-    [self py_checkFloatForMax:0 min:0 precision:0];
+-(void) pyCheckFloat{
+    [self pyCheckFloatForMax:0 min:0 precision:0];
 }
--(void) py_checkFloatForMax:(CGFloat) max min:(CGFloat) min precision:(int) precision{
+-(void) pyCheckFloatForMax:(CGFloat) max min:(CGFloat) min precision:(int) precision{
     PYTextInputCheckParams * params = self._pytextinputcheckparams;
     params.maxFloat = max;
     params.minFloat = min;
     params.precisionFloat = precision;
     NSString * matchIng = precision == 0 ? @"^\\-{0,1}\\d{0,}\\.{0,1}\\d{0,}$" : [NSString stringWithFormat:@"^\\-{0,1}\\d{0,}\\.{0,1}\\d{0,%d}$",precision];
     NSString * matchEnd = precision == 0 ? @"^\\-{0,1}\\d{1,}((\\.{1}\\d{1,})|(\\d{0}))$" : [NSString stringWithFormat:@"^\\-{0,1}\\d{1,}((\\.{1}\\d{1,%d})|(\\d{0,%d}))$", precision, precision];
-    [self py_checkMatchWithIdentify:_UITextInputCheckDictKeyFloat inputing:matchIng inputEnd:matchEnd];
+    [self pyCheckMatchWithIdentify:_UITextInputCheckDictKeyFloat inputing:matchIng inputEnd:matchEnd];
     
 }
--(void) py_checkMobliePhone{
+-(void) pyCheckMobliePhone{
     NSDictionary * matchIng = @{
                                 @(1):@"^(\\+|1){1}$",
                                 @(2):@"^((\\+(\\d{1,2})){1})|((13)|(14)|(15)|(18)|(19)|(17))$",
@@ -85,17 +85,17 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
                                 @(5):@"^(\\+(\\d{2})){0,1}((13)|(14)|(15)|(18)|(19)|(17))\\d{0,9}$"
                                  };
     NSString * matchEnd = @"^(\\+(\\d{2})){0,1}((13)|(14)|(15)|(18)|(19)|(17))\\d{9}$";
-    [self py_checkMatchWithIdentify:_UITextInputCheckDictKeyMobilePhone inputing:matchIng inputEnd:matchEnd];
+    [self pyCheckMatchWithIdentify:_UITextInputCheckDictKeyMobilePhone inputing:matchIng inputEnd:matchEnd];
     
 }
--(void) py_checkEmail{
+-(void) pyCheckEmail{
     NSString * matchIng = @"^([a-zA-Z0-9_\\.\\-])+\\@{0,1}(([a-zA-Z0-9\\-]){0,}\\.{0,1}){0,1}([a-zA-Z0-9]{0,4}){1}$";
     NSString * matchEnd = @"^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$";
-    [self py_checkMatchWithIdentify:_UITextInputCheckDictKeyEmail inputing:matchIng inputEnd:matchEnd];
+    [self pyCheckMatchWithIdentify:_UITextInputCheckDictKeyEmail inputing:matchIng inputEnd:matchEnd];
     
 }
 
--(void) py_checkIDCard{
+-(void) pyCheckIDCard{
     NSDictionary * matchIng = @{
                                 @(1):@"^\\d{1,6}$",
                                 @(7):@"^\\d{6}[1,2]$",
@@ -107,11 +107,11 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
                                 @(18):@"^\\d{6}[1,2]\\d{3}((0[1-9])|(1[0-2]))((0[1-9])|([1,2][0-9])|(3[0,1]))\\d{3}[0-9X]$"
                                 };
     NSString * matchEnd = @"^\\d{6}[1,2]\\d{3}((0[1-9])|(1[0-2]))((0[1-9])|([1,2][0-9])|(3[0,1]))\\d{3}[0-9X]$";
-    [self py_checkMatchWithIdentify:_UITextInputCheckDictKeyIDCard inputing:matchIng inputEnd:matchEnd];
+    [self pyCheckMatchWithIdentify:_UITextInputCheckDictKeyIDCard inputing:matchIng inputEnd:matchEnd];
     
 }
 
--(void) py_checkMatchWithIdentify:(NSString *) identify inputing:(nonnull id) inputing inputEnd:(nonnull NSString *) inputEnd{
+-(void) pyCheckMatchWithIdentify:(NSString *) identify inputing:(nonnull id) inputing inputEnd:(nonnull NSString *) inputEnd{
     self._pytextinputcheckparams.dictMatch[identify] =@{
                                                                                   _UITextInputCheckDictSubKeyIng:inputing,
                                                                                   _UITextInputCheckDictSubKeyEnd:inputEnd

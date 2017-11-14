@@ -10,6 +10,7 @@
 #define PYParams_h
 #import <UIKit/UIKit.h>
 
+extern void (^_Nullable BlockDialogButtonStyle)(UIButton * _Nonnull button);
 
 extern CGFloat PYPopupAnimationTime;
 extern CGFloat PYPopupAnimationTimeOffset;

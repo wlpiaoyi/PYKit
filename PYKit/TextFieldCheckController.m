@@ -42,8 +42,8 @@ kPNSNN UIButton * button;
     self.texField.backgroundColor = [UIColor redColor];
     [PYViewAutolayoutCenter persistConstraint:self.texField size:CGSizeMake(200, 44)];
     [PYViewAutolayoutCenter persistConstraint:self.texField relationmargins:UIEdgeInsetsMake(0, 100, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
-    [self.texField py_clearTextFieldCheck];
-    [self.texField py_checkFloatForMax:9999.99 min:0.00 precision:2];
+    [self.texField pyClearTextFieldCheck];
+    [self.texField pyCheckFloatForMax:9999.99 min:0.00 precision:2];
 }
 -(void) back{
     [self dismissViewControllerAnimated:YES completion:^{
