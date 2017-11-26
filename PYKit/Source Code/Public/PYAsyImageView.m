@@ -8,13 +8,20 @@
 
 #import "PYAsyImageView.h"
 #import "PYNetDownload.h"
-
 static NSString * PYAsyImageViewDataCaches;
+//@interface PYNetDownloadt:PYNetDownload
+//@end
+//@implementation PYNetDownloadt
+//-(void) dealloc{
+//    NSLog(@"adfadsfa=========>");
+//}
+//@end
 
 @interface PYAsyImageView()
 kPNSNN UIActivityIndicatorView * aiv;
 kPNSNN PYNetDownload * dnw;
 kPNSNA NSString * cachesUrl;
+kPNSNN NSLock * lock;
 @end
 
 @implementation PYAsyImageView
@@ -45,63 +52,60 @@ kPNSNA NSString * cachesUrl;
 }
 
 kINITPARAMS{
-    
+    self.lock = [NSLock new];
     self.dnw = [PYNetDownload new];
     [self.dnw setBlockReceiveChallenge:^BOOL(id  _Nullable data, PYNetwork * _Nonnull target) {
         return true;
     }];
     __unsafe_unretained typeof(self) uself = self;
     [self.dnw setBlockDownloadProgress:^(PYNetDownload * _Nonnull target, int64_t currentBytes, int64_t totalBytes) {
+        [uself.lock lock];
         if(uself.blockProgress){
             uself.blockProgress((double)currentBytes/(double)totalBytes, uself);
         }
+        [uself.lock unlock];
     }];
     [self.dnw setBlockComplete:^(id  _Nullable data, PYNetwork * _Nonnull target) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [uself.aiv stopAnimating];
-            });  
-        });
-        uself.cachesUrl = nil;
-        if(data  != nil && [data isKindOfClass:[NSError class]]){
-            NSLog(@"[erro code:%ld] [erro domain;%@] [erro description:%@]", (long)((NSError*)data).code, ((NSError*)data).domain, ((NSError*)data).description);
-            return;
-        }
-        if(data == nil || ![data isKindOfClass:[NSString class]]){
-            return;
-        }
-        BOOL isDirectory = false;
-        if(![[NSFileManager defaultManager] fileExistsAtPath:data isDirectory:&isDirectory] || isDirectory){
-            return;
-        }
-        NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:uself.imgUrl];
-        imagePath = imagePath ? imagePath : uself.imgUrl;
-        NSError * erro;
-        if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]) [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
-        erro = nil;
-        [[NSFileManager defaultManager] moveItemAtPath:data toPath:imagePath error:&erro];
-        if(erro == nil){
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    uself.cachesUrl = imagePath;
-                    if(uself.blockDisplay){
-                        uself.blockDisplay(true,false, uself);
-                    }
-                });
-            });
-        }else{
-            NSLog(@"%@ image errocode:%ld, errodomain:%@",NSStringFromClass([PYAsyImageView class]), (long)[erro code], [erro domain]);
+        [uself.lock lock];
+        @try{
+            [uself.aiv stopAnimating];
+            uself.cachesUrl = nil;
+            if(data  != nil && [data isKindOfClass:[NSError class]]){
+                NSLog(@"[erro code:%ld] [erro domain;%@] [erro description:%@]", (long)((NSError*)data).code, ((NSError*)data).domain, ((NSError*)data).description);
+                return;
+            }
+            if(data == nil || ![data isKindOfClass:[NSString class]]){
+                return;
+            }
+            BOOL isDirectory = false;
+            if(![[NSFileManager defaultManager] fileExistsAtPath:data isDirectory:&isDirectory] || isDirectory){
+                return;
+            }
+            NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:uself.imgUrl];
+            imagePath = imagePath ? imagePath : uself.imgUrl;
+            NSError * erro;
+            if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]) [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
+            erro = nil;
+            [[NSFileManager defaultManager] moveItemAtPath:data toPath:imagePath error:&erro];
+            if(erro == nil){
+                uself.cachesUrl = imagePath;
+                if(uself.blockDisplay){
+                    uself.blockDisplay(true,false, uself);
+                }
+            }else{
+                NSLog(@"%@ image errocode:%ld, errodomain:%@",NSStringFromClass([PYAsyImageView class]), (long)[erro code], [erro domain]);
+            }
+        }@finally{
+            [uself.lock unlock];
         }
     }];
     [self.dnw setBlockCancel:^(id  _Nullable data, PYNetDownload * _Nonnull target) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [uself.aiv stopAnimating];
-                if(uself.blockDisplay){
-                    uself.blockDisplay(false,false, uself);
-                }
-            });
-        });
+        [uself.lock lock];
+        [uself.aiv stopAnimating];
+        if(uself.blockDisplay){
+            uself.blockDisplay(false,false, uself);
+        }
+        [uself.lock unlock];
     }];
     self.aiv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self addSubview:self.aiv];
@@ -111,7 +115,7 @@ kINITPARAMS{
 -(void) setCachesUrl:(NSString *)cachesUrl{
     _cachesUrl = cachesUrl;
     if(_cachesUrl != nil){
-        self.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:self.cachesUrl]];
+        self.image = [[UIImage alloc] initWithContentsOfFile:self.cachesUrl];
     }else{
         self.image = nil;
     }
@@ -176,7 +180,16 @@ kINITPARAMS{
 }
 
 -(void) dealloc{
+    [self.lock lock];
+    [self.dnw setBlockCancel:nil];
+    [self.dnw setBlockComplete:nil];
+    [self.dnw setBlockReceiveChallenge:nil];
+    [self.dnw setBlockComplete:nil];
+    [self.dnw setBlockSendProgress:nil];
+    [self.dnw setBlockDownloadProgress:nil];
+    [self.dnw cancel];
     [self.aiv stopAnimating];
+    [self.lock unlock];
 }
 
 @end
