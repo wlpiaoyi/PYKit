@@ -45,6 +45,9 @@ kINITPARAMS{
     _imageView.contentMode = UIViewContentModeScaleToFill;
     self.multipleTouchEnabled = YES;
     _viewImgContext.multipleTouchEnabled = YES;
+    [((PYAsyImageView *)self.imageView) setBlockDisplay:^(bool isSuccess, bool isCahes, PYAsyImageView * _Nonnull imageView) {
+        NSLog(@"");
+    }];
 }
 
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

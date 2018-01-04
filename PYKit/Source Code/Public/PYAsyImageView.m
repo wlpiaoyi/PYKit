@@ -9,13 +9,6 @@
 #import "PYAsyImageView.h"
 #import "PYNetDownload.h"
 static NSString * PYAsyImageViewDataCaches;
-//@interface PYNetDownloadt:PYNetDownload
-//@end
-//@implementation PYNetDownloadt
-//-(void) dealloc{
-//    NSLog(@"adfadsfa=========>");
-//}
-//@end
 
 @interface PYAsyImageView()
 kPNSNN UIActivityIndicatorView * aiv;
@@ -32,22 +25,31 @@ kPNSNN NSLock * lock;
 }
 
 +(NSString *) parseImageUrlToImagePath:(NSString *) imageUrl{
-    
-    if(![[imageUrl substringWithRange:NSMakeRange(0, 4)] isEqual:@"http"]){
-        return nil;
+    NSRange range = [imageUrl rangeOfString:@"http://"];
+    if(range.length > 0 && range.location == 0){
+        imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
     }
+    range = [imageUrl rangeOfString:@"https://"];
+    if(range.length > 0 && range.location == 0){
+        imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
+    }
+    range = [imageUrl rangeOfString:@"/"];
+    if(range.length > 0){
+        range.length = range.location + 1;
+        range.location = 0;
+        imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
+    }
+    imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"?" withString:@""];
+    
     NSMutableString * imagePath = [NSMutableString new];
     [imagePath appendString:PYAsyImageViewDataCaches];
     NSMutableString * imageName = [NSMutableString new];
-    [imageName appendString:@"PY_IMAGE_DATA"];
-    NSArray<NSString*> *imgUrlArray = [imageUrl componentsSeparatedByString:@"/"];
-    for (NSUInteger i = (imgUrlArray.count - 1); i > 0 ; i--) {
-        [imageName appendString:imgUrlArray[i]];
-        if(imageName.length > 40){
-            break;
-        }
-    }
+    [imageName appendString:@"PYDATA["];
+    [imageName appendString:imageUrl];
+    [imageName appendString:@"]"];
     [imagePath appendFormat:@"/%@",imageName];
+    
     return imagePath;
 }
 
@@ -125,7 +127,7 @@ kINITPARAMS{
     if([self.dnw.url isEqual:self.imgUrl]){
         return;
     }
-    [self.dnw cancel];
+//    [self.dnw cancel];
     
     NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:self.imgUrl];
     if(imagePath == nil){
@@ -167,7 +169,7 @@ kINITPARAMS{
 }
 
 +(void) checkCachesPath{
-    PYAsyImageViewDataCaches = [NSString stringWithFormat:@"%@/imageCaches", cachesDir];
+    PYAsyImageViewDataCaches = [NSString stringWithFormat:@"%@/imageCaches", documentDir];
     BOOL isDirectory = false;
     BOOL hasPath = [[NSFileManager defaultManager] fileExistsAtPath:PYAsyImageViewDataCaches isDirectory:&isDirectory];
     if(!hasPath || (hasPath && !isDirectory)){

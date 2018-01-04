@@ -23,6 +23,11 @@ NSString * _UITextInputCheckDictSubKeyEnd = @"End";
 
 @implementation _UITextFieldCheckDelegateImp @end
 @implementation _UITextViewCheckDelegateImp @end
+@protocol PYChekckTextFieldDelegate <NSObject>
+@optional
+- (BOOL)checktextField:(id<UITextInput>)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
+- (BOOL)checktextFieldShouldEndEditing:(id<UITextInput>)textField;
+@end
 
 @implementation PYTextInputCheckParams{
 @private id _delegate;
@@ -185,24 +190,8 @@ bool _pyexchangetextinput_shouldendediting(PYTextInputCheckParams * _Nonnull par
     return true;
 }
 void _pytextinput_shouldchangecharactersinrange_replacementstring(id target, SEL action, id<UITextInput> textinput, NSRange range, NSString * string, BOOL * result){
-    NSMethodSignature * sig  = [[target class] instanceMethodSignatureForSelector:action];
-    NSInvocation * invocatin = [NSInvocation invocationWithMethodSignature:sig];
-    [invocatin setTarget:target];
-    [invocatin setSelector:action];
-    [invocatin setArgument:&textinput atIndex:2];
-    [invocatin setArgument:&range atIndex:3];
-    [invocatin setArgument:&string atIndex:4];
-    [invocatin retainArguments];
-    [invocatin invoke];
-    [invocatin getReturnValue:result];
+    *result = [((id<PYChekckTextFieldDelegate>)target) checktextField:textinput shouldChangeCharactersInRange:range replacementString:string];
 }
 void _pytextinput_shouldendediting(id target, SEL action, id<UITextInput> textinput, BOOL * result){
-    NSMethodSignature * sig  = [[target class] instanceMethodSignatureForSelector:action];
-    NSInvocation * invocatin = [NSInvocation invocationWithMethodSignature:sig];
-    [invocatin setTarget:target];
-    [invocatin setSelector:action];
-    [invocatin setArgument:&textinput atIndex:2];
-    [invocatin retainArguments];
-    [invocatin invoke];
-    [invocatin getReturnValue:result];
+    *result = [((id<PYChekckTextFieldDelegate>)target) checktextFieldShouldEndEditing:textinput];
 }
