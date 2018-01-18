@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[UIScrollView(PYRefreshPrivate) py_refresh_setDelegate:]:UIScrollView+PYRefreshPrivate.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "@protocol(PYRefreshDelegateHookTag)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[PYAsyImageView setCachesUrl:]:PYAsyImageView.m">
          <PersistentStrings>
             <PersistentString

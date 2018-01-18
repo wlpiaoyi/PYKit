@@ -8,15 +8,17 @@
 
 #import "PYRefreshView.h"
 
-CGFloat PYRefreshViewHeight = 80;
+CGFloat PYRefreshViewHeight = 60;
 NSString * PYRefreshDownBeginText = @"下拉刷新";
 NSString * PYRefreshDownDoText = @"松手刷新";
 NSString * PYRefreshDownDoingText = @"请稍后...";
 NSString * PYRefreshDownEndText = @"刷新完成";
+NSString * PYRefreshDownNothingText = @"取消刷新";
 NSString * PYRefreshUpBeginText = @"上拉刷新";
 NSString * PYRefreshUpDoText = @"松手刷新";
 NSString * PYRefreshUpDoingText = @"请稍后...";
 NSString * PYRefreshUpEndText = @"刷新完成";
+NSString * PYRefreshUpNothingText = @"取消刷新";
 
 
 @interface PYRefreshView()
@@ -50,11 +52,11 @@ kINITPARAMSForType(PYRefreshView){
     _lc1 = [PYViewAutolayoutCenter persistConstraint:_imageViewArrow size:CGSizeMake(60, DisableConstrainsValueMAX)].allValues.firstObject;
     [PYViewAutolayoutCenter persistConstraint:_imageViewArrow relationmargins:UIEdgeInsetsMake(0, 0, 0, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
     
-    _activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _activityIndicator.color = [UIColor lightGrayColor];
     [_contextView addSubview:_activityIndicator];
-    [PYViewAutolayoutCenter persistConstraint:_activityIndicator size:CGSizeMake(60, DisableConstrainsValueMAX)];
-    [PYViewAutolayoutCenter persistConstraint:_activityIndicator relationmargins:UIEdgeInsetsMake(0, 0, 0, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
+    [PYViewAutolayoutCenter persistConstraint:_activityIndicator size:CGSizeMake(20, DisableConstrainsValueMAX)];
+    [PYViewAutolayoutCenter persistConstraint:_activityIndicator relationmargins:UIEdgeInsetsMake(0, 20, 0, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
     
     _labelMessage = [UILabel new];
     _labelMessage.backgroundColor = [UIColor clearColor];
@@ -99,6 +101,7 @@ kINITPARAMSForType(PYRefreshView){
         }
             break;
         default:
+            message = _type == kPYRefreshHeader ? PYRefreshDownNothingText : PYRefreshUpNothingText;
             break;
     }
     _labelMessage.text = message;

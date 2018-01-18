@@ -10,8 +10,6 @@
 		150C6DA81F46D74800731FC7 /* PYSelectorBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6DA71F46D74800731FC7 /* PYSelectorBarView.m */; };
 		150C6DA91F46EB8000731FC7 /* PYSelectorBarView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 150C6DA61F46D74800731FC7 /* PYSelectorBarView.h */; };
 		150C6DAA1F46EB8900731FC7 /* PYSelectorBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6DA71F46D74800731FC7 /* PYSelectorBarView.m */; };
-		150C6EAD1F49956D00731FC7 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6E7A1F49956D00731FC7 /* libmp3lame.a */; };
-		150C6EAE1F49956D00731FC7 /* libpyinterflowa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6E7B1F49956D00731FC7 /* libpyinterflowa.a */; };
 		150C6EE91F4AC7B200731FC7 /* PYHybirdUtile.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE51F4AC7B200731FC7 /* PYHybirdUtile.m */; };
 		150C6EEA1F4AC7B200731FC7 /* PYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C6EE71F4AC7B200731FC7 /* PYWebView.m */; };
 		150C6EEC1F4AC7C700731FC7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */; };
@@ -49,6 +47,7 @@
 		154537671F9EE69C000A36ED /* pykita.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC08621EA757A60006B505 /* pykita.h */; };
 		1550219F1FFDC53500F0D2FB /* UIScrollView+PYRefreshPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1550219E1FFDC53500F0D2FB /* UIScrollView+PYRefreshPrivate.m */; };
 		155021A01FFDC7F200F0D2FB /* UIScrollView+PYRefreshPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1550219E1FFDC53500F0D2FB /* UIScrollView+PYRefreshPrivate.m */; };
+		155021A31FFDDAD100F0D2FB /* PYRefreshView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152AAAA91FFB919D00370DF8 /* PYRefreshView.h */; };
 		1555E0CC1F5CF1C10017B436 /* UITextField+PYCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 1555E0C91F5CF1C10017B436 /* UITextField+PYCheck.m */; };
 		155B586C1F5E49670070ECEE /* PYDisplayImageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 155B586B1F5E49670070ECEE /* PYDisplayImageTools.m */; };
 		15611F271F0B7DE900CD8848 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15611F261F0B7DE900CD8848 /* AVFoundation.framework */; };
@@ -100,9 +99,9 @@
 		15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9F32A1F0F2510002276A9 /* PYAudioPlayer.m */; };
 		15DA7DB21F09E899002FE132 /* TextFieldCheckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */; };
 		15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */; };
+		15DFCAE7200C7DA400DA4C0F /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15DFCAE6200C7DA300DA4C0F /* libmp3lame.a */; };
 		15E2335E1F6FB8EA00C87D9D /* SelecteBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */; };
 		15F4F5991FFD152C00E3A56B /* PYRefresh.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152AAAA21FFB1E6800370DF8 /* PYRefresh.h */; };
-		15F4F59A1FFD152C00E3A56B /* PYRefreshView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152AAAA91FFB919D00370DF8 /* PYRefreshView.h */; };
 		15F4F59B1FFD153700E3A56B /* PYRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 152AAAA31FFB1E6800370DF8 /* PYRefresh.m */; };
 		15F4F59C1FFD153700E3A56B /* PYRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 152AAAAA1FFB919D00370DF8 /* PYRefreshView.m */; };
 /* End PBXBuildFile section */
@@ -114,8 +113,8 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				155021A31FFDDAD100F0D2FB /* PYRefreshView.h in CopyFiles */,
 				15F4F5991FFD152C00E3A56B /* PYRefresh.h in CopyFiles */,
-				15F4F59A1FFD152C00E3A56B /* PYRefreshView.h in CopyFiles */,
 				154537671F9EE69C000A36ED /* pykita.h in CopyFiles */,
 				1598847D1F6B7F6100E589D3 /* PYDisplayImageView.h in CopyFiles */,
 				1597CB031F5D2D6300690BBB /* UITextField+PYCheck.h in CopyFiles */,
@@ -142,9 +141,6 @@
 /* Begin PBXFileReference section */
 		150C6DA61F46D74800731FC7 /* PYSelectorBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYSelectorBarView.h; sourceTree = "<group>"; };
 		150C6DA71F46D74800731FC7 /* PYSelectorBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYSelectorBarView.m; sourceTree = "<group>"; };
-		150C6E791F49956D00731FC7 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
-		150C6E7A1F49956D00731FC7 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
-		150C6E7B1F49956D00731FC7 /* libpyinterflowa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpyinterflowa.a; sourceTree = "<group>"; };
 		150C6EE41F4AC7B200731FC7 /* PYHybirdUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYHybirdUtile.h; sourceTree = "<group>"; };
 		150C6EE51F4AC7B200731FC7 /* PYHybirdUtile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYHybirdUtile.m; sourceTree = "<group>"; };
 		150C6EE61F4AC7B200731FC7 /* PYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYWebView.h; sourceTree = "<group>"; };
@@ -280,6 +276,8 @@
 		15DA7DAF1F09E899002FE132 /* TextFieldCheckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCheckController.h; sourceTree = "<group>"; };
 		15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCheckController.m; sourceTree = "<group>"; };
 		15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCheckController.xib; sourceTree = "<group>"; };
+		15DFCAE5200C7DA300DA4C0F /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		15DFCAE6200C7DA300DA4C0F /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		15E2335B1F6FB8EA00C87D9D /* SelecteBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelecteBarController.h; sourceTree = "<group>"; };
 		15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelecteBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -291,9 +289,8 @@
 			files = (
 				15C62E8F1FD5302A0082EF38 /* libpyutilea.a in Frameworks */,
 				150C6EED1F4AC7D400731FC7 /* JavaScriptCore.framework in Frameworks */,
-				150C6EAD1F49956D00731FC7 /* libmp3lame.a in Frameworks */,
 				15C62E901FD5302A0082EF38 /* libpyipaa.a in Frameworks */,
-				150C6EAE1F49956D00731FC7 /* libpyinterflowa.a in Frameworks */,
+				15DFCAE7200C7DA400DA4C0F /* libmp3lame.a in Frameworks */,
 				15C62E8D1FD5302A0082EF38 /* libpyinterflowa.a in Frameworks */,
 				15C62E8E1FD5302A0082EF38 /* libpynetworka.a in Frameworks */,
 			);
@@ -325,23 +322,13 @@
 		150C6E771F49956D00731FC7 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				15DFCAE4200C7DA300DA4C0F /* libmp3lame */,
 				15C62E501FD5302A0082EF38 /* pyinterflow */,
 				15C62E851FD5302A0082EF38 /* pyipa */,
 				15C62E5A1FD5302A0082EF38 /* pynetwork */,
 				15C62E621FD5302A0082EF38 /* pyutile */,
-				150C6E781F49956D00731FC7 /* libmp3lame */,
-				150C6E7B1F49956D00731FC7 /* libpyinterflowa.a */,
 			);
 			path = lib;
-			sourceTree = "<group>";
-		};
-		150C6E781F49956D00731FC7 /* libmp3lame */ = {
-			isa = PBXGroup;
-			children = (
-				150C6E791F49956D00731FC7 /* lame.h */,
-				150C6E7A1F49956D00731FC7 /* libmp3lame.a */,
-			);
-			path = libmp3lame;
 			sourceTree = "<group>";
 		};
 		150C6EE21F4AC7B200731FC7 /* Hybird */ = {
@@ -361,6 +348,8 @@
 			children = (
 				152AAAA21FFB1E6800370DF8 /* PYRefresh.h */,
 				152AAAA31FFB1E6800370DF8 /* PYRefresh.m */,
+				152AAAA91FFB919D00370DF8 /* PYRefreshView.h */,
+				152AAAAA1FFB919D00370DF8 /* PYRefreshView.m */,
 			);
 			path = PYRefresh;
 			sourceTree = "<group>";
@@ -635,8 +624,6 @@
 		15CC07F91EA756120006B505 /* Private */ = {
 			isa = PBXGroup;
 			children = (
-				152AAAA91FFB919D00370DF8 /* PYRefreshView.h */,
-				152AAAAA1FFB919D00370DF8 /* PYRefreshView.m */,
 				1550219D1FFDC53500F0D2FB /* UIScrollView+PYRefreshPrivate.h */,
 				1550219E1FFDC53500F0D2FB /* UIScrollView+PYRefreshPrivate.m */,
 				15CC084A1EA757050006B505 /* calendar_lunar.c */,
@@ -682,6 +669,15 @@
 				15CC08621EA757A60006B505 /* pykita.h */,
 			);
 			path = pykita;
+			sourceTree = "<group>";
+		};
+		15DFCAE4200C7DA300DA4C0F /* libmp3lame */ = {
+			isa = PBXGroup;
+			children = (
+				15DFCAE5200C7DA300DA4C0F /* lame.h */,
+				15DFCAE6200C7DA300DA4C0F /* libmp3lame.a */,
+			);
+			path = libmp3lame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

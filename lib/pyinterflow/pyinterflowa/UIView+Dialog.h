@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "PYParams.h"
+#import "pyutilea.h"
 
 /**
  对话框
  */
 @interface UIView(Dialog)
 @property (nonatomic, retain, nullable) id dialogUserInfo;
-
+kPNRNN UIView * dialogShowView;
 -(void) dialogShowWithTitle:(nullable NSString *) title message:(nullable NSString *) message block:(nullable BlockDialogOpt) block buttonNames:(nonnull NSArray<NSString*>*)buttonNames;
 -(void) dialogShowWithAttributeTitle:(nullable NSAttributedString *) attributeTitle attributeMessage:(nullable NSAttributedString *) attributeMessage block:(nullable BlockDialogOpt) block buttonNormalNames:(nonnull NSArray<NSAttributedString*>*)buttonNormalNames buttonHightLightNames:(nonnull NSArray<NSAttributedString*>*)buttonHightLightNames;
 

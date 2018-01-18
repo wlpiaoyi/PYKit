@@ -16,38 +16,43 @@
 
 @interface PYTestRefreshController ()<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+kPNSNN UIView * contentView;
 @end
 
 @implementation PYTestRefreshController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.scrollView.contentSize  = CGSizeMake(0, 600);
+    _scrollView.delegate = self;
+    [self.scrollView setCornerRadiusAndBorder:1 borderWidth:1 borderColor:[UIColor greenColor]];
+    self.scrollView.contentSize  = CGSizeMake(0, 800);
     kAssign(self);
     [self.scrollView setPy_blockRefreshHeader:^(UIScrollView * _Nonnull scrollView) {
         kStrong(self);
-        kDISPATCH_GLOBAL_QUEUE_DEFAULT(^{
-            [NSThread sleepForTimeInterval:2];
-            kDISPATCH_MAIN_THREAD(^{
-                [self.scrollView py_endRefreshHeader];
-            });
-        });
+        [self.scrollView py_endRefreshHeader];
     }];
     [self.scrollView setPy_blockRefreshFooter:^(UIScrollView * _Nonnull scrollView) {
         kStrong(self);
-        
-        kDISPATCH_GLOBAL_QUEUE_DEFAULT(^{
-            [NSThread sleepForTimeInterval:2];
-            kDISPATCH_MAIN_THREAD(^{
-                [self.scrollView py_endRefreshFooter];
-            });
-        });
+//        [self.scrollView py_endRefreshFooter];
     }];
+    self.contentView = [UIView new];
+    [self.contentView setCornerRadiusAndBorder:1 borderWidth:1 borderColor:[UIColor redColor]];
+    [self.scrollView addSubview:_contentView];
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    NSLog(@"begin");
+}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    NSLog(@"did");
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+-(void) viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    _contentView.frameSize = self.scrollView.frameSize;
 }
 
 /*

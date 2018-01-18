@@ -10,6 +10,18 @@
 #import "UIScrollView+PYRefreshPrivate.h"
 
 @implementation UIScrollView(pyrefresh)
+-(PYRefreshView *) py_headerView{
+    return [self py_RefreshParam].headerView;
+}
+-(void) setPy_headerView:(PYRefreshView *)py_headerView{
+    [self py_RefreshParam].headerView = py_headerView;
+}
+-(PYRefreshView *) py_footerView{
+    return [self py_RefreshParam].footerView;
+}
+-(void) setPy_footerView:(PYRefreshView *)py_footerView{
+    [self py_RefreshParam].footerView = py_footerView;
+}
 -(void (^) (UIScrollView * _Nonnull scrollView)) py_blockRefreshHeader{
     return [self py_RefreshParam].blockRefreshHeader;
 }
@@ -24,131 +36,49 @@
 }
 -(void) py_beginRefreshHeader{
     if(self.py_blockRefreshHeader == nil) return;
-    if(self.py_headerView.state != kPYRefreshEnd && self.py_headerView.state != kPYRefreshNoThing && self.py_headerView.state != kPYRefreshDoing){
+    if(self.py_headerView.state != kPYRefreshEnd && self.py_headerView.state != kPYRefreshNoThing && self.py_headerView.state != kPYRefreshDo){
         return;
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        __block CGPoint contentOffset = CGPointMake(0, 999999999 - 1);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            contentOffset = self.contentOffset;
-            self.userInteractionEnabled = true;
-        });
-        while (contentOffset.y  > 999999999 - 2) {
-            [NSThread sleepForTimeInterval:0.01];
-        }
-        CGPoint t_contentOffset = CGPointMake(0, -PYRefreshViewHeight);
-        CGFloat y_value = (contentOffset.y - t_contentOffset.y) / 20;
-        while (ABS(contentOffset.y - t_contentOffset.y) > ABS(y_value)) {
-            contentOffset.y -= y_value;
-            y_value -= y_value/30;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.contentOffset = contentOffset;
-            });
-            [NSThread sleepForTimeInterval:0.005];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIEdgeInsets inset = self.contentInset;
-            inset.top = PYRefreshViewHeight;
-            self.contentInset = inset;
-            self.userInteractionEnabled = true;
-        });
-    });
+    [[self py_RefreshParam].headerLock lock];
+    [self py_refresh_HeaderInsetOffset:YES];
+    self.py_headerView.state = kPYRefreshDoing;
+    [self setContentOffset:CGPointMake(self.contentOffset.x, -PYRefreshViewHeight) animated:YES];
+    [[self py_RefreshParam].headerLock unlock];
 }
 -(void) py_beginRefreshFooter{
     if(self.py_blockRefreshFooter == nil) return;
-    if(self.py_footerView.state != kPYRefreshEnd && self.py_footerView.state != kPYRefreshNoThing && self.py_footerView.state != kPYRefreshDoing){
+    if(self.py_footerView.state != kPYRefreshEnd && self.py_footerView.state != kPYRefreshNoThing && self.py_footerView.state != kPYRefreshDo){
         return;
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        __block CGPoint contentOffset = CGPointMake(0, 999999999 - 1);
-        __block CGSize contentSize = CGSizeZero;
-        __block CGFloat frameHeight = 0;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            contentOffset = self.contentOffset;
-            contentSize = self.contentSize;
-            frameHeight = self.frameHeight;
-            self.userInteractionEnabled = true;
-        });
-        while (contentOffset.y  > 999999999 - 2) {
-            [NSThread sleepForTimeInterval:0.01];
-        }
-        CGPoint t_contentOffset = CGPointMake(0, MAX(contentSize.height, frameHeight) - frameHeight + PYRefreshViewHeight);
-        CGFloat y_value = (contentOffset.y - t_contentOffset.y) / 20;
-        while (ABS(contentOffset.y - t_contentOffset.y) > ABS(y_value)) {
-            contentOffset.y -= y_value;
-            y_value -= y_value/30;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.contentOffset = contentOffset;
-            });
-            [NSThread sleepForTimeInterval:0.005];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIEdgeInsets inset = self.contentInset;
-            inset.bottom = PYRefreshViewHeight;
-            self.contentInset = inset;
-            self.userInteractionEnabled = true;
-        });
-    });
+    [[self py_RefreshParam].footerLock lock];
+    [self py_refresh_FooterInsetOffset:YES];
+    self.py_footerView.state = kPYRefreshDoing;
+    [self setContentOffset:CGPointMake(self.contentOffset.x, MAX(self.contentSize.height, self.frameHeight) - self.frameHeight + PYRefreshViewHeight) animated:YES];
+    [[self py_RefreshParam].footerLock unlock];
 }
 -(void) py_endRefreshHeader{
     if(self.py_blockRefreshHeader == nil) return;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        __block CGPoint contentOffset = CGPointMake(0, -CGFLOAT_MAX);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.py_headerView.state = kPYRefreshEnd;
-            contentOffset = self.contentOffset;
-            self.userInteractionEnabled = false;
-        });
-        const CGFloat v = PYRefreshViewHeight / 30.0;
-        while (contentOffset.y < 0) {
-            dispatch_async(dispatch_get_main_queue(),^{
-                contentOffset = self.contentOffset;
-                contentOffset.y += v;
-                self.contentOffset = contentOffset;
-            });
-            [NSThread sleepForTimeInterval:0.005];
-        }
-        dispatch_async(dispatch_get_main_queue(),^{
-            UIEdgeInsets inset = self.contentInset;
-            inset.top = 0;
-            self.contentInset = inset;
-            self.contentOffset = CGPointMake(0, 0);
-            self.userInteractionEnabled = true;
-        });
-    });
+    [[self py_RefreshParam].headerLock lock];
+    CGPoint contentOffset = self.contentOffset;
+    [self py_refresh_HeaderInsetOffset:NO];
+    self.contentOffset = contentOffset;
+    self.py_headerView.state = kPYRefreshEnd;
+    if(contentOffset.y < 0){
+      [self setContentOffset:CGPointMake(contentOffset.x, 0) animated:YES];
+    }
+    [[self py_RefreshParam].headerLock unlock];
 }
 -(void) py_endRefreshFooter{
     if(self.py_blockRefreshFooter == nil) return;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        __block CGPoint contentOffset = CGPointMake(0, CGFLOAT_MAX);
-        __block CGFloat contentHeight = 0;
-        __block CGFloat frameHeight = 0;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.py_footerView.state = kPYRefreshEnd;
-            contentOffset = self.contentOffset;
-            contentHeight = self.contentSize.height;
-            frameHeight = self.frameHeight;
-            self.userInteractionEnabled = false;
-        });
-        const CGFloat v = PYRefreshViewHeight / 30.0;
-        while (contentOffset.y > MAX(contentHeight, frameHeight) - frameHeight) {
-            dispatch_async(dispatch_get_main_queue(),^{
-                contentOffset = self.contentOffset;
-                contentOffset.y -= v;
-                self.contentOffset = contentOffset;
-                contentHeight = self.contentSize.height;
-                frameHeight = self.frameHeight;
-            });
-            [NSThread sleepForTimeInterval:0.01];
-        }
-        dispatch_async(dispatch_get_main_queue(),^{
-            UIEdgeInsets inset = self.contentInset;
-            inset.bottom = 0;
-            self.contentInset = inset;
-            self.contentOffset = CGPointMake(0, MAX(self.contentSize.height, self.frameHeight) - self.frameHeight);
-            self.userInteractionEnabled = true;
-        });
-    });
+    [[self py_RefreshParam].footerLock lock];
+    CGPoint contentOffset = self.contentOffset;
+    [self py_refresh_FooterInsetOffset:NO];
+    self.contentOffset = contentOffset;
+    self.py_footerView.state = kPYRefreshEnd;
+    if(contentOffset.y > MAX(self.contentSize.height, self.frameHeight) - self.frameHeight){
+        [self setContentOffset:CGPointMake(self.contentOffset.x, MAX(self.contentSize.height, self.frameHeight) - self.frameHeight) animated:YES];
+    }
+    [[self py_RefreshParam].footerLock unlock];
 }
 
 @end
