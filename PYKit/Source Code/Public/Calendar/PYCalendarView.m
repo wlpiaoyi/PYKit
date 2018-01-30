@@ -39,25 +39,7 @@ BOOL PYCalendarHasGuide = false;
     bool isTouched;
 }
 
--(instancetype) init{
-    if(self = [super init]){
-        [self initParams];
-    }
-    return self;
-}
--(instancetype) initWithFrame:(CGRect)frame{
-    if(self = [super initWithFrame:frame]){
-        [self initParams];
-    }
-    return self;
-}
--(instancetype) initWithCoder:(NSCoder *)aDecoder{
-    if(self = [super initWithCoder:aDecoder]){
-        [self initParams];
-    }
-    return self;
-}
--(void) initParams{
+kINITPARAMS{
     _dateEnableStart = [[NSDate date] offsetMonth:-3];
     _dateEnableEnd = [self.dateEnableStart offsetMonth:6];
     _date = [[NSDate date] setCompentsWithBinary:0b111000];

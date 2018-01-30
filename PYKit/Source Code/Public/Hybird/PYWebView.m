@@ -81,10 +81,10 @@ kSOULDLAYOUTMEND
 static NSString * PYWebViewPrompt = @"qqpiaoyi_prompt";
 
 @interface PYWebView()<WKUIDelegate,WKNavigationDelegate>
-@property (nullable, nonatomic, weak) id <WKNavigationDelegate> navigationDelegatec;
-@property (nullable, nonatomic, weak) id <WKUIDelegate> UIDelegatec;
+kPNA id <WKNavigationDelegate> navigationDelegatec;
+kPNA id <WKUIDelegate> UIDelegatec;
 
-@property (nonatomic, strong) NSMutableDictionary<NSString* , NSDictionary *> * interfacesDict;
+kPNSNN NSMutableDictionary<NSString* , NSDictionary *> * interfacesDict;
 kPNSNN PYScheduleView * progressView;
 kPNSNN WKNavigation * navigation;
 kPNSNA NSTimer * timer;

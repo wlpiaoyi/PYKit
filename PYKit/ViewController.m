@@ -38,7 +38,8 @@ PYPNSNN NSArray * datas;
 //    [PYAsyImageView clearCaches];
     [super viewDidLoad];
     self.datas = @[
-                   @{@"name":@"refresh", @"sel":@"goToRefresh"}
+                   @{@"name":@"refresh", @"sel":@"goToRefresh"},
+                   @{@"name":@"calendar", @"sel":@"goToCalendar"}
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -173,6 +174,9 @@ PYPNSNN NSArray * datas;
 }
 -(void) goToRefresh{
     [self performSegueWithIdentifier:@"refresh" sender:nil];
+}
+-(void) goToCalendar{
+    [self performSegueWithIdentifier:@"calendar" sender:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -101,6 +101,7 @@
 		15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */; };
 		15DFCAE7200C7DA400DA4C0F /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15DFCAE6200C7DA300DA4C0F /* libmp3lame.a */; };
 		15E2335E1F6FB8EA00C87D9D /* SelecteBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */; };
+		15EEF848202019380092620A /* PYTestCalendarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EEF847202019380092620A /* PYTestCalendarController.m */; };
 		15F4F5991FFD152C00E3A56B /* PYRefresh.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152AAAA21FFB1E6800370DF8 /* PYRefresh.h */; };
 		15F4F59B1FFD153700E3A56B /* PYRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 152AAAA31FFB1E6800370DF8 /* PYRefresh.m */; };
 		15F4F59C1FFD153700E3A56B /* PYRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 152AAAAA1FFB919D00370DF8 /* PYRefreshView.m */; };
@@ -280,6 +281,8 @@
 		15DFCAE6200C7DA300DA4C0F /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		15E2335B1F6FB8EA00C87D9D /* SelecteBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelecteBarController.h; sourceTree = "<group>"; };
 		15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelecteBarController.m; sourceTree = "<group>"; };
+		15EEF846202019380092620A /* PYTestCalendarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestCalendarController.h; sourceTree = "<group>"; };
+		15EEF847202019380092620A /* PYTestCalendarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestCalendarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +362,8 @@
 			children = (
 				152AAAA61FFB6EFD00370DF8 /* PYTestRefreshController.h */,
 				152AAAA71FFB6EFD00370DF8 /* PYTestRefreshController.m */,
+				15EEF846202019380092620A /* PYTestCalendarController.h */,
+				15EEF847202019380092620A /* PYTestCalendarController.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -801,6 +806,7 @@
 				150D4D871F95B0720058FB83 /* PYSelectorScrollView.m in Sources */,
 				155B586C1F5E49670070ECEE /* PYDisplayImageTools.m in Sources */,
 				150C6EEA1F4AC7B200731FC7 /* PYWebView.m in Sources */,
+				15EEF848202019380092620A /* PYTestCalendarController.m in Sources */,
 				15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */,
 				15CC07E31EA7556C0006B505 /* main.m in Sources */,
 				152AAAA81FFB6EFD00370DF8 /* PYTestRefreshController.m in Sources */,

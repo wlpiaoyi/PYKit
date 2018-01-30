@@ -62,10 +62,10 @@
     CGPoint contentOffset = self.contentOffset;
     [self py_refresh_HeaderInsetOffset:NO];
     self.contentOffset = contentOffset;
-    self.py_headerView.state = kPYRefreshEnd;
     if(contentOffset.y < 0){
       [self setContentOffset:CGPointMake(contentOffset.x, 0) animated:YES];
     }
+    self.py_headerView.state = kPYRefreshEnd;
     [[self py_RefreshParam].headerLock unlock];
 }
 -(void) py_endRefreshFooter{
@@ -74,10 +74,10 @@
     CGPoint contentOffset = self.contentOffset;
     [self py_refresh_FooterInsetOffset:NO];
     self.contentOffset = contentOffset;
-    self.py_footerView.state = kPYRefreshEnd;
     if(contentOffset.y > MAX(self.contentSize.height, self.frameHeight) - self.frameHeight){
         [self setContentOffset:CGPointMake(self.contentOffset.x, MAX(self.contentSize.height, self.frameHeight) - self.frameHeight) animated:YES];
     }
+    self.py_footerView.state = kPYRefreshEnd;
     [[self py_RefreshParam].footerLock unlock];
 }
 

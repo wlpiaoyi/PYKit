@@ -20,7 +20,7 @@ extern NSString * PYRefreshUpDoingText;
 extern NSString * PYRefreshUpEndText;
 
 typedef enum _kPYRefreshState {
-    kPYRefreshNoThing = 0b0,
+    kPYRefreshNoThing = 0b1,
     kPYRefreshBegin = 0b1000,
     kPYRefreshDo= kPYRefreshBegin | (kPYRefreshBegin >> 1),
     kPYRefreshDoing = kPYRefreshBegin | (kPYRefreshBegin >> 2),

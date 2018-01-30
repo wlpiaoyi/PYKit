@@ -43,9 +43,9 @@ kPNSNN UIView * contentView;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     NSLog(@"begin");
 }
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    NSLog(@"did");
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"did");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

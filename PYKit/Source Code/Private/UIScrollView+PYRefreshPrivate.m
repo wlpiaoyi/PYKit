@@ -48,7 +48,8 @@ kPNCNA void (^py_blockRefreshFooter)(UIScrollView * _Nonnull scrollView);
             refreshView.frameWidth = self.frameWidth;
             if(refreshView.frameHeight <  PYRefreshViewHeight
                && (refreshView.state ==  kPYRefreshDo
-                   || refreshView.state ==  kPYRefreshNoThing)){
+                   || refreshView.state ==  kPYRefreshNoThing
+                   || refreshView.state ==  kPYRefreshEnd)){
                    refreshView.state = kPYRefreshBegin;
                }else if(refreshView.frameHeight >=  PYRefreshViewHeight
                         && refreshView.state == kPYRefreshBegin){
@@ -78,7 +79,7 @@ kPNCNA void (^py_blockRefreshFooter)(UIScrollView * _Nonnull scrollView);
         if(!class_conformsToProtocol([delegate class], @protocol(PYRefreshDelegateHookTag))){
             class_addProtocol([delegate class], @protocol(PYRefreshDelegateHookTag));
             [UIScrollView PY_REFRESH_HOOKDELEGATE:delegate action:@selector(scrollViewWillBeginDragging:)];
-            [UIScrollView PY_REFRESH_HOOKDELEGATE:delegate action:@selector(scrollViewDidScroll:)];
+//            [UIScrollView PY_REFRESH_HOOKDELEGATE:delegate action:@selector(scrollViewDidScroll:)];
             [UIScrollView PY_REFRESH_HOOKDELEGATE:delegate action:@selector(scrollViewDidEndDecelerating:)];
             [UIScrollView PY_REFRESH_HOOKDELEGATE:delegate action:@selector(scrollViewDidEndDragging:willDecelerate:)];
         }
@@ -200,14 +201,14 @@ kPNCNA void (^py_blockRefreshFooter)(UIScrollView * _Nonnull scrollView);
         scrollView.py_footerView.state = kPYRefreshBegin;
     }
 }
-//- (void) hook_scrollViewDidScroll:(UIScrollView *)scrollView{
-//    [self hook_scrollViewDidScroll:scrollView];
-//    [self exchage_scrollViewDidScroll:scrollView];
-//}
-//-(void) exchage_scrollViewDidScroll:(UIScrollView *)scrollView{}
-//- (void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView{
-//
-//}
+- (void) hook_scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self hook_scrollViewDidScroll:scrollView];
+    [self exchage_scrollViewDidScroll:scrollView];
+}
+-(void) exchage_scrollViewDidScroll:(UIScrollView *)scrollView{}
+- (void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView{
+
+}
 
 - (void) hook_scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self hook_scrollViewDidEndDecelerating:scrollView];
@@ -272,10 +273,6 @@ kPNCNA void (^py_blockRefreshFooter)(UIScrollView * _Nonnull scrollView);
 @implementation PYRefreshParam
 -(instancetype) init{
     self = [super init];
-//    self.queueHeader = dispatch_queue_create("org.wlpiaoyi.refresh.header", DISPATCH_QUEUE_CONCURRENT);
-//    self.groupHeader = dispatch_group_create();
-//    self.queueFooter = dispatch_queue_create("org.wlpiaoyi.refresh.footer", DISPATCH_QUEUE_CONCURRENT);
-//    self.groupFooter = dispatch_group_create();
     self.footerLock = [NSConditionLock new];
     self.headerLock = [NSConditionLock new];
     return self;
