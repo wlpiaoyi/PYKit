@@ -12,6 +12,7 @@
 
 @interface UIView(Sheet)
 kPNRNN UIView * sheetShowView;
+kPNA BOOL sheetIsHiddenOnClick;
 -(void) sheetShow;
 -(void) sheetShowWithTitle:(nullable NSString *) title
             buttonConfirme:(nullable NSString *) confirme

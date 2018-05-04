@@ -41,12 +41,18 @@ kINITPARAMS{
     _viewImgContext.backgroundColor = [UIColor clearColor];
     [self addSubview:_viewImgContext];
     [PYViewAutolayoutCenter persistConstraint:_viewImgContext relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
-    self.imageView = [PYAsyImageView new];
+    
+    _imageView = [PYAsyImageView new];
     _imageView.contentMode = UIViewContentModeScaleToFill;
+    _imageView.frame = CGRectZero;
+    [self.viewImgContext addSubview:_imageView];
+    
     self.multipleTouchEnabled = YES;
     _viewImgContext.multipleTouchEnabled = YES;
+    kAssign(self);
     [((PYAsyImageView *)self.imageView) setBlockDisplay:^(bool isSuccess, bool isCahes, PYAsyImageView * _Nonnull imageView) {
-        NSLog(@"");
+        kStrong(self);
+        [self synchronizedImageSize];
     }];
 }
 
@@ -217,15 +223,6 @@ kINITPARAMS{
     _preTouch = nil;
     _preTouchPoint = CGPointZero;
     _movePoint = CGPointZero;
-}
-
--(void) setImageView:(UIImageView *)imageView{
-    if(_imageView != nil && _imageView != imageView){
-        [_imageView removeFromSuperview];
-    }
-    _imageView = imageView;
-    _imageView.frame = CGRectZero;
-    [self.viewImgContext addSubview:_imageView];
 }
 
 -(void) setMaxMultiple:(NSUInteger)maxMultiple{

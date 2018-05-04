@@ -7,7 +7,7 @@
 //
 
 #import "PYParams.h"
-#import "UIView+Remove.h"
+#import "PYMoveView.h"
 #import "UIView+Popup.h"
 #import "UIView+Dialog.h"
 #import "UIView+Sheet.h"

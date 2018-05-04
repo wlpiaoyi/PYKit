@@ -45,5 +45,6 @@ typedef NS_ENUM(NSInteger, PYPopupEnum) {
 
 -(void) resetTransform;
 -(void) resetAutoLayout;
+-(void) removeParam;
 
 @end

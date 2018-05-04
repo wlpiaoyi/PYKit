@@ -16,6 +16,7 @@
 
 @interface PYTestRefreshController ()<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITableView *tabelView;
 kPNSNN UIView * contentView;
 @end
 
@@ -34,6 +35,14 @@ kPNSNN UIView * contentView;
     [self.scrollView setPy_blockRefreshFooter:^(UIScrollView * _Nonnull scrollView) {
         kStrong(self);
 //        [self.scrollView py_endRefreshFooter];
+    }];
+    [self.tabelView setPy_blockRefreshHeader:^(UIScrollView * _Nonnull scrollView) {
+        kStrong(self);
+        [self.tabelView py_endRefreshHeader];
+    }];
+    [self.tabelView setPy_blockRefreshFooter:^(UIScrollView * _Nonnull scrollView) {
+        kStrong(self);
+        //        [self.scrollView py_endRefreshFooter];
     }];
     self.contentView = [UIView new];
     [self.contentView setCornerRadiusAndBorder:1 borderWidth:1 borderColor:[UIColor redColor]];

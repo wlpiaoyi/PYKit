@@ -22,9 +22,15 @@
     cv.frameHeight = 300;
     cv.dateEnableStart = [NSDate date];
     cv.dateEnableEnd = [[NSDate date] offsetMonth:3];
-    cv.date = [[NSDate date] offsetDay:5];
-    [cv sheetShowWithTitle:@"日期选择"  buttonConfirme:@"确认" buttonCancel:@"取消" blockOpt:^(UIView * _Nullable view, NSUInteger index) {
-        
+    cv.date = [[NSDate date] offsetDay:3];
+    cv.sheetIsHiddenOnClick = false;
+    [cv sheetShowWithTitle:@"日期选择"  buttonConfirme:@"下一页" buttonCancel:@"上一页" blockOpt:^(UIView * _Nullable view, NSUInteger index) {
+        ((PYCalendarView*)view).date = [((PYCalendarView*)view).date offsetMonth:index ? -1 : 1];
+    }];
+    [cv setBlockSelected:^(PYCalendarView * _Nonnull view) {
+        UIView * v = [UIView new];
+        [v topbarShow:2 message:[((PYCalendarView*)view).date dateFormateDate:nil]];
+        [view sheetHidden];
     }];
 }
 

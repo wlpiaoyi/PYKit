@@ -8,7 +8,7 @@
 
 #import "PYCalendarView.h"
 #import "PYCalendarHeadView.h"
-#import "PYCalenderDateView.h"
+#import "PYCalenderDrawView.h"
 #import "PYViewAutolayoutCenter.h"
 #import "PYCalendarLocation.h"
 #import "PYGraphicsDraw.h"
@@ -16,55 +16,83 @@
 #import "calendar_lunar.h"
 #import "PYDatePikerView.h"
 #import "pyinterflowa.h"
-BOOL PYCalendarHasGuide = false;
+#import "PYUtile.h"
 
-@interface PYCalendarView()<PYCalenderDateView>
-@property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
-@property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
-@property (nonatomic, strong) UISwipeGestureRecognizer *topSwipeGestureRecognizer;
-@property (nonatomic, strong) UISwipeGestureRecognizer *buttomSwipeGestureRecognizer;
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+static PYSpesalInfo PYCV_SPESALLINFO[60];
+static int  PYCV_SPESALLLENGTH = 0;
+
+@interface PYCalendarView()<PYCalenderDrawView>
 @end
 
 @implementation PYCalendarView{
 @private
-    PYCalenderDateView * dateView;
+    PYCalenderDrawView * dateView;
     PYCalendarHeadView * weeakView;
     NSLayoutConstraint * lcWeekTop;
     CGSize orgSize;
     PYCalendarRect * crs;
     int crsLength;
     NSDate * currentMonth;
-    UIView * viewGuide;
-    bool isTouched;
+    CGPoint currentTouch;
+}
+
++(void) initialize{
+    kDISPATCH_ONCE_BLOCK(^{
+        PYSpesalInfo spesals[60];
+        int  spesalLength = 0;
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 1), "元旦节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 2), "世界湿地日",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 14), "情人节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 3, 8), "妇女节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 3, 12), "植树节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 1), "劳动节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 4, 1), "愚人节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 4, 7), "世界卫生日",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 4, 22), "世界地球日",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 4), "青年节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 6, 1), "儿童节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 1), "建党节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 1), "建党节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 8, 1), "建军节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 8, 12), "国际青年节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 9, 10), "教师节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 10, 1), "国庆节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 11, 1), "万圣节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 11, 11), "光棍节",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 24), "平安夜",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 25), "圣诞夜",false);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 1), "春节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 1), "中和节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 2), "春龙节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 12), "花朝节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 3, 15), "(文)财神生日",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 5), "端午节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 7), "七夕节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 15), "中原节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 22), "(武)财神生日",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 8, 15), "中秋节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 9, 9), "重阳节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 8), "腊八节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 23), "祭灶节",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 30), "除夕夜",true);
+        spesals[spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 15), "元宵节",true);
+        for (int i = 0; i < spesalLength; i++) {
+            PYCV_SPESALLINFO[i] = spesals[i];
+            PYCV_SPESALLLENGTH++;
+        }
+    });
 }
 
 kINITPARAMS{
     _dateEnableStart = [[NSDate date] offsetMonth:-3];
     _dateEnableEnd = [self.dateEnableStart offsetMonth:6];
     _date = [[NSDate date] setCompentsWithBinary:0b111000];
-    dateView = [[PYCalenderDateView alloc] initWithDate:self.date DateStart:self.dateEnableStart dateEnd:self.dateEnableEnd];
+    dateView = [[PYCalenderDrawView alloc] initWithDate:self.date DateStart:self.dateEnableStart dateEnd:self.dateEnableEnd];
     weeakView = [PYCalendarHeadView new];
     self.date = self.date;
     orgSize = CGSizeZero;
     [self addSubview:weeakView];
     [self addSubview:dateView];
-    self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    self.leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
-    self.rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
-    self.topSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
-    self.buttomSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
-    self.leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    self.rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    self.topSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-    self.buttomSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-    self.longPressGestureRecognizer.minimumPressDuration = .5;
-    
-    [self addGestureRecognizer:self.leftSwipeGestureRecognizer];
-    [self addGestureRecognizer:self.rightSwipeGestureRecognizer];
-    [self addGestureRecognizer:self.topSwipeGestureRecognizer];
-    [self addGestureRecognizer:self.buttomSwipeGestureRecognizer];
-    [self addGestureRecognizer:self.longPressGestureRecognizer];
     
     [PYViewAutolayoutCenter persistConstraint:weeakView size:CGSizeMake(DisableConstrainsValueMAX, [PYUtile getFontHeightWithSize:weeakView.font.pointSize fontName:weeakView.font.fontName] + 5)];
     [PYViewAutolayoutCenter persistConstraint:weeakView relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, 0, DisableConstrainsValueMAX, 0) relationToItems:PYEdgeInsetsItemNull()];
@@ -72,116 +100,12 @@ kINITPARAMS{
     PYEdgeInsetsItem e = PYEdgeInsetsItemNull();
     e.top = (__bridge void * _Nullable)(weeakView);
     [PYViewAutolayoutCenter persistConstraint:dateView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:e];
-    isTouched = false;
     dateView.delegate = self;
-    if(PYCalendarHasGuide){
-        viewGuide = [UIView new];
-        viewGuide.backgroundColor = [UIColor clearColor];
-        [self addSubview: viewGuide];
-        [PYViewAutolayoutCenter persistConstraint:viewGuide relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
-        UIImageView * imageTop = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_top.png"]];
-        UIImageView * imageLeft = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_left.png"]];
-        UIImageView * imageButtom = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_buttom.png"]];
-        UIImageView * imageRight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/arrow_right.png"]];
-        UIImageView * imageTap = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PYKit.bundle/circle_tap.png"]];
-        [viewGuide addSubview:imageTop];
-        [viewGuide addSubview:imageLeft];
-        [viewGuide addSubview:imageButtom];
-        [viewGuide addSubview:imageRight];
-        [viewGuide addSubview:imageTap];
-        [PYViewAutolayoutCenter persistConstraint:imageTop size:CGSizeMake(30, 71)];
-        [PYViewAutolayoutCenter persistConstraint:imageButtom size:CGSizeMake(30, 71)];
-        [PYViewAutolayoutCenter persistConstraint:imageLeft size:CGSizeMake(71, 30)];
-        [PYViewAutolayoutCenter persistConstraint:imageRight size:CGSizeMake(71,30)];
-        [PYViewAutolayoutCenter persistConstraint:imageTap size:CGSizeMake(50, 50)];
-        [PYViewAutolayoutCenter persistConstraint:imageTop centerPointer:CGPointMake(0, DisableConstrainsValueMAX)];
-        [PYViewAutolayoutCenter persistConstraint:imageButtom centerPointer:CGPointMake(0, DisableConstrainsValueMAX)];
-        [PYViewAutolayoutCenter persistConstraint:imageLeft centerPointer:CGPointMake(DisableConstrainsValueMAX, 0)];
-        [PYViewAutolayoutCenter persistConstraint:imageRight centerPointer:CGPointMake(DisableConstrainsValueMAX, 0)];
-        [PYViewAutolayoutCenter persistConstraint:imageTap centerPointer:CGPointMake(0, 0)];
-        [PYViewAutolayoutCenter persistConstraint:imageTop relationmargins:UIEdgeInsetsMake(0, DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-        [PYViewAutolayoutCenter persistConstraint:imageTop relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-        [PYViewAutolayoutCenter persistConstraint:imageButtom relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, 0, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-        [PYViewAutolayoutCenter persistConstraint:imageLeft relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, 0, DisableConstrainsValueMAX, DisableConstrainsValueMAX) relationToItems:PYEdgeInsetsItemNull()];
-        [PYViewAutolayoutCenter persistConstraint:imageRight relationmargins:UIEdgeInsetsMake(DisableConstrainsValueMAX, DisableConstrainsValueMAX, DisableConstrainsValueMAX, 0) relationToItems:PYEdgeInsetsItemNull()];
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animationHidden) name:@"animationHidden" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animationShow) name:@"animationShow" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"animationHidden" object:nil];
+    for (int i = 0; i < PYCV_SPESALLLENGTH; i++) {
+        spesals[i] = PYCV_SPESALLINFO[i];
     }
-    self->spesalLength = 0;
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 1), "元旦节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 14), "情人节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 2, 14), "情人节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 3, 8), "妇女节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 3, 12), "植树节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 4, 4), "清明节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 1), "劳动节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 4), "青年节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 6, 1), "儿童节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 1), "建党节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 8, 1), "建军节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 9, 10), "教师节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 10, 1), "国庆节",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 24), "平安夜",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 25), "圣诞夜",false);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 1), "春节",true);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 5, 5), "端午节",true);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 7), "七夕节",true);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 7, 15), "中原节",true);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 8, 15), "中秋节",true);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 9, 9), "重阳节",true);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 8), "腊八节",true);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 12, 30), "除夕夜",true);
-    self->spesals[self->spesalLength++] = PYSpesalInfoMake(PYDateMake(0, 1, 15), "元宵节",true);
+    spesalLength = PYCV_SPESALLLENGTH;
     [self synSpesqlInfo];
-}
-
--(void) animationHidden{
-    viewGuide.hidden = NO;
-    viewGuide.alpha = 1;
-    @unsafeify(self);
-    [UIView animateWithDuration:.5 animations:^{
-        viewGuide.alpha = 0;
-    } completion:^(BOOL finished) {
-        viewGuide.hidden = YES;
-        @strongify(self);
-        if(isTouched) return;
-        [self animationShow];
-    }];
-}
--(void) animationShow{
-    viewGuide.hidden = NO;
-    viewGuide.alpha = 0;
-    [UIView animateWithDuration:2 animations:^{
-        viewGuide.alpha = 1;
-    } completion:^(BOOL finished) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"animationHidden" object:nil];
-    }];
-}
-
-- (void)handleLongPress:(UILongPressGestureRecognizer *)sender{
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        [self showDataOperationView];
-    }
-}
-- (void)handleSwipes:(UISwipeGestureRecognizer *)sender {
-    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
-        currentMonth = [currentMonth offsetMonth:1];
-    }else if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
-        currentMonth = [currentMonth offsetMonth:-1];
-    }else if (sender.direction == UISwipeGestureRecognizerDirectionUp) {
-        currentMonth = [currentMonth offsetYear:-1];
-    }else if (sender.direction == UISwipeGestureRecognizerDirectionDown) {
-        currentMonth = [currentMonth offsetYear:1];
-    }
-    dateView.date = currentMonth;
-    currentMonth = dateView.date;
-    _date = [NSDate dateWithYear:currentMonth.year month:currentMonth.month day:1 hour:0 munite:0 second:0];
-    [dateView reloadDate];
-    if(self.blockChangeDate){
-        _blockChangeDate(self);
-    }
 }
 -(void) setDate:(NSDate *)date{
     _date = date;
@@ -243,7 +167,7 @@ kINITPARAMS{
     crs = locations;
     crsLength = locationLength;
     
-    UIFont *f1 = [UIFont italicSystemFontOfSize:60];
+    UIFont *f1 = [UIFont italicSystemFontOfSize:MIN(60, self.frameHeight/6)];
     UIColor *c1 = [UIColor colorWithRed:.7 green:.7 blue:.7 alpha:.2];
     NSAttributedString * attribute = [[NSAttributedString alloc] initWithString:[self.date dateFormateDate:@"yy年MM月"] attributes:@{NSForegroundColorAttributeName:c1,NSFontAttributeName:f1}];
     CGSize s = CGSizeMake(999, [PYUtile getFontHeightWithSize:f1.pointSize fontName:f1.fontName]);
@@ -274,14 +198,16 @@ kINITPARAMS{
     [PYGraphicsDraw drawTextWithContext:context attribute:attribute rect:r y:bounds.size.height scaleFlag:false];
     
 }
+
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-    if(!isTouched && PYCalendarHasGuide){
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"animationHidden" object:nil];
-    }
-    isTouched = true;
+    currentTouch = [touches.anyObject locationInView:self];
 }
 -(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesEnded:touches withEvent:event];
+    if(!CGPointEqualToPoint(currentTouch, [touches.anyObject locationInView:self])){
+        return;
+    }
     UITouch *touch = touches.anyObject;
     CGPoint touchPoint = [touch locationInView:dateView];
     for (int i = 0; i < crsLength; i++) {
@@ -322,8 +248,8 @@ kINITPARAMS{
             default:
                 break;
         }
-        if(self.blockChangeDate){
-            _blockChangeDate(self);
+        if(self.blockChangeMonth){
+            _blockChangeMonth(self);
         }
     } buttonNames:@[@"确定",@"取消"]];
 }

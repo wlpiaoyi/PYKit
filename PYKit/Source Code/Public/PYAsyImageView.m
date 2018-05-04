@@ -8,6 +8,7 @@
 
 #import "PYAsyImageView.h"
 #import "PYNetDownload.h"
+
 static NSString * PYAsyImageViewDataCaches;
 
 @interface PYAsyImageView()
@@ -25,14 +26,20 @@ kPNSNN NSLock * lock;
 }
 
 +(NSString *) parseImageUrlToImagePath:(NSString *) imageUrl{
+    if(imageUrl.length < 7) return nil;
     NSRange range = [imageUrl rangeOfString:@"http://"];
+    BOOL hasHead = false;
     if(range.length > 0 && range.location == 0){
         imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
+        hasHead = true;
+    }else{
+        range = [imageUrl rangeOfString:@"https://"];
+        if(range.length > 0 && range.location == 0){
+            imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
+            hasHead = true;
+        }
     }
-    range = [imageUrl rangeOfString:@"https://"];
-    if(range.length > 0 && range.location == 0){
-        imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
-    }
+    if(!hasHead) return nil;
     range = [imageUrl rangeOfString:@"/"];
     if(range.length > 0){
         range.length = range.location + 1;
@@ -67,7 +74,7 @@ kINITPARAMS{
         }
         [uself.lock unlock];
     }];
-    [self.dnw setBlockComplete:^(id  _Nullable data, PYNetwork * _Nonnull target) {
+    [self.dnw setBlockComplete:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetwork * _Nonnull target) {
         [uself.lock lock];
         @try{
             [uself.aiv stopAnimating];
@@ -101,7 +108,7 @@ kINITPARAMS{
             [uself.lock unlock];
         }
     }];
-    [self.dnw setBlockCancel:^(id  _Nullable data, PYNetDownload * _Nonnull target) {
+    [self.dnw setBlockCancel:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetDownload * _Nonnull target) {
         [uself.lock lock];
         [uself.aiv stopAnimating];
         if(uself.blockDisplay){
@@ -127,14 +134,10 @@ kINITPARAMS{
     if([self.dnw.url isEqual:self.imgUrl]){
         return;
     }
-//    [self.dnw cancel];
-    
+    [self.dnw cancel];
     NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:self.imgUrl];
     if(imagePath == nil){
-        self.cachesUrl = imgUrl;
-        if(self.blockDisplay){
-            _blockDisplay(true,false, self);
-        }
+        kPrintExceptionln("setImageUrl:%s","imagepath is null or is not 'http' or 'https'");
         return;
     }
     

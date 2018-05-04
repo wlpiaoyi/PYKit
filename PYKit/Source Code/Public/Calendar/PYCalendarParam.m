@@ -85,6 +85,7 @@ UIFont * _Nonnull PYCalendarLunarFont;
 UIColor * _Nonnull PYCalendarLunarColor;
 UIColor * _Nonnull PYCalendarDisableColor;
 UIColor * _Nonnull PYCalendarWeeakEndColor;
+UIColor * _Nonnull PYCalendarSpecial;
 UIFont * _Nonnull PYCalendarSpesalFont;
 @implementation PYCalendarParam
 +(void) initialize{
@@ -101,6 +102,7 @@ UIFont * _Nonnull PYCalendarSpesalFont;
     PYCalendarLunarColor = [UIColor orangeColor];
     PYCalendarDisableColor = [UIColor lightGrayColor];
     PYCalendarWeeakEndColor = [UIColor redColor];
+    PYCalendarSpecial = [UIColor colorWithRGBHex:0XCC4444FF];
     [PYParams loadInterflowParamsData];
 }
 

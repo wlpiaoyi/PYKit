@@ -108,7 +108,6 @@ kPNCNA void (^py_blockRefreshFooter)(UIScrollView * _Nonnull scrollView);
     self.py_footerView.frameX = 0;
     self.py_headerView.frameY = -self.py_headerView.frameHeight;
     self.py_footerView.frameY = MAX(contentSize.height, self.frameHeight);
-    
 }
 -(void) py_refresh_layoutSubviews{
     [self py_refresh_layoutSubviews];

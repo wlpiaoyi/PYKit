@@ -226,10 +226,25 @@ kINITPARAMS{
     }
 }
 #pragma WKNavigationDelegate ==>
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
+    if([self.navigationDelegatec respondsToSelector:_cmd]){
+        [self.navigationDelegatec webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];
+    }else{
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
+}
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+    if([self.navigationDelegatec respondsToSelector:_cmd]){
+        [self.navigationDelegatec webView:webView decidePolicyForNavigationResponse:navigationResponse decisionHandler:decisionHandler];
+    }else{
+        decisionHandler(WKNavigationResponsePolicyAllow);
+    }
+}
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
     self.navigation = navigation;
     [self showProgress:0.3];
-    
+
     if([self.navigationDelegatec respondsToSelector:_cmd]){
         [self.navigationDelegatec webView:webView didStartProvisionalNavigation:navigation];
     }
@@ -237,7 +252,7 @@ kINITPARAMS{
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
     self.navigation = navigation;
     _progressView.schedule = 0.6;
-    
+
     if([self.navigationDelegatec respondsToSelector:_cmd]){
         [self.navigationDelegatec webView:webView didReceiveServerRedirectForProvisionalNavigation:navigation];
     }
@@ -250,14 +265,14 @@ kINITPARAMS{
 }
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
     _progressView.schedule = 0.8;
-    
+
     if([self.navigationDelegatec respondsToSelector:_cmd]){
         [self.navigationDelegatec webView:webView didCommitNavigation:navigation];
     }
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     if(self.navigation == navigation) [self hiddenProgress];
-    
+
     if([self.navigationDelegatec respondsToSelector:_cmd]){
         [self.navigationDelegatec webView:webView didFinishNavigation:navigation];
     }
@@ -285,6 +300,18 @@ kINITPARAMS{
 #pragma WKNavigationDelegate <==
 
 #pragma WKUIDelegate ==>
+- (nullable WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
+    if([self.UIDelegatec respondsToSelector:_cmd]){
+        return [self.UIDelegatec webView:webView createWebViewWithConfiguration:configuration forNavigationAction:navigationAction windowFeatures:windowFeatures];
+    }else{
+        return nil;
+    }
+}
+- (void)webViewDidClose:(WKWebView *)webView{
+    if([self.UIDelegatec respondsToSelector:_cmd]){
+        return [self.UIDelegatec webViewDidClose:webView];
+    }
+}
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
     if([self.UIDelegatec respondsToSelector:_cmd]){
         [self.UIDelegatec webView:webView runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
@@ -319,6 +346,25 @@ kINITPARAMS{
         }else{
             completionHandler(@"success");
         }
+    }
+}
+- (BOOL)webView:(WKWebView *)webView shouldPreviewElement:(WKPreviewElementInfo *)elementInfo{
+    if([self.UIDelegatec respondsToSelector:_cmd]){
+        return [self.UIDelegate webView:webView shouldPreviewElement:elementInfo];
+    }else{
+        return true;
+    }
+}
+- (nullable UIViewController *)webView:(WKWebView *)webView previewingViewControllerForElement:(WKPreviewElementInfo *)elementInfo defaultActions:(NSArray<id <WKPreviewActionItem>> *)previewActions{
+    if([self.UIDelegatec respondsToSelector:_cmd]){
+        return [self.UIDelegate webView:webView previewingViewControllerForElement:elementInfo defaultActions:previewActions];
+    }else{
+        return nil;
+    }
+}
+- (void)webView:(WKWebView *)webView commitPreviewingViewController:(UIViewController *)previewingViewController{
+    if([self.UIDelegatec respondsToSelector:_cmd]){
+        [self.UIDelegate webView:webView commitPreviewingViewController:previewingViewController];
     }
 }
 #pragma WKUIDelegate <==

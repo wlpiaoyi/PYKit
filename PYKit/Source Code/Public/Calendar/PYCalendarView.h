@@ -10,7 +10,6 @@
 #import "PYUtile.h"
 #import "PYCalendarParam.h"
 
-extern BOOL PYCalendarHasGuide;
 @interface PYCalendarView : UIView{
 @public
     PYSpesalInfo spesals[60];
@@ -20,7 +19,7 @@ extern BOOL PYCalendarHasGuide;
 kPNSNN NSDate * dateEnableStart;
 kPNSNN NSDate * dateEnableEnd;
 @property (nonatomic, copy, nullable) void (^blockSelected) (PYCalendarView * _Nonnull view);
-@property (nonatomic, copy, nullable) void (^blockChangeDate) (PYCalendarView * _Nonnull view);
+@property (nonatomic, copy, nullable) void (^blockChangeMonth) (PYCalendarView * _Nonnull view);
 -(void) synSpesqlInfo;
 -(void) showDataOperationView;
 @end

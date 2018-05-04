@@ -37,6 +37,7 @@ kSOULDLAYOUTPForType(PYRefreshView)
 }
 kINITPARAMSForType(PYRefreshView){
     _state = kPYRefreshNoThing;
+    [self setCornerRadiusAndBorder:4 borderWidth:2 borderColor:[UIColor redColor]];
     _contextView = [UIView new];
     _contextView.backgroundColor = [UIColor clearColor];
     [_contextView setShadowColor:[UIColor orangeColor].CGColor shadowRadius:2];
@@ -68,7 +69,7 @@ kINITPARAMSForType(PYRefreshView){
     [PYViewAutolayoutCenter persistConstraint:_labelMessage relationmargins:UIEdgeInsetsMake(0,0,0,0) relationToItems:insets];
 }
 -(void) setScheduleHeight:(CGFloat)scheduleHeight{
-    _scheduleHeight = MIN(PYRefreshViewHeight, MAX(10, scheduleHeight));
+    _scheduleHeight = MIN(PYRefreshViewHeight, MAX(0, scheduleHeight));
     self.frameHeight = _scheduleHeight;
     self.alpha = _scheduleHeight / PYRefreshViewHeight;
 }
@@ -121,6 +122,10 @@ kINITPARAMSForType(PYRefreshView){
 -(void) setType:(kPYRefreshType)type{
     _type = type;
     [self synIsUp];
+}
+-(void) setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    NSLog(@"frame:%@", NSStringFromCGRect(self.frame));
 }
 kSOULDLAYOUTMSTARTForType(PYRefreshView)
     

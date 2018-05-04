@@ -68,6 +68,7 @@ extern UIFont * _Nonnull PYCalendarLunarFont;
 extern UIColor * _Nonnull PYCalendarLunarColor;
 extern UIColor * _Nonnull PYCalendarDisableColor;
 extern UIColor * _Nonnull PYCalendarWeeakEndColor;
+extern UIColor * _Nonnull PYCalendarSpecial;
 extern UIFont * _Nonnull PYCalendarSpesalFont;
 
 @interface  PYCalendarParam : NSObject

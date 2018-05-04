@@ -6,6 +6,7 @@
 //  Copyright © 2015年 wlpiaoyi. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 static id _Nullable (^ _Nullable PYBlocktodictParsetStruct) (NSInvocation * _Nonnull invocatioin, const char * _Nonnull typeEncoding);
 /**
@@ -28,6 +29,22 @@ static id _Nullable (^ _Nullable PYBlocktodictParsetStruct) (NSInvocation * _Non
 /**
  通过对象生成JSON
  */
--(nullable NSObject*) objectToDictionaryWithFliteries:(nonnull NSArray<Class> *) fliteries;
+-(nullable NSObject*) objectToDictionaryWithFliteries:(nullable NSArray<Class> *) fliteries;
+/**
+ 通过对象生成JSON
+ */
+-(nullable NSObject*) objectToDictionaryWithDeepClass:(nullable Class) deepClass;
+/**
+ 通过对象生成JSON
+ #param fliteries 过滤标识
+ #param deepClass 遍历深度标识
+ */
+-(nullable NSObject*) objectToDictionaryWithFliteries:(nullable NSArray<Class> *) fliteries deepClass:(nullable Class) deepClass;
+
+/**
+ 通过dictionary解析出实体结构
+ 参考
+ */
++(nullable NSString *) dictionaryAnalysisForClass:(nonnull NSDictionary*) dictionary;
 
 @end

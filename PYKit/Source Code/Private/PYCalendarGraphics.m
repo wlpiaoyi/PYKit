@@ -123,7 +123,7 @@ NSArray *PYCalendarWeekNames;
 }
 +(void) drawSpecalWithContext:(nullable CGContextRef) context bounds:(CGRect) bounds spesal:(const char *) spesal specalColor:(nonnull UIColor *) specalColor specalFont:(nonnull UIFont *) specalFont resultRect:(CGRect)resultRect calendarRect:(PYCalendarRect) calendarRect heightFontLunar:(CGFloat) heightFontLunar{
     NSAttributedString * attributeTarget = [[NSAttributedString alloc] initWithString:[NSString stringWithUTF8String:spesal] attributes:@{(NSString*)NSForegroundColorAttributeName:specalColor,(NSString*)NSFontAttributeName:specalFont}];
-    CGRect rectTarget = CGRectMake(resultRect.origin.x + resultRect.size.width, calendarRect.frame.origin.y, calendarRect.frame.size.width - resultRect.size.width - (resultRect.origin.x - calendarRect.frame.origin.x), heightFontLunar*3);
+    CGRect rectTarget = CGRectMake(resultRect.origin.x + resultRect.size.width, calendarRect.frame.origin.y, calendarRect.frame.size.width - resultRect.size.width - (resultRect.origin.x - calendarRect.frame.origin.x), heightFontLunar*4);
     resultRect.origin.y +=  calendarRect.frame.size.height * 0.2;
     [PYGraphicsDraw drawTextWithContext:context attribute:attributeTarget rect:rectTarget y:bounds.size.height scaleFlag:false];
 }

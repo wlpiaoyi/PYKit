@@ -39,7 +39,8 @@ PYPNSNN NSArray * datas;
     [super viewDidLoad];
     self.datas = @[
                    @{@"name":@"refresh", @"sel":@"goToRefresh"},
-                   @{@"name":@"calendar", @"sel":@"goToCalendar"}
+                   @{@"name":@"calendar", @"sel":@"goToCalendar"},
+                   @{@"name":@"image", @"sel":@"goToImage"}
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -177,6 +178,9 @@ PYPNSNN NSArray * datas;
 }
 -(void) goToCalendar{
     [self performSegueWithIdentifier:@"calendar" sender:nil];
+}
+-(void) goToImage{
+    [self performSegueWithIdentifier:@"image" sender:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
