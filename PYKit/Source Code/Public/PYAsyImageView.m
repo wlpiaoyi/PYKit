@@ -131,10 +131,7 @@ kINITPARAMS{
 }
 -(void) setImgUrl:(NSString *)imgUrl{
     _imgUrl = imgUrl;
-    if([self.dnw.url isEqual:self.imgUrl]){
-        return;
-    }
-    [self.dnw cancel];
+    [self.dnw interrupt];
     NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:self.imgUrl];
     if(imagePath == nil){
         kPrintExceptionln("setImageUrl:%s","imagepath is null or is not 'http' or 'https'");
