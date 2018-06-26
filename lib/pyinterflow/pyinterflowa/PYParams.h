@@ -22,6 +22,8 @@ extern CGFloat STATIC_POPUP_OFFSETWIDTH;
 extern CGFloat STATIC_POPUP_TITLE_HEIGHT;
 extern CGFloat STATIC_POPUP_BUTTON_HEIGHT;
 
+extern UIColor * _Nonnull STATIC_CONTENT_BACKGROUNDCLOLOR;
+
 extern UIColor * _Nonnull STATIC_DIALOG_BACKGROUNDCLOLOR;
 extern UIColor * _Nonnull STATIC_DIALOG_BORDERCLOLOR;
 extern UIColor * _Nonnull STATIC_DIALOG_TEXTCLOLOR;
@@ -54,7 +56,7 @@ extern UIColor * _Nonnull STATIC_TOPBAR_BGC;
 extern UIFont * _Nonnull STATIC_TOPBAR_MESSAGEFONT;
 
 
-typedef void (^BlockTouchView)(CGPoint transformPoint, UIView  * _Nonnull touchView);
+typedef void (^BlockTouchView)(CGPoint touhMove, UIView  * _Nonnull touchView);
 typedef void (^BlockPopupEndAnmation) (UIView * _Nonnull view);
 typedef void (^BlockPopupAnimation) (UIView * _Nonnull view, BlockPopupEndAnmation _Nullable block);
 typedef void(^BlockDialogOpt)(UIView * _Nonnull view, NSUInteger index);

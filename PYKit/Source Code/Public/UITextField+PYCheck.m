@@ -35,6 +35,7 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
 
 @implementation UITextField(PYCheck)
 -(void) pyClearTextFieldCheck{
+    self.keyboardType = UIKeyboardTypeDefault;
     PYTextInputCheckParams * params = self._pytextinputcheckparams;
     if(params == nil){
         @synchronized ([UITextField class]) {
@@ -58,6 +59,7 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
     [self pyCheckIntegerForMax:0 min:0];
 }
 -(void) pyCheckIntegerForMax:(kInt64) max min:(kInt64) min{
+    self.keyboardType = UIKeyboardTypeNumberPad;
     PYTextInputCheckParams * params = self._pytextinputcheckparams;
     params.maxInteger = max;
     params.minInteger = min;
@@ -67,6 +69,7 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
     [self pyCheckFloatForMax:0 min:0 precision:0];
 }
 -(void) pyCheckFloatForMax:(CGFloat) max min:(CGFloat) min precision:(int) precision{
+    self.keyboardType = UIKeyboardTypeDecimalPad;
     PYTextInputCheckParams * params = self._pytextinputcheckparams;
     params.maxFloat = max;
     params.minFloat = min;
@@ -77,6 +80,7 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
     
 }
 -(void) pyCheckMobliePhone{
+    self.keyboardType = UIKeyboardTypePhonePad;
     NSDictionary * matchIng = @{
                                 @(1):@"^(\\+|1){1}$",
                                 @(2):@"^((\\+(\\d{1,2})){1})|((13)|(14)|(15)|(18)|(19)|(17))$",
@@ -89,6 +93,7 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
     
 }
 -(void) pyCheckEmail{
+    self.keyboardType = UIKeyboardTypeEmailAddress;
     NSString * matchIng = @"^([a-zA-Z0-9_\\.\\-])+\\@{0,1}(([a-zA-Z0-9\\-]){0,}\\.{0,1}){0,1}([a-zA-Z0-9]{0,4}){1}$";
     NSString * matchEnd = @"^([a-zA-Z0-9_\\.\\-])+\\@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+$";
     [self pyCheckMatchWithIdentify:_UITextInputCheckDictKeyEmail inputing:matchIng inputEnd:matchEnd];
@@ -96,6 +101,7 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
 }
 
 -(void) pyCheckIDCard{
+    self.keyboardType = UIKeyboardTypeASCIICapable;
     NSDictionary * matchIng = @{
                                 @(1):@"^\\d{1,6}$",
                                 @(7):@"^\\d{6}[1,2]$",

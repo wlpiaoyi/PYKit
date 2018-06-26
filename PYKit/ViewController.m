@@ -18,6 +18,7 @@
 #import "UIView+Dialog.h"
 #import "PY3DOrthogonView.h"
 #import "PYAsyImageView.h"
+#import "PYTestSliderController.h"
 
 @interface ViewController () <UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>{
 @private
@@ -38,9 +39,11 @@ PYPNSNN NSArray * datas;
 //    [PYAsyImageView clearCaches];
     [super viewDidLoad];
     self.datas = @[
-                   @{@"name":@"refresh", @"sel":@"goToRefresh"},
+                   @{@"name":@"selector", @"sel":@"goToRefresh"},
                    @{@"name":@"calendar", @"sel":@"goToCalendar"},
-                   @{@"name":@"image", @"sel":@"goToImage"}
+                   @{@"name":@"image", @"sel":@"goToImage"},
+                   @{@"name":@"slider", @"sel":@"goToSlider"},
+                   @{@"name":@"check", @"sel":@"goToCheck"}
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -181,6 +184,12 @@ PYPNSNN NSArray * datas;
 }
 -(void) goToImage{
     [self performSegueWithIdentifier:@"image" sender:nil];
+}
+-(void) goToSlider{
+    [self performSegueWithIdentifier:@"slider" sender:nil];
+}
+-(void) goToCheck{
+    [self performSegueWithIdentifier:@"check" sender:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

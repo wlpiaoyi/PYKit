@@ -52,10 +52,12 @@ window.hybird.persistInstance = function (instanceObj, instanceId){
     instanceObj.id = instanceId;
     window.hybird.instanceObjs.push(instanceObj);
 }
+
 window.hybird.mergeInstance = function (instanceObj, instanceId){
     window.hybird.removeInstacne(instanceId);
     window.hybird.persistInstance(instanceObj, instanceId);
 }
+
 window.hybird.removeInstacne = function (instanceId){
     for (var i = 0; i < window.hybird.instanceObjs.length; i++) {
         var instanceObj = window.hybird.instanceObjs[i];

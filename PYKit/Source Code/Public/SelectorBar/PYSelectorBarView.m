@@ -67,10 +67,16 @@ kINITPARAMSForType(PYSelectorBarView){
 -(void) onclickSelect:(UIButton *) button{
     unsigned int index = (unsigned int)[self.buttons indexOfObject:button];
     if(index == self.selectIndex) return;
-    if(self.delegate && ![self.delegate selectorBarView:self selecteItemIndex:index]){
-        return;
-    }else if(!self.delegate && self.blockSelecteItem && !_blockSelecteItem(index)){
-        return;
+    NSUInteger orgIndex = _selectIndex;
+    _selectIndex = index;
+    @try{
+        if(self.delegate && ![self.delegate selectorBarView:self selecteItemIndex:index]){
+            return;
+        }else if(!self.delegate && self.blockSelecteItem && !_blockSelecteItem(index)){
+            return;
+        }
+    }@finally{
+        _selectIndex = orgIndex;
     }
     [self setSelectIndex:index animation:YES];
 }

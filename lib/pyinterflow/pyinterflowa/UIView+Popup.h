@@ -36,6 +36,10 @@ typedef NS_ENUM(NSInteger, PYPopupEnum) {
 @property (nonatomic,copy, nullable) BlockPopupAnimation blockHiddenAnimation;
 ///<=====================显示和隐藏自定义动画=========================
 
+
+//popupBlockTap == nil  点击空白区域隐藏
+@property (nonatomic,copy, nullable) void (^popupBlockTap)(UIView * _Nullable view);
+
 @property (nonatomic, strong, nonnull) UIView * popupBaseView;
 @property (nonatomic, readonly, nullable) UIView * popupContentView;
 

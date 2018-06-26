@@ -12,6 +12,7 @@
 
 @interface UIView(Sheet)
 kPNRNN UIView * sheetShowView;
+kPNCNA NSArray<NSNumber *> * sheetIndexs;
 kPNA BOOL sheetIsHiddenOnClick;
 -(void) sheetShow;
 -(void) sheetShowWithTitle:(nullable NSString *) title
@@ -23,14 +24,12 @@ kPNA BOOL sheetIsHiddenOnClick;
             buttonCancel:(nullable NSString *) canel
             itemStrings:(nullable NSArray<NSString *> *) itemStrings
             blockOpt:(void (^ _Nullable)(UIView * _Nullable view, NSUInteger index)) blcokOpt
-            blockSelected:(void (^ _Nullable)(UIView * _Nullable view, NSUInteger index)) blcokSelected;
--(void) sheetShowWithAttributeTitle:(nullable NSAttributedString *) attributeTitle
-        buttonNormalAttributeConfirme:(nullable NSAttributedString *) normalConfirme
-        buttonNormalAttributeCancel:(nullable NSAttributedString *) normalCanel
-        buttonHighlightedAttributeConfirme:(nullable NSAttributedString *) highlightedconfirme
-        buttonHighlightedAttributeCancel:(nullable NSAttributedString *) highlightedCanel
-        itemAttributes:(nullable NSArray<NSAttributedString *> *) itemAttributes
-        blockOpt:(void (^ _Nullable)(UIView * _Nullable view, NSUInteger index)) blcokOpt
-        blockSelected:(void (^ _Nullable)(UIView * _Nullable view, NSUInteger index)) blcokSelected;
+            blockSelected:(void (^ _Nullable)(UIView * _Nullable view,  NSUInteger index)) blcokSelected;
+-(void) sheetShowWithTitle:(nullable NSString *) title
+            buttonConfirme:(nullable NSString *) confirme
+            buttonCancel:(nullable NSString *) canel
+            itemStrings:(nullable NSArray<NSString *> *) itemStrings
+            blockOpts:(void (^ _Nullable)(UIView * _Nullable view, NSUInteger index)) blcokOpts
+            blockSelecteds:(BOOL (^ _Nullable)(UIView * _Nullable view)) blockSelecteds;
 -(void) sheetHidden;
 @end

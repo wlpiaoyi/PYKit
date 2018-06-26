@@ -11,8 +11,19 @@
 #import "PYParams.h"
 
 @interface PYMoveView : UIView
+//是否可以移动
+kPNA BOOL isMoveable;
+//是否可以垂直移动
+kPNA BOOL isVerticalMoveabel;
+//是否可以水平移动
+kPNA BOOL isHorizontalMoveabel;
+/**
+ touch block 回调
+ */
+///===================================>
 kPNCNA BlockTouchView blockTouchBegin;
 kPNCNA BlockTouchView blockTouchMoved;
 kPNCNA BlockTouchView blockTouchEnded;
 kPNCNA BlockTouchView blockTouchCancelled;
+///<===================================
 @end

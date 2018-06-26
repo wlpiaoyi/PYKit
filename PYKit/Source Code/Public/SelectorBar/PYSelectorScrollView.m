@@ -62,7 +62,7 @@ kINITPARAMSForType(PYSelectorScrollView){
         [self setContentWidth:self.contentWidth animation:!(self->_isfistsetcontentwidth)];
         self->_isfistsetcontentwidth = false;
     }];
-    self.isScorllSelected = false;
+    self.isScorllSelected = true;
 }
 -(void) setIsScorllSelected:(bool)isScorllSelected{
     _isScorllSelected = isScorllSelected;
@@ -93,7 +93,7 @@ kINITPARAMSForType(PYSelectorScrollView){
     [self setContentWidth:contentWidth animation:NO];
 }
 
--(void) setContentWidth:(CGFloat)contentWidth animation:(BOOL) animations{
+-(void) setContentWidth:(CGFloat)contentWidth animation:(BOOL) animation{
     _contentWidth = contentWidth;
     _ssv_contentView.frame = CGRectMake(0, 0, MAX(contentWidth, self.frame.size.width), self.frame.size.height);
     _scrollView.contentSize = _ssv_contentView.frame.size;
@@ -118,7 +118,7 @@ kINITPARAMSForType(PYSelectorScrollView){
         }
         self->_scrollView.contentOffset = contentOffset;
     };
-    if(animations){
+    if(animation){
         [UIView animateWithDuration:0.25f animations:^{
             kStrong(self);
             self.userInteractionEnabled = NO;

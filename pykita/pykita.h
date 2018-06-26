@@ -10,6 +10,9 @@
 #import "PYAsyImageView.h"
 #import "PYDisplayImageView.h"
 #import "PYSelectorBarView.h"
+#import "PYSelectorScrollView.h"
+#import "PYSliderDoubleView.h"
+#import "PYSliderSingleView.h"
 
 #import "NSDate+Lunar.h"
 #import "PYCalendarParam.h"
@@ -23,4 +26,3 @@
 #import "PYAudioRecord.h"
 
 #import "UITextField+PYCheck.h"
-#import "PYRefresh.h"

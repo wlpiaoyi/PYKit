@@ -119,29 +119,13 @@ bool _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(PYText
         if(!flag) continue;
         if([key isEqual:_UITextInputCheckDictKeyInteger]){
             if(params.maxInteger != 0 || params.minInteger != 0){
-                if(params.maxInteger >= 0){
-                    flag = text.longLongValue <= params.maxInteger;
-                }else if(flag){
-                    flag = text.longLongValue < 0;
-                }
-                if(flag && params.minInteger <=0){
-                    flag = text.longLongValue >= params.minInteger;
-                }else if(flag){
-                    flag = text.longLongValue < 0;
-                }
+                flag = text.longLongValue <= params.maxInteger;
+                flag = flag && (text.longLongValue >= params.minInteger || string.longLongValue < params.minInteger);
             }
         }else if([key isEqual:_UITextInputCheckDictKeyFloat]){
             if(params.maxFloat != 0 || params.minFloat != 0){
-                if(params.maxFloat >= 0){
-                    flag = text.doubleValue <= params.maxFloat;
-                }else if(flag){
-                    flag = text.doubleValue >= 0;
-                }
-                if(flag && params.minFloat <= 0){
-                    flag = text.doubleValue >= params.minFloat;
-                }else if(flag){
-                    flag = text.doubleValue >= 0;
-                }
+                flag = text.doubleValue <= params.maxFloat;
+                flag = flag && (text.doubleValue >= params.minFloat || string.doubleValue < params.minFloat);
             }
         }
         result = result | flag;
