@@ -45,11 +45,11 @@ kINITPARAMSForType(PYSliderDoubleView){
     [self.moveView02 setShadowColor:[UIColor grayColor].CGColor shadowRadius:2];
     
     self.moveImage01 = [UIImageView new];
-    self.moveImage01.image = [UIImage imageNamed:@"PYKit.bundle/py_slider_drag.png"];
+    self.moveImage01.image = [UIImage imageNamed:@"PYKit.bundle/images/py_slider_drag.png"];
     self.moveImage01.backgroundColor = [UIColor clearColor];
     self.moveImage02 = [UIImageView new];
     self.moveImage02.backgroundColor = [UIColor clearColor];
-    self.moveImage02.image = [UIImage imageNamed:@"PYKit.bundle/py_slider_drag.png"];
+    self.moveImage02.image = [UIImage imageNamed:@"PYKit.bundle/images/py_slider_drag.png"];
     
     [self addSubview:self.imageLine01];
     [self addSubview:self.imageLine02];

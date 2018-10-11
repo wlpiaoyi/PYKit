@@ -11,7 +11,6 @@
 
 @interface PYWebView : WKWebView
 //==>加载web
-
 - (nullable WKNavigation *)loadRequest:(nonnull NSURLRequest *)request;
 - (nullable WKNavigation *)loadFileURL:(nonnull NSURL *)URL allowingReadAccessToURL:(nullable NSURL *)readAccessURL;
 - (nullable WKNavigation *)loadHTMLString:(nonnull NSString *)string baseURL:(nullable NSURL *)baseURL;

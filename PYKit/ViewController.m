@@ -24,13 +24,8 @@
 @private
     PY3DOrthogonView * a3dView;
 }
-//@property (weak, nonatomic) IBOutlet PYDisplayImageView *viewImage;
-//@property (weak, nonatomic) IBOutlet PYCalendarView *calendarView;
-//@property (weak, nonatomic) IBOutlet UITextField *textField;
-//@property (strong, nonatomic) IBOutlet UITextView * textView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 PYPNSNN NSArray * datas;
-//@property (nonatomic,strong) PYAudioPlayer *player;
 @end
 
 @implementation ViewController
@@ -39,11 +34,12 @@ PYPNSNN NSArray * datas;
 //    [PYAsyImageView clearCaches];
     [super viewDidLoad];
     self.datas = @[
-                   @{@"name":@"selector", @"sel":@"goToRefresh"},
-                   @{@"name":@"calendar", @"sel":@"goToCalendar"},
-                   @{@"name":@"image", @"sel":@"goToImage"},
-                   @{@"name":@"slider", @"sel":@"goToSlider"},
-                   @{@"name":@"check", @"sel":@"goToCheck"}
+                   @{@"name":@"refresh", @"id":@"refresh"},
+                   @{@"name":@"calendar", @"id":@"calendar"},
+                   @{@"name":@"image", @"id":@"image"},
+                   @{@"name":@"slider", @"id":@"slider"},
+                   @{@"name":@"check", @"id":@"check"},
+                   @{@"name":@"map", @"id":@"map"}
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -96,59 +92,10 @@ PYPNSNN NSArray * datas;
 //    view.backgroundColor = [UIColor purpleColor];
 //    a3dView.viewDown = view;
 //    [a3dView syn3DTranslate];
-    
 }
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-//    kDISPATCH_GLOBAL_QUEUE_DEFAULT(^{
-//        CGFloat v = 0;
-//        while (true) {
-//            v++;
-//            kDISPATCH_MAIN_THREAD(^{
-//                [a3dView angleWithDegreex:45 degreey:v degreez:45];
-//            });
-//            [NSThread sleepForTimeInterval:0.01];
-//        }
-//    });
 }
-//- (void)py_attributeTapReturnString:(NSString *)string range:(NSRange)range index:(NSInteger)index
-//{
-//    NSString *message = [NSString stringWithFormat:@"点击了“%@”字符\nrange: %@\nindex: %ld",string,NSStringFromRange(range),index];
-//    UIView * view = [UIView new];
-//    [view dialogShowWithTitle:nil message:message block:^(UIView * _Nonnull view, NSUInteger index) {
-//        [view dialogHidden];
-//    } buttonNames:@[@"确定"]];
-//}
-//- (void)textFieldDidBeginEditing:(UITextField *)textField{
-//}
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-//    return YES;
-//}
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-////    [self presentViewController:[TextFieldCheckController new] animated:YES completion:^{
-////
-////    }];
-//    return YES;
-//}
-//- (IBAction)start:(id)sender {
-//    NSURL * url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/record.mp3",documentDir]];
-//    [[PYAudioRecord getSingleInstance] start:url settings:@{AVFormatIDKey:@(kAudioFormatMPEGLayer3)}];
-//}
-//- (IBAction)stop:(id)sender {
-//    [[PYAudioRecord getSingleInstance] stop];
-//    NSFileManager *fm = [NSFileManager defaultManager];
-////    [fm removeItemAtPath:[pathWav relativePath] error:&erro];
-//
-//    self.player = [PYAudioPlayer sharedPYAudioPlayer];
-//    NSError *error;
-//    NSArray<NSString *> * array =  [fm subpathsOfDirectoryAtPath:documentDir error:&error];
-//    if (!error) {
-//        for (NSString * path in array) {
-//            [self.player addAudioUrl:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", documentDir, path]]];
-//        }
-//        [self.player play];
-//    }
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44;
@@ -160,36 +107,12 @@ PYPNSNN NSArray * datas;
     NSDictionary * data = self.datas[indexPath.row];
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     cell.textLabel.text= data[@"name"];
-//    PYAsyImageView * asyImgView = [PYAsyImageView new];
-//    [cell.contentView addSubview:asyImgView];
-//    asyImgView.frameSize = CGSizeMake(200, 44);
-//    [asyImgView setBlockDisplay:^(bool isSuccess, bool isCahes, PYAsyImageView * _Nonnull imageView) {
-//        imageView.image = [imageView.image cutImage:CGRectMake(0, 0, 100, 100)];
-//    }];
-//    asyImgView.imgUrl = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1511768544898&di=cfdcff062b8a746e0d5999777f529bb6&imgtype=0&src=http%3A%2F%2Fimg2.niutuku.com%2Fdesk%2F1208%2F2027%2Fntk-2027-16107.jpg";
-//    [asyImgView setCornerRadiusAndBorder:1 borderWidth:1 borderColor:[UIColor redColor]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SEL actioin = sel_getUid(((NSString *)self.datas[indexPath.row][@"sel"]).UTF8String);
-    [self performSelector:actioin];
-}
--(void) goToRefresh{
-    [self performSegueWithIdentifier:@"refresh" sender:nil];
-}
--(void) goToCalendar{
-    [self performSegueWithIdentifier:@"calendar" sender:nil];
-}
--(void) goToImage{
-    [self performSegueWithIdentifier:@"image" sender:nil];
-}
--(void) goToSlider{
-    [self performSegueWithIdentifier:@"slider" sender:nil];
-}
--(void) goToCheck{
-    [self performSegueWithIdentifier:@"check" sender:nil];
+    [self performSegueWithIdentifier:self.datas[indexPath.row][@"id"] sender:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

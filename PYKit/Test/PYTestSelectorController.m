@@ -7,15 +7,24 @@
 //
 
 #import "PYTestSelectorController.h"
-
+#import "PYSelectorBarView.h"
 
 @interface PYTestSelectorController ()
+@property (weak, nonatomic) IBOutlet PYSelectorBarView *bar;
 @end
 
 @implementation PYTestSelectorController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.bar setBlockSelecteItem:^BOOL(NSUInteger index) {
+        if(index == 0){
+            UIButton * b = [UIButton buttonWithType:UIButtonTypeSystem];
+            [b setTitle:@"aaaa" forState:UIControlStateNormal];
+            self.bar.buttons = @[b];
+        }
+        return true;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

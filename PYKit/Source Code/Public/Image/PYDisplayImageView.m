@@ -7,7 +7,6 @@
 //
 
 #import "PYDisplayImageView.h"
-#import "PYAsyImageView.h"
 #import "PYDisplayImageTools.h"
 
 @interface PYDisplayImageView(){

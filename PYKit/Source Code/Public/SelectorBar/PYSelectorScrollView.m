@@ -40,7 +40,7 @@ kINITPARAMSForType(PYSelectorScrollView){
                                                   0.99f,
                                                   0.01f}
                                               length : 2 startPoint:CGPointMake(0, 0) endPoint:CGPointMake(self->_scrollView.contentInset.left, 0)];
-        CGFloat width = self->_ssv_contentView.frame.size.width / self.buttons.count;
+        CGFloat width = self->_ssv_contentView.frame.size.width / MAX(1, self.buttons.count);
         [PYGraphicsDraw drawLinearGradientWithContext:ctx  colorValues : (CGFloat[]){
             self.gradualChangeColor.red,self.gradualChangeColor.green,self.gradualChangeColor.blue,self.gradualChangeColor.alpha,
             1.0f, 1.0f, 1.0f, 0.98f}
@@ -57,18 +57,23 @@ kINITPARAMSForType(PYSelectorScrollView){
     _ssv_contentView.backgroundColor = [UIColor clearColor];
     [_scrollView addSubview:_ssv_contentView];
     _isfistsetcontentwidth = true;
+    _isScorllSelected = true;
     [self setBlockSelectedOpt:^(NSUInteger index) {
         kStrong(self);
         [self setContentWidth:self.contentWidth animation:!(self->_isfistsetcontentwidth)];
         self->_isfistsetcontentwidth = false;
     }];
-    self.isScorllSelected = true;
+}
+-(void) setButtons:(NSArray *)buttons{
+    [super setButtons:buttons];
+    self.isScorllSelected = _isScorllSelected;
+    [self setGradualChangeColor:self.gradualChangeColor];
 }
 -(void) setIsScorllSelected:(bool)isScorllSelected{
     _isScorllSelected = isScorllSelected;
-    UIEdgeInsets   contentInset;
+    UIEdgeInsets contentInset;
     if(_isScorllSelected){
-        contentInset = UIEdgeInsetsMake(0, self.frame.size.width/2 - (_contentWidth/self.buttons.count)/2, 0, self.frame.size.width/2 - (_contentWidth/self.buttons.count)/2);
+        contentInset = UIEdgeInsetsMake(0, self.frame.size.width/2 - (_contentWidth/MAX(1, self.buttons.count))/2, 0, self.frame.size.width/2 - (_contentWidth/MAX(1, self.buttons.count))/2);
         _scrollView.delegate = self;
         _scrollView.decelerationRate = 0.8;
         self.selectorTag.hidden = YES;
@@ -100,7 +105,7 @@ kINITPARAMSForType(PYSelectorScrollView){
     kAssign(self);
     void (^block)() = ^() {
         kStrong(self);
-        CGFloat width = self->_ssv_contentView.frame.size.width / self.buttons.count;
+        CGFloat width = self->_ssv_contentView.frame.size.width / MAX(1, self.buttons.count);
         CGFloat height = MIN(MAX(0, self.selectorTagHeight), self->_ssv_contentView.frame.size.height);
         CGRect rect = CGRectMake(width * self.selectIndex
                                  ,  self->_ssv_contentView.frame.size.height - height
@@ -151,13 +156,10 @@ kSOULDLAYOUTMEND
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGPoint contentOffset = _scrollView.contentOffset;
     CGFloat offsetx = contentOffset.x + _scrollView.contentInset.left;
-    CGFloat width = _ssv_contentView.frame.size.width / self.buttons.count;
-    NSUInteger x = offsetx / width;
-    if(((long)offsetx) % ((long)width) > width/2){
-        x += 1;
-    }
+    CGFloat width = _ssv_contentView.frame.size.width / MAX(1, self.buttons.count);
+    NSUInteger x = kFORMAT(@"%.0f",offsetx / width).integerValue;
     self.selectIndex = x;
-    if(self.delegate && ![self.delegate selectorBarView:self selecteItemIndex:x]){
+    if(self.delegate && ![self.delegate selectorBarView:self selectedItemIndex:x]){
         return;
     }else if(!self.delegate && self.blockSelecteItem && !self.blockSelecteItem(x)){
         return;

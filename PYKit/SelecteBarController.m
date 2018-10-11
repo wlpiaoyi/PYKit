@@ -29,7 +29,6 @@ kPNSNN UIView * contentView;
         [_contentView addSubview:[self createView:i]];
     }
     _selectorBarView.delegate = self;
-    _selectorBarView.contentWidth = 700;
     _scrollView.delegate = self;
     _selectorBarView.isScorllSelected = true;
     [PYViewAutolayoutCenter persistConstraintHorizontal:_contentView.subviews relationmargins:UIEdgeInsetsZero relationToItems:PYEdgeInsetsItemNull() offset:0];
@@ -49,7 +48,7 @@ kPNSNN UIView * contentView;
     return view;
 }
 
--(BOOL) selectorBarView:(nonnull PYSelectorBarView *) selectorBarView selecteItemIndex:(NSUInteger) selecteItemIndex{
+-(BOOL) selectorBarView:(nonnull PYSelectorBarView *) selectorBarView selectedItemIndex:(NSUInteger) selecteItemIndex{
     [self.scrollView setContentOffset:CGPointMake(selecteItemIndex * self.scrollView.frameWidth , 0) animated:YES];
     return YES;
 }

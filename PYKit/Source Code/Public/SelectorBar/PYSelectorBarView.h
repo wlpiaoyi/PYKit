@@ -11,8 +11,13 @@
 
 @class PYSelectorBarView;
 @protocol PYSelectorBarViewDelegate<NSObject>
-@required
--(BOOL) selectorBarView:(nonnull PYSelectorBarView *) selectorBarView selecteItemIndex:(NSUInteger) selecteItemIndex;
+@optional
+-(BOOL) selectorBarView:(nonnull PYSelectorBarView *) selectorBarView
+      selectedItemIndex:(NSUInteger) selectedItemIndex;
+//-(void) selectorBarView:(nonnull PYSelectorBarView *) selectorBarView
+//      previousItemIndex:(NSUInteger) previousItemIndex
+//       currentItemIndex:(NSUInteger) currentItemIndex
+//                isStart:(BOOL) isStart;
 @end
 
 @interface PYSelectorBarView : UIView
@@ -26,12 +31,18 @@ kPNSNN NSArray * buttons;
 /**
  当前button选择后的一个标识图
  */
-kPNSNA UIImageView * selectorTag;
+kPNSNA UIView * selectorTag;
 /**
  标示图的高度
  如果高度为负数则表示等于当前bar的高度并且作为背景
  */
 kPNA CGFloat selectorTagHeight;
+
+/**
+ 标示图的宽度度
+ 如果宽度 <0 或者 >(width) 这自动变换
+ */
+kPNA CGFloat selectorTagWidth;
 /**
  当前选择第几个
  */

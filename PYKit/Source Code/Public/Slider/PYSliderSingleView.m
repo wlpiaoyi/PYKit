@@ -29,7 +29,7 @@ kINITPARAMSForType(PYSliderSingleView){
     self.moveView.backgroundColor = [UIColor clearColor];
     [self.moveView setShadowColor:[UIColor grayColor].CGColor shadowRadius:2];
     self.moveImage = [UIImageView new];
-    self.moveImage.image = [UIImage imageNamed:@"PYKit.bundle/py_slider_drag.png"];
+    self.moveImage.image = [UIImage imageNamed:@"PYKit.bundle/images/py_slider_drag.png"];
     self.moveImage.backgroundColor = [UIColor clearColor];
     
     [self addSubview:self.imageLine];
