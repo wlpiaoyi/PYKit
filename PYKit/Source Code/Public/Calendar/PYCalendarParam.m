@@ -7,7 +7,7 @@
 //
 
 #import "PYCalendarParam.h"
-#import "PYParams.h"
+#import "PYInterflowParams.h"
 
 //int PYDateMinusFotDays(PYDate date1, PYDate date2){
 //    int days = 0;
@@ -103,7 +103,7 @@ UIFont * _Nonnull PYCalendarSpesalFont;
     PYCalendarDisableColor = [UIColor lightGrayColor];
     PYCalendarWeeakEndColor = [UIColor redColor];
     PYCalendarSpecial = [UIColor colorWithRGBHex:0XCC4444FF];
-    [PYParams loadInterflowParamsData];
+    [PYInterflowParams loadInterflowParamsData];
 }
 
 @end

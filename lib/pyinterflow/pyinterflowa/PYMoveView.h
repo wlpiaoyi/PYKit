@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "pyutilea.h"
-#import "PYParams.h"
+#import "PYInterflowParams.h"
 
 @interface PYMoveView : UIView
 //是否可以移动

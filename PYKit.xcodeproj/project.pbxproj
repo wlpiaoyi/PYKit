@@ -179,6 +179,9 @@
 		150D4D861F95B0720058FB83 /* PYSelectorScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYSelectorScrollView.m; sourceTree = "<group>"; };
 		150EC3D92061FFDE00F5AA6B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		150EC3DB2061FFE800F5AA6B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		151A29772171A31D0053E432 /* UIView+Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Notify.h"; sourceTree = "<group>"; };
+		151A29782171A31D0053E432 /* PYInterflowParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYInterflowParams.h; sourceTree = "<group>"; };
+		151A29792171A31D0053E432 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		151AA85520A1750600B58AB9 /* PYSliderDoubleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYSliderDoubleView.h; sourceTree = "<group>"; };
 		151AA85620A1750600B58AB9 /* PYSliderDoubleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYSliderDoubleView.m; sourceTree = "<group>"; };
 		152289F11F4E6C9000E02321 /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
@@ -215,11 +218,9 @@
 		155D77CC206F9E6B00B2CDDB /* libpyinterflowa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpyinterflowa.a; sourceTree = "<group>"; };
 		155D77CE206F9E6B00B2CDDB /* pyinterflowa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pyinterflowa.h; sourceTree = "<group>"; };
 		155D77CF206F9E6B00B2CDDB /* PYMoveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYMoveView.h; sourceTree = "<group>"; };
-		155D77D0206F9E6B00B2CDDB /* PYParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYParams.h; sourceTree = "<group>"; };
 		155D77D1206F9E6B00B2CDDB /* UIView+Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Dialog.h"; sourceTree = "<group>"; };
 		155D77D2206F9E6B00B2CDDB /* UIView+Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Popup.h"; sourceTree = "<group>"; };
 		155D77D3206F9E6B00B2CDDB /* UIView+Sheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Sheet.h"; sourceTree = "<group>"; };
-		155D77D4206F9E6B00B2CDDB /* UIView+Topbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Topbar.h"; sourceTree = "<group>"; };
 		155D77D6206F9E6B00B2CDDB /* libpynetworka.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpynetworka.a; sourceTree = "<group>"; };
 		155D77D8206F9E6B00B2CDDB /* PYNetDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYNetDownload.h; sourceTree = "<group>"; };
 		155D77D9206F9E6B00B2CDDB /* PYNetNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYNetNormal.h; sourceTree = "<group>"; };
@@ -485,13 +486,14 @@
 		155D77CD206F9E6B00B2CDDB /* pyinterflowa */ = {
 			isa = PBXGroup;
 			children = (
+				151A29782171A31D0053E432 /* PYInterflowParams.h */,
+				151A29772171A31D0053E432 /* UIView+Notify.h */,
+				151A29792171A31D0053E432 /* UIView+Toast.h */,
 				155D77CE206F9E6B00B2CDDB /* pyinterflowa.h */,
 				155D77CF206F9E6B00B2CDDB /* PYMoveView.h */,
-				155D77D0206F9E6B00B2CDDB /* PYParams.h */,
 				155D77D1206F9E6B00B2CDDB /* UIView+Dialog.h */,
 				155D77D2206F9E6B00B2CDDB /* UIView+Popup.h */,
 				155D77D3206F9E6B00B2CDDB /* UIView+Sheet.h */,
-				155D77D4206F9E6B00B2CDDB /* UIView+Topbar.h */,
 			);
 			path = pyinterflowa;
 			sourceTree = "<group>";

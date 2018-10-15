@@ -39,6 +39,9 @@
 #define kUserDefaults      [NSUserDefaults standardUserDefaults]
 #define kNotificationCenter [NSNotificationCenter defaultCenter]
 
+#pragma mark 判断经纬度是否有效
+#define kCoordinateEnabled(coordinate) (coordinate.latitude > -90 && coordinate.longitude > -180 && coordinate.latitude < 90 && coordinate.longitude < 180)
+
 #pragma mark 属性配置简写
 #define kPNSNA                         @property (nonatomic, strong, nullable)
 #define kPNSNN                        @property (nonatomic, strong, nonnull)
@@ -194,9 +197,14 @@ double parseCoordinateToDistance(double lat1, double lng1, double lat2, double l
 NSString * _Nullable PYUUID(NSUInteger length);
 
 /**
- cup使用率
+ app cup使用率
  */
-float cpu_usage(void);
+float app_cpu_usage(void);
+
+/**
+ 连续控制
+ */
+//void controlsUdptype(NSTimeInterval timeInterval, dispatch_block_t block);
 
 @interface PYUtile : NSObject
 
@@ -262,6 +270,18 @@ float cpu_usage(void);
  简易发声
  */
 +(BOOL) soundWithPath:(nullable NSString *) path isShake:(BOOL) isShake;
+// MD5加密
+/*
+ *由于MD5加密是不可逆的,多用来进行验证
+ */
+// 32位小写
++(NSString *)MD5ForLower32Bate:(NSString *)str;
+// 32位大写
++(NSString *)MD5ForUpper32Bate:(NSString *)str;
+// 16为大写
++(NSString *)MD5ForUpper16Bate:(NSString *)str;
+// 16位小写
++(NSString *)MD5ForLower16Bate:(NSString *)str;
 
 @end
 

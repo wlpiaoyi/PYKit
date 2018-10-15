@@ -31,7 +31,7 @@
  topActive,leftActive,bottomActive,rightActive 是否在安全区
  topPoint,leftPoint,bottomPoint,rightPoint 边距参照对象
  */
--(NSDictionary<NSString *, NSDictionary<NSString *, NSLayoutConstraint *> *> *) setAutotLayotDict:(NSDictionary<NSString *, NSNumber *> *) autoLayoutDict;
+-(NSDictionary<NSString *, NSDictionary<NSString *, NSLayoutConstraint *> *> *) setAutotLayotDict:(NSDictionary<NSString *, id> *) autoLayoutDict;
 
 /**
  获取相对于目标视图的位置
@@ -59,5 +59,5 @@
 +(instancetype _Nullable) loadXib;
 -(UIImage * _Nullable) drawView;
 -(UIImage * _Nullable) drawViewWithBounds:(CGRect) bounds;
--(UIImage * _Nullable) drawViewWithBounds:(CGRect) bounds scale:(CGFloat) scale;
+-(UIImage * _Nullable) drawViewWithBounds:(CGRect) bounds scale:(short) scale;
 @end

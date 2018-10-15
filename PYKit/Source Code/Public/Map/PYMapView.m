@@ -39,7 +39,7 @@ kPNSNA CLLocationManager * headingManager;
 
 +(void) initialize{
     static dispatch_once_t onceToken; dispatch_once(&onceToken, ^{
-        [PYParams loadInterflowParamsData];
+        [PYInterflowParams loadInterflowParamsData];
     });
 }
 

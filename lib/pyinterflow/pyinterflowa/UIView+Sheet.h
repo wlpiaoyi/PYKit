@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "pyutilea.h"
-#import "PYParams.h"
+#import "PYInterflowParams.h"
 
 @interface UIView(Sheet)
 kPNRNN UIView * sheetShowView;
