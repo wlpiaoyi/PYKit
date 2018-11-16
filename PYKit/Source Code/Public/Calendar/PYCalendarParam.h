@@ -70,6 +70,8 @@ extern UIColor * _Nonnull PYCalendarDisableColor;
 extern UIColor * _Nonnull PYCalendarWeeakEndColor;
 extern UIColor * _Nonnull PYCalendarSpecial;
 extern UIFont * _Nonnull PYCalendarSpesalFont;
+extern BOOL PYCalendarHasWatermark;
+extern BOOL PYCalendarHasSpesal;
 
 @interface  PYCalendarParam : NSObject
 +(void) loadCalendarData;

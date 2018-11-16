@@ -28,8 +28,8 @@
     [self.textFieldPhone pyClearTextFieldCheck];
     [self.textFieldIDCard pyClearTextFieldCheck];
     
-    [self.textFieldFloat pyCheckFloatForMax:999.99 min:-888.88 precision:2];
-    [self.textFieldInt pyCheckIntegerForMax:999 min:-888];
+    [self.textFieldFloat pyCheckFloatForMax:999.99 min:0 precision:2];
+    [self.textFieldInt pyCheckIntegerForMax:999 min:0];
     [self.textFieldEmail pyCheckEmail];
     [self.textFieldPhone pyCheckMobliePhone];
     [self.textFieldIDCard pyCheckIDCard];

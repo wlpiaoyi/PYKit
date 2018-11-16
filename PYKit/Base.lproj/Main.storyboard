@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="float（-888.888)~(999.99)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9v2-QP-hLk">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="888888.88" borderStyle="roundedRect" placeholder="float（-888.888)~(999.99)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9v2-QP-hLk">
                                 <rect key="frame" x="16" y="69" width="343" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="n87-6W-zdn"/>
@@ -47,7 +47,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="int（-888)~(999)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qgC-O8-WdJ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="-5657" borderStyle="roundedRect" placeholder="int（-888)~(999)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qgC-O8-WdJ">
                                 <rect key="frame" x="16" y="114" width="343" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="NMg-sp-ANJ"/>

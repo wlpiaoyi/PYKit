@@ -91,8 +91,9 @@ bool _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(PYText
     if(!params || params.dictMatch.count == 0) return true;
     if(_pytextinputcheck_isenabletype(textInput) == false) return false;
     if(string.length == 0) return true;
-    NSString * text = [_pytexttnputcheck_gettext(textInput) stringByReplacingCharactersInRange:range withString:string];
-    if(text.length == 0) return true;
+    NSString * textOriginal = _pytexttnputcheck_gettext(textInput);
+    NSString * textChange = [textOriginal stringByReplacingCharactersInRange:range withString:string];
+    if(textChange.length == 0) return true;
     
     bool result = false;
     for (NSString * key in params.dictMatch) {
@@ -100,7 +101,7 @@ bool _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(PYText
         if([ing isKindOfClass:[NSString class]]){
             
         }else if([ing isKindOfClass:[NSDictionary class]]){
-            for (NSInteger i = text.length; i > 0; i--) {
+            for (NSInteger i = textChange.length; i > 0; i--) {
                 id value = ing[@(i)];
                 if(value){
                     ing = value;
@@ -115,17 +116,17 @@ bool _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(PYText
             NSLog(@"match not found ing match value!");
             continue;
         }
-        BOOL flag = [NSString matchArg:text regex:ing];
+        BOOL flag = [NSString matchArg:textChange regex:ing];
         if(!flag) continue;
         if([key isEqual:_UITextInputCheckDictKeyInteger]){
             if(params.maxInteger != 0 || params.minInteger != 0){
-                flag = text.longLongValue <= params.maxInteger;
-                flag = flag && (text.longLongValue >= params.minInteger || string.longLongValue < params.minInteger);
+                flag = textChange.longLongValue <= params.maxInteger;
+                flag = flag && (textChange.longLongValue >= params.minInteger || string.longLongValue < params.minInteger);
             }
         }else if([key isEqual:_UITextInputCheckDictKeyFloat]){
             if(params.maxFloat != 0 || params.minFloat != 0){
-                flag = text.doubleValue <= params.maxFloat;
-                flag = flag && (text.doubleValue >= params.minFloat || string.doubleValue < params.minFloat);
+                flag = textChange.doubleValue <= params.maxFloat;
+                flag = flag && (textChange.doubleValue >= params.minFloat || string.doubleValue < params.minFloat);
             }
         }
         result = result | flag;
@@ -133,6 +134,7 @@ bool _pyexchangetextInput_shouldchangecharactersinrange_replacementstring(PYText
     }
     if(!result){
         AudioServicesPlaySystemSound(1305);
+        
     }
     return result;
 }

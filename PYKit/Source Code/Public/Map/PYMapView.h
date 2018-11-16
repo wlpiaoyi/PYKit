@@ -54,14 +54,13 @@ kPNCNA void (^blockDeselected)(PYMapView * _Nonnull map, MKAnnotationView * _Non
 /**
  缩放回调
  */
-///=======================>
 kPNCNA void (^blockRegionWillChange)(PYMapView * _Nonnull map);
 kPNCNA void (^blockRegionDidChange)(PYMapView * _Nonnull map);
 ///<=======================
 /**
  长按回调
  */
-kPNCNA BOOL (^blockLongTapChanged)(PYMapView * _Nonnull map);
+kPNCNA BOOL (^blockLongTapWillChange)(PYMapView * _Nonnull map, MKCoordinateRegion region);
 /**
  定位回调
  */

@@ -87,6 +87,8 @@ UIColor * _Nonnull PYCalendarDisableColor;
 UIColor * _Nonnull PYCalendarWeeakEndColor;
 UIColor * _Nonnull PYCalendarSpecial;
 UIFont * _Nonnull PYCalendarSpesalFont;
+BOOL PYCalendarHasWatermark;
+BOOL PYCalendarHasSpesal;
 @implementation PYCalendarParam
 +(void) initialize{
     [PYCalendarParam loadCalendarData];
@@ -103,6 +105,8 @@ UIFont * _Nonnull PYCalendarSpesalFont;
     PYCalendarDisableColor = [UIColor lightGrayColor];
     PYCalendarWeeakEndColor = [UIColor redColor];
     PYCalendarSpecial = [UIColor colorWithRGBHex:0XCC4444FF];
+    PYCalendarHasWatermark = YES;
+    PYCalendarHasSpesal = YES;
     [PYInterflowParams loadInterflowParamsData];
 }
 

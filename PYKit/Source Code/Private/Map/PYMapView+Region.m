@@ -28,14 +28,14 @@ kPNRNA MKMapView * mapView;
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-    if(!self.blockLongTapChanged || self.blockLongTapChanged(self)){
-        CGPoint point = [gestureRecognizer locationInView:self.mapView];
-        MKCoordinateRegion region = self.mapView.region;
-        CLLocationCoordinate2D center = region.center;
-        CLLocationCoordinate2D offset = CLLocationCoordinate2DMake((point.y / self.mapView.frameHeight - .5) * region.span.latitudeDelta, (point.x / self.mapView.frameWidth - .5) * region.span.longitudeDelta);
-        center.latitude -= offset.latitude;
-        center.longitude += offset.longitude;
-        region.center = center;
+    CGPoint point = [gestureRecognizer locationInView:self.mapView];
+    MKCoordinateRegion region = self.mapView.region;
+    CLLocationCoordinate2D center = region.center;
+    CLLocationCoordinate2D offset = CLLocationCoordinate2DMake((point.y / self.mapView.frameHeight - .5) * region.span.latitudeDelta, (point.x / self.mapView.frameWidth - .5) * region.span.longitudeDelta);
+    center.latitude -= offset.latitude;
+    center.longitude += offset.longitude;
+    region.center = center;
+    if(!self.blockLongTapWillChange || self.blockLongTapWillChange(self, region)){
         [self setRegion:region animated:YES];
     }
     return YES;

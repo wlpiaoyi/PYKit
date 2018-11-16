@@ -31,6 +31,19 @@ kINITPARAMSForType(PYSelectorBarView){
             [mButtons addObject:button];
         }
     }
+    if(mButtons.count > 0){
+        [mButtons sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            UIButton * b1 = obj1;
+            UIButton * b2 = obj2;
+            if(b1.frameX < b2.frameX){
+                return NSOrderedAscending;
+            }else if(b1.frameX > b2.frameX){
+                return NSOrderedDescending;
+            }else{
+                return NSOrderedSame;
+            }
+        }];
+    }
     self.buttons = mButtons;
     _selectIndex = 0;
     _selectorTagHeight = 3;

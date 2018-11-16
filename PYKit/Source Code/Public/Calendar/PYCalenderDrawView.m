@@ -89,7 +89,7 @@ static PYDate PYCalenderDateMax;
     }];
     gtText = [PYGraphicsThumb graphicsThumbWithView:self block:^(CGContextRef  _Nonnull ctx, id  _Nullable userInfo) {
         @strongify(self);
-        [self drawTextWithContext:ctx];
+        if(PYCalendarHasWatermark)[self drawTextWithContext:ctx];
     }];
 }
 
@@ -177,19 +177,21 @@ static PYDate PYCalenderDateMax;
         if(PYDateCompareDate(today, cr.date) == 0){
             [PYCalendarGraphics drawMarkWithContext:context bounds:self.bounds mark:"今" markFont:self.fontLunar markColor:specalColoar resultRect:resultRect calendarRect:cr];
         }
-        for (int i = 0; i<spesalLength; i++) {
-            PYSpesalInfo si = spesals[i];
-            if(si.isLunar){
-                if(si.date.year <= 0)si.date.year = cr.lunarDate.year;
-                if(PYDateCompareDate(si.date, cr.lunarDate) == 0){
-                    [PYCalendarGraphics drawSpecalWithContext:context bounds:self.bounds spesal:si.spesal specalColor:specalColoar specalFont:self.fontSpesal resultRect:resultRect calendarRect:cr heightFontLunar:heightFontLunar];
-                    break;
-                }
-            }else{
-                if(si.date.year <= 0)si.date.year = cr.date.year;
-                if(PYDateCompareDate(si.date, cr.date) == 0){
-                    [PYCalendarGraphics drawSpecalWithContext:context bounds:self.bounds spesal:si.spesal specalColor:specalColoar specalFont:self.fontSpesal resultRect:resultRect calendarRect:cr heightFontLunar:heightFontLunar];
-                    break;
+        if(PYCalendarHasSpesal){
+            for (int i = 0; i<spesalLength; i++) {
+                PYSpesalInfo si = spesals[i];
+                if(si.isLunar){
+                    if(si.date.year <= 0)si.date.year = cr.lunarDate.year;
+                    if(PYDateCompareDate(si.date, cr.lunarDate) == 0){
+                        [PYCalendarGraphics drawSpecalWithContext:context bounds:self.bounds spesal:si.spesal specalColor:specalColoar specalFont:self.fontSpesal resultRect:resultRect calendarRect:cr heightFontLunar:heightFontLunar];
+                        break;
+                    }
+                }else{
+                    if(si.date.year <= 0)si.date.year = cr.date.year;
+                    if(PYDateCompareDate(si.date, cr.date) == 0){
+                        [PYCalendarGraphics drawSpecalWithContext:context bounds:self.bounds spesal:si.spesal specalColor:specalColoar specalFont:self.fontSpesal resultRect:resultRect calendarRect:cr heightFontLunar:heightFontLunar];
+                        break;
+                    }
                 }
             }
         }
