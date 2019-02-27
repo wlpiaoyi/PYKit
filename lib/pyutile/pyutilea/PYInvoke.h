@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ 注意事项:
+ 如果void * returnValue是一个人对象切记要使用 (__bridge id _Nullable)(returnValue)，否则会出现内存泄露
+ */
 @interface PYInvoke : NSObject
 //==>分布执行方法
 + (nullable id) startInvoke:(nonnull id) target action:(nonnull SEL)action;
@@ -20,7 +24,7 @@
 /**
  获取指定成员属性描述
  */
-+(nonnull NSDictionary*) getPropertyInfoWithClass:(nonnull Class) clazz propertyName:(nonnull NSString*) propertyName;
++(nullable NSDictionary*) getPropertyInfoWithClass:(nonnull Class) clazz propertyName:(nonnull NSString*) propertyName;
 /**
  获取所有成员属性描述
  */

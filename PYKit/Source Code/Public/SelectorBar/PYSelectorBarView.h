@@ -27,7 +27,12 @@ kPNRNN UIView * contentView;
  1.可以在xib里面在初始化是将自动加入到buttons对象里面
  2.自定义
  */
-kPNSNN NSArray * buttons;
+kPNSNN NSArray<UIButton *> * buttons;
+/**
+ 按钮信息标识
+ view.frameSize 标识大小
+ */
+kPNSNA NSArray<UIView *> * displayTags;
 /**
  当前button选择后的一个标识图
  */
@@ -42,7 +47,7 @@ kPNA CGFloat selectorTagHeight;
  标示图的宽度度
  如果宽度 <0 或者 >(width) 这自动变换
  */
-kPNA CGFloat selectorTagWidth;
+kPNA CGFloat  selectorTagWidth;
 /**
  当前选择第几个
  */

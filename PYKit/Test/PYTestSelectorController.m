@@ -8,6 +8,7 @@
 
 #import "PYTestSelectorController.h"
 #import "PYSelectorBarView.h"
+#import "pyutilea.h"
 
 @interface PYTestSelectorController ()
 @property (weak, nonatomic) IBOutlet PYSelectorBarView *bar;
@@ -17,6 +18,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSMutableArray * labels = [NSMutableArray new];
+    for (int i = 0; i<self.bar.buttons.count; i++) {
+        UILabel * label = [UILabel new];
+        label.frameSize = CGSizeMake(20, 20);
+        label.numberOfLines = 1;
+        label.backgroundColor = [UIColor redColor];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:13];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = @"10";
+        [label setCornerRadiusAndBorder:label.frameWidth/2 borderWidth:0 borderColor:nil];
+        [labels addObject:label];
+    }
+    self.bar.displayTags = labels;
     [self.bar setBlockSelecteItem:^BOOL(NSUInteger index) {
         if(index == 0){
             UIButton * b = [UIButton buttonWithType:UIButtonTypeSystem];

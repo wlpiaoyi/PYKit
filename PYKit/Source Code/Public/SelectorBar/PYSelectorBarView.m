@@ -13,12 +13,14 @@
 @interface PYSelectorBarView(){
 }
 kSOULDLAYOUTPForType(PYSelectorBarView)
-kPNSNA NSArray<NSDictionary<NSString *, NSLayoutConstraint *> *> * lcButtons;
-kPNSNA NSDictionary<NSString *, NSLayoutConstraint *> * lcButton;
+kPNSNA NSMutableArray<  NSLayoutConstraint *> * lcButtons;
+kPNSNA NSMutableArray<  NSLayoutConstraint *> * lcDisplays;
 @end
 
 @implementation PYSelectorBarView
 kINITPARAMSForType(PYSelectorBarView){
+    _lcDisplays = [NSMutableArray new];
+    _lcButtons = [NSMutableArray new];
     _contentView = [UIView new];
     _contentView.backgroundColor = [UIColor clearColor];
     [self addContentView:_contentView];
@@ -57,18 +59,15 @@ kINITPARAMSForType(PYSelectorBarView){
 }
 -(void) setButtons:(NSArray *)buttons{
     if(self.lcButtons){
-        for (NSDictionary * lcDict in self.lcButtons) {
-            for (NSLayoutConstraint * lc in lcDict.allValues) {
-                [_contentView removeConstraint:lc];
-            }
+        for (NSLayoutConstraint * lc in self.lcButtons) {
+            [self.class __LC_REMOVE_FROM_VIEW:lc];
         }
-        self.lcButtons = nil;
+        [self.lcButtons removeAllObjects];;
     }
-    if(self.lcButton){
-        for (NSLayoutConstraint * lc in self.lcButton.allValues) {
-            [_contentView removeConstraint:lc];
+    if(_buttons && _buttons.count){
+        for (UIButton * button in _buttons) {
+            [button removeFromSuperview];
         }
-        self.lcButton = nil;
     }
     _buttons = buttons;
     if(_buttons == nil || buttons.count == 0) return;
@@ -82,12 +81,51 @@ kINITPARAMSForType(PYSelectorBarView){
         [_contentView addSubview:button];
     }
     if(_buttons.count == 1){
-        self.lcButton = [PYViewAutolayoutCenter persistConstraint:_buttons.firstObject relationmargins:UIEdgeInsetsZero relationToItems:PYEdgeInsetsItemNull()];
+        NSDictionary<NSString *, NSLayoutConstraint *> * lcd = [PYViewAutolayoutCenter persistConstraint:_buttons.firstObject relationmargins:UIEdgeInsetsZero relationToItems:PYEdgeInsetsItemNull()];
+        [self.lcButtons addObjectsFromArray:lcd.allValues];
     }else{
-        self.lcButtons = [PYViewAutolayoutCenter persistConstraintHorizontal:_buttons relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull() offset:0];
+        NSArray<NSDictionary<NSString *, NSLayoutConstraint *> *> * lcds = [PYViewAutolayoutCenter persistConstraintHorizontal:_buttons relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull() offset:0];
+        for (NSDictionary<NSString *, NSLayoutConstraint *> * lcd in lcds) {
+            [self.lcButtons addObjectsFromArray:lcd.allValues];
+        }
     }
     self.selectorTag = _selectorTag;
     self.selectIndex = 0;
+    self.displayTags = _displayTags;
+}
+
+-(void) setDisplayTags:(NSArray<UIView *> *)displayTags{
+    if(_displayTags && _displayTags.count){
+        for (UIView * view in _displayTags) {
+            [view removeFromSuperview];
+        }
+    }
+    if(_lcDisplays && _lcDisplays.count){
+        for (NSLayoutConstraint * lc in _lcDisplays) {
+            [self.class __LC_REMOVE_FROM_VIEW:lc];
+        }
+        [_lcDisplays removeAllObjects];
+    }
+    
+    _displayTags = displayTags;
+    if(_displayTags.count != _buttons.count) return;
+    
+    for (NSUInteger i = 1; i < _displayTags.count; i++) {
+        UIView * view = self.displayTags[i-1];
+        [_contentView addSubview:view];
+        UIButton * button = _buttons[i];
+        NSDictionary<NSString *, NSDictionary<NSString *, NSLayoutConstraint *> *> * lcds = [view setAutotLayotDict:@{@"top":@0, @"right":@0,@"w":@(view.frameWidth), @"h":@(view.frameHeight),@"rightPoint":button}];
+        for (NSDictionary<NSString *, NSLayoutConstraint *> * lcd in lcds.allValues) {
+            [_lcDisplays addObjectsFromArray:lcd.allValues];
+        }
+    }
+    UIView * view = self.displayTags.lastObject;
+    [_contentView addSubview:view];
+    NSDictionary<NSString *, NSDictionary<NSString *, NSLayoutConstraint *> *> * lcds = [view setAutotLayotDict:@{@"top":@0, @"right":@0,@"w":@(view.frameWidth), @"h":@(view.frameHeight)}];
+    for (NSDictionary<NSString *, NSLayoutConstraint *> * lcd in lcds.allValues) {
+        [_lcDisplays addObjectsFromArray:lcd.allValues];
+    }
+    
 }
 -(void) addContentView:(UIView *) contentView{
     [self addSubview:contentView];
@@ -195,5 +233,20 @@ self.selectIndex = _selectIndex;
 kSOULDLAYOUTMEND
 -(void) dealloc{
     
+}
+
+
+
++(void) __LC_REMOVE_FROM_VIEW:(nonnull NSLayoutConstraint *) lc{
+    UIView * view = lc.firstItem;
+    if(view){
+        [view removeConstraint:lc];
+        [view.superview removeConstraint:lc];
+    }
+    view = lc.secondItem;
+    if(view){
+        [view removeConstraint:lc];
+        [view.superview removeConstraint:lc];
+    }
 }
 @end

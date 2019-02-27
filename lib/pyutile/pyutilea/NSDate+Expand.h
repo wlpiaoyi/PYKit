@@ -11,6 +11,14 @@
 
 @interface NSDate (Expand)
 
+/**
+ 友好的日期描述
+ */
+-(nonnull NSString *) dateDescribe;
+/**
+ 友好的时间描述
+ */
+-(nonnull NSString *) timeDescribe;
 -(NSDate *) offsetYear:(int)numYears;
 -(NSDate *) offsetMonth:(int)numMonths;
 -(NSDate *) offsetDay:(int)numDays;
@@ -41,5 +49,5 @@
 +(NSDate *) dateEndOfWeek;
 +(NSDate *) getTodayZero;
 
--(NSDate *) setCompentsWithBinary:(int) binary NS_DEPRECATED_IOS(2_0, 7_0, "Use clearedWithBinary");
+-(NSDate *) setCompentsWithBinary:(int) binary NS_DEPRECATED_IOS(2_0, 7_0, "Use clearedWithBinary:");
 @end

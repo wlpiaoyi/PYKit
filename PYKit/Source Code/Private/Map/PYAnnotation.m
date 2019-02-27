@@ -31,6 +31,8 @@ kINITPARAMSForType(PYAnnotationView){
     labelMessage.textAlignment = NSTextAlignmentCenter;
     labelMessage.font = [UIFont systemFontOfSize:14];
     labelMessage.numberOfLines = 0;
+    labelMessage.adjustsFontSizeToFitWidth = YES;
+    labelMessage.minimumScaleFactor = .5;
     
     viewMessage = [UIView new];
     [viewMessage setCornerRadiusAndBorder:2 borderWidth:1 borderColor:PY_COLOR_ANNOTAION_MESSAGE_LINE];
