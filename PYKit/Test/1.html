@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <style>
+            .topic {
+                font-size: 14px;
+                border-bottom:solid 1px #9098b8;
+                margin: 40px 20px 20px 20px;
+                padding-bottom: 20px;
+            }
+            .content {
+                color: #666;
+            }
+            .option_selecte_n {
+                color: #9098b8;
+            }
+            .option_selecte_r {
+                color:#21c1fc;
+            }
+            .option_selecte_w {
+                color:#f13838;
+            }
+            img:active {
+                background-color:burlywood;
+            }
+            .option_img_n{
+                display: inline-block;
+                color:#21c1fc;
+                max-width: calc(50% - 35px);
+                background-color: #eee;
+                margin: 5px 10px 5px 5px;
+                padding: 2px 8px 2px 8px;
+                border-radius:10px 10px;
+            }
+            .option_judge_n{
+                display: inline-block;
+                color:#21c1fc;
+                background-color: #eee;
+                margin: 5px 10px 5px 5px;
+                padding: 2px 8px 2px 8px;
+                border-radius:10px 10px;
+            }
+            .option_judge_r{
+                display: inline-block;
+                color: #eee;
+                background-color:#21c1fc;
+                margin: 5px 10px 5px 5px;
+                padding: 2px 8px 2px 8px;
+                border-radius:10px 10px;
+            }
+            .option_judge_w{
+                display: inline-block;
+                color: #eee;
+                background-color:#f13838;
+                margin: 5px 10px 5px 5px;
+                padding: 2px 8px 2px 8px;
+                border-radius:10px 10px;
+            }
+        </style>
+        <script>
+            function onclickShowImg(url){
+                alert(url);
+            }
+        </script>
+    </head>
+    <body>
+        ${_BODY_CONTENT_}
+        <div class="topic">
+                <div class="content">
+                    1.XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;
+                </div>
+                <div>
+                    <img class="option_img_n" onclick="onclickShowImg('sdfs')" src="http://pic.51yuansu.com/pic3/cover/02/99/29/5addac9946eb6_610.jpg"/>
+                    <img class="option_img_n" src="http://pic.51yuansu.com/pic3/cover/02/99/29/5addac9946eb6_610.jpg"/>
+                </div>
+            </div>
+        <div class="topic">
+            <div class="content">
+                1.XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;
+            </div>
+            <div>
+                <p class="option_selecte_n">1.XXXXXXX</p>
+                <p class="option_selecte_r">1.XXXXXXX</p>
+                <p class="option_selecte_w">1.XXXXXXX</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="content">
+                1.XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;
+            </div>
+            <div>
+                <p class="option_judge_n">对</p>
+                <p class="option_judge_r">错</p>
+            </div>
+        </div>
+        <div class="topic">
+            <div class="content">
+                1.XXXXXXXXXXXXXXXXXXXXXXXXXXXXX;
+            </div>
+            <div>
+                <p class="option_judge_w">对</p>
+                <p class="option_judge_n">错</p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -18,8 +18,8 @@ NS_ENUM(PYRequestType) {
 
 
 @interface PYNetNormal : NSObject
-//http请求反馈
 
+//http请求反馈
 @property (nonatomic, strong, nullable) id userInfo;
 @property (nonatomic, strong, nonnull) NSString * url;
 @property (nonatomic) NSStringEncoding encoding;

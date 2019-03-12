@@ -43,13 +43,26 @@ extern CGFloat PYPopupAnimationTime;
 //popupBlockTap == nil  点击空白区域隐藏
 @property (nonatomic,copy, nullable) void (^popupBlockTap)(UIView * _Nullable view);
 
+//是否显示毛玻璃效果
 @property (nonatomic, assign) BOOL popupHasEffect;
+//窗口视图
 @property (nonatomic, strong, nonnull) UIView * popupBaseView;
+//父级视图
 @property (nonatomic, readonly, nullable) UIView * popupContentView;
 
--(void) popupShow;
--(void) popupShowForHasContentView:(BOOL) hasContentView;
--(void) popupHidden;
+/**
+ 显示视图
+ */
+-(BOOL) popupShow;
+/**
+ 显示视图
+ @params hasContentView 是否拥有父级视图
+ */
+-(BOOL) popupShowForHasContentView:(BOOL) hasContentView;
+/**
+ 隐藏视图
+ */
+-(BOOL) popupHidden;
 
 -(void) resetTransform;
 -(void) resetAutoLayout;

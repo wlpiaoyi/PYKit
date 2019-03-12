@@ -13,6 +13,7 @@
 @interface UIView(Sheet)
 kPNRNN UIView * sheetShowView;
 kPNCNA NSArray<NSNumber *> * sheetIndexs;
+kPNCNA BOOL (^sheetBlockSelecting) (NSMutableArray<NSNumber *> * _Nonnull  beforeIndexs, NSUInteger cureentIndex);
 kPNA BOOL sheetIsHiddenOnClick;
 -(void) sheetShow;
 -(void) sheetShowWithTitle:(nullable NSString *) title

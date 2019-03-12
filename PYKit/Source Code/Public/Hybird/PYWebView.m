@@ -8,12 +8,12 @@
 
 #import "PYWebView.h"
 #import "PYHybirdUtile.h"
-
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <objc/runtime.h>
 #import <WebKit/WebKit.h>
 #import "pyutilea.h"
 #import "pyinterflowa.h"
+#import "PYWebViewDelegate.h"
 
 @interface PYScheduleView:UIView
 kPNA CGFloat schedule;
@@ -78,12 +78,13 @@ self.schedule = self.schedule;
 kSOULDLAYOUTMEND
 @end
 
-static NSString * PYWebViewPrompt = @"qqpiaoyi_prompt";
+@interface PYWebView()
 
-@interface PYWebView()<WKUIDelegate,WKNavigationDelegate>
-kPNA id <WKNavigationDelegate> navigationDelegatec;
-kPNA id <WKUIDelegate> UIDelegatec;
+kPNSNA id <WKNavigationDelegate> navigationDelegatet;
+kPNSNA id <WKUIDelegate> UIDelegatet;
 
+kPNANA id <WKNavigationDelegate> navigationDelegatec;
+kPNANA id <WKUIDelegate> UIDelegatec;
 kPNSNN NSMutableDictionary<NSString* , NSDictionary *> * interfacesDict;
 kPNSNN PYScheduleView * progressView;
 kPNSNN WKNavigation * navigation;
@@ -119,8 +120,10 @@ kINITPARAMS{
     [PYViewAutolayoutCenter persistConstraint:_progressView relationmargins:UIEdgeInsetsMake(0, 0 , DisableConstrainsValueMAX, 0) relationToItems:PYEdgeInsetsItemNull()];
     _progressView.hidden = YES;
     
-    self.UIDelegate = self;
-    self.navigationDelegate = self;
+    self.UIDelegatet = [PYWebViewUIDelegate new];
+    self.navigationDelegatet = [PYWebViewNavigationDelegate new];
+    self.UIDelegate = self.UIDelegatet;
+    self.navigationDelegate = self.navigationDelegatet;
 }
 
 -(void) reloadInjectJS{
@@ -187,6 +190,7 @@ kINITPARAMS{
     }
 }
 -(void) showProgress:(CGFloat) progeress{
+    if(!_isShowProgress) return;
     _progressView.schedule = progeress;
     _progressView.hidden = NO;
     _progressView.alpha = 1;
@@ -195,9 +199,10 @@ kINITPARAMS{
 }
 -(void) scheduledTimerEnd{
     NSError * erro = [NSError errorWithDomain:NSNetServicesErrorDomain code:1860504 userInfo:@{@"describle":@"Gateway Timeout"}];
-    [self webView:self didFailProvisionalNavigation:self.navigation withError:erro];
+    [self.navigationDelegatec webView:self didFailProvisionalNavigation:self.navigation withError:erro];
 }
 -(void) hiddenProgress{
+    if(!_isShowProgress) return;
     if(self.timer) [self.timer invalidate];
     self.timer = nil;
     _progressView.schedule = 1;
@@ -212,162 +217,19 @@ kINITPARAMS{
     }];
 }
 -(void) setUIDelegate:(id<WKUIDelegate>)UIDelegate{
-    if(UIDelegate != self){
-        self.UIDelegatec = UIDelegate;
-    }else{
+    if([UIDelegate isKindOfClass:[PYWebViewUIDelegate class]]){
         [super setUIDelegate:UIDelegate];
+    }else{
+        self.UIDelegatec = UIDelegate;
     }
 }
 -(void) setNavigationDelegate:(id<WKNavigationDelegate>)navigationDelegate{
-    if(navigationDelegate != self){
-        self.navigationDelegatec = navigationDelegate;
-    }else{
+    if(navigationDelegate && [navigationDelegate isKindOfClass:[PYWebViewNavigationDelegate class]]){
         [super setNavigationDelegate:navigationDelegate];
-    }
-}
-#pragma WKNavigationDelegate ==>
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];
     }else{
-        decisionHandler(WKNavigationActionPolicyAllow);
+        self.navigationDelegatec = navigationDelegate;
     }
 }
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView decidePolicyForNavigationResponse:navigationResponse decisionHandler:decisionHandler];
-    }else{
-        decisionHandler(WKNavigationResponsePolicyAllow);
-    }
-}
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
-    self.navigation = navigation;
-    [self showProgress:0.3];
-
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView didStartProvisionalNavigation:navigation];
-    }
-}
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
-    self.navigation = navigation;
-    _progressView.schedule = 0.6;
-
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView didReceiveServerRedirectForProvisionalNavigation:navigation];
-    }
-}
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    if(self.navigation == navigation) [self hiddenProgress];
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView didFailProvisionalNavigation:navigation withError:error];
-    }
-}
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-    _progressView.schedule = 0.8;
-
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView didCommitNavigation:navigation];
-    }
-}
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
-    if(self.navigation == navigation) [self hiddenProgress];
-
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView didFinishNavigation:navigation];
-    }
-}
-
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView didFailNavigation:navigation withError:error];
-    }
-}
-
-- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler{
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webView:webView didReceiveAuthenticationChallenge:challenge completionHandler:completionHandler];
-    }else{
-        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
-    }
-}
-
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView{
-    if([self.navigationDelegatec respondsToSelector:_cmd]){
-        [self.navigationDelegatec webViewWebContentProcessDidTerminate:webView];
-    }
-}
-#pragma WKNavigationDelegate <==
-
-#pragma WKUIDelegate ==>
-- (nullable WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
-    if([self.UIDelegatec respondsToSelector:_cmd]){
-        return [self.UIDelegatec webView:webView createWebViewWithConfiguration:configuration forNavigationAction:navigationAction windowFeatures:windowFeatures];
-    }else{
-        return nil;
-    }
-}
-- (void)webViewDidClose:(WKWebView *)webView{
-    if([self.UIDelegatec respondsToSelector:_cmd]){
-        return [self.UIDelegatec webViewDidClose:webView];
-    }
-}
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
-    if([self.UIDelegatec respondsToSelector:_cmd]){
-        [self.UIDelegatec webView:webView runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
-    }else{
-        UIView * view = [UIView new];
-        [view dialogShowWithTitle:webView.title.length ? webView.title : @"提示" message:message block:^(UIView * _Nonnull view, NSUInteger index) {
-            [view dialogHidden];
-            completionHandler();
-        } buttonNames:@[@"确定"]];
-    }
-}
-- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler{
-    if([self.UIDelegatec respondsToSelector:_cmd]){
-        [self.UIDelegatec webView:webView runJavaScriptConfirmPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
-    }else{
-        UIView * view = [UIView new];
-        [view dialogShowWithTitle:webView.title message:message block:^(UIView * _Nonnull view, NSUInteger index) {
-            [view dialogHidden];
-            completionHandler(index != 0);
-        } buttonNames:@[@"确定",@"取消"]];
-    }
-}
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
-    if ([prompt isEqual:PYWebViewPrompt]) {
-        NSDictionary * jsDict = [[defaultText dataUsingEncoding:NSUTF8StringEncoding] toDictionary];
-        NSDictionary * interfaceDict = self.interfacesDict[jsDict[@"instanceName"]];
-        NSDictionary * resultDict = [PYHybirdUtile invokeInstanceFromJs:jsDict interfaceDict:interfaceDict];
-        completionHandler([[resultDict toData] toString]);
-    }else{
-        if([self.UIDelegatec respondsToSelector:_cmd]){
-            [self.UIDelegatec webView:webView runJavaScriptTextInputPanelWithPrompt:prompt defaultText:defaultText initiatedByFrame:frame completionHandler:completionHandler];
-        }else{
-            completionHandler(@"success");
-        }
-    }
-}
-- (BOOL)webView:(WKWebView *)webView shouldPreviewElement:(WKPreviewElementInfo *)elementInfo{
-    if([self.UIDelegatec respondsToSelector:_cmd]){
-        return [self.UIDelegate webView:webView shouldPreviewElement:elementInfo];
-    }else{
-        return true;
-    }
-}
-- (nullable UIViewController *)webView:(WKWebView *)webView previewingViewControllerForElement:(WKPreviewElementInfo *)elementInfo defaultActions:(NSArray<id <WKPreviewActionItem>> *)previewActions{
-    if([self.UIDelegatec respondsToSelector:_cmd]){
-        return [self.UIDelegate webView:webView previewingViewControllerForElement:elementInfo defaultActions:previewActions];
-    }else{
-        return nil;
-    }
-}
-- (void)webView:(WKWebView *)webView commitPreviewingViewController:(UIViewController *)previewingViewController{
-    if([self.UIDelegatec respondsToSelector:_cmd]){
-        [self.UIDelegate webView:webView commitPreviewingViewController:previewingViewController];
-    }
-}
-#pragma WKUIDelegate <==
 
 
 @end

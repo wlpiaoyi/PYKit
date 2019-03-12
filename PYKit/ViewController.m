@@ -39,7 +39,8 @@ PYPNSNN NSArray * datas;
                    @{@"name":@"image", @"id":@"image"},
                    @{@"name":@"slider", @"id":@"slider"},
                    @{@"name":@"check", @"id":@"check"},
-                   @{@"name":@"map", @"id":@"map"}
+                   @{@"name":@"map", @"id":@"map"},
+                   @{@"name":@"webview", @"id":@"webview"}
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
