@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "15CC07DD1EA7556C0006B505"
+            BuildableName = "PYKit.app"
+            BlueprintName = "PYKit"
+            ReferencedContainer = "container:PYKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "15CC085F1EA757A60006B505"
-            BuildableName = "libpykita.a"
-            BlueprintName = "pykita"
+            BlueprintIdentifier = "15CC07DD1EA7556C0006B505"
+            BuildableName = "PYKit.app"
+            BlueprintName = "PYKit"
             ReferencedContainer = "container:PYKit.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

@@ -126,7 +126,7 @@
         }
         const char * encode = [invocaton.methodSignature methodReturnType];
         
-        id value = nil;
+        NSObject * value = nil;
         if(strcasecmp(encode, @encode(int)) == 0){;
             int v;
             [PYInvoke excuInvoke:&v returnType:nil invocation:invocaton];
@@ -163,7 +163,10 @@
             [PYInvoke excuInvoke:&v returnType:nil invocation:invocaton];
             value = [NSString stringWithUTF8String:v];
         }else if(strcasecmp(encode, @encode(id)) == 0){
-            [PYInvoke excuInvoke:&value returnType:nil invocation:invocaton];
+            void * pointer = NULL;
+            [PYInvoke excuInvoke:&pointer returnType:nil invocation:invocaton];
+
+            value = CFBridgingRelease(CFBridgingRetain((__bridge id _Nullable)(pointer)));
         }else if(strcasecmp(encode, @encode(void)) == 0){
             [PYInvoke excuInvoke:nil returnType:nil invocation:invocaton];
         }else{
