@@ -8,6 +8,7 @@
 
 #import "PYHybirdUtile.h"
 #import "PYInvoke.h"
+#import "pyutilea.h"
 
 
 @implementation PYHybirdUtile
@@ -165,8 +166,22 @@
         }else if(strcasecmp(encode, @encode(id)) == 0){
             void * pointer = NULL;
             [PYInvoke excuInvoke:&pointer returnType:nil invocation:invocaton];
-
-            value = CFBridgingRelease(CFBridgingRetain((__bridge id _Nullable)(pointer)));
+            if(pointer != NULL || pointer != nil){
+                value = CFBridgingRelease(CFBridgingRetain((__bridge id _Nullable)(pointer)));
+                if([value isKindOfClass:[NSString class]]){
+                    value = value;
+                }else if([value isKindOfClass:[NSDictionary class]]){
+                    value = [[((NSDictionary *)value) toData] toString];
+                }else if([value isKindOfClass:[NSData class]]){
+                    value = [((NSData *)value) toString];
+                }else if([value isKindOfClass:[NSNumber class]]){
+                    value = [((NSNumber *)value) stringValueWithPrecision:10];
+                }else if([value isKindOfClass:[NSDate class]]){
+                    value = [((NSDate *) value) dateFormateDate:nil];
+                }else if([value isKindOfClass:[NSURL class]]){
+                    value = [((NSURL *)value) absoluteString];
+                }else value = [value description];
+            }else value = nil;
         }else if(strcasecmp(encode, @encode(void)) == 0){
             [PYInvoke excuInvoke:nil returnType:nil invocation:invocaton];
         }else{
