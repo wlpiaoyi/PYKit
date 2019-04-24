@@ -20,9 +20,12 @@ kPNSNA PYWebView * webView;
     [super viewDidLoad];
     self.webView = [PYWebView new];
     [self.view addSubview:self.webView];
-    [PYViewAutolayoutCenter persistConstraint:self.webView relationmargins:UIEdgeInsetsZero relationToItems:PYEdgeInsetsItemNull()];
-    [self.webView loadHTMLString:[NSString stringWithContentsOfFile:kFORMAT(@"%@/1.html", bundleDir) encoding:NSUTF8StringEncoding error:nil] baseURL:nil];
+    [PYViewAutolayoutCenter persistConstraint:self.webView relationmargins:UIEdgeInsetsMake(60, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
+//    [self.webView loadHTMLString:[NSString stringWithContentsOfFile:kFORMAT(@"%@/1.html", bundleDir) encoding:NSUTF8StringEncoding error:nil] baseURL:nil];
+    self.webView.isShowProgress = YES;
     self.webView.navigationDelegate = self;
+    [self.webView loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:kFORMAT(@"https://www.cnblogs.com/wb145230/p/4610017.html?uuid=%@", PYUUID(20))]]];
+    
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
@@ -37,5 +40,9 @@ kPNSNA PYWebView * webView;
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void) dealloc{
+    NSLog(@"======");
+}
 
 @end

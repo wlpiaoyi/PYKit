@@ -25,6 +25,7 @@
 		151AA85920A1A2E800B58AB9 /* PYSliderDoubleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 151AA85620A1750600B58AB9 /* PYSliderDoubleView.m */; };
 		152289F21F4E6C9000E02321 /* timg.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 152289F11F4E6C9000E02321 /* timg.jpeg */; };
 		1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
+		15265ACA226F2204004D633C /* 100063.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15265AC9226F2204004D633C /* 100063.mp3 */; };
 		152AAAA81FFB6EFD00370DF8 /* PYTestSelectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 152AAAA71FFB6EFD00370DF8 /* PYTestSelectorController.m */; };
 		152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C31931F0DD6EC006FD18C /* PYAudioRecord.m */; };
 		152F58B31F4BDD09006528C7 /* PYHybirdUtile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 150C6EE41F4AC7B200731FC7 /* PYHybirdUtile.h */; };
@@ -239,6 +240,7 @@
 		152289F11F4E6C9000E02321 /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
 		1522C7BC1F18A1BC003CB0D0 /* PYTextInputCheckParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTextInputCheckParams.h; sourceTree = "<group>"; };
 		1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTextInputCheckParams.m; sourceTree = "<group>"; };
+		15265AC9226F2204004D633C /* 100063.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 100063.mp3; sourceTree = "<group>"; };
 		152AAAA61FFB6EFD00370DF8 /* PYTestSelectorController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestSelectorController.h; sourceTree = "<group>"; };
 		152AAAA71FFB6EFD00370DF8 /* PYTestSelectorController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestSelectorController.m; sourceTree = "<group>"; };
 		152C31921F0DD6EC006FD18C /* PYAudioRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAudioRecord.h; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 		15CC07D51EA7556C0006B505 = {
 			isa = PBXGroup;
 			children = (
+				15265AC9226F2204004D633C /* 100063.mp3 */,
 				1502A59A223A3E6B00F0787A /* Library */,
 				1502A5CF223A413B00F0787A /* PYInterflow.bundle */,
 				15CC08791EA7595A0006B505 /* PYKit.bundle */,
@@ -812,7 +815,7 @@
 				TargetAttributes = {
 					15CC07DD1EA7556C0006B505 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = S4NUSJ3KDJ;
+						DevelopmentTeam = TVXZ27JPZ9;
 						ProvisioningStyle = Automatic;
 					};
 					15CC085F1EA757A60006B505 = {
@@ -827,6 +830,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -852,6 +856,7 @@
 				159C3A851F56AF6900167B3E /* py_webview_hybird.js in Resources */,
 				159884801F6B99FE00E589D3 /* icon.png in Resources */,
 				152289F21F4E6C9000E02321 /* timg.jpeg in Resources */,
+				15265ACA226F2204004D633C /* 100063.mp3 in Resources */,
 				15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */,
 				15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */,
 				15CC07EE1EA7556C0006B505 /* Assets.xcassets in Resources */,
@@ -1081,7 +1086,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Leo Cloudless (SFR9NKH7W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				DEVELOPMENT_TEAM = TVXZ27JPZ9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1128,7 +1133,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Leo Cloudless (SFR9NKH7W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
+				DEVELOPMENT_TEAM = TVXZ27JPZ9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

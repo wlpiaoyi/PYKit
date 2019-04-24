@@ -33,10 +33,15 @@ void _hook_remoteControlReceivedWithEvent_(id target, SEL action, UIEvent * rece
 void _hook_outputDeviceChanged_(id target, SEL action, NSNotification * aNotification){
     NSNumber *routeNum = aNotification.userInfo[AVAudioSessionRouteChangeReasonKey];
     id<PYAudioPlayer> player = [PYAudioMapTable objectForKey:@"player"];
+    id<PYAudioRemote> remote = player.delegate;
     if (routeNum && routeNum.intValue == 1) {
-        [player play];
+        if(!remote || ![remote respondsToSelector:@selector(pause:)] || [remote pause:player]){
+            [player pause];
+        }
     }else if(routeNum && routeNum.intValue == 2){
-        [player pause];
+        if(!remote || ![remote respondsToSelector:@selector(play:)] || [remote play:player]){
+            [player play];
+        }
     }
 }
 
@@ -46,61 +51,65 @@ void _hook_outputDeviceChanged_(id target, SEL action, NSNotification * aNotific
     PYAudioMapTable = [NSMapTable weakToStrongObjectsMapTable];
 }
 +(void) backgourndPlay:(BOOL) flag{
-    //==>可以后台播放
-    /*在info.plist里面添加
-     <key>Required background modes</key>
-     <array>
-     <string>App plays audio</string>
-     </array>
-     即可。*/
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:NO error:nil];
     ///<==
-    
     //注册远程控制
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 
 }
 
 + (void) remoteControlReceivedWithEvent:(UIEvent *) receivedEvent player:(id<PYAudioPlayer>) player{
+    id<PYAudioRemote> remote = player.delegate;
     if (receivedEvent.type == UIEventTypeRemoteControl) {
         
         switch (receivedEvent.subtype) {
-                
             case UIEventSubtypeRemoteControlPlay:{
-                [player play];
+                if(!remote || ![remote respondsToSelector:@selector(play:)] || [remote play:player]){
+                    [player play];
+                }
             }
                 break;
                 
             case UIEventSubtypeRemoteControlPause:{
-                [player pause];
+                if(!remote || ![remote respondsToSelector:@selector(pause:)] || [remote pause:player]){
+                    [player pause];
+                }
             }
                 break;
                 
             case UIEventSubtypeRemoteControlNextTrack:{
-                if(![player next]){
-                    player.indexPlay = 0;
+                if(remote && [remote respondsToSelector:@selector(next:)]){
+                    [remote next:player];
                 }
             }
                 break;
                 
             case UIEventSubtypeRemoteControlPreviousTrack:{
-                if(![player previous]){
-                    player.indexPlay = [player.arrayAudiosURL count] - 1;
+                if(remote && [remote respondsToSelector:@selector(previous:)]){
+                    [remote previous:player];
                 }
             }
                 break;
             case UIEventSubtypeRemoteControlTogglePlayPause:{
                 switch (player.playerStatus) {
-                    case PYAudioPlayerStatusPlay:{
-                        [player pause];
-                    }
+                    case PYAudioPlayerStatusPause:
+                        if(!remote || ![remote respondsToSelector:@selector(play:)] || [remote play:player]){
+                            [player play];
+                        }
                         break;
-                        
-                    default:{
-                        [player play];
-                    }
+                    case PYAudioPlayerStatusPlay:
+                        if(!remote || ![remote respondsToSelector:@selector(pause:)] || [remote pause:player]){
+                            [player pause];
+                        }
+                        break;
+                    case PYAudioPlayerStatusStop:
+                        if(!remote || ![remote respondsToSelector:@selector(play:)] || [remote play:player]){
+                            [player play];
+                        }
+                        break;
+                    default:
                         break;
                 }
             }

@@ -11,8 +11,13 @@
 
 @interface PYAudioTools : NSObject
 /**
- 后台运行
- */
+可以后台播放
+/*在info.plist里面添加
+<key>Required background modes</key>
+<array>
+<string>App plays audio</string>
+</array>
+即可。*/
 +(void) backgourndPlay:(BOOL) flag;
 /**
  远程控制

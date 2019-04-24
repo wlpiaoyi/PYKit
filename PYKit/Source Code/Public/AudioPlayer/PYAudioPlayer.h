@@ -16,14 +16,18 @@ extern unsigned int DEFAULT_NUMBEROFLOOPS;
 //默认进度
 extern float DEFAULT_PROGRESS;
 SINGLETON_SYNTHESIZE_FOR_hCLASS(PYAudioPlayer, NSObject, <PYAudioPlayer>)
-@property (nonatomic, strong,readonly) AVAudioPlayer *player;
-//播放文件的index
-@property (nonatomic) NSUInteger indexPlay;
-//播放文件列表
-@property (nonatomic, copy) NSMutableArray *arrayAudiosURL;
-//当前文件信息
-@property (nonatomic, strong, readonly) NSDictionary *audioInfo;
 
-@property (nonatomic, readonly) PYAudioPlayerStatus playerStatus;
+kPNAR PYAudioPlayerStatus playerStatus;
+kPNRNA AVAudioPlayer * player;
+kPNANA id<PYAudioRemote> delegate;
+
+kPNRNA NSURL * audioUrl;
+kPNRNA NSDictionary * audioInfo;
+
+/**
+ 准备播放
+ */
+- (nullable NSDictionary *) prepareWithUrl:(nonnull NSString *) url;
+
 @end
 

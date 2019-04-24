@@ -13,40 +13,32 @@
  播放状态
  */
 typedef enum{
+    PYAudioPlayerStatusUnkown,
     PYAudioPlayerStatusPrepare,
     PYAudioPlayerStatusPlay,
     PYAudioPlayerStatusPause,
     PYAudioPlayerStatusStop
 } PYAudioPlayerStatus;
 
+@protocol PYAudioRemote;
+
 @protocol PYAudioPlayer <NSObject>
 
-@property (nonatomic, strong,readonly) AVAudioPlayer * _Nonnull player;
-//播放文件的index
-@property (nonatomic) NSUInteger indexPlay;
-//播放文件列表
-@property (nonatomic, copy) NSMutableArray * _Nonnull arrayAudiosURL;
-//当前文件信息
-@property (nonatomic, strong, readonly) NSDictionary * _Nullable audioInfo;
+@required
 
-@property (nonatomic, readonly) PYAudioPlayerStatus playerStatus;
-/**
- 添加音频播放文件URL
- */
-- (void) addAudioUrl:(NSURL * _Nonnull) url;
-/**
- 添加音频播放文件名称
- */
-- (void) addAudioName:(NSString * _Nonnull) name ofType:(NSString * _Nonnull) ofType;
-/**
- 开始播放
- */
-- (BOOL) play;
+kPNAR PYAudioPlayerStatus playerStatus;
+kPNRNA AVAudioPlayer * player;
+kPNANA id<PYAudioRemote> delegate;
+
 /**
  从指定的位置播放
  @progress 0-1
  */
-- (BOOL) playProgress:(CGFloat) progress;
+- (BOOL) skip:(CGFloat) progress;
+/**
+ 播放
+ */
+- (BOOL) play;
 /**
  暂停
  */
@@ -55,12 +47,24 @@ typedef enum{
  停止
  */
 - (BOOL) stop;
+@end
+
+@protocol PYAudioRemote <NSObject>
 /**
- 下一个
+ 播放
  */
-- (BOOL) next;
+@optional - (BOOL) play:(nonnull id<PYAudioPlayer>) player;
+/**
+ 暂停
+ */
+@optional - (BOOL) pause:(nonnull id<PYAudioPlayer>) player;
 /**
  上一个
  */
-- (BOOL) previous;
+@required - (BOOL) previous:(nonnull id<PYAudioPlayer>) player;
+/**
+ 下一个
+ */
+@required - (BOOL) next:(nonnull id<PYAudioPlayer>) player;
+
 @end

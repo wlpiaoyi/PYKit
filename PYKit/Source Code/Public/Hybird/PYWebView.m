@@ -17,6 +17,7 @@
 
 @interface PYScheduleView:UIView
 kPNA CGFloat schedule;
+kPNSNA void (^block) (void);
 kPNSNN UIColor * pColor;
 kPNSNN UIColor * bColor;
 kSOULDLAYOUTP
@@ -49,6 +50,10 @@ kSOULDLAYOUTP
     [PYViewAutolayoutCenter persistConstraint:_psView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
     [PYViewAutolayoutCenter persistConstraint:_bsView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
     return self;
+}
+
+-(void) forBlock{
+    if(self.block) _block();
 }
 
 -(void) setSchedule:(CGFloat)schedule{
@@ -194,8 +199,14 @@ kINITPARAMS{
     _progressView.schedule = progeress;
     _progressView.hidden = NO;
     _progressView.alpha = 1;
+#pragma NSTimer导致的处理内存溢出
+    kAssign(self);
+    _progressView.block = ^{
+        kStrong(self);
+        [self scheduledTimerEnd];
+    };
     if(self.timer) [self.timer invalidate];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:300 target:self selector:@selector(scheduledTimerEnd) userInfo:nil repeats:NO];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:300 target:_progressView selector:@selector(forBlock) userInfo:nil repeats:NO];
 }
 -(void) scheduledTimerEnd{
     NSError * erro = [NSError errorWithDomain:NSNetServicesErrorDomain code:1860504 userInfo:@{@"describle":@"Gateway Timeout"}];
@@ -224,11 +235,24 @@ kINITPARAMS{
     }
 }
 -(void) setNavigationDelegate:(id<WKNavigationDelegate>)navigationDelegate{
+    
     if(navigationDelegate && [navigationDelegate isKindOfClass:[PYWebViewNavigationDelegate class]]){
         [super setNavigationDelegate:navigationDelegate];
     }else{
         self.navigationDelegatec = navigationDelegate;
     }
+}
+
+-(void) clearConfigure{
+    _navigationDelegatec = nil;
+    _UIDelegatec = nil;
+    [super setNavigationDelegate:nil];
+    [super setUIDelegate:nil];
+}
+-(void) dealloc{
+    [self stopLoading];
+    [self clearConfigure];
+    if(self.timer) [self.timer invalidate];
 }
 
 

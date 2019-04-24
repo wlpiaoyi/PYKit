@@ -19,4 +19,5 @@
 -(void) addJavascriptInterface:(nonnull NSObject *) interface name:(nullable NSString *) name;
 -(void) removeJavascriptInterfaceWithName:(nullable NSString *) name;
 -(void) reloadInjectJS;
+-(void) clearConfigure;
 @end

@@ -11,6 +11,7 @@
 #import "PYCalendarParam.h"
 #import "PYSelectorBarView.h"
 #import "PYDisplayImageTools.h"
+#import "PYAudioPlayer.h"
 @interface AppDelegate ()
 
 @end
@@ -21,6 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [PYCalendarParam loadCalendarData];
     [PYDisplayImageTools class];
+    [[PYAudioPlayer sharedPYAudioPlayer] prepareWithUrl:kFORMAT(@"%@/100063.mp3", bundleDir)];
+    [[PYAudioPlayer sharedPYAudioPlayer] play];
     return YES;
 }
 
