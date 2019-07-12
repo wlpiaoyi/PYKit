@@ -38,18 +38,51 @@ SINGLETON_SYNTHESIZE_FOR_mCLASS(PYAudioPlayer){
 /**
  准备播放
  */
-- (nullable NSDictionary *) prepareWithUrl:(nonnull NSString *) url{
-    _audioUrl = nil;
+- (nullable NSDictionary *) prepareWithData:(nonnull NSData *) data{
     @synchronized(self) {
         [self stop];
-        _audioUrl = [NSURL URLWithString:url];
-        if(_audioUrl == nil) return nil;
-        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:_audioUrl error:nil];
-        if(DEFAULT_VOLUME >= 0)_player.volume = DEFAULT_VOLUME; //0.0-1.0之间
-        _player.numberOfLoops = DEFAULT_NUMBEROFLOOPS;//循环播放次数
+        NSError * erro;
+        _player = [[AVAudioPlayer alloc] initWithData:data error:&erro];
+        if(erro){
+            kPrintErrorln("py-player is play erro for code:%ld domain:%s", erro.code, erro.domain.UTF8String);
+            return nil;
+        }
+        if(!_player) return nil;
+        //0.0-1.0之间
+        if(DEFAULT_VOLUME >= 0)_player.volume = DEFAULT_VOLUME;
+        //循环播放次数
+        _player.numberOfLoops = DEFAULT_NUMBEROFLOOPS;
         
-        if(_player)_audioInfo = [PYAudioTools getAudioInfoByUrl:_audioUrl];
-        else return nil;
+        if (![self skip:DEFAULT_PROGRESS]) return nil;
+        _playerStatus = PYAudioPlayerStatusPrepare;
+        
+        _player.delegate = self;
+        
+    }
+    return _audioInfo ? : @{};
+}
+
+/**
+ 准备播放
+ */
+- (nullable NSDictionary *) prepareWithUrl:(nonnull NSString *) url{
+    @synchronized(self) {
+        [self stop];
+        NSURL * audioUrl = [NSURL URLWithString:url];
+        if(audioUrl == nil) return nil;
+        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioUrl error:nil];
+        NSError * erro;
+        if(erro){
+            kPrintErrorln("py-player is play erro for code:%ld domain:%s", erro.code, erro.domain.UTF8String);
+            return nil;
+        }
+        if(!_player) return nil;
+        //0.0-1.0之间
+        if(DEFAULT_VOLUME >= 0)_player.volume = DEFAULT_VOLUME;
+        //循环播放次数
+        _player.numberOfLoops = DEFAULT_NUMBEROFLOOPS;
+        
+        _audioInfo = [PYAudioTools getAudioInfoByUrl:audioUrl];
         
         if (![self skip:DEFAULT_PROGRESS]) return nil;
         _playerStatus = PYAudioPlayerStatusPrepare;

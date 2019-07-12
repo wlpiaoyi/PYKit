@@ -12,7 +12,9 @@
 
 static NSString * PYAsyImageViewDataCaches;
 
-@interface PYAsyImageView()
+@interface PYAsyImageView(){
+    NSTimeInterval static_pre_time_interval;
+}
 kPNSNN UIActivityIndicatorView * activityIndicator;
 kPNSNN UIView * activityView;
 kPNSNN UILabel * activityLabel;
@@ -69,6 +71,60 @@ kPNSNN UIColor * fillColor;
     
     return imagePath;
 }
+-(void) imageDownloadIng:(PYNetDownload * _Nonnull) target  currentBytes:(int64_t) currentBytes totalBytes:(int64_t) totalBytes{
+    [self.lock lock];
+    if(self.blockProgress){
+        self.blockProgress((double)currentBytes/(double)totalBytes, self);
+    }
+    if(self.hasPercentage){
+        if([NSDate timeIntervalSinceReferenceDate] - static_pre_time_interval > 0.2){
+            self.currentBytes = currentBytes;
+            self.totalBytes = totalBytes;
+            [self.graphicsThumb executDisplay:nil];
+            if(self.currentBytes < 1024 * 1024)
+                self.activityLabel.text = kFORMAT(@"%.2fKB", (double)self.currentBytes / (double)1024);
+            else
+                self.activityLabel.text = kFORMAT(@"%.2fMB", (double)self.currentBytes / (double)(1024 * 1024));
+            static_pre_time_interval = [NSDate timeIntervalSinceReferenceDate];
+        }
+    }
+    [self.lock unlock];
+}
+-(void) imageDownloadComplete:(PYNetwork * _Nonnull) target data:(id  _Nullable) data response:(NSURLResponse * _Nullable) response{
+    [self.lock lock];
+    @try{
+        [self.activityIndicator stopAnimating];
+        self.activityView.hidden = YES;
+        self.cachesUrl = nil;
+        if(data  != nil && [data isKindOfClass:[NSError class]]){
+            NSLog(@"[erro code:%ld] [erro domain;%@] [erro description:%@]", (long)((NSError*)data).code, ((NSError*)data).domain, ((NSError*)data).description);
+            return;
+        }
+        if(data == nil || ![data isKindOfClass:[NSString class]]){
+            return;
+        }
+        BOOL isDirectory = false;
+        if(![[NSFileManager defaultManager] fileExistsAtPath:data isDirectory:&isDirectory] || isDirectory){
+            return;
+        }
+        NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:self.imgUrl];
+        imagePath = imagePath ? imagePath : self.imgUrl;
+        NSError * erro;
+        if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]) [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
+        erro = nil;
+        [[NSFileManager defaultManager] moveItemAtPath:data toPath:imagePath error:&erro];
+        if(erro == nil){
+            self.cachesUrl = imagePath;
+            if(self.blockDisplay){
+                self.blockDisplay(true,false, self);
+            }
+        }else{
+            NSLog(@"%@ image errocode:%ld, errodomain:%@",NSStringFromClass([PYAsyImageView class]), (long)[erro code], [erro domain]);
+        }
+    }@finally{
+        [self.lock unlock];
+    }
+}
 
 kINITPARAMS{
     self.lock = [NSLock new];
@@ -79,60 +135,11 @@ kINITPARAMS{
         return true;
     }];
     __unsafe_unretained typeof(self) uself = self;
-    static NSTimeInterval static_pre_time_interval = 0;
     [self.dnw setBlockDownloadProgress:^(PYNetDownload * _Nonnull target, int64_t currentBytes, int64_t totalBytes) {
-        [uself.lock lock];
-        if(uself.blockProgress){
-            uself.blockProgress((double)currentBytes/(double)totalBytes, uself);
-        }
-        if(uself.hasPercentage){
-            if([NSDate timeIntervalSinceReferenceDate] - static_pre_time_interval > 0.2){
-                uself.currentBytes = currentBytes;
-                uself.totalBytes = totalBytes;
-                [uself.graphicsThumb executDisplay:nil];
-                if(self.currentBytes < 1024 * 1024)
-                    uself.activityLabel.text = kFORMAT(@"%.2fKB", (double)self.currentBytes / (double)1024);
-                else
-                    uself.activityLabel.text = kFORMAT(@"%.2fMB", (double)self.currentBytes / (double)(1024 * 1024));
-                static_pre_time_interval = [NSDate timeIntervalSinceReferenceDate];
-            }
-        }
-        [uself.lock unlock];
+        [uself imageDownloadIng:target currentBytes:currentBytes totalBytes:totalBytes];
     }];
     [self.dnw setBlockComplete:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetwork * _Nonnull target) {
-        [uself.lock lock];
-        @try{
-            [uself.activityIndicator stopAnimating];
-            uself.activityView.hidden = YES;
-            uself.cachesUrl = nil;
-            if(data  != nil && [data isKindOfClass:[NSError class]]){
-                NSLog(@"[erro code:%ld] [erro domain;%@] [erro description:%@]", (long)((NSError*)data).code, ((NSError*)data).domain, ((NSError*)data).description);
-                return;
-            }
-            if(data == nil || ![data isKindOfClass:[NSString class]]){
-                return;
-            }
-            BOOL isDirectory = false;
-            if(![[NSFileManager defaultManager] fileExistsAtPath:data isDirectory:&isDirectory] || isDirectory){
-                return;
-            }
-            NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:uself.imgUrl];
-            imagePath = imagePath ? imagePath : uself.imgUrl;
-            NSError * erro;
-            if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]) [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
-            erro = nil;
-            [[NSFileManager defaultManager] moveItemAtPath:data toPath:imagePath error:&erro];
-            if(erro == nil){
-                uself.cachesUrl = imagePath;
-                if(uself.blockDisplay){
-                    uself.blockDisplay(true,false, uself);
-                }
-            }else{
-                NSLog(@"%@ image errocode:%ld, errodomain:%@",NSStringFromClass([PYAsyImageView class]), (long)[erro code], [erro domain]);
-            }
-        }@finally{
-            [uself.lock unlock];
-        }
+        [uself imageDownloadComplete:target data:data response:response];
     }];
     [self.dnw setBlockCancel:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetDownload * _Nonnull target) {
         [uself.lock lock];
@@ -178,6 +185,7 @@ kINITPARAMS{
 }
 -(void) setImgUrl:(NSString *)imgUrl{
     _imgUrl = imgUrl;
+    static_pre_time_interval = 0;
     [self.dnw interrupt];
     NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:self.imgUrl];
     if(imagePath == nil){
@@ -237,7 +245,7 @@ kINITPARAMS{
     [self.dnw setBlockComplete:nil];
     [self.dnw setBlockSendProgress:nil];
     [self.dnw setBlockDownloadProgress:nil];
-    [self.dnw cancel];
+    [self.dnw interrupt];
     [self.activityIndicator stopAnimating];
     self.activityView.hidden = YES;
     [self.lock unlock];

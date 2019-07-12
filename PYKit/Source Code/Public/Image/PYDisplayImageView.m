@@ -194,11 +194,11 @@ kINITPARAMS{
     _touchState = PYDisplayImageTouchChange;
     _touchIndex -= touches.count;
     if(_touchIndex > 0) return;
-    @unsafeify(self);
+    kAssign(self);
     [UIView animateWithDuration:0.15 animations:^{
-        @strongify(self);
+        kStrong(self);
         CGRect displayRect = self.imageView.frame;
-        [PYDisplayImageTools checkDisplayRect:&displayRect fitRect:_imgFitRect maxMultiple:self.maxMultiple];
+        [PYDisplayImageTools checkDisplayRect:&displayRect fitRect:self->_imgFitRect maxMultiple:self.maxMultiple];
         self.imageView.frame = displayRect;
     }];
     [self initTouchData];
@@ -208,11 +208,11 @@ kINITPARAMS{
     _touchState = PYDisplayImageTouchChange;
     _touchIndex -= touches.count;
     if(_touchIndex > 0) return;
-    @unsafeify(self);
+    kAssign(self);
     [UIView animateWithDuration:0.15 animations:^{
-        @strongify(self);
+        kStrong(self);
         CGRect displayRect = self.imageView.frame;
-        [PYDisplayImageTools checkDisplayRect:&displayRect fitRect:_imgFitRect maxMultiple:self.maxMultiple];
+        [PYDisplayImageTools checkDisplayRect:&displayRect fitRect:self->_imgFitRect maxMultiple:self.maxMultiple];
         self.imageView.frame = displayRect;
     }];
     [self initTouchData];
@@ -249,5 +249,8 @@ kINITPARAMS{
 kSOULDLAYOUTMSTARTForType(PYDisplayImageView)
 [self synchronizedImageSize];
 kSOULDLAYOUTMEND
+-(void) dealloc{
+    NSLog(@"");
+}
 @end
 

@@ -20,8 +20,6 @@ SINGLETON_SYNTHESIZE_FOR_hCLASS(PYAudioPlayer, NSObject, <PYAudioPlayer>)
 kPNAR PYAudioPlayerStatus playerStatus;
 kPNRNA AVAudioPlayer * player;
 kPNANA id<PYAudioRemote> delegate;
-
-kPNRNA NSURL * audioUrl;
 kPNRNA NSDictionary * audioInfo;
 
 /**
