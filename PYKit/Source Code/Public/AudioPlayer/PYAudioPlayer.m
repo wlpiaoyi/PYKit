@@ -70,8 +70,8 @@ SINGLETON_SYNTHESIZE_FOR_mCLASS(PYAudioPlayer){
         [self stop];
         NSURL * audioUrl = [NSURL URLWithString:url];
         if(audioUrl == nil) return nil;
-        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioUrl error:nil];
         NSError * erro;
+        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioUrl error:&erro];
         if(erro){
             kPrintErrorln("py-player is play erro for code:%ld domain:%s", erro.code, erro.domain.UTF8String);
             return nil;

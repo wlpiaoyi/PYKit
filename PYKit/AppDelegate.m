@@ -22,8 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [PYCalendarParam loadCalendarData];
     [PYDisplayImageTools class];
-//    [[PYAudioPlayer sharedPYAudioPlayer] prepareWithUrl:kFORMAT(@"%@/100063.mp3", bundleDir)];
-//    [[PYAudioPlayer sharedPYAudioPlayer] play];
+    [[PYAudioPlayer sharedPYAudioPlayer] prepareWithUrl:@"https://pp.ting55.com/201908221229/7cef186d6d8ee5404870ec022e67bc53/2015/08/1787/28.mp3"];
+    [[PYAudioPlayer sharedPYAudioPlayer] play];
     return YES;
 }
 
