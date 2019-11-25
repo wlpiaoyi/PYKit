@@ -38,6 +38,7 @@ static PYAudioRecord * xPYAudioRecord;
 @property (nonatomic, strong, nonnull) AVAudioSession *session;
 @property (nonatomic, strong, nonnull) AVAudioRecorder * recorder;
 @property (nonatomic, strong, nullable) NSURL * path;
+
 @end
 
 @implementation PYAudioRecord
@@ -52,19 +53,19 @@ static PYAudioRecord * xPYAudioRecord;
 -(instancetype) init{
     if(self = [super init]){
         _status = PYAudioRecordPrepare;
+        _session =[AVAudioSession sharedInstance];
     }
     return self;
 }
+
 -(BOOL) start:(nonnull NSURL *) path settings:(nullable NSDictionary<NSString *, id> *)settings {
     if(_status == PYAudioRecordIng) return false;
     _status = PYAudioRecordPrepare;
-    AVAudioSession *session =[AVAudioSession sharedInstance];
     NSError *error;
-    [session setActive:YES error:&error];
+    [_session setActive:YES error:&error];
     if (error) {
         NSLog(@"Alert setActive true session: %@",[error description]);
     }
-    self.session = session;
 
     self.path = path;
     NSMutableDictionary * mutableSettings = [NSMutableDictionary new];
@@ -115,6 +116,9 @@ static PYAudioRecord * xPYAudioRecord;
         self.recorder.meteringEnabled = YES;
         [self.recorder prepareToRecord];
         [self.recorder record];
+        if(![self.recorder isRecording]){
+            return false;
+        }
     }else{
         NSLog(@"音频格式和文件存储格式不匹配,无法初始化Recorder");
         return false;
@@ -141,6 +145,7 @@ static PYAudioRecord * xPYAudioRecord;
     return true;
 }
 -(nonnull NSURL *) stop{
+    [_session setActive:false error:nil];
     if(_status == PYAudioRecordEnd) return nil;
     _status = PYAudioRecordPrepare;
     if ([self.recorder isRecording]) {

@@ -10,7 +10,7 @@
 #import "PYGraphicsDraw.h"
 #import "PYGraphicsThumb.h"
 #import "PYViewAutolayoutCenter.h"
-#import "UIColor+Expand.h"
+#import "UIColor+PYExpand.h"
 
 int kSelectorbarviewtag = 1860005;
 

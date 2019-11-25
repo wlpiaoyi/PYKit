@@ -51,6 +51,7 @@ NSString * PYWebViewPrompt = @"qqpiaoyi_prompt";
         [webView.UIDelegatec webView:webView runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
     }else{
         UIView * view = [UIView new];
+        view.dialogShowView.popupBlockTap = ^(UIView * _Nullable view) {};
         [view dialogShowWithTitle:webView.title.length ? webView.title : @"提示" message:message block:^(UIView * _Nonnull view, NSUInteger index) {
             [view dialogHidden];
             completionHandler();
@@ -62,6 +63,7 @@ NSString * PYWebViewPrompt = @"qqpiaoyi_prompt";
         [webView.UIDelegatec webView:webView runJavaScriptConfirmPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
     }else{
         UIView * view = [UIView new];
+        view.dialogShowView.popupBlockTap = ^(UIView * _Nullable view) {};
         [view dialogShowWithTitle:webView.title message:message block:^(UIView * _Nonnull view, NSUInteger index) {
             [view dialogHidden];
             completionHandler(index != 0);

@@ -8,8 +8,8 @@
 
 #import "PYTextInputCheckParams.h"
 #import <objc/runtime.h>
-#import "NSNumber+Expand.h"
-#import "NSString+Expand.h"
+#import "NSNumber+PYExpand.h"
+#import "NSString+PYExpand.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 NSString * _UITextInputCheckDictKeyInteger = @"Integer";

@@ -7,8 +7,8 @@
 //
 
 #import "UITextField+PYCheck.h"
-#import "NSNumber+Expand.h"
-#import "NSString+Expand.h"
+#import "NSNumber+PYExpand.h"
+#import "NSString+PYExpand.h"
 #import "UIResponder+Hook.h"
 #import "UIView+Dialog.h"
 #import <objc/runtime.h>

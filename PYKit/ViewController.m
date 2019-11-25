@@ -112,6 +112,7 @@ PYPNSNN NSArray * datas;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    kFORMAT(@"%d,%ld", indexPath.row, indexPath.section);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self performSegueWithIdentifier:self.datas[indexPath.row][@"id"] sender:nil];
 }

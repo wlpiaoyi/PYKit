@@ -8,8 +8,8 @@
 
 #import "PYSelectorBarView.h"
 #import "PYViewAutolayoutCenter.h"
-#import "UIImage+Expand.h"
-#import "UIView+Expand.h"
+#import "UIImage+PYExpand.h"
+#import "UIView+PYExpand.h"
 @interface PYSelectorBarView(){
 }
 kSOULDLAYOUTPForType(PYSelectorBarView)

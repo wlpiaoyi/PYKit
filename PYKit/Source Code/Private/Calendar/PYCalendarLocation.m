@@ -8,7 +8,7 @@
 
 #import "PYCalendarLocation.h"
 #import "PYCalendarLunar.h"
-#import "NSDate+Expand.h"
+#import "NSDate+PYExpand.h"
 #import "calendar_lunar.h"
 PYCalendarSolarTerm * PRECALENDERSOLARTERMS;
 @implementation PYCalendarLocation
