@@ -20,14 +20,15 @@ kPNSNA PYWebView * webView;
     [super viewDidLoad];
     self.webView = [PYWebView new];
     [self.view addSubview:self.webView];
-    [PYViewAutolayoutCenter persistConstraint:self.webView relationmargins:UIEdgeInsetsMake(60, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull()];
+    [PYViewAutolayoutCenter persistConstraint:self.webView relationmargins:UIEdgeInsetsZero controller:self];
     
     [self.webView loadHTMLString:[NSString stringWithContentsOfFile:kFORMAT(@"%@/1.html", bundleDir) encoding:NSUTF8StringEncoding error:nil] baseURL:nil];
     [self.webView reloadInjectJS];
     [self.webView addJavascriptInterface:self name:@"aa"];
-//    self.webView.isShowProgress = YES;
+    
+    self.webView.isShowProgress = YES;
 //    self.webView.navigationDelegate = self;
-//    [self.webView loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:kFORMAT(@"https://www.cnblogs.com/wb145230/p/4610017.html?uuid=%@", PYUUID(20))]]];
+//    [self.webView loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:kFORMAT(@"https://www.baidu.com?uuid=%@", PYUUID(20))]]];
 //    unpayed-alarm-new-container
 //    default-buttons uap-default-button
 //    confirm-button

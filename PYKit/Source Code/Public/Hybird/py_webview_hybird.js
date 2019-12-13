@@ -1,4 +1,7 @@
-var hybirdPrompt = "qqpiaoyi_prompt";
+if(ios == undefined){
+    var ios = {};
+}
+ios.hybirdPrompt = "qqpiaoyi_prompt";
 window.hybird = {
     call : undefined,
     persistInstance : undefined,
@@ -23,7 +26,7 @@ window.hybird.call = function (instanceName, methodName, params){
             methodName:methodName,
             params:params
         };
-        var resultValue = window.prompt(hybirdPrompt,JSON.stringify(nativeParams));
+        var resultValue = window.prompt(ios.hybirdPrompt,JSON.stringify(nativeParams));
         if(resultValue){
             if(typeof resultValue == "string"){
                 var obj = eval("("+resultValue+")");

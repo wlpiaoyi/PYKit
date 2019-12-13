@@ -1,0 +1,30 @@
+//
+//  PYNavigationControll.h
+//  PYKit
+//
+//  Created by wlpiaoyi on 2019/12/10.
+//  Copyright © 2019 wlpiaoyi. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "pyutilea.h"
+#import "PYNavigationStyleModel.h"
+
+@protocol PYNavigationSetterTag <NSObject> @end
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface PYNavigationControll : NSObject
+/**
+ 设置全局默认BackItem
+ */
++(void) setBackItemWithPopImage:(nonnull UIImage *) popImage dismissImage:(nonnull UIImage *) dismissImage;
+
+/*
+ 设置全局导航栏样式
+ */
++(void) setNavigationWithBarStyle:(nonnull PYNavigationStyleModel *) barStyle;
+
+@end
+
+NS_ASSUME_NONNULL_END

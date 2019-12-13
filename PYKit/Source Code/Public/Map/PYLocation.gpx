@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Xcode">
+    
+    <!--
+     Provide one or more waypoints containing a latitude/longitude pair. If you provide one
+     waypoint, Xcode will simulate that specific location. If you provide multiple waypoints,
+     Xcode will simulate a route visiting each waypoint.
+     -->
+    <wpt lat="30.67" lon="104.07">
+        <name>Cupertino</name>
+        
+        <!--
+         Optionally provide a time element for each waypoint. Xcode will interpolate movement
+         at a rate of speed based on the time elapsed between each waypoint. If you do not provide
+         a time element, then Xcode will use a fixed rate of speed.
+         
+         Waypoints must be sorted by time in ascending order.
+         -->
+        <time>2014-09-24T14:55:37Z</time>
+    </wpt>
+    
+</gpx>
+<gpx version="1.1"
+
+    creator="GMapToGPX 6.4j - http://www.elsewhere.org/GMapToGPX/"
+
+    xmlns="http://www.topografix.com/GPX/1/1"
+
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+    <wpt lat="31.255713422688655" lon="121.51010557702513">
+
+        九寨沟
+
+        <cmt>九寨沟</cmt>
+
+        九寨沟
+
+</gpx>
+
+作者：FM_0138
+链接：https://www.jianshu.com/p/2aea3c40341a
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

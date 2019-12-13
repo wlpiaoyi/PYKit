@@ -12,6 +12,29 @@
 #import "PYSelectorBarView.h"
 #import "PYDisplayImageTools.h"
 #import "PYAudioPlayer.h"
+@interface UIViewController(HookInitM)
+
+@end
+@implementation UIViewController(HookInitM)
+
+
+- (instancetype)exchangeInitWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil{
+    typeof(self) obj = [self exchangeInitWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    obj.modalPresentationStyle = UIModalPresentationFullScreen;
+    return obj;
+}
+- (nullable instancetype)exchangeInitWithCoder:(NSCoder *)coder{
+    typeof(self) obj = [self exchangeInitWithCoder:coder];
+    obj.modalPresentationStyle = UIModalPresentationFullScreen;
+    return obj;
+}
+
++(void) hookInitM{
+    [self hookInstanceMethodName:@"initWithCoder:"];
+    [self hookInstanceMethodName:@"initWithNibName:bundle:"];
+}
+
+@end
 @interface AppDelegate ()
 
 @end
@@ -21,7 +44,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [PYCalendarParam loadCalendarData];
-    [PYDisplayImageTools class];
+    [PYDisplayImageTools class];[UIViewController hookInitM];
     [[PYAudioPlayer sharedPYAudioPlayer] prepareWithUrl:@"https://pp.ting55.com/201908221229/7cef186d6d8ee5404870ec022e67bc53/2015/08/1787/28.mp3"];
     [[PYAudioPlayer sharedPYAudioPlayer] play];
     return YES;

@@ -20,7 +20,7 @@
     NSArray<NSDictionary*>* datas = [PYInvoke getInstanceMethodInfosWithClass:[instance class]];
     NSMutableString * jsInterface = [NSMutableString new];
     
-    [jsInterface appendFormat:@"var %@ = {\n",name];
+    [jsInterface appendFormat:@"ios.%@ = {\n",name];
     for (NSDictionary * data in datas) {
         NSString * method =  data[@"name"];
         if ([method containsString:@"."]) {

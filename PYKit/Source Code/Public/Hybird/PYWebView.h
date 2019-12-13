@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 
 @interface PYWebView : WKWebView
-@property BOOL isShowProgress;
+@property(nonatomic, assign) BOOL isShowProgress;
 //==>加载web
 - (nullable WKNavigation *)loadRequest:(nonnull NSURLRequest *)request;
 - (nullable WKNavigation *)loadFileURL:(nonnull NSURL *)URL allowingReadAccessToURL:(nullable NSURL *)readAccessURL;

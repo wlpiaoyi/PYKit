@@ -27,3 +27,5 @@
 #import "PYAudioRecord.h"
 
 #import "UITextField+PYCheck.h"
+#import "PYKeyboardControll.h"
+#import "PYNavigationControll.h"

@@ -8,9 +8,11 @@
 
 #import "PYTestSelectorController.h"
 #import "PYSelectorBarView.h"
+#import "PYSelectorScrollView.h"
 #import "pyutilea.h"
 
 @interface PYTestSelectorController ()
+@property (weak, nonatomic) IBOutlet PYSelectorScrollView *scroll;
 @property (weak, nonatomic) IBOutlet PYSelectorBarView *bar;
 @end
 
@@ -40,6 +42,16 @@
         }
         return true;
     }];
+    
+    NSMutableArray * btns = [NSMutableArray new];
+    for (int i = 0; i<5; i++) {
+        UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [btn setTitle:@"xx" forState:UIControlStateNormal];
+        [btns addObject:btn];
+    }
+    self.scroll.buttons = btns;
+    self.scroll.contentWidth = 80 * 5;
+    self.scroll.isScorllSelected = false;
 }
 
 - (void)didReceiveMemoryWarning {

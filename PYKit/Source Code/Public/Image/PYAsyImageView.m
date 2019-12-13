@@ -37,7 +37,7 @@ kPNSNN UIColor * fillColor;
     });
 }
 
-+(NSString *) parseImageUrlToImagePath:(NSString *) imageUrl{
++(nonnull NSString *) parseImageUrlToImageTag:(nonnull NSString *) imageUrl{
     if(imageUrl.length < 7) return nil;
     NSRange range = [imageUrl rangeOfString:@"http://"];
     BOOL hasHead = false;
@@ -60,12 +60,16 @@ kPNSNN UIColor * fillColor;
     }
     imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"/" withString:@""];
     imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"?" withString:@""];
+    return imageUrl;
+}
+
++(nonnull NSString *) getImagePathFromImageTag:(nonnull NSString *) imageTag{
     
     NSMutableString * imagePath = [NSMutableString new];
     [imagePath appendString:PYAsyImageViewDataCaches];
     NSMutableString * imageName = [NSMutableString new];
     [imageName appendString:@"PYDATA["];
-    [imageName appendString:imageUrl];
+    [imageName appendString:imageTag];
     [imageName appendString:@"]"];
     [imagePath appendFormat:@"/%@",imageName];
     
@@ -107,7 +111,7 @@ kPNSNN UIColor * fillColor;
         if(![[NSFileManager defaultManager] fileExistsAtPath:data isDirectory:&isDirectory] || isDirectory){
             return;
         }
-        NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:self.imgUrl];
+        NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:self.cacheTag];
         imagePath = imagePath ? imagePath : self.imgUrl;
         NSError * erro;
         if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]) [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
@@ -187,7 +191,8 @@ kINITPARAMS{
     _imgUrl = imgUrl;
     static_pre_time_interval = 0;
     [self.dnw interrupt];
-    NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:self.imgUrl];
+    self.cacheTag = [PYAsyImageView parseImageUrlToImageTag:self.imgUrl];
+    NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:self.cacheTag];
     if(imagePath == nil){
         kPrintExceptionln("setImageUrl:%s","imagepath is null or is not 'http' or 'https'");
         return;
@@ -207,8 +212,9 @@ kINITPARAMS{
     self.activityView.hidden = NO;
 }
 
-+(bool) clearCache:(nonnull NSString *) imgUrl{
-    NSString * imagePath = [PYAsyImageView parseImageUrlToImagePath:imgUrl];
++(bool) clearCache:(nonnull NSString *) imageUrl{
+    NSString * cacheTag = [self parseImageUrlToImageTag:imageUrl] ? : imageUrl;
+    NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:cacheTag];
     if(imagePath == nil) return false;
     NSError * erro;
     [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];

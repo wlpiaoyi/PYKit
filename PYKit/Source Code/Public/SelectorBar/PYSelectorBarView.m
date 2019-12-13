@@ -165,9 +165,6 @@ kINITPARAMSForType(PYSelectorBarView){
     offsetW = offsetW > 0 ? offsetW : 0;
     CGFloat orgSelectIndex = _selectIndex;
     _selectIndex = MAX(0, MIN(self.buttons.count - 1, selectIndex));
-    if(_blockSelectedOpt){
-        _blockSelectedOpt(selectIndex);
-    }
     if(self.selectorTag){
         kAssign(self);
         void (^blockStart)() = ^() {
@@ -217,6 +214,10 @@ kINITPARAMSForType(PYSelectorBarView){
             self.userInteractionEnabled = YES;
             blockEnd();
         }
+    }
+    
+    if(_blockSelectedOpt){
+        _blockSelectedOpt(_selectIndex);
     }
     
     int index = 0;
