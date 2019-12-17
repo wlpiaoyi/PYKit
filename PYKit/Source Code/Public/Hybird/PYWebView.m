@@ -7,7 +7,7 @@
 //
 
 #import "PYWebView.h"
-#import "PYWebView+Schedule.h"
+#import "PYWebView+PYSchedule.h"
 
 @interface PYWebView()
 

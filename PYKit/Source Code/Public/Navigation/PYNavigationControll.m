@@ -18,11 +18,6 @@ static __PY__UIViewcontrollerNavigationImpl * xUIViewcontrollerNavigationImpl;
     });
 }
 
-+(void) setBackItemWithPopImage:(nonnull UIImage *) popImage dismissImage:(nonnull UIImage *) dismissImage{
-    xUIViewcontrollerNavigationImpl.imagePop = popImage;
-    xUIViewcontrollerNavigationImpl.imageDismiss = dismissImage;
-}
-
 /*
  设置全局导航栏样式
  */

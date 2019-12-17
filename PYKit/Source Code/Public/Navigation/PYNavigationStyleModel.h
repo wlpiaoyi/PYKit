@@ -11,9 +11,12 @@
 
 @interface PYNavigationStyleModel : NSObject
 
-kPNA CGSize shadowOffset;      // offset in user space of the shadow from the original drawing
-kPNA CGFloat shadowBlurRadius; // blur radius of the shadow in default user space units
-kPNSNA UIColor * shadowColor;     // color used for the shadow (default is black with an alpha value of 1/3)
+kPNSNA UIImage * popItemimage;
+kPNSNA UIImage * dismissItemimage;
+
+kPNA CGSize textShadowOffset;      // offset in user space of the shadow from the original drawing
+kPNA CGFloat textShadowBlurRadius; // blur radius of the shadow in default user space units
+kPNSNA UIColor * textShadowColor;     // color used for the shadow (default is black with an alpha value of 1/3)
 
 kPNSNA UIColor * titleColor;
 kPNSNA UIFont * titleFont;
@@ -30,6 +33,8 @@ kPNSNA UIImage * lineButtomImage;
 kPNA UIBarMetrics barMetrics;
 
 kPNA UIStatusBarStyle statusBarStyle;
+
+kPNCNA UIView * _Nullable (^blockCreateNavigationBarView) (UIViewController * _Nonnull vc);
 
 -(nonnull instancetype) initForLight;
 

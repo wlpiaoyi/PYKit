@@ -1,12 +1,12 @@
 //
-//  PYWebView+Schedule.m
+//  PYWebView+PYSchedule.m
 //  PYKit
 //
 //  Created by wlpiaoyi on 2019/12/7.
 //  Copyright © 2019 wlpiaoyi. All rights reserved.
 //
 
-#import "PYWebView+Schedule.h"
+#import "PYWebView+PYSchedule.h"
 
 @interface PYWebView()
 
@@ -23,7 +23,7 @@ kPNSNA NSTimer * timer;
 
 @end
 
-@implementation PYWebView(Schedule)
+@implementation PYWebView(PYSchedule)
 
 -(void) initSchedule{
     self.progressView = [PYScheduleView new];

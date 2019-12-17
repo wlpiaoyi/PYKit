@@ -120,7 +120,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBl-Tv-bFL" customClass="PYSelectorBarView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBl-Tv-bFL">
                                 <rect key="frame" x="16" y="44" width="343" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbH-7M-FWb">
@@ -218,7 +218,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="jXf-kw-Gbe"/>
                     <connections>
-                        <outlet property="bar" destination="PBl-Tv-bFL" id="JPD-6n-NLb"/>
                         <outlet property="scroll" destination="Tlk-qC-BoD" id="WbI-aj-jHP"/>
                     </connections>
                 </viewController>

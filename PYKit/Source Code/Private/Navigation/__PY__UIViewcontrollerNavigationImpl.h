@@ -14,13 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface __PY__UIViewcontrollerNavigationImpl : NSObject<UIViewcontrollerHookViewDelegate>
 
-kPNSNA UIImage * imagePop;
-kPNSNA UIImage * imageDismiss;
-
 kPNSNA PYNavigationStyleModel * barStyle;
-
-kPNCNA BOOL (^blockBeforeBarStyle) (UIViewController * _Nonnull vc, NSObject *_Nullable* _Nullable userInfo);
-kPNCNA BOOL (^blockAfterBarStyle) (UIViewController * _Nonnull vc, NSObject * _Nullable userInfo);
 
 @end
 

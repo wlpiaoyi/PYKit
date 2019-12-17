@@ -1,5 +1,5 @@
 //
-//  PYWebView+Schedule.h
+//  PYWebView+PYSchedule.h
 //  PYKit
 //
 //  Created by wlpiaoyi on 2019/12/7.
@@ -26,7 +26,7 @@ kPNSNN UIColor * bColor;
 kSOULDLAYOUTP
 @end
 
-@interface PYWebView(Schedule)
+@interface PYWebView(PYSchedule)
 kPNA BOOL isShowProgress;
 -(void) initSchedule;
 -(void) showProgress:(CGFloat) progeress;

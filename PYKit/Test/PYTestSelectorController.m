@@ -49,6 +49,7 @@
         [btn setTitle:@"xx" forState:UIControlStateNormal];
         [btns addObject:btn];
     }
+    self.scroll.selectorTagWidth = 40;
     self.scroll.buttons = btns;
     self.scroll.contentWidth = 80 * 5;
     self.scroll.isScorllSelected = false;

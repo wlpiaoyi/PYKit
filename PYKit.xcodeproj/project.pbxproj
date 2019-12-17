@@ -84,8 +84,8 @@
 		15C5F46E239F4C140009B7E0 /* PYNavigationControll.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15C5F462239F42190009B7E0 /* PYNavigationControll.h */; };
 		15C5F472239F8CDB0009B7E0 /* __PY_UIResponderHookKeyboardImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C5F471239F8CDB0009B7E0 /* __PY_UIResponderHookKeyboardImpl.m */; };
 		15C5F473239F8CEE0009B7E0 /* __PY_UIResponderHookKeyboardImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C5F471239F8CDB0009B7E0 /* __PY_UIResponderHookKeyboardImpl.m */; };
-		15CB315D239B5A74005344EF /* PYWebView+Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CB315C239B5A74005344EF /* PYWebView+Schedule.m */; };
-		15CB315E239B5DA5005344EF /* PYWebView+Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CB315C239B5A74005344EF /* PYWebView+Schedule.m */; };
+		15CB315D239B5A74005344EF /* PYWebView+PYSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CB315C239B5A74005344EF /* PYWebView+PYSchedule.m */; };
+		15CB315E239B5DA5005344EF /* PYWebView+PYSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CB315C239B5A74005344EF /* PYWebView+PYSchedule.m */; };
 		15CC07E31EA7556C0006B505 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E21EA7556C0006B505 /* main.m */; };
 		15CC07E61EA7556C0006B505 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E51EA7556C0006B505 /* AppDelegate.m */; };
 		15CC07E91EA7556C0006B505 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07E81EA7556C0006B505 /* ViewController.m */; };
@@ -320,8 +320,8 @@
 		15C5F463239F42190009B7E0 /* PYNavigationControll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYNavigationControll.m; sourceTree = "<group>"; };
 		15C5F470239F8CDB0009B7E0 /* __PY_UIResponderHookKeyboardImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __PY_UIResponderHookKeyboardImpl.h; sourceTree = "<group>"; };
 		15C5F471239F8CDB0009B7E0 /* __PY_UIResponderHookKeyboardImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = __PY_UIResponderHookKeyboardImpl.m; sourceTree = "<group>"; };
-		15CB315B239B5A74005344EF /* PYWebView+Schedule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PYWebView+Schedule.h"; sourceTree = "<group>"; };
-		15CB315C239B5A74005344EF /* PYWebView+Schedule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PYWebView+Schedule.m"; sourceTree = "<group>"; };
+		15CB315B239B5A74005344EF /* PYWebView+PYSchedule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PYWebView+PYSchedule.h"; sourceTree = "<group>"; };
+		15CB315C239B5A74005344EF /* PYWebView+PYSchedule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PYWebView+PYSchedule.m"; sourceTree = "<group>"; };
 		15CC07DE1EA7556C0006B505 /* PYKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CC07E21EA7556C0006B505 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		15CC07E41EA7556C0006B505 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -699,8 +699,8 @@
 		15CB315F239B5DD1005344EF /* Hybird */ = {
 			isa = PBXGroup;
 			children = (
-				15CB315B239B5A74005344EF /* PYWebView+Schedule.h */,
-				15CB315C239B5A74005344EF /* PYWebView+Schedule.m */,
+				15CB315B239B5A74005344EF /* PYWebView+PYSchedule.h */,
+				15CB315C239B5A74005344EF /* PYWebView+PYSchedule.m */,
 			);
 			path = Hybird;
 			sourceTree = "<group>";
@@ -976,7 +976,7 @@
 				15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */,
 				15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */,
 				15DB8CA5210C122700AA2CF9 /* PYMapView+Region.m in Sources */,
-				15CB315D239B5A74005344EF /* PYWebView+Schedule.m in Sources */,
+				15CB315D239B5A74005344EF /* PYWebView+PYSchedule.m in Sources */,
 				15DB8CA3210C122700AA2CF9 /* PYAnnotation.m in Sources */,
 				15417B3E1EADCF4B009C894F /* NSDate+Lunar.m in Sources */,
 				15BD959720BC048100A5811A /* PYTestCheckController.m in Sources */,
@@ -1034,7 +1034,7 @@
 				15D42AED23A3A77E00BAA1C7 /* PYNavigationStyleModel.m in Sources */,
 				15C5F473239F8CEE0009B7E0 /* __PY_UIResponderHookKeyboardImpl.m in Sources */,
 				15C5F46D239F4BF50009B7E0 /* PYNavigationControll.m in Sources */,
-				15CB315E239B5DA5005344EF /* PYWebView+Schedule.m in Sources */,
+				15CB315E239B5DA5005344EF /* PYWebView+PYSchedule.m in Sources */,
 				159F241E2397F5C600C95278 /* PYKeyboardOptionView.m in Sources */,
 				159F24202397F5C600C95278 /* PYKeyboardControll.m in Sources */,
 				15F9695B2229093B0000CE37 /* PYWebViewDelegate.m in Sources */,

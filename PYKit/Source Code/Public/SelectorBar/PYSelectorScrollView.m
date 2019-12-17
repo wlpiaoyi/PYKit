@@ -16,6 +16,7 @@ int kSelectorbarviewtag = 1860005;
 
 @interface PYSelectorScrollView()<UIScrollViewDelegate>{
 @private
+    UIView * __ssv_contentView;
     UIScrollView * _scrollView;
     UIView * _ssv_contentView;
     PYGraphicsThumb * _graphicsThumb;
@@ -91,6 +92,7 @@ kINITPARAMSForType(PYSelectorScrollView){
     _scrollView = [UIScrollView new];
     _ssv_contentView = [UIView new];
     [_ssv_contentView addSubview:contentView];
+    __ssv_contentView = contentView;
     
 }
 
@@ -101,15 +103,18 @@ kINITPARAMSForType(PYSelectorScrollView){
 -(void) setContentWidth:(CGFloat)contentWidth animation:(BOOL) animation{
     _contentWidth = contentWidth;
     _ssv_contentView.frame = CGRectMake(0, 0, MAX(contentWidth, self.frame.size.width), self.frame.size.height);
+    __ssv_contentView.frame = _ssv_contentView.frame;
     _scrollView.contentSize = _ssv_contentView.frame.size;
     kAssign(self);
     void (^block)() = ^() {
         kStrong(self);
         CGFloat width = self->_ssv_contentView.frame.size.width / MAX(1, self.buttons.count);
         CGFloat height = MIN(MAX(0, self.selectorTagHeight), self->_ssv_contentView.frame.size.height);
-        CGRect rect = CGRectMake(width * self.selectIndex
-                                 ,  self->_ssv_contentView.frame.size.height - height
-                                 , width, height);
+        CGFloat offsetW = (self.selectorTagWidth > 0 && self.selectorTagWidth < width) ? (width - self.selectorTagWidth)/2 : 0;
+        offsetW = offsetW > 0 ? offsetW : 0;
+        CGRect rect = CGRectMake(width * self.selectIndex + offsetW
+                                 ,  self.contentView.frame.size.height - height
+                                 , width - offsetW * 2, height);
         self.selectorTag.frame = rect;
         CGPoint contentOffset = self->_scrollView.contentOffset;
         if(self.isScorllSelected){

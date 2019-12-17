@@ -191,7 +191,8 @@ kINITPARAMS{
     _imgUrl = imgUrl;
     static_pre_time_interval = 0;
     [self.dnw interrupt];
-    self.cacheTag = [PYAsyImageView parseImageUrlToImageTag:self.imgUrl];
+    if(_cacheTag == nil || _cacheTag.length == 0)
+        self.cacheTag = [PYAsyImageView parseImageUrlToImageTag:self.imgUrl];
     NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:self.cacheTag];
     if(imagePath == nil){
         kPrintExceptionln("setImageUrl:%s","imagepath is null or is not 'http' or 'https'");

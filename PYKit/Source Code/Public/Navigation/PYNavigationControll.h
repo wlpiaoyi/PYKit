@@ -15,11 +15,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PYNavigationControll : NSObject
-/**
- 设置全局默认BackItem
- */
-+(void) setBackItemWithPopImage:(nonnull UIImage *) popImage dismissImage:(nonnull UIImage *) dismissImage;
-
 /*
  设置全局导航栏样式
  */

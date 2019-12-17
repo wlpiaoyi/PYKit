@@ -10,6 +10,19 @@
 #import "PYViewAutolayoutCenter.h"
 #import "UIImage+PYExpand.h"
 #import "UIView+PYExpand.h"
+
+@interface __PYSelectorView : UIView
+
+@end
+
+@implementation __PYSelectorView
+
+-(void) setFrame:(CGRect)frame{
+    [super setFrame:frame];
+}
+
+@end
+
 @interface PYSelectorBarView(){
 }
 kSOULDLAYOUTPForType(PYSelectorBarView)
@@ -50,7 +63,7 @@ kINITPARAMSForType(PYSelectorBarView){
     _selectIndex = 0;
     _selectorTagHeight = 3;
     if(self.selectorTag == nil){
-        UIView * selectorTag = [UIView new];
+        UIView * selectorTag = [__PYSelectorView new];
         selectorTag.backgroundColor = [UIColor orangeColor];
         selectorTag.contentMode = UIViewContentModeScaleAspectFit;
         [selectorTag setCornerRadiusAndBorder:2 borderWidth:1 borderColor:[UIColor clearColor]];
@@ -197,6 +210,9 @@ kINITPARAMSForType(PYSelectorBarView){
                                      ,  self.contentView.frame.size.height - height
                                      , width - offsetW * 2, height);
             self.selectorTag.frame = rect;
+            if(self.blockSelectedOpt){
+                self.blockSelectedOpt(self.selectIndex);
+            }
         };
         
         if(animation){
@@ -214,10 +230,6 @@ kINITPARAMSForType(PYSelectorBarView){
             self.userInteractionEnabled = YES;
             blockEnd();
         }
-    }
-    
-    if(_blockSelectedOpt){
-        _blockSelectedOpt(_selectIndex);
     }
     
     int index = 0;

@@ -32,12 +32,12 @@
 }
 
 -(void) initDarkParams{
-    self.shadowOffset = CGSizeZero;
+    self.textShadowOffset = CGSizeZero;
     self.barMetrics =  UIBarMetricsDefault;
     self.statusBarStyle = UIStatusBarStyleLightContent;
     self.lineButtomImage = [UIImage new];
-    self.shadowBlurRadius = 0;
-    self.shadowColor = [UIColor clearColor];
+    self.textShadowBlurRadius = 0;
+    self.textShadowColor = [UIColor clearColor];
     self.titleColor = [UIColor whiteColor];
     self.titleFont = [UIFont systemFontOfSize:20];
     self.itemColor = [UIColor whiteColor];
@@ -49,7 +49,7 @@
 }
 
 -(void) initLightParams{
-    self.shadowOffset = CGSizeZero;
+    self.textShadowOffset = CGSizeZero;
     self.barMetrics =  UIBarMetricsDefault;
     if (@available(iOS 13.0, *)) {
         self.statusBarStyle = UIStatusBarStyleDarkContent;
@@ -57,8 +57,8 @@
         self.statusBarStyle = UIStatusBarStyleDefault;
     }
     self.lineButtomImage = [UIImage new];
-    self.shadowBlurRadius = 0;
-    self.shadowColor = [UIColor clearColor];
+    self.textShadowBlurRadius = 0;
+    self.textShadowColor = [UIColor clearColor];
     self.titleColor = [UIColor darkTextColor];
     self.titleFont = [UIFont systemFontOfSize:20];
     self.itemColor = [UIColor whiteColor];
@@ -90,14 +90,14 @@
     if (!shadow) {
         shadow = [[NSShadow alloc] init];
     }
-    if (barStyle.shadowOffset.width != CGSizeZero.width && barStyle.shadowOffset.height != CGSizeZero.height) {
-        shadow.shadowOffset = barStyle.shadowOffset;
+    if (barStyle.textShadowOffset.width != CGSizeZero.width && barStyle.textShadowOffset.height != CGSizeZero.height) {
+        shadow.shadowOffset = barStyle.textShadowOffset;
     }
-    if (barStyle.shadowBlurRadius != CGFLOAT_MIN) {
-        shadow.shadowBlurRadius = barStyle.shadowBlurRadius;
+    if (barStyle.textShadowBlurRadius != CGFLOAT_MIN) {
+        shadow.shadowBlurRadius = barStyle.textShadowBlurRadius;
     }
-    if (barStyle.shadowColor) {
-        shadow.shadowColor = barStyle.shadowColor;
+    if (barStyle.textShadowColor) {
+        shadow.shadowColor = barStyle.textShadowColor;
     }
     titleTextAttributes[NSShadowAttributeName] = shadow;
     
@@ -113,9 +113,8 @@
     if (barStyle.tintColor) {
         [navigationBar setTintColor:barStyle.tintColor];
     }
-    if (barStyle.backgroundColor) {
-        [navigationBar setBackgroundColor:barStyle.backgroundColor];
-    }else if (barStyle.backgroundImage) {
+    if(barStyle.backgroundImage){
+        [navigationBar setBackgroundColor:[UIColor clearColor]];
         [navigationBar setBackgroundImage:barStyle.backgroundImage forBarMetrics:barStyle.barMetrics];
     }
     
@@ -151,14 +150,14 @@
     if (!shadow) {
         shadow = [[NSShadow alloc] init];
     }
-    if (barStyle.shadowOffset.width != CGSizeZero.width && barStyle.shadowOffset.height != CGSizeZero.height) {
-        shadow.shadowOffset = barStyle.shadowOffset;
+    if (barStyle.textShadowOffset.width != CGSizeZero.width && barStyle.textShadowOffset.height != CGSizeZero.height) {
+        shadow.shadowOffset = barStyle.textShadowOffset;
     }
-    if (barStyle.shadowBlurRadius != CGFLOAT_MIN) {
-        shadow.shadowBlurRadius = barStyle.shadowBlurRadius;
+    if (barStyle.textShadowBlurRadius != CGFLOAT_MIN) {
+        shadow.shadowBlurRadius = barStyle.textShadowBlurRadius;
     }
-    if (barStyle.shadowColor) {
-        shadow.shadowColor = barStyle.shadowColor;
+    if (barStyle.textShadowColor) {
+        shadow.shadowColor = barStyle.textShadowColor;
     }
     titleTextAttributes[NSShadowAttributeName] = shadow;
     if (barStyle.itemColor) {
