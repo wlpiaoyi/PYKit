@@ -19,7 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [PYAsyImageView clearCaches];
+//    [PYAsyImageView clearCaches];
+    self.imageView.cacheTag = @"12123";
     self.imageView.imgUrl = @"http://b.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab4279cc5d939b6003bf3b3c4.jpg";
     NSArray * a = @[
       @"http://img6.3lian.com/c23/desk4/05/77/d/01.jpg",
@@ -31,7 +32,7 @@
       @"http://img6.3lian.com/c23/desk3/11/35/2.jpg",
       @"http://pic5.bbzhi.com/fengjingbizhi/gaoqingziranfengjingbizhi/gaoqingziranfengjingbizhi_415650_15.jpg"
       ];
-    ((PYAsyImageView *)self.dView.imageView).imgUrl = a[(random()%a.count)];
+//    ((PYAsyImageView *)self.dView.imageView).imgUrl = a[(random()%a.count)];
     
 //    [((PYAsyImageView *)self.dView.imageView) setBlockDisplay:^(bool isSuccess, bool isCahes, PYAsyImageView * _Nonnull imageView) {
 //

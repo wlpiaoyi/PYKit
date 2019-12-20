@@ -9,6 +9,7 @@
 #import "PYAsyImageView.h"
 #import "pyutilea.h"
 #import "PYNetDownload.h"
+CFStringRef PY_ASYIMG_PERCENT_FIELD = CFSTR(":/?#[]@!$&’()*+,;=");
 
 static NSString * PYAsyImageViewDataCaches;
 
@@ -187,6 +188,12 @@ kINITPARAMS{
         self.image = nil;
     }
 }
+-(void) setCacheTag:(NSString *)cacheTag{
+//    NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+//    [allowedCharacterSet addCharactersInString:@":/?#[]@!$&’()*+,;="];
+    _cacheTag = [cacheTag stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    _cacheTag = [_cacheTag stringByReplacingOccurrencesOfString:@"/" withString:@""];
+}
 -(void) setImgUrl:(NSString *)imgUrl{
     _imgUrl = imgUrl;
     static_pre_time_interval = 0;
@@ -201,10 +208,12 @@ kINITPARAMS{
     
     if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]){
         self.cachesUrl = imagePath;
-        if(self.blockDisplay){
-            _blockDisplay(true,true, self);
+        if(self.image){
+            if(self.blockDisplay){
+                _blockDisplay(true,true, self);
+            }
+            return;
         }
-        return;
     }
     
     self.dnw.url = imgUrl;
