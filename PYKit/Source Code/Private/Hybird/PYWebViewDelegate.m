@@ -50,24 +50,24 @@ NSString * PYWebViewPrompt = @"qqpiaoyi_prompt";
     if([webView.UIDelegatec respondsToSelector:_cmd]){
         [webView.UIDelegatec webView:webView runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
     }else{
-        UIView * view = [UIView new];
-        view.dialogShowView.popupBlockTap = ^(UIView * _Nullable view) {};
-        [view dialogShowWithTitle:webView.title.length ? webView.title : @"提示" message:message block:^(UIView * _Nonnull view, NSUInteger index) {
+        UIView * dialog = [UIView new];
+        dialog.dialogShowView.popupBlockTap = ^(UIView * _Nullable view) {};
+        [dialog dialogShowWithTitle:webView.title ? :  webView.title  message:message block:^(UIView * _Nonnull view, BOOL isConfirm) {
             [view dialogHidden];
             completionHandler();
-        } buttonNames:@[@"确定"]];
+        } buttonConfirm:@"确定" buttonCancel:nil];
     }
 }
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler{
     if([webView.UIDelegatec respondsToSelector:_cmd]){
         [webView.UIDelegatec webView:webView runJavaScriptConfirmPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
     }else{
-        UIView * view = [UIView new];
-        view.dialogShowView.popupBlockTap = ^(UIView * _Nullable view) {};
-        [view dialogShowWithTitle:webView.title message:message block:^(UIView * _Nonnull view, NSUInteger index) {
+        UIView * dialog = [UIView new];
+        dialog.dialogShowView.popupBlockTap = ^(UIView * _Nullable view) {};
+        [dialog dialogShowWithTitle:webView.title ? :  webView.title  message:message block:^(UIView * _Nonnull view, BOOL isConfirm) {
             [view dialogHidden];
-            completionHandler(index != 0);
-        } buttonNames:@[@"确定",@"取消"]];
+            completionHandler(isConfirm);
+        } buttonConfirm:@"确定" buttonCancel:@"取消"];
     }
 }
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{

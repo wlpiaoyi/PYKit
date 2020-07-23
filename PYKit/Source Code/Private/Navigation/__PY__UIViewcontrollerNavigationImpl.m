@@ -29,10 +29,18 @@
 @end
 
 void __py_navigatioin_popvc(UIViewController * self, SEL _cmd){
+    if([self respondsToSelector:@selector(beforePop:)] && [((id<PYNavigationSetterTag>) self) beforePop:self] == NO){
+        return;
+    }
+//        -(BOOL) beforePop:(nonnull UIViewController *) vc;
+//        -(BOOL) beforeDismiss:(nonnull UIViewController *) vc;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
+    if([self respondsToSelector:@selector(beforeDismiss:)] && [((id<PYNavigationSetterTag>) self) beforeDismiss:self] == NO){
+        return;
+    }
     [(self.navigationController ? : self) dismissViewControllerAnimated:YES completion:^{}];
 }
 

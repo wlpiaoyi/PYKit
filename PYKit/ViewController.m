@@ -19,6 +19,9 @@
 #import "PY3DOrthogonView.h"
 #import "PYAsyImageView.h"
 #import "PYTestSliderController.h"
+#import "PYImagePickerController.h"
+#import "PYCameraPickerController.h"
+
 
 @interface ViewController () <UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>{
 @private
@@ -29,7 +32,6 @@ PYPNSNN NSArray * datas;
 @end
 
 @implementation ViewController
-
 - (void)viewDidLoad {
 //    [PYAsyImageView clearCaches];
     [super viewDidLoad];
@@ -40,7 +42,9 @@ PYPNSNN NSArray * datas;
                    @{@"name":@"slider", @"id":@"slider"},
                    @{@"name":@"check", @"id":@"check"},
                    @{@"name":@"map", @"id":@"map"},
-                   @{@"name":@"webview", @"id":@"webview"}
+                   @{@"name":@"webview", @"id":@"webview"},
+                   @{@"name":@"camera", @"id":@"PYCameraPickerController"},
+                   @{@"name":@"photo", @"id":@"PYImagePickerController"}
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -114,6 +118,22 @@ PYPNSNN NSArray * datas;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     kFORMAT(@"%d,%ld", indexPath.row, indexPath.section);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if([(self.datas[indexPath.row][@"id"]) isEqual:@"PYImagePickerController"]){
+        PYImagePickerController * vc = [PYImagePickerController new];
+        vc.maxSelected = 3;
+        [self presentViewController:vc animated:YES completion:^{
+            
+        }];
+        return;
+    }
+    if([(self.datas[indexPath.row][@"id"]) isEqual:@"PYCameraPickerController"]){
+        PYCameraPickerController * vc = [PYCameraPickerController new];
+        vc.imageSize = CGSizeMake(boundsWidth() / 2, boundsHeight()/2);
+        [self presentViewController:vc animated:YES completion:^{
+            
+        }];
+        return;
+    }
     [self performSegueWithIdentifier:self.datas[indexPath.row][@"id"] sender:nil];
 }
 - (void)didReceiveMemoryWarning {

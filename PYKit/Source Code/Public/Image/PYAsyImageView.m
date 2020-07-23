@@ -9,6 +9,13 @@
 #import "PYAsyImageView.h"
 #import "pyutilea.h"
 #import "PYNetDownload.h"
+
+UIImage * PY_ASY_DEFAULT_IMG;
+UIImage * PY_ASY_NODATA_IMG;
+
+NSDictionary<NSString*, UIImage *> * PY_ASY_DEFAULT_IMG_DICT;
+NSDictionary<NSString*, UIImage *> * PY_ASY_NODATA_IMG_DICT;
+
 CFStringRef PY_ASYIMG_PERCENT_FIELD = CFSTR(":/?#[]@!$&’()*+,;=");
 
 static NSString * PYAsyImageViewDataCaches;
@@ -70,7 +77,7 @@ kPNSNN UIColor * fillColor;
     [imagePath appendString:PYAsyImageViewDataCaches];
     NSMutableString * imageName = [NSMutableString new];
     [imageName appendString:@"PYDATA["];
-    [imageName appendString:imageTag];
+    [imageName appendString:imageTag ? : @""];
     [imageName appendString:@"]"];
     [imagePath appendFormat:@"/%@",imageName];
     
@@ -133,28 +140,8 @@ kPNSNN UIColor * fillColor;
 
 kINITPARAMS{
     self.lock = [NSLock new];
-    self.dnw = [PYNetDownload new];
     self.strokeColor = [UIColor colorWithRGBHex:0x66884466];
     self.fillColor = [UIColor colorWithRGBHex:0x88888833];
-    [self.dnw setBlockReceiveChallenge:^BOOL(id  _Nullable data, PYNetwork * _Nonnull target) {
-        return true;
-    }];
-    __unsafe_unretained typeof(self) uself = self;
-    [self.dnw setBlockDownloadProgress:^(PYNetDownload * _Nonnull target, int64_t currentBytes, int64_t totalBytes) {
-        [uself imageDownloadIng:target currentBytes:currentBytes totalBytes:totalBytes];
-    }];
-    [self.dnw setBlockComplete:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetwork * _Nonnull target) {
-        [uself imageDownloadComplete:target data:data response:response];
-    }];
-    [self.dnw setBlockCancel:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetDownload * _Nonnull target) {
-        [uself.lock lock];
-        [uself.activityIndicator stopAnimating];
-        uself.activityView.hidden = YES;
-        if(uself.blockDisplay){
-            uself.blockDisplay(false,false, uself);
-        }
-        [uself.lock unlock];
-    }];
     self.activityView = [UIView new];
     self.activityView.backgroundColor = [UIColor clearColor];
     kAssign(self);
@@ -179,14 +166,56 @@ kINITPARAMS{
     [self.activityView addSubview:self.activityIndicator];
     [PYViewAutolayoutCenter persistConstraint:self.activityIndicator size:CGSizeMake(30, 30)];
     [PYViewAutolayoutCenter persistConstraint:self.activityIndicator centerPointer:CGPointMake(0, 0)];
+    self.showType = self.showType;
+}
+-(void) setShowType:(NSString *)showType{
+    _showType = showType;
+    if(PY_ASY_DEFAULT_IMG_DICT && self.showType){
+        self.defaultImg = PY_ASY_DEFAULT_IMG_DICT[self.showType];
+    }
+    if(self.defaultImg == nil) self.defaultImg = PY_ASY_DEFAULT_IMG;
+
+    if(PY_ASY_NODATA_IMG_DICT && self.showType){
+        self.noDataImg = PY_ASY_NODATA_IMG_DICT[self.showType];
+    }
+    if(self.noDataImg == nil) self.noDataImg = PY_ASY_NODATA_IMG ? : PY_ASY_DEFAULT_IMG;
+}
+-(void) setDefaultImg:(UIImage *)defaultImg{
+    _defaultImg = defaultImg;
+    if(self.image == nil) self.image = self.defaultImg;
 }
 -(void) setCachesUrl:(NSString *)cachesUrl{
     _cachesUrl = cachesUrl;
     if(_cachesUrl != nil){
-        self.image = [[UIImage alloc] initWithContentsOfFile:self.cachesUrl];
-    }else{
-        self.image = nil;
-    }
+        UIImage * image = [[UIImage alloc] initWithContentsOfFile:self.cachesUrl];
+        if(image && image.size.width > 0 && image.size.height > 0){
+            self.image = image;
+        }else self.image = self.noDataImg;
+    }else self.image = self.noDataImg;
+}
+
+-(PYNetDownload *) createDnw{
+    PYNetDownload * dnw = [PYNetDownload new];
+    [dnw setBlockReceiveChallenge:^BOOL(id  _Nullable data, PYNetwork * _Nonnull target) {
+        return true;
+    }];
+    __unsafe_unretained typeof(self) uself = self;
+    [dnw setBlockDownloadProgress:^(PYNetDownload * _Nonnull target, int64_t currentBytes, int64_t totalBytes) {
+        [uself imageDownloadIng:target currentBytes:currentBytes totalBytes:totalBytes];
+    }];
+    [dnw setBlockComplete:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetwork * _Nonnull target) {
+        [uself imageDownloadComplete:target data:data response:response];
+    }];
+    [dnw setBlockCancel:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetDownload * _Nonnull target) {
+        [uself.lock lock];
+        [uself.activityIndicator stopAnimating];
+        uself.activityView.hidden = YES;
+        if(uself.blockDisplay){
+            uself.blockDisplay(false,false, uself);
+        }
+        [uself.lock unlock];
+    }];
+    return dnw;
 }
 -(void) setCacheTag:(NSString *)cacheTag{
 //    NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
@@ -195,11 +224,19 @@ kINITPARAMS{
     _cacheTag = [_cacheTag stringByReplacingOccurrencesOfString:@"/" withString:@""];
 }
 -(void) setImgUrl:(NSString *)imgUrl{
+    [self setImgUrl:imgUrl cacheTag:nil];
+}
+-(void) setImgUrl:(nonnull NSString *) imgUrl cacheTag:(nullable NSString *) cacheTag{
     _imgUrl = imgUrl;
+    self.image = self.defaultImg;
+    if(imgUrl == nil || imgUrl.length == 0) return;
     static_pre_time_interval = 0;
-    [self.dnw interrupt];
-    if(_cacheTag == nil || _cacheTag.length == 0)
-        self.cacheTag = [PYAsyImageView parseImageUrlToImageTag:self.imgUrl];
+    if(self.dnw) [self.dnw interrupt];
+    else self.dnw = [self createDnw];
+    
+    if(cacheTag == nil || cacheTag.length == 0)
+       [self setCacheTag:[PYAsyImageView parseImageUrlToImageTag:self.imgUrl]];
+    else self.cacheTag = cacheTag;
     NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:self.cacheTag];
     if(imagePath == nil){
         kPrintExceptionln("setImageUrl:%s","imagepath is null or is not 'http' or 'https'");

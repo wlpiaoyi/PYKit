@@ -318,13 +318,14 @@ kINITPARAMSForType(PYKeyboardOptionView){
     lcOptionW = [viewContentRight setAutotLayotDict:@{@"top":@(0),@"w":@(lcOptionWValue),@"bottom":@(0),@"left":@(-self.frameHeight/2)}][@"size"][@"selfWith"];
     [viewContentRight setCornerRadiusAndBorder:self.frameHeight/2 borderWidth:0 borderColor:[UIColor clearColor]];
     b = [self.class __PY_CREATE_BUTTON];
-    [b setTitle:@" △" forState:UIControlStateNormal];
+    
+    [b setTitle:@" ⬆︎" forState:UIControlStateNormal];
     [b addTarget:self action:@selector(onclickPre:) forControlEvents:UIControlEventTouchUpInside];
     [viewContentRight addSubview:b];
     buttonPre = b;
     
     b = [self.class __PY_CREATE_BUTTON];
-    [b setTitle:@" ▽" forState:UIControlStateNormal];
+    [b setTitle:@" ⬇︎" forState:UIControlStateNormal];
     [b addTarget:self action:@selector(onclickNext:) forControlEvents:UIControlEventTouchUpInside];
     [viewContentRight addSubview:b];
     buttonNext = b;

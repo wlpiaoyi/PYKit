@@ -8,8 +8,9 @@
 
 #import "PYTestCheckController.h"
 #import "UITextField+PYCheck.h"
+#import "pykita.h"
 
-@interface PYTestCheckController ()
+@interface PYTestCheckController ()<PYKeyboardOptionTag>
 @property (weak, nonatomic) IBOutlet UITextField *textFieldFloat;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldInt;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldEmail;

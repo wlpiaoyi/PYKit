@@ -62,7 +62,6 @@ kPNSNA NSTimer * timer;
         if(self.progressView.alpha != 1){
             self.progressView.hidden = YES;
             self.progressView.alpha = 1;
-            
         }
     }];
 }
@@ -127,7 +126,7 @@ kPNSNA NSTimer * timer;
 }
 kSOULDLAYOUTMSTART
 self.schedule = self.schedule;
-[_bsView setCornerRadiusAndBorder:self.frameHeight/2 -3 borderWidth:0 borderColor:[UIColor clearColor]];
-[_psView setCornerRadiusAndBorder:self.frameHeight/2 - 3 borderWidth:0 borderColor:[UIColor clearColor]];
+[_bsView setCornerRadiusAndBorder:self.frameHeight / 2 - 3 borderWidth:0 borderColor:[UIColor clearColor]];
+[_psView setCornerRadiusAndBorder:self.frameHeight / 2 - 3 borderWidth:0 borderColor:[UIColor clearColor]];
 kSOULDLAYOUTMEND
 @end

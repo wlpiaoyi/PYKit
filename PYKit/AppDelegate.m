@@ -12,6 +12,7 @@
 #import "PYSelectorBarView.h"
 #import "PYDisplayImageTools.h"
 #import "PYAudioPlayer.h"
+#import "pykita.h"
 @interface UIViewController(HookInitM)
 
 @end
@@ -43,8 +44,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [PYKeyboardControll setControllType:PYKeyboardControllTag];
     [PYCalendarParam loadCalendarData];
-    [PYDisplayImageTools class];[UIViewController hookInitM];
+    [PYDisplayImageTools class];
+    [UIViewController hookInitM];
     [[PYAudioPlayer sharedPYAudioPlayer] prepareWithUrl:@"https://pp.ting55.com/201908221229/7cef186d6d8ee5404870ec022e67bc53/2015/08/1787/28.mp3"];
     [[PYAudioPlayer sharedPYAudioPlayer] play];
     return YES;

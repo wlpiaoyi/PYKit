@@ -19,9 +19,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [PYAsyImageView clearCaches];
-    self.imageView.cacheTag = @"12123";
-    self.imageView.imgUrl = @"http://b.hiphotos.baidu.com/image/pic/item/359b033b5bb5c9eab4279cc5d939b6003bf3b3c4.jpg";
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    [PYAsyImageView clearCaches];
+//    self.imageView.cacheTag = @"12123";
+    self.imageView.imgUrl = @"http://gz.kaoxve.com:18708/BRService/fserver/view.do?filename=cwfile/EF36CEAC3A364FAEBD75075CF9249675.jpg&access_token=br_token__65BBF9057FAA479C8A7AA36B24583F8";//@"http://120.24.234.64:13102/BRService/fserver/view.do?filename=&access_token=br_token__72EDDBECFCEC46D2B51D444B83564846";//
     NSArray * a = @[
       @"http://img6.3lian.com/c23/desk4/05/77/d/01.jpg",
       @"http://www.kandianying.com/upload/201305/%E6%9D%A8%E5%B9%82%20%E4%BD%99%E6%96%87%E4%B9%90%20(3).jpg",
@@ -32,7 +33,7 @@
       @"http://img6.3lian.com/c23/desk3/11/35/2.jpg",
       @"http://pic5.bbzhi.com/fengjingbizhi/gaoqingziranfengjingbizhi/gaoqingziranfengjingbizhi_415650_15.jpg"
       ];
-//    ((PYAsyImageView *)self.dView.imageView).imgUrl = a[(random()%a.count)];
+    ((PYAsyImageView *)self.dView.imageView).imgUrl = a[(random()%a.count)];
     
 //    [((PYAsyImageView *)self.dView.imageView) setBlockDisplay:^(bool isSuccess, bool isCahes, PYAsyImageView * _Nonnull imageView) {
 //

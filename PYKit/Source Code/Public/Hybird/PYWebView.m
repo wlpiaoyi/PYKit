@@ -70,7 +70,7 @@ kINITPARAMS{
                 }
             }
         }
-        NSString * javaScript = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/py_webview_hybird.js",[[NSBundle mainBundle] resourcePath]] encoding:NSUTF8StringEncoding error:nil];
+        NSString * javaScript = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/PYKit.bundle/py_webview_hybird.js",[[NSBundle mainBundle] bundlePath]] encoding:NSUTF8StringEncoding error:nil];
         _baseScript = [[WKUserScript alloc] initWithSource:javaScript  injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:false];
         [self.configuration.userContentController addUserScript:_baseScript];
     }
@@ -128,7 +128,6 @@ kINITPARAMS{
     }
 }
 -(void) setNavigationDelegate:(id<WKNavigationDelegate>)navigationDelegate{
-    
     if(navigationDelegate && [navigationDelegate isKindOfClass:[PYWebViewNavigationDelegate class]]){
         [super setNavigationDelegate:navigationDelegate];
     }else{
