@@ -29,7 +29,7 @@ kPNA UIEdgeInsets edgeInsets;
 
 -(instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     bundle = [NSBundle bundleWithPath:kFORMAT(@"%@/PYKit.bundle", bundleDir)];
-    bundle = [NSBundle mainBundle];
+//    bundle = [NSBundle mainBundle];
     self = [super initWithNibName:nibNameOrNil ? : @"PYImagePickerController" bundle:bundle];
     self.modalPresentationStyle = UIModalPresentationFullScreen;
     return self;
@@ -89,6 +89,7 @@ kPNA UIEdgeInsets edgeInsets;
     if([self.selectedAssets containsObject:cell.asset]){
         [self.selectedAssets removeObject:cell.asset];
         cell.isSelectedData = [self.selectedAssets containsObject:cell.asset];
+        self.maxSelected = self.maxSelected;
         return;
     }
     if(self.maxSelected <= 1){
