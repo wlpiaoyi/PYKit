@@ -32,8 +32,6 @@ void __py_navigatioin_popvc(UIViewController * self, SEL _cmd){
     if([self respondsToSelector:@selector(beforePop:)] && [((id<PYNavigationSetterTag>) self) beforePop:self] == NO){
         return;
     }
-//        -(BOOL) beforePop:(nonnull UIViewController *) vc;
-//        -(BOOL) beforeDismiss:(nonnull UIViewController *) vc;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -48,6 +46,7 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
 
 -(void) afterExcuteViewWillAppearWithTarget:(nonnull UIViewController *) target{
     if(![target conformsToProtocol:@protocol(PYNavigationSetterTag)]) return;
+    if(self.barStyle.blockSetNavigationBarStyle && !self.barStyle.blockSetNavigationBarStyle(self.barStyle, target)) return;
     [self excuteSetterBackItem:target];
     [self excuteSetterBarStyle:target];
 }
@@ -91,8 +90,8 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
         target.navigationItem.leftBarButtonItem = bbi;
         target.navigationController.interactivePopGestureRecognizer.delegate = [__PYGestureRecognizerDelegate shareDelegate];
     }else if(self.barStyle.dismissItemimage && target.navigationController.presentingViewController
-             && target.navigationController.childViewControllers.count == 1
-             && target.navigationController.childViewControllers.firstObject == target){
+             && target.navigationController.viewControllers.count == 1
+             && target.navigationController.viewControllers.firstObject == target){
         SEL dismessSel = sel_getUid("__py_navigation_dismissvc");
         if(![target respondsToSelector:dismessSel]){
             class_addMethod([target class], dismessSel, (IMP)__py_navigation_dismissvc, "v@:");
@@ -109,18 +108,17 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
     if(target.navigationController == nil) return;
     [PYNavigationStyleModel setNavigationBarStyle:target.navigationController.navigationBar barStyle:self.barStyle];
     [PYNavigationStyleModel setNavigationItemStyle:target.navigationItem barStyle:self.barStyle];
-    if([target.view viewWithTag:186335021] == nil && self.barStyle.blockCreateNavigationBarView){
-        UIView * navigationBarView = self.barStyle.blockCreateNavigationBarView(target);
+    if([target.view viewWithTag:186335021] == nil && self.barStyle.blockCreateNavigationBarBackgrand){
+        UIView * navigationBarView = self.barStyle.blockCreateNavigationBarBackgrand(target);
         if(navigationBarView){
             [target.view addSubview:navigationBarView];
             UIView * lineTag = [UIView new];
             lineTag.backgroundColor = [UIColor clearColor];
             [target.view addSubview:lineTag];
-            [PYViewAutolayoutCenter persistConstraint:lineTag size:CGSizeMake(DisableConstrainsValueMAX, .5)];
-            [PYViewAutolayoutCenter persistConstraint:lineTag relationmargins:UIEdgeInsetsMake(0, 0, DisableConstrainsValueMAX, 0) controller:target];
-            PYEdgeInsetsItem eii = PYEdgeInsetsItemNull();
-            eii.bottom = (__bridge void * _Nullable)(lineTag);
-            [PYViewAutolayoutCenter persistConstraint:navigationBarView relationmargins:UIEdgeInsetsZero relationToItems:eii];
+            [lineTag py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+                make.left.bottom.right.py_constant(0);
+                make.height.py_constant(.5);
+            }];
         }
     }
     

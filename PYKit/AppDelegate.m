@@ -44,6 +44,18 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    PYNavigationStyleModel * styleModel = [[PYNavigationStyleModel alloc] initForDefault];
+    styleModel.dismissItemimage = [UIImage imageNamed:@"WechatIMG272"];
+        styleModel.blockSetNavigationBarStyle = ^BOOL(PYNavigationStyleModel * _Nonnull styleModel, UIViewController * _Nonnull target) {
+    //        if([target conformsToProtocol:@protocol(ZFNavigationSetterBlueTag)]){
+    //            styleModel.backgroundImage = normalImage;
+    //            styleModel.tintColor = styleModel.titleColor = [UIColor darkTextColor];
+    //        }else{
+                styleModel.tintColor = styleModel.titleColor = [UIColor darkTextColor];
+    //        }
+            return YES;
+        };
+    [PYNavigationControll setNavigationWithBarStyle:styleModel];
     [PYKeyboardControll setControllType:PYKeyboardControllTag];
     [PYCalendarParam loadCalendarData];
     [PYDisplayImageTools class];

@@ -35,15 +35,14 @@
     self.textShadowOffset = CGSizeZero;
     self.barMetrics =  UIBarMetricsDefault;
     self.statusBarStyle = UIStatusBarStyleLightContent;
-    self.lineButtomImage = [UIImage new];
+    self.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
     self.textShadowBlurRadius = 0;
     self.textShadowColor = [UIColor clearColor];
-    self.titleColor = [UIColor whiteColor];
     self.titleFont = [UIFont systemFontOfSize:20];
-    self.itemColor = [UIColor whiteColor];
+    [UIColor whiteColor];
     self.itemFont = [UIFont systemFontOfSize:14];
     self.itemState = UIControlStateNormal;
-    self.tintColor = [UIColor whiteColor];
+    self.itemColor = self.titleColor = self.tintColor = [UIColor whiteColor];
     self.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
     
 }
@@ -56,24 +55,22 @@
     } else {
         self.statusBarStyle = UIStatusBarStyleDefault;
     }
-    self.lineButtomImage = [UIImage new];
+    self.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
     self.textShadowBlurRadius = 0;
     self.textShadowColor = [UIColor clearColor];
-    self.titleColor = [UIColor darkTextColor];
     self.titleFont = [UIFont systemFontOfSize:20];
-    self.itemColor = [UIColor whiteColor];
     self.itemFont = [UIFont systemFontOfSize:14];
     self.itemState = UIControlStateNormal;
-    self.tintColor = [UIColor darkTextColor];
+    self.itemColor = self.titleColor = self.tintColor = [UIColor blackColor];
     self.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
 }
 
 -(void) initDefaultParams{
     if (@available(iOS 13.0, *)) {
-        if([PYUtile getCurrenWindow].overrideUserInterfaceStyle == UIUserInterfaceStyleLight){
-            [self initLightParams];
+        if(UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark){
+            [self initDarkParams];
         }else{
-            [self initDefaultParams];
+            [self initLightParams];
         }
     }else{
         [self initLightParams];
@@ -132,7 +129,6 @@
     }else if(navigationItem.backBarButtonItem){
         [self setBarButtonItemStyle:navigationItem.backBarButtonItem barStyle:barStyle];
     }
-    
     if(navigationItem.rightBarButtonItems){
         for (UIBarButtonItem * barButtonItem in navigationItem.rightBarButtonItems) {
             [self setBarButtonItemStyle:barButtonItem barStyle:barStyle];
@@ -166,7 +162,6 @@
     if (barStyle.itemFont) {
         titleTextAttributes[NSFontAttributeName] = barStyle.itemFont;
     }
-    
     [barButtonItem setTitleTextAttributes:titleTextAttributes forState:barStyle.itemState];
     
 }

@@ -14,7 +14,8 @@ PHImageRequestOptions * xPYImagePickerCellOptions;
 @implementation PYImagePickerCell{
     __weak IBOutlet UIImageView *imagePhoto;
     __weak IBOutlet UIButton *buttonSelected;
-
+    __weak IBOutlet UIActivityIndicatorView *activityIndicatorView;
+    
 }
 
 +(void) initialize{
@@ -29,10 +30,22 @@ PHImageRequestOptions * xPYImagePickerCellOptions;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.isLoading = NO;
     if (@available(iOS 13.0, *)) {
         [buttonSelected setShadowColor:[UIColor systemBackgroundColor].CGColor shadowRadius:4];
     } else {
         [buttonSelected setShadowColor:[UIColor whiteColor].CGColor shadowRadius:4];
+    }
+    [activityIndicatorView setShadowColor:[UIColor whiteColor].CGColor shadowRadius:0];
+}
+-(void) setIsLoading:(BOOL)isLoading{
+    _isLoading = isLoading;
+    if(isLoading){
+        activityIndicatorView.hidden = NO;
+        [activityIndicatorView startAnimating];
+    }else{
+        [activityIndicatorView stopAnimating];
+        activityIndicatorView.hidden = YES;
     }
 }
 

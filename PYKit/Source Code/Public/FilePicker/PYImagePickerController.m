@@ -19,9 +19,13 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 kPNSNA NSMutableArray<PHAsset *> * selectedAssets;
+kPNSNA NSMutableArray<PHAsset *> * iCouldAssets;
+kPNSNA NSMutableArray<PHAsset *> * loactionAssets;
 kPNSNA NSMutableArray<NSDictionary *> * datas;
 kPNA CGSize cellSize;
 kPNA UIEdgeInsets edgeInsets;
+kPNSNA PHImageRequestOptions * requestOptionsNO;
+kPNSNA PHImageRequestOptions * requestOptionsYES;
 
 @end
 
@@ -39,9 +43,21 @@ kPNA UIEdgeInsets edgeInsets;
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     self.selectedAssets = [NSMutableArray new];
+    self.iCouldAssets = [NSMutableArray new];
+    self.loactionAssets = [NSMutableArray new];
     self.maxSelected = self.maxSelected;
     // 获得所有的自定义相簿
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.resizeMode = PHImageRequestOptionsResizeModeFast;
+        options.synchronous = YES;
+        options.networkAccessAllowed = NO;
+        self.requestOptionsNO = options;
+        options = [[PHImageRequestOptions alloc] init];
+        options.resizeMode = PHImageRequestOptionsResizeModeFast;
+        options.synchronous = YES;
+        options.networkAccessAllowed = YES;
+        self.requestOptionsYES = options;
         PHFetchResult<PHAssetCollection *> *assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAny options:nil];
         if(assetCollections == nil || assetCollections.count == 0){
             int count = 10;
@@ -64,6 +80,20 @@ kPNA UIEdgeInsets edgeInsets;
             if([assetCollection.localizedTitle isEqual:@"最近项目"]){
                 recentAssetsDict = assetsDict;
                 continue;
+            }
+            for (PHAsset * asset in assets) {
+                CGSize size = CGSizeMake(boundsWidth(), boundsWidth()/asset.pixelWidth*asset.pixelHeight);
+                if(![self.iCouldAssets containsObject:asset] && ![self.loactionAssets containsObject:asset]){
+                    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:self.requestOptionsNO resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                        if(!result){
+                            if(![self.iCouldAssets containsObject:asset])[self.iCouldAssets addObject:asset];
+                            [self.loactionAssets removeObject:asset];
+                        }else{
+                            if(![self.loactionAssets containsObject:asset]) [self.loactionAssets addObject:asset];
+                            [self.iCouldAssets removeObject:asset];
+                        }
+                    }];
+                }
             }
             [self.datas addObject:assetsDict];
             
@@ -103,6 +133,17 @@ kPNA UIEdgeInsets edgeInsets;
     [self.selectedAssets addObject:cell.asset];
     self.maxSelected = self.maxSelected;
     cell.isSelectedData = [self.selectedAssets containsObject:cell.asset];
+    cell.isLoading = [self.iCouldAssets containsObject:cell.asset] && cell.isSelectedData;
+    if(cell.isLoading){
+        PHAsset * asset = cell.asset;
+        CGSize size = CGSizeMake(boundsWidth(), boundsWidth()/asset.pixelWidth*asset.pixelHeight);
+        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:self.requestOptionsYES resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            if(result){
+                [self.iCouldAssets removeObject:asset];
+                [collectionView reloadData];
+            }
+        }];
+    }
     if(self.maxSelected <= 1 && self.blockSelected){
         [self onclickConfirm:nil];
     }
@@ -143,6 +184,7 @@ kPNA UIEdgeInsets edgeInsets;
     PHFetchResult<PHAsset *> * assets = (PHFetchResult<PHAsset *> *) self.datas[indexPath.section][@"datas"];
     cell.asset = [assets objectAtIndex:indexPath.row];
     cell.isSelectedData = [self.selectedAssets containsObject:cell.asset];
+    cell.isLoading = [self.iCouldAssets containsObject:cell.asset] && cell.isSelectedData;
     return cell;
 }
 
@@ -187,7 +229,16 @@ kPNA UIEdgeInsets edgeInsets;
     }
 }
 - (IBAction)onclickConfirm:(id)sender {
-    if(self.blockSelected) _blockSelected(self.selectedAssets);
+    BOOL hasiCloud = NO;
+    if(self.iCouldAssets.count){
+        for(id obj in self.selectedAssets){
+            if([self.iCouldAssets containsObject:obj]){
+                hasiCloud = YES;
+                break;
+            }
+        }
+    }
+    if(self.blockSelected) _blockSelected(self.selectedAssets, hasiCloud);
     [self onclickDesmiss:nil];
 }
 

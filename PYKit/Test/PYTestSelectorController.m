@@ -10,8 +10,9 @@
 #import "PYSelectorBarView.h"
 #import "PYSelectorScrollView.h"
 #import "pyutilea.h"
+#import "PYNavigationControll.h"
 
-@interface PYTestSelectorController ()
+@interface PYTestSelectorController ()<PYNavigationSetterTag>
 @property (weak, nonatomic) IBOutlet PYSelectorScrollView *scroll;
 @property (weak, nonatomic) IBOutlet PYSelectorBarView *bar;
 @end
@@ -53,6 +54,11 @@
     self.scroll.buttons = btns;
     self.scroll.contentWidth = 80 * 5;
     self.scroll.isScorllSelected = false;
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"");
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -83,9 +84,9 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptF-kY-2on">
-                                    <rect key="frame" x="0.0" y="0.0" width="66" height="56"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="56"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="66" id="eDq-IN-TEM"/>
+                                        <constraint firstAttribute="width" constant="80" id="eDq-IN-TEM"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="取消"/>
@@ -105,14 +106,28 @@
                                         <action selector="onclickConfirm:" destination="-1" eventType="touchUpInside" id="t97-hL-nby"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcZ-w8-zDL">
+                                    <rect key="frame" x="334" y="0.0" width="80" height="56"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="80" id="6U5-NS-hag"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="切换"/>
+                                    <connections>
+                                        <action selector="onclickCheck:" destination="-1" eventType="touchUpInside" id="zdA-41-iRM"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="ptF-kY-2on" firstAttribute="top" secondItem="ge1-pa-bne" secondAttribute="top" id="0ba-JS-fIs"/>
                                 <constraint firstItem="es3-pm-FYP" firstAttribute="centerX" secondItem="ge1-pa-bne" secondAttribute="centerX" id="1FL-Mh-hEw"/>
                                 <constraint firstItem="es3-pm-FYP" firstAttribute="centerY" secondItem="ge1-pa-bne" secondAttribute="centerY" id="3SC-XS-BVw"/>
+                                <constraint firstAttribute="bottom" secondItem="bcZ-w8-zDL" secondAttribute="bottom" id="CpE-Ye-gMj"/>
                                 <constraint firstItem="ptF-kY-2on" firstAttribute="leading" secondItem="ge1-pa-bne" secondAttribute="leading" id="Guq-YS-Af4"/>
+                                <constraint firstAttribute="trailing" secondItem="bcZ-w8-zDL" secondAttribute="trailing" id="KOb-gs-B5b"/>
                                 <constraint firstAttribute="bottom" secondItem="ptF-kY-2on" secondAttribute="bottom" id="eyI-Yx-D3O"/>
+                                <constraint firstItem="bcZ-w8-zDL" firstAttribute="top" secondItem="ge1-pa-bne" secondAttribute="top" id="gvw-sR-MnD"/>
                             </constraints>
                         </view>
                     </subviews>

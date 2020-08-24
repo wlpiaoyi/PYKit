@@ -34,7 +34,8 @@ kPNA UIBarMetrics barMetrics;
 
 kPNA UIStatusBarStyle statusBarStyle;
 
-kPNCNA UIView * _Nullable (^blockCreateNavigationBarView) (UIViewController * _Nonnull vc);
+kPNCNA BOOL (^blockSetNavigationBarStyle)(PYNavigationStyleModel * _Nonnull styleModel, UIViewController * _Nonnull target);
+kPNCNA UIView * _Nullable (^blockCreateNavigationBarBackgrand) (UIViewController * _Nonnull vc);
 
 -(nonnull instancetype) initForLight;
 

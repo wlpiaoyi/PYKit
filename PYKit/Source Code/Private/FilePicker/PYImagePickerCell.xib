@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,20 +29,26 @@
                         </constraints>
                         <state key="normal" image="images/checkbox-unselected-normal.png"/>
                     </button>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kl9-fg-kkC">
+                        <rect key="frame" x="5" y="109" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="kl9-fg-kkC" secondAttribute="bottom" constant="5" id="22O-Ps-26u"/>
                 <constraint firstAttribute="trailing" secondItem="ih0-9o-1PT" secondAttribute="trailing" id="6zl-6M-yWk"/>
                 <constraint firstItem="ih0-9o-1PT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="A6m-tw-ucM"/>
                 <constraint firstAttribute="bottom" secondItem="eyT-5j-3YF" secondAttribute="bottom" constant="5" id="EXf-fk-MXz"/>
                 <constraint firstItem="ih0-9o-1PT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KR5-kI-Gw0"/>
                 <constraint firstAttribute="trailing" secondItem="eyT-5j-3YF" secondAttribute="trailing" constant="5" id="PqW-Pz-gZV"/>
+                <constraint firstItem="kl9-fg-kkC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="d5X-Ac-0HS"/>
                 <constraint firstAttribute="bottom" secondItem="ih0-9o-1PT" secondAttribute="bottom" id="mVH-xO-sH2"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="138" height="134"/>
             <connections>
+                <outlet property="activityIndicatorView" destination="kl9-fg-kkC" id="BX7-15-Va3"/>
                 <outlet property="buttonSelected" destination="eyT-5j-3YF" id="MSx-8h-WLi"/>
                 <outlet property="imagePhoto" destination="ih0-9o-1PT" id="ueM-Ga-p4b"/>
             </connections>

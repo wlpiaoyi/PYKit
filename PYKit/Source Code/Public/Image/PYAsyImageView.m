@@ -124,6 +124,7 @@ kPNSNN UIColor * fillColor;
         NSError * erro;
         if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]) [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
         erro = nil;
+        
         [[NSFileManager defaultManager] moveItemAtPath:data toPath:imagePath error:&erro];
         if(erro == nil){
             self.cachesUrl = imagePath;
@@ -231,7 +232,7 @@ kINITPARAMS{
     self.image = self.defaultImg;
     if(imgUrl == nil || imgUrl.length == 0) return;
     static_pre_time_interval = 0;
-    if(self.dnw) [self.dnw interrupt];
+    if(self.dnw) [self.dnw stop];
     else self.dnw = [self createDnw];
     
     if(cacheTag == nil || cacheTag.length == 0)
@@ -298,7 +299,7 @@ kINITPARAMS{
     [self.dnw setBlockComplete:nil];
     [self.dnw setBlockSendProgress:nil];
     [self.dnw setBlockDownloadProgress:nil];
-    [self.dnw interrupt];
+    [self.dnw stop];
     [self.activityIndicator stopAnimating];
     self.activityView.hidden = YES;
     [self.lock unlock];

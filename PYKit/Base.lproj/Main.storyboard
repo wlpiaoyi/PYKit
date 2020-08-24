@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l8E-ra-icP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l8E-ra-icP">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -108,6 +108,22 @@
             </objects>
             <point key="canvasLocation" x="33" y="-731"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="umg-YD-pmS">
+            <objects>
+                <navigationController id="pan-sT-0TO" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jaf-ew-B1Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uYt-cL-mrY" kind="relationship" relationship="rootViewController" id="2Sm-SQ-Ith"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rtt-B6-bdd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1206" y="-985"/>
+        </scene>
         <!--Test Selector Controller-->
         <scene sceneID="WGS-iY-L9X">
             <objects>
@@ -206,7 +222,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="PBl-Tv-bFL" firstAttribute="top" secondItem="3Rz-0x-TOP" secondAttribute="bottom" id="IhM-2O-YKV"/>
                             <constraint firstItem="Tlk-qC-BoD" firstAttribute="top" secondItem="PBl-Tv-bFL" secondAttribute="bottom" constant="20" id="LfK-Hc-nuI"/>
@@ -216,14 +232,16 @@
                             <constraint firstItem="PBl-Tv-bFL" firstAttribute="leading" secondItem="OuD-eW-fYc" secondAttribute="leadingMargin" id="rfh-wc-JPr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jXf-kw-Gbe"/>
+                    <navigationItem key="navigationItem" id="jXf-kw-Gbe">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="neH-E0-03K"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="scroll" destination="Tlk-qC-BoD" id="WbI-aj-jHP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6gk-la-vbr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965.60000000000002" y="-718.29085457271367"/>
+            <point key="canvasLocation" x="1986" y="-975"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -253,13 +271,13 @@
                     <navigationItem key="navigationItem" id="TLO-zW-sGV"/>
                     <connections>
                         <outlet property="tableview" destination="Iqp-2B-cwt" id="XPM-Gp-JiE"/>
-                        <segue destination="uYt-cL-mrY" kind="push" identifier="refresh" id="DWF-YY-ARe"/>
                         <segue destination="ODj-Ai-zEy" kind="push" identifier="calendar" id="wIF-IS-a0n"/>
                         <segue destination="zN7-C9-oT7" kind="push" identifier="image" id="SK8-3I-Dt6"/>
                         <segue destination="L5G-2I-8YR" kind="push" identifier="slider" id="RTh-eY-1nK"/>
                         <segue destination="fCr-NO-2dZ" kind="push" identifier="check" id="ppD-fm-0Jd"/>
                         <segue destination="1Cl-xf-1OB" kind="push" identifier="map" id="xfS-gE-sXl"/>
                         <segue destination="iEQ-xE-0wC" kind="push" identifier="webview" id="iEy-eb-RLZ"/>
+                        <segue destination="pan-sT-0TO" kind="showDetail" identifier="refresh" id="XKy-1m-KU0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

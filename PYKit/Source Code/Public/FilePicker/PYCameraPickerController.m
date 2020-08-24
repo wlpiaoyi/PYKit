@@ -21,9 +21,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lcW;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lcH;
 kPNSNA AVCaptureSession * session;
-kPNSNA AVCapturePhotoOutput * output;
+kPNSNA AVCapturePhotoOutput * photoOutput;
+kPNSNA AVCaptureDeviceInput * deviceInput;
 kPNSNA NSArray<AVCaptureDevice *> * cameras;
 kPNSNA AVCaptureVideoPreviewLayer * preview;
+kPNA AVCaptureDevicePosition position;
 @end
 
 @implementation PYCameraPickerController
@@ -40,16 +42,16 @@ kPNSNA AVCaptureVideoPreviewLayer * preview;
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self.buttonConfirm setCornerRadiusAndBorder:25 borderWidth:0 borderColor:nil];
-    self.output = [[AVCapturePhotoOutput alloc] init];
+    self.photoOutput = [[AVCapturePhotoOutput alloc] init];
     NSDictionary * outputSettings;
     if (@available(iOS 11.0, *)) {
         outputSettings = @{AVVideoCodecKey:AVVideoCodecTypeJPEG};
     } else {
         outputSettings = @{AVVideoCodecKey:AVVideoCodecJPEG};
     }
-    [self.output setLivePhotoCaptureEnabled:NO];
-    [self.output connectionWithMediaType:AVMediaTypeVideo];
-    [self.output setPhotoSettingsForSceneMonitoring:[AVCapturePhotoSettings photoSettingsWithFormat:outputSettings]];
+    [self.photoOutput setLivePhotoCaptureEnabled:NO];
+    [self.photoOutput connectionWithMediaType:AVMediaTypeVideo];
+    [self.photoOutput setPhotoSettingsForSceneMonitoring:[AVCapturePhotoSettings photoSettingsWithFormat:outputSettings]];
     
     NSMutableArray<AVCaptureDevice *> * cameras = [NSMutableArray new];
     AVCaptureDeviceDiscoverySession * devices = [AVCaptureDeviceDiscoverySession  discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera] mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionBack];
@@ -59,8 +61,9 @@ kPNSNA AVCaptureVideoPreviewLayer * preview;
     self.cameras = cameras;
     self.session = [[AVCaptureSession alloc] init];
     self.session.sessionPreset = AVCaptureSessionPresetHigh;
-    [self.session addOutput:self.output];
-    if(![self checkCameraBack]) return;
+    [self.session addOutput:self.photoOutput];
+    self.position = AVCaptureDevicePositionBack;
+    if(self.position != AVCaptureDevicePositionBack) return;
     self.preview = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
     [self.preview setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     [self.preview setFrame:CGRectMake(0, 0, boundsWidth(), boundsHeight())];
@@ -76,24 +79,30 @@ kPNSNA AVCaptureVideoPreviewLayer * preview;
     self.lcH.constant = imageSize.height <= 0 ? boundsHeight() : imageSize.height;
 }
 
--(BOOL) checkCameraBack{
+-(void) setPosition:(AVCaptureDevicePosition)position{
+    _position = position;
+    if(self.cameras == nil || self.cameras.count == 0) return;
+    AVCaptureDevice * curCamera;
     for (AVCaptureDevice * camera  in self.cameras) {
-        if(camera.position == AVCaptureDevicePositionBack){
-            NSError *error;
-            AVCaptureDeviceInput * input = [[AVCaptureDeviceInput alloc] initWithDevice:camera error:&error];
-            if(error){
-                UIView * alert = [UIView new];
-                [alert dialogShowWithTitle:nil message:error.userInfo[@"NSLocalizedFailureReason"] block:^(UIView * _Nonnull view, BOOL isConfirm) {
-                    [view dialogHidden];
-                } buttonConfirm:@"确定" buttonCancel:nil];
-                return NO;
-            }
-            printf("%s", kFORMAT(@"%@", error).UTF8String);
-            [self.session addInput:input];
-            return YES;
+        if(position == camera.position){
+            curCamera = camera;
+            break;
         }
     }
-    return NO;
+    if(!curCamera){
+        _position = AVCaptureDevicePositionUnspecified;
+        return;
+    }
+    NSError *error;
+    AVCaptureDeviceInput * input = [[AVCaptureDeviceInput alloc] initWithDevice:curCamera error:&error];
+    if(error){
+        _position = AVCaptureDevicePositionUnspecified;
+        NSLog(@"%@", error);
+        return;
+    }
+    if(self.deviceInput)[self.session removeInput:self.deviceInput];
+    self.deviceInput = input;
+    [self.session addInput:input];
 }
 
 -(BOOL) getCameraFront{
@@ -118,7 +127,7 @@ kPNSNA AVCaptureVideoPreviewLayer * preview;
 
 
 - (IBAction)onclickConfirm:(id)sender {
-    [self.output capturePhotoWithSettings:[AVCapturePhotoSettings photoSettings] delegate:self];
+    [self.photoOutput capturePhotoWithSettings:[AVCapturePhotoSettings photoSettings] delegate:self];
 }
 - (IBAction)onclickCancel:(id)sender {
     if(self.navigationController){
@@ -135,6 +144,11 @@ kPNSNA AVCaptureVideoPreviewLayer * preview;
     }
 }
 
+- (IBAction)onclickCheck:(id)sender {
+    self.position = self.position == AVCaptureDevicePositionBack ? AVCaptureDevicePositionFront : AVCaptureDevicePositionBack;
+    if(self.position != AVCaptureDevicePositionUnspecified) return;
+    
+}
 
 - (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(nullable NSError *)error API_AVAILABLE(ios(11.0)){
     UIImage *image;

@@ -70,6 +70,7 @@
 		156C6A6524C8037A00CF8B28 /* PYImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5824C7DB6E00CF8B28 /* PYImagePickerController.m */; };
 		156C6A6624C8037A00CF8B28 /* PYCameraPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */; };
 		156FA05A2062106C0034ED49 /* PYWebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC574A2062034600C37942 /* PYWebView.h */; };
+		1573A97E24E907C100F70C88 /* UIViewController+PYNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1573A97D24E907C100F70C88 /* UIViewController+PYNavigation.m */; };
 		1589DCC1204D160000D78784 /* PYTestImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1589DCC0204D160000D78784 /* PYTestImageController.m */; };
 		1597CB031F5D2D6300690BBB /* UITextField+PYCheck.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1555E0C81F5CF1C10017B436 /* UITextField+PYCheck.h */; };
 		1597CB0A1F5D42AE00690BBB /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */; };
@@ -285,6 +286,8 @@
 		156C6A5C24C7DECE00CF8B28 /* PYCameraPickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYCameraPickerController.h; sourceTree = "<group>"; };
 		156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYCameraPickerController.m; sourceTree = "<group>"; };
 		156C6A5E24C7DECE00CF8B28 /* PYCameraPickerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PYCameraPickerController.xib; sourceTree = "<group>"; };
+		1573A97C24E907C100F70C88 /* UIViewController+PYNavigation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PYNavigation.h"; sourceTree = "<group>"; };
+		1573A97D24E907C100F70C88 /* UIViewController+PYNavigation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PYNavigation.m"; sourceTree = "<group>"; };
 		1589DCBF204D160000D78784 /* PYTestImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestImageController.h; sourceTree = "<group>"; };
 		1589DCC0204D160000D78784 /* PYTestImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestImageController.m; sourceTree = "<group>"; };
 		1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
@@ -330,6 +333,10 @@
 		15A91E0A238B9B8800F5517B /* pyutilea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pyutilea.h; path = ../../../PYUtile/pyutilea/pyutilea.h; sourceTree = "<group>"; };
 		15A91E0E238B9D4500F5518B /* UIButton+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/UIButton+PYExpand.h"; sourceTree = "<group>"; };
 		15A91E0F238B9D5A00F5517B /* NSArray+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSArray+PYExpand.h"; sourceTree = "<group>"; };
+		15AA037F24E15547006293DD /* PYAutolayoutUtilites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAutolayoutUtilites.h; sourceTree = "<group>"; };
+		15AA038024E15547006293DD /* UIView+PYAutolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PYAutolayout.h"; sourceTree = "<group>"; };
+		15AA038124E15547006293DD /* PYConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYConstraintMaker.h; sourceTree = "<group>"; };
+		15AA038224E15547006293DD /* NSArray+PYAutolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PYAutolayout.h"; sourceTree = "<group>"; };
 		15BD959520BC048100A5811A /* PYTestCheckController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestCheckController.h; sourceTree = "<group>"; };
 		15BD959620BC048100A5811A /* PYTestCheckController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestCheckController.m; sourceTree = "<group>"; };
 		15BFD8A12227DCC1009E3C88 /* PYWebViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYWebViewDelegate.h; sourceTree = "<group>"; };
@@ -447,6 +454,10 @@
 		1502A59B223A3E7500F0787A /* PYUtile */ = {
 			isa = PBXGroup;
 			children = (
+				15AA038224E15547006293DD /* NSArray+PYAutolayout.h */,
+				15AA037F24E15547006293DD /* PYAutolayoutUtilites.h */,
+				15AA038124E15547006293DD /* PYConstraintMaker.h */,
+				15AA038024E15547006293DD /* UIView+PYAutolayout.h */,
 				15A91E0E238B9D4500F5518B /* UIButton+PYExpand.h */,
 				15A91E0F238B9D5A00F5517B /* NSArray+PYExpand.h */,
 				15A91E0A238B9B8800F5517B /* pyutilea.h */,
@@ -732,6 +743,8 @@
 				15D42AE723A3A73F00BAA1C7 /* PYNavigationStyleModel.m */,
 				15C5F462239F42190009B7E0 /* PYNavigationControll.h */,
 				15C5F463239F42190009B7E0 /* PYNavigationControll.m */,
+				1573A97C24E907C100F70C88 /* UIViewController+PYNavigation.h */,
+				1573A97D24E907C100F70C88 /* UIViewController+PYNavigation.m */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -1069,6 +1082,7 @@
 				15DB8CA7210C122700AA2CF9 /* PYUserLocationView.m in Sources */,
 				154E5BDC20AD3B3A00C4E5C0 /* PYTestSliderController.m in Sources */,
 				15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */,
+				1573A97E24E907C100F70C88 /* UIViewController+PYNavigation.m in Sources */,
 				1589DCC1204D160000D78784 /* PYTestImageController.m in Sources */,
 				15D42AEB23A3A74E00BAA1C7 /* __PY__UIViewcontrollerNavigationImpl.m in Sources */,
 				152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */,

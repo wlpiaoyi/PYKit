@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 kPNA NSUInteger maxSelected;
 
-kPNCNA void (^blockSelected) (NSArray<PHAsset *> * selectedAssets);
+kPNCNA void (^blockSelected) (NSArray<PHAsset *> * selectedAssets, BOOL hasiCloud);
 
 @end
 

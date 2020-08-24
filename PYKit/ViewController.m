@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "pyutilea.h"
 #import "PYDisplayImageView.h"
 #import "UITextField+PYCheck.h"
 #import "TextFieldCheckController.h"
@@ -21,9 +22,10 @@
 #import "PYTestSliderController.h"
 #import "PYImagePickerController.h"
 #import "PYCameraPickerController.h"
+#import "PYNavigationControll.h"
 
 
-@interface ViewController () <UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>{
+@interface ViewController () <UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,PYNavigationSetterTag>{
 @private
     PY3DOrthogonView * a3dView;
 }
@@ -121,6 +123,9 @@ PYPNSNN NSArray * datas;
     if([(self.datas[indexPath.row][@"id"]) isEqual:@"PYImagePickerController"]){
         PYImagePickerController * vc = [PYImagePickerController new];
         vc.maxSelected = 3;
+        vc.blockSelected = ^(NSArray<PHAsset *> * _Nonnull selectedAssets, BOOL isiCloud) {
+            
+        };
         [self presentViewController:vc animated:YES completion:^{
             
         }];
@@ -128,7 +133,9 @@ PYPNSNN NSArray * datas;
     }
     if([(self.datas[indexPath.row][@"id"]) isEqual:@"PYCameraPickerController"]){
         PYCameraPickerController * vc = [PYCameraPickerController new];
-        vc.imageSize = CGSizeMake(boundsWidth() / 2, boundsHeight()/2);
+        vc.blockCamera = ^BOOL(UIImage * _Nonnull image) {
+            return YES;
+        };
         [self presentViewController:vc animated:YES completion:^{
             
         }];

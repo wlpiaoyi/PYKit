@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 kPNSNA UIImage * imageData;
 kPNA BOOL isSelectedData;
 kPNSNA PHAsset * asset;
+kPNA BOOL isLoading;
 
 @end
 
