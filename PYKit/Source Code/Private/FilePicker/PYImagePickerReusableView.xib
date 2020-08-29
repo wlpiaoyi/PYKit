@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,18 +20,39 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqa-xR-fQq">
+                    <rect key="frame" x="282" y="0.0" width="38" height="50"/>
+                    <state key="normal" title="    ▶ ">
+                        <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                    <state key="selected" title="   ▼ "/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIV-JE-86z">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <connections>
+                        <action selector="onclickExpand:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="JZs-5V-qDs"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="cQd-12-ixj" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="7sI-C3-DhD"/>
                 <constraint firstAttribute="trailing" secondItem="cQd-12-ixj" secondAttribute="trailing" constant="10" id="DB6-xf-kUp"/>
                 <constraint firstItem="cQd-12-ixj" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="10" id="GCa-46-WDh"/>
                 <constraint firstItem="9Gg-ye-v9C" firstAttribute="bottom" secondItem="cQd-12-ixj" secondAttribute="bottom" id="XEg-Rx-9sq"/>
+                <constraint firstAttribute="trailing" secondItem="RIV-JE-86z" secondAttribute="trailing" id="bNY-fa-flq"/>
+                <constraint firstItem="zqa-xR-fQq" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="cUA-2q-r76"/>
+                <constraint firstItem="9Gg-ye-v9C" firstAttribute="bottom" secondItem="zqa-xR-fQq" secondAttribute="bottom" id="da7-0j-TJF"/>
+                <constraint firstItem="9Gg-ye-v9C" firstAttribute="bottom" secondItem="RIV-JE-86z" secondAttribute="bottom" id="gih-KF-UnX"/>
+                <constraint firstAttribute="trailing" secondItem="zqa-xR-fQq" secondAttribute="trailing" id="hF8-gc-qPH"/>
+                <constraint firstItem="RIV-JE-86z" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="iqk-XN-SZD"/>
+                <constraint firstItem="RIV-JE-86z" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="xej-gH-pRH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="9Gg-ye-v9C"/>
             <connections>
+                <outlet property="buttonExpand" destination="zqa-xR-fQq" id="o0j-6e-mCh"/>
                 <outlet property="labelName" destination="cQd-12-ixj" id="giZ-jI-dX4"/>
             </connections>
-            <point key="canvasLocation" x="132" y="144"/>
+            <point key="canvasLocation" x="131.8840579710145" y="143.97321428571428"/>
         </collectionReusableView>
     </objects>
 </document>

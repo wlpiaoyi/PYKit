@@ -59,18 +59,17 @@
 		156C6A5324C7DB6400CF8B28 /* PYImagePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156C6A4E24C7DB6400CF8B28 /* PYImagePickerCell.xib */; };
 		156C6A5424C7DB6400CF8B28 /* PYImagePickerReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5024C7DB6400CF8B28 /* PYImagePickerReusableView.m */; };
 		156C6A5524C7DB6400CF8B28 /* PYImagePickerReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156C6A5124C7DB6400CF8B28 /* PYImagePickerReusableView.xib */; };
-		156C6A5A24C7DB6E00CF8B28 /* PYImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5824C7DB6E00CF8B28 /* PYImagePickerController.m */; };
-		156C6A5B24C7DB6E00CF8B28 /* PYImagePickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156C6A5924C7DB6E00CF8B28 /* PYImagePickerController.xib */; };
+		156C6A5A24C7DB6E00CF8B28 /* PYAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5824C7DB6E00CF8B28 /* PYAssetPickerController.m */; };
+		156C6A5B24C7DB6E00CF8B28 /* PYAssetPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156C6A5924C7DB6E00CF8B28 /* PYAssetPickerController.xib */; };
 		156C6A5F24C7DECE00CF8B28 /* PYCameraPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */; };
 		156C6A6024C7DECE00CF8B28 /* PYCameraPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156C6A5E24C7DECE00CF8B28 /* PYCameraPickerController.xib */; };
-		156C6A6124C8036700CF8B28 /* PYImagePickerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 156C6A5724C7DB6E00CF8B28 /* PYImagePickerController.h */; };
+		156C6A6124C8036700CF8B28 /* PYAssetPickerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 156C6A5724C7DB6E00CF8B28 /* PYAssetPickerController.h */; };
 		156C6A6224C8036700CF8B28 /* PYCameraPickerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 156C6A5C24C7DECE00CF8B28 /* PYCameraPickerController.h */; };
 		156C6A6324C8037A00CF8B28 /* PYImagePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A4D24C7DB6400CF8B28 /* PYImagePickerCell.m */; };
 		156C6A6424C8037A00CF8B28 /* PYImagePickerReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5024C7DB6400CF8B28 /* PYImagePickerReusableView.m */; };
-		156C6A6524C8037A00CF8B28 /* PYImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5824C7DB6E00CF8B28 /* PYImagePickerController.m */; };
+		156C6A6524C8037A00CF8B28 /* PYAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5824C7DB6E00CF8B28 /* PYAssetPickerController.m */; };
 		156C6A6624C8037A00CF8B28 /* PYCameraPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */; };
 		156FA05A2062106C0034ED49 /* PYWebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC574A2062034600C37942 /* PYWebView.h */; };
-		1573A97E24E907C100F70C88 /* UIViewController+PYNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1573A97D24E907C100F70C88 /* UIViewController+PYNavigation.m */; };
 		1589DCC1204D160000D78784 /* PYTestImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1589DCC0204D160000D78784 /* PYTestImageController.m */; };
 		1597CB031F5D2D6300690BBB /* UITextField+PYCheck.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1555E0C81F5CF1C10017B436 /* UITextField+PYCheck.h */; };
 		1597CB0A1F5D42AE00690BBB /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */; };
@@ -174,7 +173,7 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				156C6A6124C8036700CF8B28 /* PYImagePickerController.h in CopyFiles */,
+				156C6A6124C8036700CF8B28 /* PYAssetPickerController.h in CopyFiles */,
 				156C6A6224C8036700CF8B28 /* PYCameraPickerController.h in CopyFiles */,
 				15D42AEF23A3A7BE00BAA1C7 /* PYNavigationStyleModel.h in CopyFiles */,
 				15C5F46E239F4C140009B7E0 /* PYNavigationControll.h in CopyFiles */,
@@ -280,14 +279,12 @@
 		156C6A4F24C7DB6400CF8B28 /* PYImagePickerReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYImagePickerReusableView.h; sourceTree = "<group>"; };
 		156C6A5024C7DB6400CF8B28 /* PYImagePickerReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYImagePickerReusableView.m; sourceTree = "<group>"; };
 		156C6A5124C7DB6400CF8B28 /* PYImagePickerReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PYImagePickerReusableView.xib; sourceTree = "<group>"; };
-		156C6A5724C7DB6E00CF8B28 /* PYImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYImagePickerController.h; sourceTree = "<group>"; };
-		156C6A5824C7DB6E00CF8B28 /* PYImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYImagePickerController.m; sourceTree = "<group>"; };
-		156C6A5924C7DB6E00CF8B28 /* PYImagePickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PYImagePickerController.xib; sourceTree = "<group>"; };
+		156C6A5724C7DB6E00CF8B28 /* PYAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAssetPickerController.h; sourceTree = "<group>"; };
+		156C6A5824C7DB6E00CF8B28 /* PYAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYAssetPickerController.m; sourceTree = "<group>"; };
+		156C6A5924C7DB6E00CF8B28 /* PYAssetPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PYAssetPickerController.xib; sourceTree = "<group>"; };
 		156C6A5C24C7DECE00CF8B28 /* PYCameraPickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYCameraPickerController.h; sourceTree = "<group>"; };
 		156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYCameraPickerController.m; sourceTree = "<group>"; };
 		156C6A5E24C7DECE00CF8B28 /* PYCameraPickerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PYCameraPickerController.xib; sourceTree = "<group>"; };
-		1573A97C24E907C100F70C88 /* UIViewController+PYNavigation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PYNavigation.h"; sourceTree = "<group>"; };
-		1573A97D24E907C100F70C88 /* UIViewController+PYNavigation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PYNavigation.m"; sourceTree = "<group>"; };
 		1589DCBF204D160000D78784 /* PYTestImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestImageController.h; sourceTree = "<group>"; };
 		1589DCC0204D160000D78784 /* PYTestImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestImageController.m; sourceTree = "<group>"; };
 		1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
@@ -669,9 +666,9 @@
 		156C6A5624C7DB6E00CF8B28 /* FilePicker */ = {
 			isa = PBXGroup;
 			children = (
-				156C6A5724C7DB6E00CF8B28 /* PYImagePickerController.h */,
-				156C6A5824C7DB6E00CF8B28 /* PYImagePickerController.m */,
-				156C6A5924C7DB6E00CF8B28 /* PYImagePickerController.xib */,
+				156C6A5724C7DB6E00CF8B28 /* PYAssetPickerController.h */,
+				156C6A5824C7DB6E00CF8B28 /* PYAssetPickerController.m */,
+				156C6A5924C7DB6E00CF8B28 /* PYAssetPickerController.xib */,
 				156C6A5C24C7DECE00CF8B28 /* PYCameraPickerController.h */,
 				156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */,
 				156C6A5E24C7DECE00CF8B28 /* PYCameraPickerController.xib */,
@@ -743,8 +740,6 @@
 				15D42AE723A3A73F00BAA1C7 /* PYNavigationStyleModel.m */,
 				15C5F462239F42190009B7E0 /* PYNavigationControll.h */,
 				15C5F463239F42190009B7E0 /* PYNavigationControll.m */,
-				1573A97C24E907C100F70C88 /* UIViewController+PYNavigation.h */,
-				1573A97D24E907C100F70C88 /* UIViewController+PYNavigation.m */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -1016,7 +1011,7 @@
 				156C6A5524C7DB6400CF8B28 /* PYImagePickerReusableView.xib in Resources */,
 				159884801F6B99FE00E589D3 /* icon.png in Resources */,
 				152289F21F4E6C9000E02321 /* timg.jpeg in Resources */,
-				156C6A5B24C7DB6E00CF8B28 /* PYImagePickerController.xib in Resources */,
+				156C6A5B24C7DB6E00CF8B28 /* PYAssetPickerController.xib in Resources */,
 				15265ACA226F2204004D633C /* 100063.mp3 in Resources */,
 				15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */,
 				15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */,
@@ -1072,7 +1067,7 @@
 				156C6A5224C7DB6400CF8B28 /* PYImagePickerCell.m in Sources */,
 				159F24162397F06D00C95278 /* PYKeyboardControll.m in Sources */,
 				155B586C1F5E49670070ECEE /* PYDisplayImageTools.m in Sources */,
-				156C6A5A24C7DB6E00CF8B28 /* PYImagePickerController.m in Sources */,
+				156C6A5A24C7DB6E00CF8B28 /* PYAssetPickerController.m in Sources */,
 				15EEF848202019380092620A /* PYTestCalendarController.m in Sources */,
 				15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */,
 				15CC07E31EA7556C0006B505 /* main.m in Sources */,
@@ -1082,7 +1077,6 @@
 				15DB8CA7210C122700AA2CF9 /* PYUserLocationView.m in Sources */,
 				154E5BDC20AD3B3A00C4E5C0 /* PYTestSliderController.m in Sources */,
 				15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */,
-				1573A97E24E907C100F70C88 /* UIViewController+PYNavigation.m in Sources */,
 				1589DCC1204D160000D78784 /* PYTestImageController.m in Sources */,
 				15D42AEB23A3A74E00BAA1C7 /* __PY__UIViewcontrollerNavigationImpl.m in Sources */,
 				152C31941F0DD6EC006FD18C /* PYAudioRecord.m in Sources */,
@@ -1104,7 +1098,7 @@
 			files = (
 				156C6A6324C8037A00CF8B28 /* PYImagePickerCell.m in Sources */,
 				156C6A6424C8037A00CF8B28 /* PYImagePickerReusableView.m in Sources */,
-				156C6A6524C8037A00CF8B28 /* PYImagePickerController.m in Sources */,
+				156C6A6524C8037A00CF8B28 /* PYAssetPickerController.m in Sources */,
 				156C6A6624C8037A00CF8B28 /* PYCameraPickerController.m in Sources */,
 				15D42AEC23A3A77E00BAA1C7 /* __PY__UIViewcontrollerNavigationImpl.m in Sources */,
 				15D42AED23A3A77E00BAA1C7 /* PYNavigationStyleModel.m in Sources */,

@@ -1,17 +1,17 @@
 //
-//  PYImagePickerController.m
+//  PYAssetPickerController.m
 //  PYKit
 //
 //  Created by wlpiaoyi on 2020/7/21.
 //  Copyright © 2020 wlpiaoyi. All rights reserved.
 //
 
-#import "PYImagePickerController.h"
+#import "PYAssetPickerController.h"
 #import "PYImagePickerCell.h"
 #import "PYImagePickerReusableView.h"
 #import "pyinterflowa.h"
 
-@interface PYImagePickerController (){
+@interface PYAssetPickerController (){
     NSBundle * bundle;
 }
 
@@ -22,6 +22,7 @@ kPNSNA NSMutableArray<PHAsset *> * selectedAssets;
 kPNSNA NSMutableArray<PHAsset *> * iCouldAssets;
 kPNSNA NSMutableArray<PHAsset *> * loactionAssets;
 kPNSNA NSMutableArray<NSDictionary *> * datas;
+kPNA NSInteger expandSection;
 kPNA CGSize cellSize;
 kPNA UIEdgeInsets edgeInsets;
 kPNSNA PHImageRequestOptions * requestOptionsNO;
@@ -29,12 +30,24 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 
 @end
 
-@implementation PYImagePickerController
+@implementation PYAssetPickerController
+
+
++(instancetype) instanceVideos{
+    PYAssetPickerController * vc = [PYAssetPickerController new];
+    vc->_subtype = PHAssetCollectionSubtypeSmartAlbumVideos;
+    return vc;
+}
++(instancetype) instanceAny{
+    PYAssetPickerController * vc = [PYAssetPickerController new];
+    return vc;
+    
+}
 
 -(instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     bundle = [NSBundle bundleWithPath:kFORMAT(@"%@/PYKit.bundle", bundleDir)];
-//    bundle = [NSBundle mainBundle];
-    self = [super initWithNibName:nibNameOrNil ? : @"PYImagePickerController" bundle:bundle];
+    self = [super initWithNibName:nibNameOrNil ? : @"PYAssetPickerController" bundle:bundle];
+    self->_subtype = PHAssetCollectionSubtypeAny;
     self.modalPresentationStyle = UIModalPresentationFullScreen;
     return self;
 }
@@ -46,6 +59,38 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
     self.iCouldAssets = [NSMutableArray new];
     self.loactionAssets = [NSMutableArray new];
     self.maxSelected = self.maxSelected;
+    self.expandSection = 0;
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        threadJoinMain(^{
+            switch (status) {
+                case PHAuthorizationStatusAuthorized:{
+                    [self initImagePicker];
+                }
+                    break;
+                case PHAuthorizationStatusDenied:{
+                    UIView * alert = [UIView new];
+                    [alert dialogShowWithTitle:nil message:@"没有权限读取相册,现在开启权限App可能会被强制重启,当前界面可能无法保持!" block:^(UIView * _Nonnull view, BOOL isConfirm) {
+                        [view dialogHidden];
+                        if(isConfirm){
+                            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {}];
+                            }
+                        }
+                        [self onclickDesmiss:nil];
+                    } buttonConfirm:@"去设置" buttonCancel:@"退出"];
+                    alert.dialogShowView.popupBlockTap = ^(UIView * _Nullable view) {};
+                }
+                    break;
+                default:
+                    break;
+            }
+        });
+    }];
+}
+
+-(void) initImagePicker{
+    
     // 获得所有的自定义相簿
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
@@ -58,18 +103,18 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
         options.synchronous = YES;
         options.networkAccessAllowed = YES;
         self.requestOptionsYES = options;
-        PHFetchResult<PHAssetCollection *> *assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAny options:nil];
+        PHFetchResult<PHAssetCollection *> *assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:_subtype options:nil];
         if(assetCollections == nil || assetCollections.count == 0){
             int count = 10;
             while (count -- > 0) {
-                [NSThread sleepForTimeInterval:.5];
-                assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAny options:nil];
+                assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:_subtype options:nil];
                 if(assetCollections && assetCollections.count > 0) break;
             }
         }
         // 遍历所有的自定义相簿
         self.datas = [NSMutableArray new];
-        NSMutableDictionary * recentAssetsDict;
+        NSMutableDictionary * userAssetsDict;
+        NSMutableDictionary * hiddenAssetsDict;
         for (PHAssetCollection *assetCollection in assetCollections) {
             // 获得某个相簿中的所有PHAsset对象
             PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
@@ -77,28 +122,24 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
             NSMutableDictionary * assetsDict = [NSMutableDictionary new];
             assetsDict[@"name"] = assetCollection.localizedTitle;
             assetsDict[@"datas"] = assets;
-            if([assetCollection.localizedTitle isEqual:@"最近项目"]){
-                recentAssetsDict = assetsDict;
+            if(assetCollection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumUserLibrary){
+                userAssetsDict = assetsDict;
+                continue;
+            }
+            if(assetCollection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumAllHidden){
+                hiddenAssetsDict = assetsDict;
                 continue;
             }
             for (PHAsset * asset in assets) {
-                CGSize size = CGSizeMake(boundsWidth(), boundsWidth()/asset.pixelWidth*asset.pixelHeight);
                 if(![self.iCouldAssets containsObject:asset] && ![self.loactionAssets containsObject:asset]){
-                    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:self.requestOptionsNO resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-                        if(!result){
-                            if(![self.iCouldAssets containsObject:asset])[self.iCouldAssets addObject:asset];
-                            [self.loactionAssets removeObject:asset];
-                        }else{
-                            if(![self.loactionAssets containsObject:asset]) [self.loactionAssets addObject:asset];
-                            [self.iCouldAssets removeObject:asset];
-                        }
-                    }];
+                    [self.loactionAssets addObject:asset];
                 }
             }
             [self.datas addObject:assetsDict];
             
         }
-        if(recentAssetsDict) [self.datas insertObject:recentAssetsDict atIndex:0];
+        if(userAssetsDict) [self.datas insertObject:userAssetsDict atIndex:0];
+        if(hiddenAssetsDict) [self.datas addObject:hiddenAssetsDict];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
@@ -110,6 +151,19 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
     CGFloat h = w;
     self.cellSize = CGSizeMake(w, h);
     self.maxSelected = self.maxSelected;
+}
+
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if(self.modalPresentationStyle != UIModalPresentationPopover) return;
+    [[PYUtile getCurrentController]  setNeedsStatusBarAppearanceUpdate];
+}
+
+-(void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if(self.modalPresentationStyle != UIModalPresentationPopover) return;
+    [[PYUtile getCurrentController]  setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark UICollectionViewDelegate
@@ -134,17 +188,16 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
     self.maxSelected = self.maxSelected;
     cell.isSelectedData = [self.selectedAssets containsObject:cell.asset];
     cell.isLoading = [self.iCouldAssets containsObject:cell.asset] && cell.isSelectedData;
-    if(cell.isLoading){
-        PHAsset * asset = cell.asset;
-        CGSize size = CGSizeMake(boundsWidth(), boundsWidth()/asset.pixelWidth*asset.pixelHeight);
-        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:self.requestOptionsYES resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-            if(result){
-                [self.iCouldAssets removeObject:asset];
-                [collectionView reloadData];
-            }
-        }];
-    }
-    if(self.maxSelected <= 1 && self.blockSelected){
+    PHAsset * asset = cell.asset;
+    CGSize size = CGSizeMake(boundsWidth(), boundsWidth()/asset.pixelWidth*asset.pixelHeight);
+    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:self.requestOptionsNO resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        if(!result){
+            [self.iCouldAssets addObject:asset];
+        }
+        cell.isSelectedData = [self.selectedAssets containsObject:cell.asset];
+        cell.isLoading = [self.iCouldAssets containsObject:cell.asset] && cell.isSelectedData;
+    }];
+    if(self.maxSelected <= 1){
         [self onclickConfirm:nil];
     }
 }
@@ -176,6 +229,7 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if(section != self.expandSection) return 0;
     return ((PHFetchResult *)self.datas[section][@"datas"]).count;
 }
 
@@ -190,10 +244,55 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 
 - (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     if (kind != UICollectionElementKindSectionHeader) return  nil;
-    NSString * name = self.datas[indexPath.section][@"name"];
+    NSString * name = kFORMAT(@"%@(%ld)", self.datas[indexPath.section][@"name"], ((PHFetchResult *)self.datas[indexPath.section][@"datas"]).count);
     PYImagePickerReusableView * reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"PYImagePickerReusableView" forIndexPath:indexPath];
     reusableview.name = name;
+    reusableview.section = indexPath.section;
+    kAssign(self);
+    reusableview.blockExpand = ^BOOL(PYImagePickerReusableView * _Nonnull view) {
+        kStrong(self);
+        if(view.isExpand){
+            self.expandSection = -1;
+        }else{
+            self.expandSection = view.section;
+        }
+        [self reloadData];
+        return YES;
+    };
+    reusableview.isExpand = indexPath.section == self.expandSection;
     return reusableview;
+}
+
+-(void) reloadData{
+    [self.collectionView reloadData];
+    [self.collectionView layoutIfNeeded];
+    NSArray *cells = [_collectionView.visibleCells sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        UIView * view1 = obj1;
+        UIView * view2 = obj2;
+        NSInteger y1 = view1.frameY;
+        NSInteger y2 = view2.frameY;
+        if(y1 > y2) {
+            return NSOrderedDescending;
+        }else{
+            return NSOrderedAscending;
+        }
+    }];
+    CGFloat collectionHeight = _collectionView.bounds.size.height;
+    NSInteger count = 0;
+    NSInteger index = 0;
+    for (UICollectionViewCell *cell in cells) {
+        if(count == 4){
+            count = 0;
+            index ++;
+        }
+        count++;
+        cell.alpha = 0.0f;
+        cell.transform = CGAffineTransformMakeTranslation(0, collectionHeight);
+        [UIView animateWithDuration:0.5f delay:0.06 * index usingSpringWithDamping:0.6f initialSpringVelocity:0 options:0 animations:^{
+            cell.transform =  CGAffineTransformMakeTranslation(0, 0);
+            cell.alpha = 1.0f;
+        } completion:nil];
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
@@ -238,8 +337,19 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
             }
         }
     }
-    if(self.blockSelected) _blockSelected(self.selectedAssets, hasiCloud);
-    [self onclickDesmiss:nil];
+    kAssign(self);
+    void (^blockDesmiss) (void) = ^(void){
+        kStrong(self);
+        [self onclickDesmiss:nil];
+    };
+    if(self.blockSelectedHasICloud){
+         _blockSelectedHasICloud(self.selectedAssets, hasiCloud, blockDesmiss);
+    }else if(self.blockSelected){
+        _blockSelected(self.selectedAssets);
+        blockDesmiss();
+    }else{
+        blockDesmiss();
+    }
 }
 
 /*

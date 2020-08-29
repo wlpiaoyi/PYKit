@@ -10,11 +10,21 @@
 
 @implementation PYImagePickerReusableView{
     __weak IBOutlet UILabel *labelName;
+    __weak IBOutlet UIButton *buttonExpand;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+}
+- (IBAction)onclickExpand:(id)sender {
+    if(_blockExpand && !_blockExpand(self)){
+        return;
+    }
+}
+
+-(void) setIsExpand:(BOOL)isExpand{
+    _isExpand = isExpand;
+    buttonExpand.selected = isExpand;
 }
 
 -(void) setName:(NSString *)name{

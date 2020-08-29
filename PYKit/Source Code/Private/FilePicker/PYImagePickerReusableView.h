@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PYImagePickerReusableView : UICollectionReusableView
 
 kPNSNA NSString * name;
+kPNA NSInteger section;
+kPNA BOOL isExpand;
+kPNCNA BOOL (^blockExpand)(PYImagePickerReusableView * view);
 
 @end
 

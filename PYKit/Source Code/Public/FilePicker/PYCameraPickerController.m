@@ -42,6 +42,29 @@ kPNA AVCaptureDevicePosition position;
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self.buttonConfirm setCornerRadiusAndBorder:25 borderWidth:0 borderColor:nil];
+    
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        threadJoinMain(^{
+            if(!granted){
+                UIView * alert = [UIView new];
+                [alert dialogShowWithTitle:nil message:@"没有权限读取摄像头,现在开启权限App可能会被强制重启,当前界面可能无法保持!" block:^(UIView * _Nonnull view, BOOL isConfirm) {
+                    [view dialogHidden];
+                    if(isConfirm){
+                        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {}];
+                        }
+                    }
+                    [self onclickCancel:nil];
+                } buttonConfirm:@"去开启" buttonCancel:@"退出"];
+                alert.dialogShowView.popupBlockTap = ^(UIView * _Nullable view) {};
+            }else{
+                [self initCameraPicker];
+            }
+        });
+    }];
+}
+-(void) initCameraPicker{
     self.photoOutput = [[AVCapturePhotoOutput alloc] init];
     NSDictionary * outputSettings;
     if (@available(iOS 11.0, *)) {
@@ -70,7 +93,18 @@ kPNA AVCaptureDevicePosition position;
     [self.viewOutput.layer addSublayer:self.preview];
     [self.session startRunning];
     self.imageSize = self.imageSize;
-    
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if(self.modalPresentationStyle != UIModalPresentationPopover) return;
+    [[PYUtile getCurrentController]  setNeedsStatusBarAppearanceUpdate];
+}
+
+-(void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if(self.modalPresentationStyle != UIModalPresentationPopover) return;
+    [[PYUtile getCurrentController]  setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void) setImageSize:(CGSize)imageSize{

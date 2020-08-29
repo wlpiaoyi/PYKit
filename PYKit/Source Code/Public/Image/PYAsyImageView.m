@@ -222,7 +222,8 @@ kINITPARAMS{
 //    NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
 //    [allowedCharacterSet addCharactersInString:@":/?#[]@!$&’()*+,;="];
     _cacheTag = [cacheTag stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    _cacheTag = [_cacheTag stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    _cacheTag = [PYUtile MD5ForLower32Bate:_cacheTag];
+    
 }
 -(void) setImgUrl:(NSString *)imgUrl{
     [self setImgUrl:imgUrl cacheTag:nil];

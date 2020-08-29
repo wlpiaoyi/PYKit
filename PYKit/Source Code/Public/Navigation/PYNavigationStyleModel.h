@@ -33,6 +33,7 @@ kPNSNA UIImage * lineButtomImage;
 kPNA UIBarMetrics barMetrics;
 
 kPNA UIStatusBarStyle statusBarStyle;
+kPRA BOOL needsUpdateStatusBarStyle;
 
 kPNCNA BOOL (^blockSetNavigationBarStyle)(PYNavigationStyleModel * _Nonnull styleModel, UIViewController * _Nonnull target);
 kPNCNA UIView * _Nullable (^blockCreateNavigationBarBackgrand) (UIViewController * _Nonnull vc);

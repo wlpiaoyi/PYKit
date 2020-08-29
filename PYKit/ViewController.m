@@ -20,7 +20,7 @@
 #import "PY3DOrthogonView.h"
 #import "PYAsyImageView.h"
 #import "PYTestSliderController.h"
-#import "PYImagePickerController.h"
+#import "PYAssetPickerController.h"
 #import "PYCameraPickerController.h"
 #import "PYNavigationControll.h"
 
@@ -46,7 +46,7 @@ PYPNSNN NSArray * datas;
                    @{@"name":@"map", @"id":@"map"},
                    @{@"name":@"webview", @"id":@"webview"},
                    @{@"name":@"camera", @"id":@"PYCameraPickerController"},
-                   @{@"name":@"photo", @"id":@"PYImagePickerController"}
+                   @{@"name":@"photo", @"id":@"PYAssetPickerController"}
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -120,11 +120,12 @@ PYPNSNN NSArray * datas;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     kFORMAT(@"%d,%ld", indexPath.row, indexPath.section);
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if([(self.datas[indexPath.row][@"id"]) isEqual:@"PYImagePickerController"]){
-        PYImagePickerController * vc = [PYImagePickerController new];
-        vc.maxSelected = 3;
-        vc.blockSelected = ^(NSArray<PHAsset *> * _Nonnull selectedAssets, BOOL isiCloud) {
-            
+    if([(self.datas[indexPath.row][@"id"]) isEqual:@"PYAssetPickerController"]){
+        PYAssetPickerController * vc = [PYAssetPickerController new];
+        vc.modalPresentationStyle = UIModalPresentationPopover;
+        vc.maxSelected = 1;
+        vc.blockSelectedHasICloud = ^(NSArray<PHAsset *> * _Nonnull selectedAssets, BOOL hasiCloud, void (^ _Nonnull blockDesmiss)(void)) {
+            blockDesmiss();
         };
         [self presentViewController:vc animated:YES completion:^{
             

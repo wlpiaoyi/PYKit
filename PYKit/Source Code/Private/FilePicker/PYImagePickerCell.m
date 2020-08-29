@@ -10,6 +10,7 @@
 #import "pyutilea.h"
 
 PHImageRequestOptions * xPYImagePickerCellOptions;
+UIImage * PYDEFAULT_PICKER_IMAGE;
 
 @implementation PYImagePickerCell{
     __weak IBOutlet UIImageView *imagePhoto;
@@ -24,6 +25,7 @@ PHImageRequestOptions * xPYImagePickerCellOptions;
         options.resizeMode = PHImageRequestOptionsResizeModeFast;
         options.synchronous = YES;
         xPYImagePickerCellOptions = options;
+        PYDEFAULT_PICKER_IMAGE = [UIImage imageNamed:@"PYKit.bundle/images/py-image-loading@3x.png"];
     });
     
 }
@@ -61,10 +63,16 @@ PHImageRequestOptions * xPYImagePickerCellOptions;
 
 -(void) setAsset:(PHAsset *)asset{
     _asset = asset;
-    CGSize size = CGSizeMake(200, 200./asset.pixelWidth*asset.pixelHeight);
-    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:xPYImagePickerCellOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-        self->imagePhoto.image = result;
-    }];
+    CGFloat w = boundsWidth() / 4 - 4;
+    CGSize size = CGSizeMake(w, w/asset.pixelWidth*asset.pixelHeight);
+    self->imagePhoto.image = PYDEFAULT_PICKER_IMAGE;
+    threadJoinGlobal(^{
+        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:xPYImagePickerCellOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            threadJoinMain(^{
+                self->imagePhoto.image = result ? : PYDEFAULT_PICKER_IMAGE;
+            });
+        }];
+    });
 }
 
 @end

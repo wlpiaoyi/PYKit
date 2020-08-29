@@ -34,7 +34,7 @@
 -(void) initDarkParams{
     self.textShadowOffset = CGSizeZero;
     self.barMetrics =  UIBarMetricsDefault;
-    self.statusBarStyle = UIStatusBarStyleLightContent;
+    self.statusBarStyle = UIStatusBarStyleDefault;
     self.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
     self.textShadowBlurRadius = 0;
     self.textShadowColor = [UIColor clearColor];
@@ -44,17 +44,14 @@
     self.itemState = UIControlStateNormal;
     self.itemColor = self.titleColor = self.tintColor = [UIColor whiteColor];
     self.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
+    _needsUpdateStatusBarStyle = YES;
     
 }
 
 -(void) initLightParams{
     self.textShadowOffset = CGSizeZero;
     self.barMetrics =  UIBarMetricsDefault;
-    if (@available(iOS 13.0, *)) {
-        self.statusBarStyle = UIStatusBarStyleDarkContent;
-    } else {
-        self.statusBarStyle = UIStatusBarStyleDefault;
-    }
+    self.statusBarStyle = UIStatusBarStyleDefault;
     self.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
     self.textShadowBlurRadius = 0;
     self.textShadowColor = [UIColor clearColor];
@@ -63,6 +60,7 @@
     self.itemState = UIControlStateNormal;
     self.itemColor = self.titleColor = self.tintColor = [UIColor blackColor];
     self.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
+    _needsUpdateStatusBarStyle = YES;
 }
 
 -(void) initDefaultParams{
@@ -140,30 +138,49 @@
  设置导航栏按钮样式
  */
 +(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem barStyle:(nonnull PYNavigationStyleModel *) barStyle{
-    NSMutableDictionary *titleTextAttributes = [NSMutableDictionary dictionaryWithDictionary:[barButtonItem titleTextAttributesForState:barStyle.itemState]];
+    if(barButtonItem.customView && [barButtonItem.customView isKindOfClass:[UIButton class]]){
+        if(barStyle.itemFont) ((UIButton *)barButtonItem.customView).titleLabel.font = barStyle.itemFont;
+        if(barStyle.itemColor){
+            [((UIButton *)barButtonItem.customView) setTitleColor:barStyle.itemColor forState:UIControlStateNormal];
+            [((UIButton *)barButtonItem.customView) setTitleColor:[UIColor colorWithRed:barStyle.itemColor.red green:barStyle.itemColor.green blue:barStyle.itemColor.blue alpha:barStyle.itemColor.alpha * .5] forState:UIControlStateHighlighted];
+        }
+    }else{
+        NSMutableDictionary *titleTextAttributes = [NSMutableDictionary dictionaryWithDictionary:[barButtonItem titleTextAttributesForState:barStyle.itemState]];
 
-    NSShadow *shadow = titleTextAttributes[NSShadowAttributeName];
-    if (!shadow) {
-        shadow = [[NSShadow alloc] init];
+        NSShadow *shadow = titleTextAttributes[NSShadowAttributeName];
+        if (!shadow) {
+            shadow = [[NSShadow alloc] init];
+        }
+        if (barStyle.textShadowOffset.width != CGSizeZero.width && barStyle.textShadowOffset.height != CGSizeZero.height) {
+            shadow.shadowOffset = barStyle.textShadowOffset;
+        }
+        if (barStyle.textShadowBlurRadius != CGFLOAT_MIN) {
+            shadow.shadowBlurRadius = barStyle.textShadowBlurRadius;
+        }
+        if (barStyle.textShadowColor) {
+            shadow.shadowColor = barStyle.textShadowColor;
+        }
+        titleTextAttributes[NSShadowAttributeName] = shadow;
+        if (barStyle.itemColor) {
+            titleTextAttributes[NSForegroundColorAttributeName] = barStyle.itemColor;
+        }
+        if (barStyle.itemFont) {
+            titleTextAttributes[NSFontAttributeName] = barStyle.itemFont;
+        }
+        [barButtonItem setTitleTextAttributes:titleTextAttributes forState:barStyle.itemState];
     }
-    if (barStyle.textShadowOffset.width != CGSizeZero.width && barStyle.textShadowOffset.height != CGSizeZero.height) {
-        shadow.shadowOffset = barStyle.textShadowOffset;
-    }
-    if (barStyle.textShadowBlurRadius != CGFLOAT_MIN) {
-        shadow.shadowBlurRadius = barStyle.textShadowBlurRadius;
-    }
-    if (barStyle.textShadowColor) {
-        shadow.shadowColor = barStyle.textShadowColor;
-    }
-    titleTextAttributes[NSShadowAttributeName] = shadow;
-    if (barStyle.itemColor) {
-        titleTextAttributes[NSForegroundColorAttributeName] = barStyle.itemColor;
-    }
-    if (barStyle.itemFont) {
-        titleTextAttributes[NSFontAttributeName] = barStyle.itemFont;
-    }
-    [barButtonItem setTitleTextAttributes:titleTextAttributes forState:barStyle.itemState];
     
+}
+
+-(void) setStatusBarStyle:(UIStatusBarStyle)statusBarStyle{
+    if(_statusBarStyle != statusBarStyle){
+        _needsUpdateStatusBarStyle = YES;
+    }
+    _statusBarStyle = statusBarStyle;
+}
+
+-(void) setNeedsUpdateStatusBarStyle:(BOOL)needsUpdateStatusBarStyle{
+    _needsUpdateStatusBarStyle = needsUpdateStatusBarStyle;
 }
 
 @end

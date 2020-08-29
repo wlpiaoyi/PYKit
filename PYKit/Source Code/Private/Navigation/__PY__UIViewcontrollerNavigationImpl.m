@@ -9,6 +9,10 @@
 #import "__PY__UIViewcontrollerNavigationImpl.h"
 #import "PYNavigationControll.h"
 
+@interface PYNavigationStyleModel (__Expand__)
+-(void) setNeedsUpdateStatusBarStyle:(BOOL)needsUpdateStatusBarStyle;
+@end
+
 @interface __PYGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
 +(nullable instancetype) shareDelegate;
 @end
@@ -49,6 +53,21 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
     if(self.barStyle.blockSetNavigationBarStyle && !self.barStyle.blockSetNavigationBarStyle(self.barStyle, target)) return;
     [self excuteSetterBackItem:target];
     [self excuteSetterBarStyle:target];
+    if(self.barStyle.needsUpdateStatusBarStyle){
+        [target setNeedsStatusBarAppearanceUpdate];
+        [self.barStyle setNeedsUpdateStatusBarStyle:NO];
+    }
+}
+
+-(void) afterExcuteViewDidAppearWithTarget:(nonnull UIViewController *) target{
+    if(![target conformsToProtocol:@protocol(PYNavigationSetterTag)]) return;
+    if(self.barStyle.blockSetNavigationBarStyle && !self.barStyle.blockSetNavigationBarStyle(self.barStyle, target)) return;
+    [self excuteSetterBackItem:target];
+    [self excuteSetterBarStyle:target];
+    if(self.barStyle.needsUpdateStatusBarStyle){
+        [target setNeedsStatusBarAppearanceUpdate];
+        [self.barStyle setNeedsUpdateStatusBarStyle:NO];
+    }
 }
 
 -(void) afterExcuteViewWillLayoutSubviewsWithTarget:(nonnull UIViewController *) target{
@@ -64,10 +83,12 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
        ((UINavigationController*)(target)).viewControllers.count){
         return [((UINavigationController*)(target)).viewControllers.lastObject preferredStatusBarStyle];
     }
+    
     if([target isKindOfClass:[UITabBarController class]] &&
        ((UITabBarController *) target).selectedViewController){
         return [((UITabBarController *) target).selectedViewController preferredStatusBarStyle];
     }
+    
     if(![target conformsToProtocol:@protocol(PYNavigationSetterTag)]) return style;
     if(target.childViewControllers.count ){
         return [target.childViewControllers.lastObject preferredStatusBarStyle];
