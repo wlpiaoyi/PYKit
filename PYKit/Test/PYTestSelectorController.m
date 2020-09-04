@@ -48,6 +48,15 @@
     for (int i = 0; i<5; i++) {
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
         [btn setTitle:@"xx" forState:UIControlStateNormal];
+        if(i == 1){
+            [btn setTitle:@"xxxxxxxxxxxxxxxxx" forState:UIControlStateNormal];
+        }
+        if(i == 3){
+            [btn setTitle:@"xxxxxxxxxx" forState:UIControlStateNormal];
+        }
+        if(i == 2){
+            [btn setTitle:@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" forState:UIControlStateNormal];
+        }
         [btns addObject:btn];
     }
     self.scroll.selectorTagWidth = 40;

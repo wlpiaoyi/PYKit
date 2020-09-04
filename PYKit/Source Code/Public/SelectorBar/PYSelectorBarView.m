@@ -41,9 +41,6 @@ kINITPARAMSForType(PYSelectorBarView){
     [_contentView py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
         make.top.left.right.bottom.py_constant(0);
     }];
-//    PYEdgeInsetsItem eii = PYEdgeInsetsItemNull();
-//    eii.topActive = eii.leftActive = eii.rightActive = eii.bottomActive = YES;
-//    [PYViewAutolayoutCenter persistConstraint:_contentView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:eii];
     NSMutableArray * mButtons = [NSMutableArray new];
     for(UIButton * button in self.subviews){
         if([button isKindOfClass:[UIButton class]]){
@@ -74,6 +71,10 @@ kINITPARAMSForType(PYSelectorBarView){
         self.selectorTag = selectorTag;
     }
 }
+-(void) setAutoItemWith:(BOOL)autoItemWith{
+    _autoItemWith = autoItemWith;
+    self.buttons = self.buttons;
+}
 -(void) setButtons:(NSArray *)buttons{
     if(self.lcButtons){
         for (NSLayoutConstraint * lc in self.lcButtons) {
@@ -83,6 +84,7 @@ kINITPARAMSForType(PYSelectorBarView){
     }
     if(_buttons && _buttons.count){
         for (UIButton * button in _buttons) {
+            [button py_removeAllLayoutContarint];
             [button removeFromSuperview];
         }
     }
@@ -100,6 +102,17 @@ kINITPARAMSForType(PYSelectorBarView){
     if(_buttons.count == 1){
         NSDictionary<NSString *, NSLayoutConstraint *> * lcd = [PYViewAutolayoutCenter persistConstraint:_buttons.firstObject relationmargins:UIEdgeInsetsZero relationToItems:PYEdgeInsetsItemNull()];
         [self.lcButtons addObjectsFromArray:lcd.allValues];
+    }else if(self.autoItemWith){
+        UIView * leftTag;
+        for (UIButton * button in buttons) {
+            CGFloat wValue = [PYSelectorBarView getWidthWithButton:button minWith:44];
+            [button py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+                make.left.py_toItem(leftTag).py_constant(0);
+                make.top.bottom.py_constant(0);
+                make.width.py_constant(wValue);
+            }];
+            leftTag = button;
+        }
     }else{
         NSArray<NSDictionary<NSString *, NSLayoutConstraint *> *> * lcds = [PYViewAutolayoutCenter persistConstraintHorizontal:_buttons relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:PYEdgeInsetsItemNull() offset:0];
         for (NSDictionary<NSString *, NSLayoutConstraint *> * lcd in lcds) {
@@ -177,49 +190,64 @@ kINITPARAMSForType(PYSelectorBarView){
 
 -(void) setSelectIndex:(NSUInteger)selectIndex animation:(BOOL) animation{
     if(self.buttons.count == 0) return;
-    CGFloat width = self.contentView.frame.size.width / self.buttons.count;
-    CGFloat offsetW = (self.selectorTagWidth > 0 && self.selectorTagWidth < width) ? (width - self.selectorTagWidth)/2 : 0;
-    offsetW = offsetW > 0 ? offsetW : 0;
-    CGFloat orgSelectIndex = _selectIndex;
+    NSInteger orgSelectIndex = _selectIndex;
     _selectIndex = MAX(0, MIN(self.buttons.count - 1, selectIndex));
     if(self.selectorTag){
         kAssign(self);
+        void (^blockBefore)() = ^() {
+            kStrong(self);
+            [self.selectorTag py_removeAllLayoutContarint];
+            [self.selectorTag py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+                if(self.selectorTagHeight > 0){
+                    make.height.py_constant(self.selectorTagHeight);
+                }else{
+                    make.top.py_constant(0);
+                }
+                make.left.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(0);
+                make.right.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(0);
+                make.bottom.py_constant(0);
+            }];
+            [self.selectorTag.superview layoutIfNeeded];
+        };
         void (^blockStart)() = ^() {
             kStrong(self);
-            CGFloat height;
-            if(_selectorTagHeight < 0){
-                height = self.contentView.frame.size.height;
-                [self.selectorTag.superview sendSubviewToBack:self.selectorTag];
-            }else{
-                height = MIN(MAX(0, _selectorTagHeight), self.contentView.frame.size.height);
-                [self.selectorTag.superview bringSubviewToFront:self.selectorTag];
-            }
-            CGRect rect = CGRectMake(width * ((self.selectIndex - orgSelectIndex) > 0 ? orgSelectIndex : self.selectIndex) + offsetW
-                                     ,  self.contentView.frame.size.height - height
-                                     , width + width * ABS(self.selectIndex - orgSelectIndex) - offsetW * 2, height);
-            self.selectorTag.frame = rect;
+            [self.selectorTag py_removeAllLayoutContarint];
+            [self.selectorTag py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+                BOOL isToRight = selectIndex > orgSelectIndex;
+                if(self.selectorTagHeight > 0){
+                    make.height.py_constant(self.selectorTagHeight);
+                }else{
+                    make.top.py_constant(0);
+                }
+                if(isToRight){
+                    make.left.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(0);
+                    make.right.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(0);
+                }else{
+                    make.right.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(0);
+                    make.left.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(0);
+                }
+                make.bottom.py_constant(0);
+            }];
+            [self.selectorTag.superview layoutIfNeeded];
         };
         void (^blockEnd)() = ^() {
             kStrong(self);
-            CGFloat width = self.contentView.frame.size.width / self.buttons.count;
-            CGFloat height;
-            if(_selectorTagHeight < 0){
-                height = self.contentView.frame.size.height;
-                [self.selectorTag.superview sendSubviewToBack:self.selectorTag];
-            }else{
-                height = MIN(MAX(0, self.selectorTagHeight), self.contentView.frame.size.height);
-                [self.selectorTag.superview bringSubviewToFront:self.selectorTag];
-            }
-            CGRect rect = CGRectMake(width * self.selectIndex + offsetW
-                                     ,  self.contentView.frame.size.height - height
-                                     , width - offsetW * 2, height);
-            self.selectorTag.frame = rect;
-            if(self.blockSelectedOpt){
-                self.blockSelectedOpt(self.selectIndex);
-            }
+            [self.selectorTag py_removeAllLayoutContarint];
+            [self.selectorTag py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+                if(self.selectorTagHeight > 0){
+                    make.height.py_constant(self.selectorTagHeight);
+                }else{
+                    make.top.py_constant(0);
+                }
+                make.left.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(0);
+                make.right.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(0);
+                make.bottom.py_constant(0);
+            }];
+            [self.selectorTag.superview layoutIfNeeded];
         };
         
         if(animation){
+            blockBefore();
             [UIView animateWithDuration:.125f animations:^{
                 self.userInteractionEnabled = NO;
                 blockStart();
@@ -228,11 +256,17 @@ kINITPARAMSForType(PYSelectorBarView){
                     blockEnd();
                 } completion:^(BOOL finished) {
                     self.userInteractionEnabled = YES;
+                    if(self.blockSelectedOpt){
+                        self.blockSelectedOpt(self.selectIndex);
+                    }
                 }];
             }];
         }else{
             self.userInteractionEnabled = YES;
             blockEnd();
+            if(self.blockSelectedOpt){
+                self.blockSelectedOpt(self.selectIndex);
+            }
         }
     }
     
@@ -245,6 +279,7 @@ kINITPARAMSForType(PYSelectorBarView){
 -(void) setSelectIndex:(NSUInteger)selectIndex{
     [self setSelectIndex:selectIndex animation:NO];
 }
+
 kSOULDLAYOUTMSTARTForType(PYSelectorBarView)
 self.selectIndex = _selectIndex;
 kSOULDLAYOUTMEND
@@ -252,7 +287,20 @@ kSOULDLAYOUTMEND
     
 }
 
++(CGFloat) getWidthWithButton:(nonnull UIButton  *) button minWith:(CGFloat) minWith{
+    CGSize size = CGSizeMake(9999, 1);
+    size.width = MAX(minWith, [PYUtile getBoundSizeWithTxt:[button titleForState:UIControlStateNormal] font:button.titleLabel.font size:size].width + 10);
+    CGFloat width = size.width;
+    return width;
+}
 
++(CGFloat) getWidthWithButtons:(nonnull NSArray<UIButton *> *) buttons minWith:(CGFloat) minWith{
+    CGFloat width = 0;
+    for (UIButton * button in buttons) {
+        width += [self getWidthWithButton:button minWith:minWith];
+    }
+    return width;
+}
 
 +(void) __LC_REMOVE_FROM_VIEW:(nonnull NSLayoutConstraint *) lc{
     UIView * view = lc.firstItem;

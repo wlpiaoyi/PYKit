@@ -21,7 +21,13 @@
 @end
 
 @interface PYSelectorBarView : UIView
+
 kPNRNN UIView * contentView;
+
+/**
+ 当前选择第几个
+ */
+kPNA BOOL autoItemWith;
 /**
  按钮集合
  1.可以在xib里面在初始化是将自动加入到buttons对象里面
@@ -70,4 +76,6 @@ kPNCNA BOOL (^blockSelecteItem)(NSUInteger index);
 kPNCNA void (^blockSelectedOpt)(NSUInteger index);
 #pragma mark 用于二次开发,重写此类将contentView添加到指定的地方, 由于使用了自动布局不建议直接加在scorllview中
 -(void) addContentView:(nonnull UIView *) contentView;
+
++(CGFloat) getWidthWithButtons:(nonnull NSArray<UIButton *> *) buttons minWith:(CGFloat) minWith;
 @end

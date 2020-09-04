@@ -72,6 +72,7 @@ kINITPARAMSForType(PYSelectorScrollView){
 }
 -(void) setIsScorllSelected:(bool)isScorllSelected{
     _isScorllSelected = isScorllSelected;
+    if(self.autoItemWith == isScorllSelected) self.autoItemWith = !isScorllSelected;
     UIEdgeInsets contentInset;
     if(_isScorllSelected){
         contentInset = UIEdgeInsetsMake(0, self.frame.size.width/2 - (_contentWidth/MAX(1, self.buttons.count))/2, 0, self.frame.size.width/2 - (_contentWidth/MAX(1, self.buttons.count))/2);
@@ -97,6 +98,10 @@ kINITPARAMSForType(PYSelectorScrollView){
 }
 
 -(void) setContentWidth:(CGFloat)contentWidth{
+    if(self.autoItemWith){
+        contentWidth = [self.class getWidthWithButtons:self.buttons minWith:44];
+    }
+    _contentWidth = contentWidth;
     [self setContentWidth:contentWidth animation:NO];
 }
 
@@ -108,22 +113,16 @@ kINITPARAMSForType(PYSelectorScrollView){
     kAssign(self);
     void (^block)() = ^() {
         kStrong(self);
-        CGFloat width = self->_ssv_contentView.frame.size.width / MAX(1, self.buttons.count);
-        CGFloat height = MIN(MAX(0, self.selectorTagHeight), self->_ssv_contentView.frame.size.height);
-        CGFloat offsetW = (self.selectorTagWidth > 0 && self.selectorTagWidth < width) ? (width - self.selectorTagWidth)/2 : 0;
-        offsetW = offsetW > 0 ? offsetW : 0;
-        CGRect rect = CGRectMake(width * self.selectIndex + offsetW
-                                 ,  self.contentView.frame.size.height - height
-                                 , width - offsetW * 2, height);
-        self.selectorTag.frame = rect;
+        CGFloat leftX = self.buttons[self.selectIndex].frame.origin.x;
+        CGFloat nextW = self.selectIndex + 1 > self.buttons.count ? 0 : self.buttons[self.selectIndex].frame.size.width;
         CGPoint contentOffset = self->_scrollView.contentOffset;
         if(self.isScorllSelected){
-            contentOffset = CGPointMake(width * self.selectIndex - self->_scrollView.contentInset.left, 0);
+            contentOffset = CGPointMake(leftX - self->_scrollView.contentInset.left, 0);
         }else if(_contentWidth > 0){
-            if(contentOffset.x  > width * self.selectIndex){
-                contentOffset.x  =  width * self.selectIndex;
-            }else if(contentOffset.x + self->_scrollView.frame.size.width < width * self.selectIndex + width){
-                contentOffset.x =  width * self.selectIndex + width - self->_scrollView.frame.size.width;
+            if(contentOffset.x  > leftX){
+                contentOffset.x  =  leftX;
+            }else if(contentOffset.x + self->_scrollView.frame.size.width < leftX + nextW){
+                contentOffset.x =  leftX + nextW - self->_scrollView.frame.size.width;
             }
         }
         self->_scrollView.contentOffset = contentOffset;
