@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "pyutilea.h"
 
+@protocol PYNavigationSetterTag <NSObject>
+@optional
+-(BOOL) beforePop:(nonnull UIViewController *) vc;
+-(BOOL) beforeDismiss:(nonnull UIViewController *) vc;
+@end
+
+
 @interface PYNavigationStyleModel : NSObject
 
 kPNSNA UIImage * popItemimage;
@@ -51,11 +58,13 @@ kPNCNA UIView * _Nullable (^blockCreateNavigationBarBackgrand) (UIViewController
 /**
 设置导航栏按钮样式
  */
-+(void) setNavigationItemStyle:(nonnull UINavigationItem *) navigationItem barStyle:(nonnull PYNavigationStyleModel *) barStyle;
+ +(void) setNavigationItemStyle:(nonnull UINavigationItem *) navigationItem barStyle:(nonnull PYNavigationStyleModel *) barStyle;
+ +(void) setNavigationItemStyle:(nonnull UINavigationItem *) navigationItem barStyle:(nonnull PYNavigationStyleModel *) barStyle target:(nullable UIViewController *) target;
 /**
  设置导航栏按钮样式
  */
 +(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem barStyle:(nonnull PYNavigationStyleModel *) barStyle;
++(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem barStyle:(nonnull PYNavigationStyleModel *) barStyle target:(nullable UIViewController *) target;
 
 
 @end

@@ -10,6 +10,7 @@
 #import "PYViewAutolayoutCenter.h"
 #import "UIImage+PYExpand.h"
 #import "UIView+PYExpand.h"
+#import "UIView+PYAutolayout.h"
 
 @interface __PYSelectorView : UIView
 
@@ -37,9 +38,12 @@ kINITPARAMSForType(PYSelectorBarView){
     _contentView = [UIView new];
     _contentView.backgroundColor = [UIColor clearColor];
     [self addContentView:_contentView];
-    PYEdgeInsetsItem eii = PYEdgeInsetsItemNull();
-    eii.topActive = eii.leftActive = eii.rightActive = eii.bottomActive = YES;
-    [PYViewAutolayoutCenter persistConstraint:_contentView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:eii];
+    [_contentView py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+        make.top.left.right.bottom.py_constant(0);
+    }];
+//    PYEdgeInsetsItem eii = PYEdgeInsetsItemNull();
+//    eii.topActive = eii.leftActive = eii.rightActive = eii.bottomActive = YES;
+//    [PYViewAutolayoutCenter persistConstraint:_contentView relationmargins:UIEdgeInsetsMake(0, 0, 0, 0) relationToItems:eii];
     NSMutableArray * mButtons = [NSMutableArray new];
     for(UIButton * button in self.subviews){
         if([button isKindOfClass:[UIButton class]]){

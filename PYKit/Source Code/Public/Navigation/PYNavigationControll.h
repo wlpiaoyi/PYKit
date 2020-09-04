@@ -10,12 +10,6 @@
 #import "pyutilea.h"
 #import "PYNavigationStyleModel.h"
 
-@protocol PYNavigationSetterTag <NSObject>
-@optional
--(BOOL) beforePop:(nonnull UIViewController *) vc;
--(BOOL) beforeDismiss:(nonnull UIViewController *) vc;
-@end
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PYNavigationControll : NSObject

@@ -347,7 +347,7 @@ kINITPARAMSForType(PYKeyboardOptionView){
 +(UIButton *) __PY_CREATE_BUTTON{
     UIButton * b =  [UIButton buttonWithType:UIButtonTypeCustom];
     [b.titleLabel setFont:PY_KEYBOARD_FONT];
-    [b setTitleColor:[UIColor colorWithRGBHex:0x167ffbff] forState:UIControlStateNormal];
+    [b setTitleColor:[UIColor colorWithHexNumber:0x167ffbff] forState:UIControlStateNormal];
     [b setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     [b setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     [b setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];

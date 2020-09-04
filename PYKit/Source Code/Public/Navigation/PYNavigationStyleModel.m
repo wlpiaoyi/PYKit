@@ -120,29 +120,44 @@
 设置导航栏按钮样式
  */
 +(void) setNavigationItemStyle:(nonnull UINavigationItem *) navigationItem barStyle:(nonnull PYNavigationStyleModel *) barStyle{
+    [self setNavigationItemStyle:navigationItem barStyle:barStyle target:nil];
+}
+
++(void) setNavigationItemStyle:(nonnull UINavigationItem *) navigationItem barStyle:(nonnull PYNavigationStyleModel *) barStyle target:(nullable UIViewController *) target{
     if(navigationItem.leftBarButtonItems){
         for (UIBarButtonItem * barButtonItem in navigationItem.leftBarButtonItems) {
-            [self setBarButtonItemStyle:barButtonItem barStyle:barStyle];
+            [self setBarButtonItemStyle:barButtonItem barStyle:barStyle target:target];
         }
     }else if(navigationItem.backBarButtonItem){
-        [self setBarButtonItemStyle:navigationItem.backBarButtonItem barStyle:barStyle];
+        [self setBarButtonItemStyle:navigationItem.backBarButtonItem barStyle:barStyle target:target];
     }
     if(navigationItem.rightBarButtonItems){
         for (UIBarButtonItem * barButtonItem in navigationItem.rightBarButtonItems) {
-            [self setBarButtonItemStyle:barButtonItem barStyle:barStyle];
+            [self setBarButtonItemStyle:barButtonItem barStyle:barStyle target:target];
         }
     }
+    
 }
 
 /**
  设置导航栏按钮样式
  */
 +(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem barStyle:(nonnull PYNavigationStyleModel *) barStyle{
+    [self setBarButtonItemStyle:barButtonItem barStyle:barStyle target:nil];
+}
+
+/**
+ 设置导航栏按钮样式
+ */
++(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem barStyle:(nonnull PYNavigationStyleModel *) barStyle target:(UIViewController *) target{
     if(barButtonItem.customView && [barButtonItem.customView isKindOfClass:[UIButton class]]){
+        if(((UIButton *)barButtonItem.customView).buttonType != UIButtonTypeSystem) return;
         if(barStyle.itemFont) ((UIButton *)barButtonItem.customView).titleLabel.font = barStyle.itemFont;
         if(barStyle.itemColor){
             [((UIButton *)barButtonItem.customView) setTitleColor:barStyle.itemColor forState:UIControlStateNormal];
             [((UIButton *)barButtonItem.customView) setTitleColor:[UIColor colorWithRed:barStyle.itemColor.red green:barStyle.itemColor.green blue:barStyle.itemColor.blue alpha:barStyle.itemColor.alpha * .5] forState:UIControlStateHighlighted];
+            [UIButton buttonWithType:UIButtonTypeSystem];
+            [((UIButton *)barButtonItem.customView) setTintColor:barStyle.itemColor];
         }
     }else{
         NSMutableDictionary *titleTextAttributes = [NSMutableDictionary dictionaryWithDictionary:[barButtonItem titleTextAttributesForState:barStyle.itemState]];

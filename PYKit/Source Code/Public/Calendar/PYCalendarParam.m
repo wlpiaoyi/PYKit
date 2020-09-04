@@ -104,7 +104,7 @@ BOOL PYCalendarHasSpesal;
     PYCalendarLunarColor = [UIColor orangeColor];
     PYCalendarDisableColor = [UIColor lightGrayColor];
     PYCalendarWeeakEndColor = [UIColor redColor];
-    PYCalendarSpecial = [UIColor colorWithRGBHex:0XCC4444FF];
+    PYCalendarSpecial = [UIColor colorWithHexNumber:0XCC4444FF];
     PYCalendarHasWatermark = YES;
     PYCalendarHasSpesal = YES;
     [PYInterflowParams loadInterflowParamsData];

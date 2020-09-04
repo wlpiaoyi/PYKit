@@ -123,7 +123,7 @@ PYPNSNN NSArray * datas;
     if([(self.datas[indexPath.row][@"id"]) isEqual:@"PYAssetPickerController"]){
         PYAssetPickerController * vc = [PYAssetPickerController new];
         vc.modalPresentationStyle = UIModalPresentationPopover;
-        vc.maxSelected = 1;
+        vc.maxSelected = 10;
         vc.blockSelectedHasICloud = ^(NSArray<PHAsset *> * _Nonnull selectedAssets, BOOL hasiCloud, void (^ _Nonnull blockDesmiss)(void)) {
             blockDesmiss();
         };

@@ -53,7 +53,7 @@
     self.scroll.selectorTagWidth = 40;
     self.scroll.buttons = btns;
     self.scroll.contentWidth = 80 * 5;
-    self.scroll.isScorllSelected = false;
+    self.scroll.isScorllSelected = NO;
 }
 
 -(void) viewWillAppear:(BOOL)animated{

@@ -63,7 +63,7 @@ UIImage * PYDEFAULT_PICKER_IMAGE;
 
 -(void) setAsset:(PHAsset *)asset{
     _asset = asset;
-    CGFloat w = boundsWidth() / 4 - 4;
+    CGFloat w = boundsWidth() / 2 - 4;
     CGSize size = CGSizeMake(w, w/asset.pixelWidth*asset.pixelHeight);
     self->imagePhoto.image = PYDEFAULT_PICKER_IMAGE;
     threadJoinGlobal(^{

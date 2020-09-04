@@ -128,7 +128,7 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
     if([target isKindOfClass:[UINavigationController class]]) return;
     if(target.navigationController == nil) return;
     [PYNavigationStyleModel setNavigationBarStyle:target.navigationController.navigationBar barStyle:self.barStyle];
-    [PYNavigationStyleModel setNavigationItemStyle:target.navigationItem barStyle:self.barStyle];
+    [PYNavigationStyleModel setNavigationItemStyle:target.navigationItem barStyle:self.barStyle target:target];
     if([target.view viewWithTag:186335021] == nil && self.barStyle.blockCreateNavigationBarBackgrand){
         UIView * navigationBarView = self.barStyle.blockCreateNavigationBarBackgrand(target);
         if(navigationBarView){

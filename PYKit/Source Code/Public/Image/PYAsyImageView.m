@@ -141,8 +141,8 @@ kPNSNN UIColor * fillColor;
 
 kINITPARAMS{
     self.lock = [NSLock new];
-    self.strokeColor = [UIColor colorWithRGBHex:0x66884466];
-    self.fillColor = [UIColor colorWithRGBHex:0x88888833];
+    self.strokeColor = [UIColor colorWithHexNumber:0x66884466];
+    self.fillColor = [UIColor colorWithHexNumber:0x88888833];
     self.activityView = [UIView new];
     self.activityView.backgroundColor = [UIColor clearColor];
     kAssign(self);
@@ -218,16 +218,22 @@ kINITPARAMS{
     }];
     return dnw;
 }
+
++(UIImage *) getCacheImageWithUrl:(nonnull NSString *) url{
+    NSString * cacheTag = [PYUtile MD5ForLower32Bate:[PYAsyImageView parseImageUrlToImageTag:url]];
+    NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:cacheTag];
+    return [UIImage imageWithContentsOfFile:imagePath];
+}
+
 -(void) setCacheTag:(NSString *)cacheTag{
-//    NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-//    [allowedCharacterSet addCharactersInString:@":/?#[]@!$&’()*+,;="];
     _cacheTag = [cacheTag stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     _cacheTag = [PYUtile MD5ForLower32Bate:_cacheTag];
-    
 }
+
 -(void) setImgUrl:(NSString *)imgUrl{
     [self setImgUrl:imgUrl cacheTag:nil];
 }
+
 -(void) setImgUrl:(nonnull NSString *) imgUrl cacheTag:(nullable NSString *) cacheTag{
     _imgUrl = imgUrl;
     self.image = self.defaultImg;
