@@ -107,6 +107,7 @@ kINITPARAMSForType(PYSelectorScrollView){
 
 -(void) setContentWidth:(CGFloat)contentWidth animation:(BOOL) animation{
     _contentWidth = contentWidth;
+    if(self.buttons.count == 0) return;
     _ssv_contentView.frame = CGRectMake(0, 0, MAX(contentWidth, self.frame.size.width), self.frame.size.height);
     __ssv_contentView.frame = _ssv_contentView.frame;
     _scrollView.contentSize = _ssv_contentView.frame.size;

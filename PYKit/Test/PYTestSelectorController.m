@@ -34,6 +34,8 @@
         [label setCornerRadiusAndBorder:label.frameWidth/2 borderWidth:0 borderColor:nil];
         [labels addObject:label];
     }
+    
+    self.bar.selectorTagOffWidth = 40;
     self.bar.displayTags = labels;
     [self.bar setBlockSelecteItem:^BOOL(NSUInteger index) {
         if(index == 0){
@@ -59,10 +61,9 @@
         }
         [btns addObject:btn];
     }
-    self.scroll.selectorTagWidth = 40;
     self.scroll.buttons = btns;
     self.scroll.contentWidth = 80 * 5;
-    self.scroll.isScorllSelected = NO;
+    self.scroll.isScorllSelected = YES;
 }
 
 -(void) viewWillAppear:(BOOL)animated{

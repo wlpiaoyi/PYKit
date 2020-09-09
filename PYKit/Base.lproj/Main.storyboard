@@ -140,41 +140,25 @@
                                 <rect key="frame" x="16" y="44" width="343" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbH-7M-FWb">
-                                        <rect key="frame" x="0.0" y="0.0" width="86" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="44"/>
                                         <state key="normal" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZvL-7r-onE">
-                                        <rect key="frame" x="86" y="0.0" width="85.5" height="44"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kr4-EL-JEG">
-                                        <rect key="frame" x="171.5" y="0.0" width="86" height="44"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GC2-Hk-Gbn">
-                                        <rect key="frame" x="257.5" y="0.0" width="85.5" height="44"/>
+                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="44"/>
                                         <state key="normal" title="Button"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.75684099739999999" green="0.087704721090000007" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="kr4-EL-JEG" firstAttribute="top" secondItem="PBl-Tv-bFL" secondAttribute="top" id="3Qg-w3-pU7"/>
-                                    <constraint firstAttribute="bottom" secondItem="kr4-EL-JEG" secondAttribute="bottom" id="6IB-Q9-Z0m"/>
                                     <constraint firstItem="sbH-7M-FWb" firstAttribute="leading" secondItem="PBl-Tv-bFL" secondAttribute="leading" id="8PP-jo-CYV"/>
-                                    <constraint firstItem="GC2-Hk-Gbn" firstAttribute="leading" secondItem="kr4-EL-JEG" secondAttribute="trailing" id="KMD-1A-gpC"/>
                                     <constraint firstAttribute="bottom" secondItem="sbH-7M-FWb" secondAttribute="bottom" id="NZL-h4-a26"/>
-                                    <constraint firstAttribute="bottom" secondItem="GC2-Hk-Gbn" secondAttribute="bottom" id="Qqw-fr-CA2"/>
                                     <constraint firstItem="ZvL-7r-onE" firstAttribute="leading" secondItem="sbH-7M-FWb" secondAttribute="trailing" id="UYi-9T-5jP"/>
-                                    <constraint firstItem="kr4-EL-JEG" firstAttribute="width" secondItem="sbH-7M-FWb" secondAttribute="width" id="WzT-wP-Mr7"/>
-                                    <constraint firstAttribute="trailing" secondItem="GC2-Hk-Gbn" secondAttribute="trailing" id="YPe-U1-EJL"/>
                                     <constraint firstItem="ZvL-7r-onE" firstAttribute="width" secondItem="sbH-7M-FWb" secondAttribute="width" id="bB9-cx-I5b"/>
-                                    <constraint firstItem="kr4-EL-JEG" firstAttribute="leading" secondItem="ZvL-7r-onE" secondAttribute="trailing" id="cMM-Ao-vOK"/>
                                     <constraint firstAttribute="bottom" secondItem="ZvL-7r-onE" secondAttribute="bottom" id="de1-Ix-6Jb"/>
                                     <constraint firstAttribute="height" constant="44" id="gWk-uq-Vw1"/>
-                                    <constraint firstItem="GC2-Hk-Gbn" firstAttribute="width" secondItem="sbH-7M-FWb" secondAttribute="width" id="hzW-3e-arg"/>
                                     <constraint firstItem="ZvL-7r-onE" firstAttribute="top" secondItem="PBl-Tv-bFL" secondAttribute="top" id="kOb-KP-y3Q"/>
-                                    <constraint firstItem="GC2-Hk-Gbn" firstAttribute="top" secondItem="PBl-Tv-bFL" secondAttribute="top" id="oOS-FR-NAb"/>
                                     <constraint firstItem="sbH-7M-FWb" firstAttribute="top" secondItem="PBl-Tv-bFL" secondAttribute="top" id="rCQ-kh-Aiz"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZvL-7r-onE" secondAttribute="trailing" id="u1Y-5N-WBp"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlk-qC-BoD" customClass="PYSelectorScrollView">
@@ -236,6 +220,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" id="neH-E0-03K"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bar" destination="PBl-Tv-bFL" id="tA7-QC-bZP"/>
                         <outlet property="scroll" destination="Tlk-qC-BoD" id="WbI-aj-jHP"/>
                     </connections>
                 </viewController>

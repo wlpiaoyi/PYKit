@@ -151,7 +151,7 @@
  */
 +(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem barStyle:(nonnull PYNavigationStyleModel *) barStyle target:(UIViewController *) target{
     if(barButtonItem.customView && [barButtonItem.customView isKindOfClass:[UIButton class]]){
-        if(((UIButton *)barButtonItem.customView).buttonType != UIButtonTypeSystem) return;
+        if(((UIButton *)barButtonItem.customView).buttonType == UIButtonTypeCustom) return;
         if(barStyle.itemFont) ((UIButton *)barButtonItem.customView).titleLabel.font = barStyle.itemFont;
         if(barStyle.itemColor){
             [((UIButton *)barButtonItem.customView) setTitleColor:barStyle.itemColor forState:UIControlStateNormal];

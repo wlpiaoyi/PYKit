@@ -203,8 +203,8 @@ kINITPARAMSForType(PYSelectorBarView){
                 }else{
                     make.top.py_constant(0);
                 }
-                make.left.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(0);
-                make.right.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(0);
+                make.left.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(self.selectorTagOffWidth);
+                make.right.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(self.selectorTagOffWidth);
                 make.bottom.py_constant(0);
             }];
             [self.selectorTag.superview layoutIfNeeded];
@@ -220,11 +220,11 @@ kINITPARAMSForType(PYSelectorBarView){
                     make.top.py_constant(0);
                 }
                 if(isToRight){
-                    make.left.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(0);
-                    make.right.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(0);
+                    make.left.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(self.selectorTagOffWidth);
+                    make.right.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(self.selectorTagOffWidth);
                 }else{
-                    make.right.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(0);
-                    make.left.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(0);
+                    make.right.py_toItem(self.buttons[orgSelectIndex]).py_toReversal(YES).py_constant(self.selectorTagOffWidth);
+                    make.left.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(self.selectorTagOffWidth);
                 }
                 make.bottom.py_constant(0);
             }];
@@ -239,8 +239,8 @@ kINITPARAMSForType(PYSelectorBarView){
                 }else{
                     make.top.py_constant(0);
                 }
-                make.left.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(0);
-                make.right.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(0);
+                make.left.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(self.selectorTagOffWidth);
+                make.right.py_toItem(self.buttons[selectIndex]).py_toReversal(YES).py_constant(self.selectorTagOffWidth);
                 make.bottom.py_constant(0);
             }];
             [self.selectorTag.superview layoutIfNeeded];

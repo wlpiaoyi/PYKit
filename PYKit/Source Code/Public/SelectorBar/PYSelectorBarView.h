@@ -50,10 +50,10 @@ kPNSNA UIView * selectorTag;
 kPNA CGFloat selectorTagHeight;
 
 /**
- 标示图的宽度度
- 如果宽度 <0 或者 >(width) 这自动变换
+ 标示图的宽度度偏移量
+ 如果宽度 <0  这自动变换
  */
-kPNA CGFloat  selectorTagWidth;
+kPNA CGFloat  selectorTagOffWidth;
 /**
  当前选择第几个
  */
