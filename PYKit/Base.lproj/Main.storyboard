@@ -217,7 +217,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jXf-kw-Gbe">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="neH-E0-03K"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="neH-E0-03K">
+                            <connections>
+                                <action selector="onclick:" destination="uYt-cL-mrY" id="2HF-Ru-ZRX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bar" destination="PBl-Tv-bFL" id="tA7-QC-bZP"/>

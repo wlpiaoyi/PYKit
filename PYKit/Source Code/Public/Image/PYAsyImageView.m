@@ -10,11 +10,9 @@
 #import "pyutilea.h"
 #import "PYNetDownload.h"
 
-UIImage * PY_ASY_DEFAULT_IMG;
-UIImage * PY_ASY_NODATA_IMG;
-
-NSDictionary<NSString*, UIImage *> * PY_ASY_DEFAULT_IMG_DICT;
+NSString * PY_ASY_DICT_DEFAULT_KEY;
 NSDictionary<NSString*, UIImage *> * PY_ASY_NODATA_IMG_DICT;
+NSDictionary<NSString*, UIImage *> * PY_ASY_LOADING_IMG_DICT;
 
 CFStringRef PY_ASYIMG_PERCENT_FIELD = CFSTR(":/?#[]@!$&’()*+,;=");
 
@@ -27,7 +25,7 @@ kPNSNN UIActivityIndicatorView * activityIndicator;
 kPNSNN UIView * activityView;
 kPNSNN UILabel * activityLabel;
 kPNSNN PYNetDownload * dnw;
-kPNSNA NSString * cachesUrl;
+kPNSNA NSString * cachesPath;
 kPNSNN NSLock * lock;
 kPNSNA PYGraphicsThumb * graphicsThumb;
 kPNA int64_t currentBytes;
@@ -42,46 +40,8 @@ kPNSNN UIColor * fillColor;
    static dispatch_once_t onceToken; dispatch_once(&onceToken,^{
         [PYUtile class];
         [PYAsyImageView checkCachesPath];
+        PY_ASY_DICT_DEFAULT_KEY = @"default";
     });
-}
-
-+(nonnull NSString *) parseImageUrlToImageTag:(nonnull NSString *) imageUrl{
-    if(imageUrl.length < 7) return nil;
-    NSRange range = [imageUrl rangeOfString:@"http://"];
-    BOOL hasHead = false;
-    if(range.length > 0 && range.location == 0){
-        imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
-        hasHead = true;
-    }else{
-        range = [imageUrl rangeOfString:@"https://"];
-        if(range.length > 0 && range.location == 0){
-            imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
-            hasHead = true;
-        }
-    }
-    if(!hasHead) return nil;
-    range = [imageUrl rangeOfString:@"/"];
-    if(range.length > 0){
-        range.length = range.location + 1;
-        range.location = 0;
-        imageUrl = [imageUrl stringByReplacingCharactersInRange:range withString:@""];
-    }
-    imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"/" withString:@""];
-    imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"?" withString:@""];
-    return imageUrl;
-}
-
-+(nonnull NSString *) getImagePathFromImageTag:(nonnull NSString *) imageTag{
-    
-    NSMutableString * imagePath = [NSMutableString new];
-    [imagePath appendString:PYAsyImageViewDataCaches];
-    NSMutableString * imageName = [NSMutableString new];
-    [imageName appendString:@"PYDATA["];
-    [imageName appendString:imageTag ? : @""];
-    [imageName appendString:@"]"];
-    [imagePath appendFormat:@"/%@",imageName];
-    
-    return imagePath;
 }
 -(void) imageDownloadIng:(PYNetDownload * _Nonnull) target  currentBytes:(int64_t) currentBytes totalBytes:(int64_t) totalBytes{
     [self.lock lock];
@@ -107,7 +67,8 @@ kPNSNN UIColor * fillColor;
     @try{
         [self.activityIndicator stopAnimating];
         self.activityView.hidden = YES;
-        self.cachesUrl = nil;
+        self.image = self.imageNoData;
+        self.cachesPath = nil;
         if(data  != nil && [data isKindOfClass:[NSError class]]){
             NSLog(@"[erro code:%ld] [erro domain;%@] [erro description:%@]", (long)((NSError*)data).code, ((NSError*)data).domain, ((NSError*)data).description);
             return;
@@ -119,21 +80,20 @@ kPNSNN UIColor * fillColor;
         if(![[NSFileManager defaultManager] fileExistsAtPath:data isDirectory:&isDirectory] || isDirectory){
             return;
         }
-        NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:self.cacheTag];
-        imagePath = imagePath ? imagePath : self.imgUrl;
+        NSString * imagePath = [PYAsyImageView getCachePathWithUrl:self.imgUrl];
+        if(![NSString isEnabled:imagePath]){
+            NSLog(@"create image path erro!!");
+            return;
+        }
         NSError * erro;
         if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]) [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
-        erro = nil;
+        if(erro) NSLog(@"[erro code:%ld] [erro domain;%@] [erro description:%@] imagePath:%@", (long)((NSError*)erro).code, ((NSError*)data).domain, ((NSError*)erro).description, imagePath);
         
+        erro = nil;
         [[NSFileManager defaultManager] moveItemAtPath:data toPath:imagePath error:&erro];
-        if(erro == nil){
-            self.cachesUrl = imagePath;
-            if(self.blockDisplay){
-                self.blockDisplay(true,false, self);
-            }
-        }else{
-            NSLog(@"%@ image errocode:%ld, errodomain:%@",NSStringFromClass([PYAsyImageView class]), (long)[erro code], [erro domain]);
-        }
+        if(erro) NSLog(@"%@ image errocode:%ld, errodomain:%@",NSStringFromClass([PYAsyImageView class]), (long)[erro code], [erro domain]);
+        self.cachesPath = imagePath;
+        if(self.blockDisplay) self.blockDisplay(true,false, self);
     }@finally{
         [self.lock unlock];
     }
@@ -155,44 +115,52 @@ kINITPARAMS{
         }
     }];
     [self addSubview:self.activityView];
-    [self.activityView setAutotLayotDict:@{@"x":@(0), @"y":@(0), @"w":@(30), @"h":@(30)}];
+    [self.activityView py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+        make.centerX.centerY.py_constant(0);
+        make.width.height.py_constant(30);
+    }];
     self.activityLabel = [UILabel new];
     self.activityLabel.backgroundColor = [UIColor clearColor];
     self.activityLabel.numberOfLines = 2;
     self.activityLabel.font = [UIFont systemFontOfSize:12];
     self.activityLabel.textColor = [UIColor darkGrayColor];
     [self.activityView addSubview: self.activityLabel];
-    [self.activityLabel setAutotLayotDict:@{@"x":@(0), @"y":@(20), @"h":@(15)}];
+    [self.activityLabel py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+        make.centerX.py_constant(0);
+        make.centerY.py_constant(20);
+        make.height.py_constant(15);
+    }];
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.activityView addSubview:self.activityIndicator];
-    [PYViewAutolayoutCenter persistConstraint:self.activityIndicator size:CGSizeMake(30, 30)];
-    [PYViewAutolayoutCenter persistConstraint:self.activityIndicator centerPointer:CGPointMake(0, 0)];
+    [self.activityIndicator py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+        make.centerX.centerY.py_constant(0);
+        make.width.height.py_constant(30);
+    }];
     self.showType = self.showType;
 }
+
 -(void) setShowType:(NSString *)showType{
     _showType = showType;
-    if(PY_ASY_DEFAULT_IMG_DICT && self.showType){
-        self.defaultImg = PY_ASY_DEFAULT_IMG_DICT[self.showType];
-    }
-    if(self.defaultImg == nil) self.defaultImg = PY_ASY_DEFAULT_IMG;
-
     if(PY_ASY_NODATA_IMG_DICT && self.showType){
-        self.noDataImg = PY_ASY_NODATA_IMG_DICT[self.showType];
+        self.imageNoData = PY_ASY_NODATA_IMG_DICT[self.showType];
     }
-    if(self.noDataImg == nil) self.noDataImg = PY_ASY_NODATA_IMG ? : PY_ASY_DEFAULT_IMG;
+    if(self.imageNoData == nil) self.imageNoData = PY_ASY_NODATA_IMG_DICT[PYAsyImageView.dictDefaultKey];
+    if(PY_ASY_LOADING_IMG_DICT && self.showType){
+        self.imageLoading = PY_ASY_LOADING_IMG_DICT[self.showType];
+    }
+    if(self.imageLoading == nil) self.imageLoading = PY_ASY_LOADING_IMG_DICT[PYAsyImageView.dictDefaultKey];
+    if(self.imageLoading == nil) self.imageLoading = self.imageNoData;
 }
--(void) setDefaultImg:(UIImage *)defaultImg{
-    _defaultImg = defaultImg;
-    if(self.image == nil) self.image = self.defaultImg;
-}
--(void) setCachesUrl:(NSString *)cachesUrl{
-    _cachesUrl = cachesUrl;
-    if(_cachesUrl != nil){
-        UIImage * image = [[UIImage alloc] initWithContentsOfFile:self.cachesUrl];
+
+
+-(void) setCachesPath:(NSString *)cachesUrl{
+    _cachesPath = cachesUrl;
+    if(_cachesPath != nil){
+        UIImage * image = [[UIImage alloc] initWithContentsOfFile:self.cachesPath];
         if(image && image.size.width > 0 && image.size.height > 0){
             self.image = image;
-        }else self.image = self.noDataImg;
-    }else self.image = self.noDataImg;
+        }else self.image = self.imageNoData;
+    }else self.image = self.imageNoData;
 }
 
 -(PYNetDownload *) createDnw{
@@ -210,6 +178,7 @@ kINITPARAMS{
     [dnw setBlockCancel:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetDownload * _Nonnull target) {
         [uself.lock lock];
         [uself.activityIndicator stopAnimating];
+        if(uself.image == nil || uself.image == self.imageLoading) uself.image = uself.imageNoData;
         uself.activityView.hidden = YES;
         if(uself.blockDisplay){
             uself.blockDisplay(false,false, uself);
@@ -219,58 +188,45 @@ kINITPARAMS{
     return dnw;
 }
 
-+(UIImage *) getCacheImageWithUrl:(nonnull NSString *) url{
-    NSString * cacheTag = [PYUtile MD5ForLower32Bate:[PYAsyImageView parseImageUrlToImageTag:url]];
-    NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:cacheTag];
-    return [UIImage imageWithContentsOfFile:imagePath];
-}
-
--(void) setCacheTag:(NSString *)cacheTag{
-    _cacheTag = [cacheTag stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    _cacheTag = [PYUtile MD5ForLower32Bate:_cacheTag];
++(NSString *) getCachePathWithUrl:(nonnull NSString *) url{
+    if(![NSString isEnabled:url]) return nil;
+    NSString * cacheTag = [PYUtile MD5ForLower32Bate:url];
+    NSMutableString * imagePath = [NSMutableString new];
+    [imagePath appendString:PYAsyImageViewDataCaches];
+    [imagePath appendFormat:@"/%@",cacheTag];
+    return imagePath;
 }
 
 -(void) setImgUrl:(NSString *)imgUrl{
-    [self setImgUrl:imgUrl cacheTag:nil];
-}
-
--(void) setImgUrl:(nonnull NSString *) imgUrl cacheTag:(nullable NSString *) cacheTag{
     _imgUrl = imgUrl;
-    self.image = self.defaultImg;
+    self.showType = self.showType;
+    self.image = self.imageLoading;
     if(imgUrl == nil || imgUrl.length == 0) return;
-    static_pre_time_interval = 0;
     if(self.dnw) [self.dnw stop];
     else self.dnw = [self createDnw];
     
-    if(cacheTag == nil || cacheTag.length == 0)
-       [self setCacheTag:[PYAsyImageView parseImageUrlToImageTag:self.imgUrl]];
-    else self.cacheTag = cacheTag;
-    NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:self.cacheTag];
-    if(imagePath == nil){
-        kPrintExceptionln("setImageUrl:%s","imagepath is null or is not 'http' or 'https'");
+    NSString * imagePath = [PYAsyImageView getCachePathWithUrl:imgUrl];
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]){
+        self.cachesPath = imagePath;
+        if(self.blockDisplay) _blockDisplay(true,true, self);
         return;
     }
     
-    if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]){
-        self.cachesUrl = imagePath;
-        if(self.image){
-            if(self.blockDisplay){
-                _blockDisplay(true,true, self);
-            }
-            return;
-        }
-    }
-    
+    static_pre_time_interval = 0;
     self.dnw.url = imgUrl;
     [self.dnw resume];
     [self.activityIndicator startAnimating];
     self.activityView.hidden = NO;
 }
 
++(nonnull NSString *) dictDefaultKey{
+    return PY_ASY_DICT_DEFAULT_KEY;
+}
+
 +(bool) clearCache:(nonnull NSString *) imageUrl{
-    NSString * cacheTag = [self parseImageUrlToImageTag:imageUrl] ? : imageUrl;
-    NSString * imagePath = [PYAsyImageView getImagePathFromImageTag:cacheTag];
-    if(imagePath == nil) return false;
+    NSString * imagePath = [PYAsyImageView getCachePathWithUrl:imageUrl];
+    if(![NSString isEnabled:imagePath]) return false;
     NSError * erro;
     [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
     if(erro) return false;

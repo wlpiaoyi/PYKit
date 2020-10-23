@@ -8,24 +8,26 @@
 
 #import <UIKit/UIKit.h>
 #import "PYNetwork.h"
-
-extern UIImage * PY_ASY_DEFAULT_IMG;
-extern UIImage * PY_ASY_NODATA_IMG;
-
-extern NSDictionary<NSString*, UIImage *> * PY_ASY_DEFAULT_IMG_DICT;
-extern NSDictionary<NSString*, UIImage *> * PY_ASY_NODATA_IMG_DICT;
+extern NSDictionary<NSString*, UIImage *> * _Nullable PY_ASY_NODATA_IMG_DICT;
+extern NSDictionary<NSString*, UIImage *> * _Nullable PY_ASY_LOADING_IMG_DICT;
 
 @interface PYAsyImageView : UIImageView
-kPNSNA UIImage * defaultImg;
-kPNSNA UIImage * noDataImg;
+
+kPNSNA UIImage * imageNoData;
+kPNSNA UIImage * imageLoading;
+
 kPNA BOOL hasPercentage;
+
 kPNSNN NSString * imgUrl;
-kPNRNA NSString * cacheTag;
 kPNSNA NSString * showType;
+
+kPCNRA NSString * dictDefaultKey;
+
 @property (nonatomic, copy, nullable) void (^blockDisplay)(bool isSuccess, bool isCahes, PYAsyImageView * _Nonnull imageView);
 @property (nonatomic, copy, nullable) void (^blockProgress)(double progress, PYAsyImageView * _Nonnull imageView);
--(void) setImgUrl:(nonnull NSString *) imgUrl cacheTag:(nullable NSString *) cacheTag;
-+(nullable UIImage *) getCacheImageWithUrl:(nonnull NSString *) url;
+
++(nullable NSString *) getCachePathWithUrl:(nonnull NSString *) url;
 +(bool) clearCache:(nonnull NSString *) imgUrl;
 +(bool) clearCaches;
+
 @end

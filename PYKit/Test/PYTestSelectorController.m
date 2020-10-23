@@ -77,6 +77,8 @@
 -(void) viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
 }
+- (IBAction)onclick:(id)sender {
+}
 
 /*
 #pragma mark - Navigation

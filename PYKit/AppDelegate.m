@@ -51,7 +51,7 @@
     //            styleModel.backgroundImage = normalImage;
     //            styleModel.tintColor = styleModel.titleColor = [UIColor darkTextColor];
     //        }else{
-                styleModel.tintColor = styleModel.titleColor = [UIColor darkTextColor];
+//                styleModel.tintColor = styleModel.titleColor = [UIColor darkTextColor];
     //        }
             return YES;
         };

@@ -18,6 +18,7 @@
 		150C6EEC1F4AC7C700731FC7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */; };
 		150C6EED1F4AC7D400731FC7 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */; };
 		150D4D871F95B0720058FB83 /* PYSelectorScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 150D4D861F95B0720058FB83 /* PYSelectorScrollView.m */; };
+		150DF83B25319697009C29F3 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 150DF83A25319697009C29F3 /* 2.png */; };
 		150EC3DA2061FFDE00F5AA6B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150EC3D92061FFDE00F5AA6B /* WebKit.framework */; };
 		150EC3DC2061FFE800F5AA6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150EC3DB2061FFE800F5AA6B /* Foundation.framework */; };
 		151AA85720A1750600B58AB9 /* PYSliderDoubleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 151AA85620A1750600B58AB9 /* PYSliderDoubleView.m */; };
@@ -234,10 +235,12 @@
 		150C6EEB1F4AC7C700731FC7 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		150D4D851F95B0720058FB83 /* PYSelectorScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYSelectorScrollView.h; sourceTree = "<group>"; };
 		150D4D861F95B0720058FB83 /* PYSelectorScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYSelectorScrollView.m; sourceTree = "<group>"; };
+		150DF83A25319697009C29F3 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		150EC3D92061FFDE00F5AA6B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		150EC3DB2061FFE800F5AA6B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		151AA85520A1750600B58AB9 /* PYSliderDoubleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYSliderDoubleView.h; sourceTree = "<group>"; };
 		151AA85620A1750600B58AB9 /* PYSliderDoubleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYSliderDoubleView.m; sourceTree = "<group>"; };
+		151E988325090E6700B9E222 /* UIView+LeftSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+LeftSlide.h"; path = "../../../PYInterflow/PYInterflow/Source/Public/Slide/UIView+LeftSlide.h"; sourceTree = "<group>"; };
 		152289F11F4E6C9000E02321 /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
 		1522C7BC1F18A1BC003CB0D0 /* PYTextInputCheckParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTextInputCheckParams.h; sourceTree = "<group>"; };
 		1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTextInputCheckParams.m; sourceTree = "<group>"; };
@@ -495,6 +498,7 @@
 		1502A5BC223A3ED600F0787A /* PYInterflow */ = {
 			isa = PBXGroup;
 			children = (
+				151E988325090E6700B9E222 /* UIView+LeftSlide.h */,
 				1502A5D1223A424C00F0787A /* PYMoveView.h */,
 				1502A5C3223A3F1D00F0787A /* pyinterflowa.h */,
 				1502A5C1223A3F0B00F0787A /* PYInterflowParams.h */,
@@ -790,6 +794,7 @@
 			children = (
 				152AAAA51FFB20FC00370DF8 /* Test */,
 				159C3A801F555B9800167B3E /* 1.jpg */,
+				150DF83A25319697009C29F3 /* 2.png */,
 				152289F11F4E6C9000E02321 /* timg.jpeg */,
 				15CC07F81EA756120006B505 /* Source Code */,
 				15CC07E41EA7556C0006B505 /* AppDelegate.h */,
@@ -1013,6 +1018,7 @@
 				15265ACA226F2204004D633C /* 100063.mp3 in Resources */,
 				15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */,
 				15DA7DB31F09E899002FE132 /* TextFieldCheckController.xib in Resources */,
+				150DF83B25319697009C29F3 /* 2.png in Resources */,
 				156C6A5324C7DB6400CF8B28 /* PYImagePickerCell.xib in Resources */,
 				15CC07EE1EA7556C0006B505 /* Assets.xcassets in Resources */,
 				159C3A811F555B9800167B3E /* 1.jpg in Resources */,

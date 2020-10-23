@@ -10,27 +10,61 @@
 #import "pyutilea.h"
 
 @protocol PYNavigationSetterTag <NSObject>
+
 @optional
--(BOOL) beforePop:(nonnull UIViewController *) vc;
--(BOOL) beforeDismiss:(nonnull UIViewController *) vc;
+
+/**
+ 自定义itemFont
+ */
+-(nonnull UIFont *) pyNavigationItemFont:(nonnull UIBarButtonItem *) barItem;
+/**
+ 自定义itemNormalColor
+ */
+-(nonnull UIColor *) pyNavigationItemNormalColor:(nonnull UIBarButtonItem *) barItem;
+/**
+ 自定义itemHighlightColor
+ */
+-(nonnull UIColor *) pyNavigationItemHighlightColor:(nonnull UIBarButtonItem *) barItem;
+/**
+ 自定义tintColor作用于ItemBar图片
+ */
+-(nonnull UIColor *) pyNavigationItemTintColor:(nonnull UIBarButtonItem *) barItem;
+
+/**
+ 自定义PopItemBar图片
+ */
+-(nullable UIImage *) pyNavigatonPopItemImage;
+
+/**
+ 自定义DismissItemBar图片
+ */
+-(nullable UIImage *) pyNavigatonDismissItemImage;
+
+/**
+ 点击退出按钮之前的确认
+ @return YES:允许退出 NO:反之
+ */
+//==========================================================>
+-(BOOL) beforeOnclikPop:(nonnull UIViewController *) vc;
+-(BOOL) beforeOnclickDismiss:(nonnull UIViewController *) vc;
+///<==========================================================
+
 @end
 
 
 @interface PYNavigationStyleModel : NSObject
 
+kPNSNA id userInfo;
+
 kPNSNA UIImage * popItemimage;
 kPNSNA UIImage * dismissItemimage;
-
-kPNA CGSize textShadowOffset;      // offset in user space of the shadow from the original drawing
-kPNA CGFloat textShadowBlurRadius; // blur radius of the shadow in default user space units
-kPNSNA UIColor * textShadowColor;     // color used for the shadow (default is black with an alpha value of 1/3)
 
 kPNSNA UIColor * titleColor;
 kPNSNA UIFont * titleFont;
 
-kPNSNA UIColor * itemColor;
+kPNSNA UIColor * itemNormalColor;
+kPNSNA UIColor * itemHighlightColor;
 kPNSNA UIFont * itemFont;
-kPNA UIControlState itemState;
 
 kPNSNA UIColor * tintColor;
 kPNSNA UIColor * backgroundColor;

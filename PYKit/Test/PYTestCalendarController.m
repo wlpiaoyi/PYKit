@@ -29,7 +29,7 @@
     }];
     [cv setBlockSelected:^(PYCalendarView * _Nonnull view) {
         UIView * v = [UIView new];
-        [v topbarShow:2 message:[((PYCalendarView*)view).date dateFormateDate:nil]];
+        [v toastShow:3 message:[((PYCalendarView*)view).date dateFormateDate:nil]];
         [view sheetHidden];
     }];
 }
