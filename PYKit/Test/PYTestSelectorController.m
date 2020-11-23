@@ -35,14 +35,13 @@
         [labels addObject:label];
     }
     
-    self.bar.selectorTagOffWidth = 40;
     self.bar.displayTags = labels;
     [self.bar setBlockSelecteItem:^BOOL(NSUInteger index) {
-        if(index == 0){
-            UIButton * b = [UIButton buttonWithType:UIButtonTypeSystem];
-            [b setTitle:@"aaaa" forState:UIControlStateNormal];
-            self.bar.buttons = @[b];
-        }
+//        if(index == 0){
+//            UIButton * b = [UIButton buttonWithType:UIButtonTypeSystem];
+//            [b setTitle:@"aaaa" forState:UIControlStateNormal];
+//            self.bar.buttons = @[b];
+//        }
         return true;
     }];
     

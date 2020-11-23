@@ -156,10 +156,15 @@ kINITPARAMS{
 -(void) setCachesPath:(NSString *)cachesUrl{
     _cachesPath = cachesUrl;
     if(_cachesPath != nil){
-        UIImage * image = [[UIImage alloc] initWithContentsOfFile:self.cachesPath];
+//        NSLog(self.cachesPath);
+        NSData * data = [NSData dataWithContentsOfFile:self.cachesPath];
+        UIImage * image  = [[UIImage alloc] initWithData:data];
         if(image && image.size.width > 0 && image.size.height > 0){
             self.image = image;
-        }else self.image = self.imageNoData;
+        }else{
+            [[NSFileManager defaultManager] removeItemAtPath:_cachesPath error:nil];
+            self.image = self.imageNoData;
+        }
     }else self.image = self.imageNoData;
 }
 
@@ -168,22 +173,25 @@ kINITPARAMS{
     [dnw setBlockReceiveChallenge:^BOOL(id  _Nullable data, PYNetwork * _Nonnull target) {
         return true;
     }];
-    __unsafe_unretained typeof(self) uself = self;
+    kAssign(self);
     [dnw setBlockDownloadProgress:^(PYNetDownload * _Nonnull target, int64_t currentBytes, int64_t totalBytes) {
-        [uself imageDownloadIng:target currentBytes:currentBytes totalBytes:totalBytes];
+        kStrong(self);
+        [self imageDownloadIng:target currentBytes:currentBytes totalBytes:totalBytes];
     }];
     [dnw setBlockComplete:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetwork * _Nonnull target) {
-        [uself imageDownloadComplete:target data:data response:response];
+        kStrong(self);
+        [self imageDownloadComplete:target data:data response:response];
     }];
     [dnw setBlockCancel:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetDownload * _Nonnull target) {
-        [uself.lock lock];
-        [uself.activityIndicator stopAnimating];
-        if(uself.image == nil || uself.image == self.imageLoading) uself.image = uself.imageNoData;
-        uself.activityView.hidden = YES;
-        if(uself.blockDisplay){
-            uself.blockDisplay(false,false, uself);
+        kStrong(self);
+        [self.lock lock];
+        [self.activityIndicator stopAnimating];
+        if(self.image == nil || self.image == self.imageLoading) self.image = self.imageNoData;
+        self.activityView.hidden = YES;
+        if(self.blockDisplay){
+            self.blockDisplay(false,false, self);
         }
-        [uself.lock unlock];
+        [self.lock unlock];
     }];
     return dnw;
 }
@@ -198,14 +206,14 @@ kINITPARAMS{
 }
 
 -(void) setImgUrl:(NSString *)imgUrl{
-    _imgUrl = imgUrl;
+    _imgUrl = [imgUrl pyEncodeToPercentEscapeString:@"!*'();@&=+$,%#[]"];
     self.showType = self.showType;
-    self.image = self.imageLoading;
-    if(imgUrl == nil || imgUrl.length == 0) return;
+    self.image = self.imageNoData;
+    if(_imgUrl == nil || _imgUrl.length == 0) return;
     if(self.dnw) [self.dnw stop];
     else self.dnw = [self createDnw];
-    
-    NSString * imagePath = [PYAsyImageView getCachePathWithUrl:imgUrl];
+    self.image = self.imageLoading;
+    NSString * imagePath = [PYAsyImageView getCachePathWithUrl:_imgUrl];
     
     if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]){
         self.cachesPath = imagePath;
@@ -214,7 +222,7 @@ kINITPARAMS{
     }
     
     static_pre_time_interval = 0;
-    self.dnw.url = imgUrl;
+    self.dnw.url = _imgUrl;
     [self.dnw resume];
     [self.activityIndicator startAnimating];
     self.activityView.hidden = NO;

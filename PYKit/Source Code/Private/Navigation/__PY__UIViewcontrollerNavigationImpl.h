@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface __PY__UIViewcontrollerNavigationImpl : NSObject<UIViewcontrollerHookViewDelegate>
 
-kPNSNA PYNavigationStyleModel * barStyle;
+kPNSNA PYNavigationStyleModel * navigationStyle;
 
 @end
 

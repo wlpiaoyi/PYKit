@@ -50,23 +50,23 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
 
 -(void) afterExcuteViewWillAppearWithTarget:(nonnull UIViewController *) target{
     if(![target conformsToProtocol:@protocol(PYNavigationSetterTag)]) return;
-    if(self.barStyle.blockSetNavigationBarStyle && !self.barStyle.blockSetNavigationBarStyle(self.barStyle, target)) return;
+    if(self.navigationStyle.blockSetNavigationBarStyle && !self.navigationStyle.blockSetNavigationBarStyle(self.navigationStyle, target)) return;
     [self excuteSetterBackItem:target];
     [self excuteSetterBarStyle:target];
-    if(self.barStyle.needsUpdateStatusBarStyle){
+    if(self.navigationStyle.needsUpdateStatusBarStyle){
         [target setNeedsStatusBarAppearanceUpdate];
-        [self.barStyle setNeedsUpdateStatusBarStyle:NO];
+        [self.navigationStyle setNeedsUpdateStatusBarStyle:NO];
     }
 }
 
 -(void) afterExcuteViewDidAppearWithTarget:(nonnull UIViewController *) target{
     if(![target conformsToProtocol:@protocol(PYNavigationSetterTag)]) return;
-    if(self.barStyle.blockSetNavigationBarStyle && !self.barStyle.blockSetNavigationBarStyle(self.barStyle, target)) return;
+    if(self.navigationStyle.blockSetNavigationBarStyle && !self.navigationStyle.blockSetNavigationBarStyle(self.navigationStyle, target)) return;
     [self excuteSetterBackItem:target];
     [self excuteSetterBarStyle:target];
-    if(self.barStyle.needsUpdateStatusBarStyle){
+    if(self.navigationStyle.needsUpdateStatusBarStyle){
         [target setNeedsStatusBarAppearanceUpdate];
-        [self.barStyle setNeedsUpdateStatusBarStyle:NO];
+        [self.navigationStyle setNeedsUpdateStatusBarStyle:NO];
     }
 }
 
@@ -94,53 +94,85 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
         return [target.childViewControllers.lastObject preferredStatusBarStyle];
     }
 
-    UIStatusBarStyle statusBarStyle = self.barStyle ? self.barStyle.statusBarStyle : style;
+    UIStatusBarStyle statusBarStyle = self.navigationStyle ? self.navigationStyle.statusBarStyle : style;
     return statusBarStyle;
 }
 
 -(void)  excuteSetterBackItem:(nonnull UIViewController *) target{
     if(!target.navigationController) return;
-    if(target.navigationItem.leftBarButtonItem) return;
-    UIImage * popItemimage = self.barStyle.popItemimage;
-    UIImage * dismissItemimage = self.barStyle.dismissItemimage;
-    if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigatonPopItemImage)]){
-        popItemimage = [((id<PYNavigationSetterTag>)target) pyNavigatonPopItemImage] ? : popItemimage;
+    PYBackButtonItem * backButtonItem;
+    for (UIBarButtonItem * buttonItem in target.navigationItem.leftBarButtonItems) {
+        if([buttonItem isKindOfClass:[PYBackButtonItem class]]){
+            backButtonItem = buttonItem;
+            break;
+        }
     }
-    if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigatonDismissItemImage)]){
-        dismissItemimage = [((id<PYNavigationSetterTag>)target) pyNavigatonDismissItemImage] ? : dismissItemimage;
-    }
-    if(popItemimage && target.navigationController.childViewControllers
+    if(target.navigationController.childViewControllers
        && target.navigationController.childViewControllers.count > 1) {
         SEL popSel = sel_getUid("__py_navigatioin_popvc");
         if(![target respondsToSelector:popSel]){
             class_addMethod([target class], popSel, (IMP)__py_navigatioin_popvc, "v@:");
         };
-        UIBarButtonItem * bbi = [[UIBarButtonItem alloc] initWithImage:popItemimage  style:UIBarButtonItemStylePlain target:target action:popSel];
-        target.navigationItem.leftBarButtonItem = bbi;
+        PYNavigationBackItemStyleModel * popStyle = self.navigationStyle.popStyle;
+        if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigatonPopStyle:)]){
+            popStyle = [((id<PYNavigationSetterTag>)target) pyNavigatonPopStyle:popStyle] ? : popStyle;
+        }
+        if(!popStyle) return;
+        if(!backButtonItem){
+            UIButton * backButton = [popStyle createButton];
+            backButtonItem = [[PYBackButtonItem alloc] initWithCustomView:backButton];
+        }else{
+            if(backButtonItem.customView && [backButtonItem.customView isKindOfClass:[UIButton class]]){
+                UIButton * backButton = backButtonItem.customView;
+                [popStyle setStyleWithButton:backButton];
+                [backButton addTarget:target action:popSel forControlEvents:UIControlEventTouchUpInside];
+            }
+            backButtonItem = nil;
+        }
         target.navigationController.interactivePopGestureRecognizer.delegate = [__PYGestureRecognizerDelegate shareDelegate];
-        [PYNavigationStyleModel setBarButtonItemStyle:bbi barStyle:self.barStyle target:target];
-    }else if(dismissItemimage && target.navigationController.presentingViewController
+    }else if(target.navigationController.presentingViewController
              && target.navigationController.viewControllers.count == 1
              && target.navigationController.viewControllers.firstObject == target){
         SEL dismessSel = sel_getUid("__py_navigation_dismissvc");
         if(![target respondsToSelector:dismessSel]){
             class_addMethod([target class], dismessSel, (IMP)__py_navigation_dismissvc, "v@:");
         }
-        UIBarButtonItem * bbi = [[UIBarButtonItem alloc] initWithImage:dismissItemimage  style:UIBarButtonItemStylePlain target:target action:dismessSel];
-        target.navigationItem.leftBarButtonItem = bbi;
-        [PYNavigationStyleModel setBarButtonItemStyle:bbi barStyle:self.barStyle target:target];
+        PYNavigationBackItemStyleModel * dismissStyle = self.navigationStyle.dismissStyle;
+        if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigatonDismissStyle:)]){
+            dismissStyle = [((id<PYNavigationSetterTag>)target) pyNavigatonDismissStyle:dismissStyle] ? : dismissStyle;
+        }
+        if(!dismissStyle) return;
+        if(!backButtonItem){
+            UIButton * backButton  = [dismissStyle createButton];
+            backButtonItem = [[PYBackButtonItem alloc] initWithCustomView:backButton];
+        }else{
+            if(backButtonItem.customView && [backButtonItem.customView isKindOfClass:[UIButton class]]){
+                UIButton * backButton = backButtonItem.customView;
+                [dismissStyle setStyleWithButton:backButton];
+                [backButton addTarget:target action:dismessSel forControlEvents:UIControlEventTouchUpInside];
+            }
+            backButtonItem = nil;
+        }
+    }
+    if(backButtonItem){
+        if(target.navigationItem.leftBarButtonItem == nil) target.navigationItem.leftBarButtonItem = backButtonItem;
+        else{
+            NSMutableArray * leftBarButtonItems = [target.navigationItem.leftBarButtonItems mutableCopy];
+            [leftBarButtonItems insertObject:backButtonItem atIndex:0];
+            target.navigationItem.leftBarButtonItems = leftBarButtonItems;
+        }
     }
 }
 -(void) excuteSetterBarStyle:(nonnull UIViewController *) target{
     if(!target.navigationController) return;
-    if(self.barStyle == nil) return;
+    if(self.navigationStyle == nil) return;
     if(![target conformsToProtocol:@protocol(PYNavigationSetterTag)]) return;
     if([target isKindOfClass:[UINavigationController class]]) return;
     if(target.navigationController == nil) return;
-    [PYNavigationStyleModel setNavigationBarStyle:target.navigationController.navigationBar barStyle:self.barStyle];
-    [PYNavigationStyleModel setNavigationItemStyle:target.navigationItem barStyle:self.barStyle target:target];
-    if([target.view viewWithTag:187335021] == nil && self.barStyle.blockCreateNavigationBarBackgrand){
-        UIView * navigationBarView = self.barStyle.blockCreateNavigationBarBackgrand(target);
+    [PYNavigationStyleModel setNavigationBarStyle:target.navigationController.navigationBar barStyle:self.navigationStyle.barStyle target:target];
+    [PYNavigationStyleModel setNavigationItemStyle:target.navigationItem itemStyle:self.navigationStyle.itemStyle target:target];
+    if([target.view viewWithTag:187335021] == nil && self.navigationStyle.blockCreateNavigationBarBackgrand){
+        UIView * navigationBarView = self.navigationStyle.blockCreateNavigationBarBackgrand(target);
         navigationBarView.tag = 187335021;
         if(navigationBarView){
             [target.view addSubview:navigationBarView];

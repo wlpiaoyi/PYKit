@@ -217,7 +217,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jXf-kw-Gbe">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="neH-E0-03K">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="user_location_reset.png" id="neH-E0-03K">
                             <connections>
                                 <action selector="onclick:" destination="uYt-cL-mrY" id="2HF-Ru-ZRX"/>
                             </connections>
@@ -333,6 +333,15 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2A3-DP-5v1" customClass="PYMapView">
                                 <rect key="frame" x="16" y="44" width="343" height="623"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LN0-7t-uWF">
+                                        <rect key="frame" x="104" y="110" width="58" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="43"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -351,7 +360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yFI-sJ-UZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721" y="36"/>
+            <point key="canvasLocation" x="1720.8" y="35.532233883058474"/>
         </scene>
         <!--Selecte Bar Controller-->
         <scene sceneID="aFe-Ba-DR5">
@@ -547,4 +556,7 @@
             <point key="canvasLocation" x="1761" y="773"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="user_location_reset.png" width="22" height="22"/>
+    </resources>
 </document>

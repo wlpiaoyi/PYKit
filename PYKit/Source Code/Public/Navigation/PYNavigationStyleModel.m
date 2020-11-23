@@ -32,46 +32,61 @@
 }
 
 -(void) initDarkParams{
-//    self.textShadowOffset = CGSizeZero;
-//    self.textShadowBlurRadius = 0;
-//    self.textShadowColor = [UIColor clearColor];
-    self.barMetrics =  UIBarMetricsDefault;
+    PYNavigationItemStyleModel * itemStyle = [PYNavigationItemStyleModel new];
+    PYNavigationBackItemStyleModel * popStyle = [PYNavigationBackItemStyleModel new];
+    PYNavigationBackItemStyleModel * dismissStyle = [PYNavigationBackItemStyleModel new];
+    PYNavigationBarStyleModel * barStyle =[PYNavigationBarStyleModel new];
+    itemStyle.font = popStyle.font = dismissStyle.font = [UIFont systemFontOfSize:14];
+    barStyle.titleColor = itemStyle.normalColor = popStyle.normalColor = dismissStyle.normalColor = [UIColor whiteColor];
+    barStyle.barMetrics =  UIBarMetricsDefault;
+    barStyle.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
+    barStyle.titleFont = [UIFont systemFontOfSize:20];
+    barStyle.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
+    self.itemStyle = itemStyle;
+    self.popStyle = popStyle;
+    self.dismissStyle = dismissStyle;
+    self.barStyle = barStyle;
     self.statusBarStyle = UIStatusBarStyleDefault;
-    self.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
-    self.titleFont = [UIFont systemFontOfSize:20];
-    self.itemFont = [UIFont systemFontOfSize:14];
-    self.itemNormalColor = self.titleColor = self.tintColor = [UIColor whiteColor];
-    self.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
     _needsUpdateStatusBarStyle = YES;
     
 }
 
 -(void) initLightParams{
-//    self.textShadowOffset = CGSizeZero;
-//    self.textShadowBlurRadius = 0;
-//    self.textShadowColor = [UIColor clearColor];
-    self.barMetrics =  UIBarMetricsDefault;
+    PYNavigationItemStyleModel * itemStyle = [PYNavigationItemStyleModel new];
+    PYNavigationBackItemStyleModel * popStyle = [PYNavigationBackItemStyleModel new];
+    PYNavigationBackItemStyleModel * dismissStyle = [PYNavigationBackItemStyleModel new];
+    PYNavigationBarStyleModel * barStyle =[PYNavigationBarStyleModel new];
+    itemStyle.font = popStyle.font = dismissStyle.font = [UIFont systemFontOfSize:14];
+    barStyle.titleColor = itemStyle.normalColor = popStyle.normalColor = dismissStyle.normalColor = [UIColor blackColor];
+    barStyle.barMetrics =  UIBarMetricsDefault;
+    barStyle.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
+    barStyle.titleFont = [UIFont systemFontOfSize:20];
+    barStyle.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
+    self.itemStyle = itemStyle;
+    self.popStyle = popStyle;
+    self.dismissStyle = dismissStyle;
+    self.barStyle = barStyle;
     self.statusBarStyle = UIStatusBarStyleDefault;
-    self.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
-    self.titleFont = [UIFont systemFontOfSize:20];
-    self.itemFont = [UIFont systemFontOfSize:14];
-    self.itemNormalColor = self.titleColor = self.tintColor = [UIColor blackColor];
-    self.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
     _needsUpdateStatusBarStyle = YES;
 }
 
 -(void) initDefaultParams{
     if (@available(iOS 13.0, *)) {
-//        self.textShadowOffset = CGSizeZero;
-//        self.textShadowBlurRadius = 0;
-//        self.textShadowColor = [UIColor clearColor];
-        self.barMetrics =  UIBarMetricsDefault;
+        PYNavigationItemStyleModel * itemStyle = [PYNavigationItemStyleModel new];
+        PYNavigationBackItemStyleModel * popStyle = [PYNavigationBackItemStyleModel new];
+        PYNavigationBackItemStyleModel * dismissStyle = [PYNavigationBackItemStyleModel new];
+        PYNavigationBarStyleModel * barStyle =[PYNavigationBarStyleModel new];
+        itemStyle.font = popStyle.font = dismissStyle.font = [UIFont systemFontOfSize:14];
+        barStyle.titleColor = itemStyle.normalColor = popStyle.normalColor = dismissStyle.normalColor = [UIColor labelColor];
+        barStyle.barMetrics =  UIBarMetricsDefault;
+        barStyle.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
+        barStyle.titleFont = [UIFont systemFontOfSize:20];
+        barStyle.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
+        self.itemStyle = itemStyle;
+        self.popStyle = popStyle;
+        self.dismissStyle = dismissStyle;
+        self.barStyle = barStyle;
         self.statusBarStyle = UIStatusBarStyleDefault;
-        self.lineButtomImage = [UIImage imageWithColor:[UIColor lightGrayColor]];
-        self.titleFont = [UIFont systemFontOfSize:20];
-        self.itemFont = [UIFont systemFontOfSize:14];
-        self.itemNormalColor = self.titleColor = self.tintColor = [UIColor labelColor];
-        self.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
         _needsUpdateStatusBarStyle = YES;
     }else{
         [self initLightParams];
@@ -81,48 +96,28 @@
 /**
  设置导航栏样式
  */
-+(void) setNavigationBarStyle:(nonnull UINavigationBar *) navigationBar barStyle:(nonnull PYNavigationStyleModel *) barStyle{
-
-    NSMutableDictionary *titleTextAttributes = [NSMutableDictionary dictionaryWithDictionary:[navigationBar titleTextAttributes]];
++(void) setNavigationBarStyle:(nonnull UINavigationBar *) navigationBar barStyle:(nonnull PYNavigationBarStyleModel *) barStyle target:(nullable UIViewController *) target{
     
-    NSShadow *shadow = titleTextAttributes[NSShadowAttributeName];
-    if (!shadow)  shadow = [[NSShadow alloc] init];
-    titleTextAttributes[NSShadowAttributeName] = shadow;
-    
-    if (barStyle.titleColor) titleTextAttributes[NSForegroundColorAttributeName] = barStyle.titleColor;
-    if (barStyle.titleFont) titleTextAttributes[NSFontAttributeName] = barStyle.titleFont;
-    
-    [navigationBar setTitleTextAttributes:titleTextAttributes];
-    
-    if (barStyle.tintColor)  [navigationBar setTintColor:barStyle.tintColor];
-    else [navigationBar setTintColor:nil];
-    
-    if(barStyle.backgroundImage){
-        [navigationBar setBackgroundColor:[UIColor clearColor]];
-        [navigationBar setBackgroundImage:barStyle.backgroundImage forBarMetrics:barStyle.barMetrics];
-    }else if(barStyle.backgroundColor) navigationBar.backgroundColor = barStyle.backgroundColor;
-    
-    if(barStyle.lineButtomImage) navigationBar.shadowImage = barStyle.lineButtomImage;
+    if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigationBarStyle:)]){
+        barStyle = [((id<PYNavigationSetterTag>)target) pyNavigationBarStyle:barStyle];
+    }
+    [barStyle setStyleWithNavigaitonBar:navigationBar];
 }
 
 /**
 设置导航栏按钮样式
  */
-+(void) setNavigationItemStyle:(nonnull UINavigationItem *) navigationItem barStyle:(nonnull PYNavigationStyleModel *) barStyle{
-    [self setNavigationItemStyle:navigationItem barStyle:barStyle target:nil];
-}
-
-+(void) setNavigationItemStyle:(nonnull UINavigationItem *) navigationItem barStyle:(nonnull PYNavigationStyleModel *) barStyle target:(nullable UIViewController *) target{
++(void) setNavigationItemStyle:(nonnull UINavigationItem *) navigationItem itemStyle:(nonnull PYNavigationItemStyleModel *) itemStyle target:(nullable UIViewController *) target{
     if(navigationItem.leftBarButtonItems){
         for (UIBarButtonItem * barButtonItem in navigationItem.leftBarButtonItems) {
-            [self setBarButtonItemStyle:barButtonItem barStyle:barStyle target:target];
+            if([barButtonItem isKindOfClass:[PYBackButtonItem class]]) continue;
+            [self setBarButtonItemStyle:barButtonItem itemStyle:itemStyle target:target];
         }
-    }else if(navigationItem.backBarButtonItem){
-        [self setBarButtonItemStyle:navigationItem.backBarButtonItem barStyle:barStyle target:target];
     }
     if(navigationItem.rightBarButtonItems){
         for (UIBarButtonItem * barButtonItem in navigationItem.rightBarButtonItems) {
-            [self setBarButtonItemStyle:barButtonItem barStyle:barStyle target:target];
+            if([barButtonItem isKindOfClass:[PYBackButtonItem class]]) continue;
+            [self setBarButtonItemStyle:barButtonItem itemStyle:itemStyle target:target];
         }
     }
 }
@@ -130,105 +125,47 @@
 /**
  设置导航栏按钮样式
  */
-+(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem barStyle:(nonnull PYNavigationStyleModel *) barStyle{
-    [self setBarButtonItemStyle:barButtonItem barStyle:barStyle target:nil];
-}
-
-/**
- 设置导航栏按钮样式
- */
-+(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem barStyle:(nonnull PYNavigationStyleModel *) barStyle target:(UIViewController *) target{
-
-    UIColor * tintColor = barStyle.tintColor;
-    UIFont * itemFont = barStyle.itemFont;
-    UIColor * itemNormalColor = barStyle.itemNormalColor;
-    UIColor * itemHighlightColor = barStyle.itemHighlightColor;
++(void) setBarButtonItemStyle:(nonnull UIBarButtonItem *) barButtonItem itemStyle:(nonnull PYNavigationItemStyleModel *) itemStyle target:(UIViewController *) target{
     
-    if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigationItemTintColor:)]){
-        tintColor = [((id<PYNavigationSetterTag>)target) pyNavigationItemTintColor:barButtonItem];
+    if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigationItemStyle:)]){
+        itemStyle = [((id<PYNavigationSetterTag>)target) pyNavigationItemStyle:itemStyle];
     }
-    if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigationItemFont:)]){
-        itemFont = [((id<PYNavigationSetterTag>)target) pyNavigationItemFont:barButtonItem];
-    }
-    if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigationItemNormalColor:)]){
-        itemNormalColor = [((id<PYNavigationSetterTag>)target) pyNavigationItemNormalColor:barButtonItem];
-    }
-    if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigationItemHighlightColor:)]){
-        itemHighlightColor = [((id<PYNavigationSetterTag>)target) pyNavigationItemHighlightColor:barButtonItem];
-    }
-    
     
     if(barButtonItem.customView){
-        
         if(![barButtonItem.customView isKindOfClass:[UIButton class]]) return;
         UIButton * button = barButtonItem.customView;
-        if(button.buttonType != UIButtonTypeSystem) return;
-        
-        if(tintColor) [button setTintColor:tintColor];
-        if(itemFont) button.titleLabel.font = itemFont;
-        if(itemNormalColor) [button setTitleColor:itemNormalColor forState:UIControlStateNormal];
-        if(itemHighlightColor) [button setTitleColor:itemHighlightColor forState:UIControlStateHighlighted];
-        else if(itemNormalColor) [button setTitleColor:itemNormalColor forState:UIControlStateHighlighted];
-        if([button imageForState:UIControlStateNormal] && ![button imageForState:UIControlStateHighlighted])
-        [button setImage:[button imageForState:UIControlStateNormal] forState:UIControlStateHighlighted];
-        
+        [itemStyle setStyleWithButton:button];
         return;
     }
     
-    if(barButtonItem.customView == nil){
-        UIButton * button;
-        if(barButtonItem.image){
-            button = [UIButton buttonWithType:UIButtonTypeCustom];
-            [button setImage:barButtonItem.image forState:UIControlStateNormal];
-            [button setImage:barButtonItem.image forState:UIControlStateHighlighted];
-            barButtonItem.image = nil;
-        }else if([NSString isEnabled:barButtonItem.title]){
-            button = [UIButton buttonWithType:UIButtonTypeCustom];
-            [button setTitle:barButtonItem.title forState:UIControlStateNormal];
-            if(itemNormalColor) [button setTitleColor:itemNormalColor forState:UIControlStateNormal];
-            if(itemHighlightColor) [button setTitleColor:itemHighlightColor forState:UIControlStateHighlighted];
-            else if(itemNormalColor) [button setTitleColor:itemNormalColor forState:UIControlStateHighlighted];
-            button.titleLabel.font = itemFont;
-            barButtonItem.title = nil;
-        }
-        [button addTarget:barButtonItem.target action:barButtonItem.action forControlEvents:UIControlEventTouchUpInside];
-        [barButtonItem setCustomView:button];
-        
-//        NSMutableDictionary * textNormalAttributes = [barButtonItem titleTextAttributesForState:UIControlStateNormal].mutableCopy;
-//        NSMutableDictionary * textHighlightedAttributes = [barButtonItem titleTextAttributesForState:UIControlStateHighlighted].mutableCopy;
-//        NSShadow * shadowNormal =  textNormalAttributes[NSShadowAttributeName];
-//        NSShadow * shadowHighlighted =  textNormalAttributes[NSShadowAttributeName];
-//
-//        if(!shadowNormal) shadowNormal = [[NSShadow alloc] init];
-//        if(!shadowHighlighted) shadowHighlighted = [[NSShadow alloc] init];
-//
-//        if(barStyle.textShadowOffset.width != CGSizeZero.width && barStyle.textShadowOffset.height != CGSizeZero.height) {
-//            shadowNormal.shadowOffset = barStyle.textShadowOffset;
-//            shadowHighlighted.shadowOffset = barStyle.textShadowOffset;
-//        }
-//        if(barStyle.textShadowBlurRadius != CGFLOAT_MIN) {
-//            shadowNormal.shadowBlurRadius = barStyle.textShadowBlurRadius;
-//            shadowHighlighted.shadowBlurRadius = barStyle.textShadowBlurRadius;
-//        }
-//        if(barStyle.textShadowColor) {
-//            shadowNormal.shadowColor = barStyle.textShadowColor;
-//            shadowHighlighted.shadowColor = barStyle.textShadowColor;
-//        }
-//        textNormalAttributes[NSShadowAttributeName] = shadowNormal;
-//        textHighlightedAttributes[NSShadowAttributeName] = shadowHighlighted;
-//
-//        if(barStyle.itemNormalColor)  textNormalAttributes[NSForegroundColorAttributeName] = barStyle.itemNormalColor;
-//        if(barStyle.itemHighlightColor) textHighlightedAttributes[NSForegroundColorAttributeName] = barStyle.itemHighlightColor;
-//        else if(barStyle.itemNormalColor) textHighlightedAttributes[NSForegroundColorAttributeName] = barStyle.itemNormalColor;
-//
-//        if (barStyle.itemFont) {
-//            textNormalAttributes[NSFontAttributeName] = barStyle.itemFont;
-//            textHighlightedAttributes[NSFontAttributeName] = barStyle.itemFont;
-//        }
-//        [barButtonItem setTitleTextAttributes:textNormalAttributes forState:UIControlStateNormal];
-//        [barButtonItem setTitleTextAttributes:textHighlightedAttributes forState:UIControlStateHighlighted];
-//        [barButtonItem setTintColor:tintColor];
+    
+    if(barButtonItem.image == nil && [NSString isEnabled:barButtonItem.title]){
+        [itemStyle setStyleWithButtonItem:barButtonItem];
     }
+    
+//    if(barButtonItem.image == nil && [NSString isEnabled:barButtonItem.title]){
+//        [itemStyle setStyleWithButtonItem:barButtonItem];
+//    UIButton * button;
+//    if(barButtonItem.image){
+//        if(!button) button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [button setImage:barButtonItem.image forState:UIControlStateNormal];
+//        [button setImage:barButtonItem.image forState:UIControlStateHighlighted];
+//        [button addTarget:barButtonItem.target action:barButtonItem.action forControlEvents:UIControlEventTouchUpInside];
+//        barButtonItem.image = nil;
+//        barButtonItem.title = nil;
+//    }else
+//         button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [itemStyle setStyleWithButton:button];
+//        [button setTitle:barButtonItem.title forState:UIControlStateNormal];
+//        barButtonItem.image = nil;
+//        barButtonItem.title = nil;
+//    }
+//    if(button){
+//        [button addTarget:barButtonItem.target action:barButtonItem.action forControlEvents:UIControlEventTouchUpInside];
+//        [barButtonItem setCustomView:button];
+//        return;
+//    }
+    
 }
 
 -(void) setStatusBarStyle:(UIStatusBarStyle)statusBarStyle{
@@ -243,3 +180,142 @@
 }
 
 @end
+
+
+@implementation PYNavigationItemStyleModel
+
+-(void) setStyleWithButtonItem:(UIBarButtonItem *) buttonItem{
+    NSMutableDictionary * textNormalAttributes = [buttonItem titleTextAttributesForState:UIControlStateNormal].mutableCopy;
+    NSMutableDictionary * textHighlightedAttributes = [buttonItem titleTextAttributesForState:UIControlStateHighlighted].mutableCopy;
+//    NSShadow * shadowNormal =  textNormalAttributes[NSShadowAttributeName];
+//    NSShadow * shadowHighlighted =  textNormalAttributes[NSShadowAttributeName];
+//    if(!shadowNormal) shadowNormal = [[NSShadow alloc] init];
+//    if(!shadowHighlighted) shadowHighlighted = [[NSShadow alloc] init];
+//        if(barStyle.textShadowOffset.width != CGSizeZero.width && barStyle.textShadowOffset.height != CGSizeZero.height) {
+//            shadowNormal.shadowOffset = barStyle.textShadowOffset;
+//            shadowHighlighted.shadowOffset = barStyle.textShadowOffset;
+//        }
+//        if(barStyle.textShadowBlurRadius != CGFLOAT_MIN) {
+//            shadowNormal.shadowBlurRadius = barStyle.textShadowBlurRadius;
+//            shadowHighlighted.shadowBlurRadius = barStyle.textShadowBlurRadius;
+//        }
+//        if(barStyle.textShadowColor) {
+//            shadowNormal.shadowColor = barStyle.textShadowColor;
+//            shadowHighlighted.shadowColor = barStyle.textShadowColor;
+//        }
+//    textNormalAttributes[NSShadowAttributeName] = shadowNormal;
+//    textHighlightedAttributes[NSShadowAttributeName] = shadowHighlighted;
+    if(self.normalColor)  textNormalAttributes[NSForegroundColorAttributeName] = self.normalColor;
+    if(self.highlightedColor) textHighlightedAttributes[NSForegroundColorAttributeName] = self.highlightedColor;
+
+    if (self.font) {
+        textNormalAttributes[NSFontAttributeName] = self.font;
+        textHighlightedAttributes[NSFontAttributeName] = self.font;
+    }
+
+    [buttonItem setTitleTextAttributes:textNormalAttributes forState:UIControlStateNormal];
+    [buttonItem setTitleTextAttributes:textHighlightedAttributes forState:UIControlStateHighlighted];
+    [buttonItem setTintColor:self.tintColor];
+}
+
+-(nonnull UIButton *) createButton{
+    UIButton * button = [UIButton buttonWithType:self.tintColor ? UIButtonTypeSystem : UIButtonTypeCustom];
+    [self setStyleWithButton:button];
+    return button;
+}
+
+-(void) setStyleWithButton:(nonnull UIButton *) button{
+    if(button.buttonType != UIButtonTypeSystem) return;
+    [button setTintColor:self.tintColor ? : self.normalColor];
+    button.titleLabel.font = self.font;
+}
+
+-(instancetype) copy{
+    typeof(self) copyObj = [self.class new];
+    copyObj.font = self.font;
+    copyObj.tintColor = self.tintColor;
+    copyObj.normalColor = self.normalColor;
+    copyObj.highlightedColor = self.highlightedColor;
+    return copyObj;
+}
+
+@end
+
+@implementation PYNavigationBackItemStyleModel
+
+-(void) setStyleWithButton:(nonnull UIButton *) button{
+    [super setStyleWithButton:button];
+    if(self.normalImage){
+        [button setImage:self.normalImage forState:UIControlStateNormal];
+    }
+    if(self.highlightedImage){
+        [button setImage:self.highlightedImage forState:UIControlStateHighlighted];
+    }
+    if([NSString isEnabled:self.title]){
+        [button setTitle:self.title forState:UIControlStateNormal];
+    }
+}
+-(void) setStyleWithButtonItem:(UIBarButtonItem *) buttonItem{
+    if(self.normalImage){
+        [buttonItem setImage:self.normalImage];
+    }
+    if([NSString isEnabled:self.title]){
+        [buttonItem setTitle:self.title];
+    }
+}
+
+-(instancetype) copy{
+    typeof(self) copyObj = [self.class new];
+    copyObj.title = self.title;
+    copyObj.font = self.font;
+    copyObj.tintColor = self.tintColor;
+    copyObj.normalColor = self.normalColor;
+    copyObj.highlightedColor = self.highlightedColor;
+    copyObj.normalImage = self.normalImage;
+    copyObj.highlightedImage = self.highlightedImage;
+    return copyObj;
+}
+
+@end
+
+
+@implementation PYNavigationBarStyleModel
+
+-(void) setStyleWithNavigaitonBar:(nonnull UINavigationBar *) navigationBar{
+    NSMutableDictionary *titleTextAttributes = [NSMutableDictionary dictionaryWithDictionary:[navigationBar titleTextAttributes]];
+    NSShadow *shadow = titleTextAttributes[NSShadowAttributeName];
+    if (!shadow)  shadow = [[NSShadow alloc] init];
+    titleTextAttributes[NSShadowAttributeName] = shadow;
+    
+    if (self.titleColor) titleTextAttributes[NSForegroundColorAttributeName] = self.titleColor;
+    if (self.titleFont) titleTextAttributes[NSFontAttributeName] = self.titleFont;
+    
+    [navigationBar setTitleTextAttributes:titleTextAttributes];
+    
+    if (self.tintColor)  [navigationBar setTintColor:self.tintColor];
+    else [navigationBar setTintColor:nil];
+    
+    if(self.backgroundImage){
+        [navigationBar setBackgroundColor:[UIColor clearColor]];
+        [navigationBar setBackgroundImage:self.backgroundImage forBarMetrics:self.barMetrics];
+    }else if(self.backgroundColor) navigationBar.backgroundColor = self.backgroundColor;
+    
+    if(self.lineButtomImage) navigationBar.shadowImage = self.lineButtomImage;
+}
+
+
+-(instancetype) copy{
+    typeof(self) copyObj = [self.class new];
+    copyObj.titleColor = self.titleColor;
+    copyObj.titleFont = self.titleFont;
+    copyObj.tintColor = self.tintColor;
+    copyObj.backgroundColor = self.backgroundColor;
+    copyObj.backgroundImage = self.backgroundImage;
+    copyObj.lineButtomImage = self.lineButtomImage;
+    copyObj.barMetrics = self.barMetrics;
+    return copyObj;
+}
+
+@end
+
+@implementation PYBackButtonItem @end

@@ -45,8 +45,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     PYNavigationStyleModel * styleModel = [[PYNavigationStyleModel alloc] initForDefault];
-    styleModel.dismissItemimage = [UIImage imageNamed:@"WechatIMG272"];
+    PYNET_OUTTIME = 30;
+    styleModel.dismissStyle.normalImage = [UIImage imageNamed:@"WechatIMG272"];
+    styleModel.dismissStyle.tintColor = [UIColor redColor];
         styleModel.blockSetNavigationBarStyle = ^BOOL(PYNavigationStyleModel * _Nonnull styleModel, UIViewController * _Nonnull target) {
+            styleModel.dismissStyle.tintColor = [UIColor redColor];
     //        if([target conformsToProtocol:@protocol(ZFNavigationSetterBlueTag)]){
     //            styleModel.backgroundImage = normalImage;
     //            styleModel.tintColor = styleModel.titleColor = [UIColor darkTextColor];

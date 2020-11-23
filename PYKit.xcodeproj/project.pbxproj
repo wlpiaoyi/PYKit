@@ -1361,6 +1361,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
 				ENABLE_BITCODE = YES;
+				EXCLUDED_ARCHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1378,6 +1379,9 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = S4NUSJ3KDJ;
 				ENABLE_BITCODE = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphoneos*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

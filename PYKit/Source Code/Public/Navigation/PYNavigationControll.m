@@ -14,6 +14,7 @@ static __PY__UIViewcontrollerNavigationImpl * xUIViewcontrollerNavigationImpl;
 +(void) initialize{
     static dispatch_once_t onceToken; dispatch_once(&onceToken, ^{
         [UIViewController hookMethodView];
+        [UINavigationController hookMethodWithName:@"preferredStatusBarStyle"];
         xUIViewcontrollerNavigationImpl = [__PY__UIViewcontrollerNavigationImpl new];
         [UIViewController addDelegateView:xUIViewcontrollerNavigationImpl];
     });
@@ -23,7 +24,7 @@ static __PY__UIViewcontrollerNavigationImpl * xUIViewcontrollerNavigationImpl;
  设置全局导航栏样式
  */
 +(void) setNavigationWithBarStyle:(nonnull PYNavigationStyleModel *) barStyle{
-    xUIViewcontrollerNavigationImpl.barStyle = barStyle;
+    xUIViewcontrollerNavigationImpl.navigationStyle = barStyle;
 }
 
 @end
