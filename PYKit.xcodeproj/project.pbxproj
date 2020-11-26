@@ -278,6 +278,7 @@
 		15595DFF222F9C110077CB85 /* PYTestWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestWebViewController.m; sourceTree = "<group>"; };
 		155B586A1F5E49670070ECEE /* PYDisplayImageTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageTools.h; sourceTree = "<group>"; };
 		155B586B1F5E49670070ECEE /* PYDisplayImageTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageTools.m; sourceTree = "<group>"; };
+		155FFBAA256BC73100768A3B /* UIView+Shutdown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIView+Shutdown.h"; path = "../../../PYInterflow/PYInterflow/Source/Public/Shutdown/UIView+Shutdown.h"; sourceTree = "<group>"; };
 		15611F261F0B7DE900CD8848 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		156C6A4C24C7DB6400CF8B28 /* PYImagePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYImagePickerCell.h; sourceTree = "<group>"; };
 		156C6A4D24C7DB6400CF8B28 /* PYImagePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYImagePickerCell.m; sourceTree = "<group>"; };
@@ -498,6 +499,7 @@
 		1502A5BC223A3ED600F0787A /* PYInterflow */ = {
 			isa = PBXGroup;
 			children = (
+				155FFBAA256BC73100768A3B /* UIView+Shutdown.h */,
 				151E988325090E6700B9E222 /* UIView+LeftSlide.h */,
 				1502A5D1223A424C00F0787A /* PYMoveView.h */,
 				1502A5C3223A3F1D00F0787A /* pyinterflowa.h */,

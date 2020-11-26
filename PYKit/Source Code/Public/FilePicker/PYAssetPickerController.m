@@ -10,14 +10,16 @@
 #import "PYImagePickerCell.h"
 #import "PYImagePickerReusableView.h"
 #import "pyinterflowa.h"
+#import "pyutilea.h"
 
-@interface PYAssetPickerController (){
+@interface PYAssetPickerController () <UIViewcontrollerHookViewDelegate>{
     NSBundle * bundle;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonConfirme;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
+@property (weak, nonatomic) IBOutlet UILabel *labelTag;
 kPNSNA NSMutableArray<PHAsset *> * selectedAssets;
 kPNSNA NSMutableArray<PHAsset *> * iCouldAssets;
 kPNSNA NSMutableArray<PHAsset *> * loactionAssets;
@@ -32,6 +34,11 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 
 @implementation PYAssetPickerController
 
+
+-(void) afterExcuteViewWillDisappearWithTarget:(nonnull UIViewController *) target{
+    if(![target isKindOfClass:[UIImagePickerController class]]) return;
+    [self initImagePicker];
+}
 
 +(instancetype) instanceVideos{
     PYAssetPickerController * vc = [PYAssetPickerController new];
@@ -54,6 +61,12 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (@available(iOS 14, *)) {
+        kDISPATCH_ONCE_BLOCK(^{
+            [UIViewController hookMethodView];
+            [UIViewController addDelegateView:self];
+        });
+    }
     [self.navigationController setNavigationBarHidden:YES];
     self.selectedAssets = [NSMutableArray new];
     self.iCouldAssets = [NSMutableArray new];
@@ -64,6 +77,26 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
         threadJoinMain(^{
             switch (status) {
                 case PHAuthorizationStatusAuthorized:{
+                    if (@available(iOS 14, *)) {
+                        PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatusForAccessLevel:PHAccessLevelReadWrite];
+                        switch (status) {
+                            case PHAuthorizationStatusLimited:{
+                                NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
+                                NSString * appName = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+                                NSMutableAttributedString * attributeString = [NSMutableAttributedString new];
+                                [attributeString appendAttributedString:[[NSAttributedString alloc] initWithString:@"• 从iOS14系统后,如果选择访问有限图片访问每次重新开启app都会提示选择访问图片资源.建议点击进入:\n" attributes:@{
+                                    NSForegroundColorAttributeName: [UIColor grayColor],
+                                }]];
+                                [attributeString appendAttributedString:[[NSAttributedString alloc] initWithString:kFORMAT(@"【设置】->【%@】->【照片】选择 【所有照片】\n", appName) attributes:@{
+                                    NSForegroundColorAttributeName: [UIColor linkColor],
+                                }]];
+                                self.labelTag.attributedText = attributeString;
+                            }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     [self initImagePicker];
                 }
                     break;
@@ -87,6 +120,12 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
             }
         });
     }];
+}
+- (IBAction)onclickGotoSetter:(id)sender {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {}];
+        }
 }
 
 -(void) initImagePicker{
@@ -117,7 +156,18 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
         NSMutableDictionary * hiddenAssetsDict;
         for (PHAssetCollection *assetCollection in assetCollections) {
             // 获得某个相簿中的所有PHAsset对象
-            PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
+            
+            NSMutableArray<PHAsset *> *assets = [NSMutableArray new];
+            for (PHAsset * asset in [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil]) {
+                [assets addObject:asset];
+            }
+            [assets sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                PHAsset * asset1 = obj1;
+                PHAsset * asset2 = obj2;
+                if(asset1.creationDate.timeIntervalSince1970 > asset2.creationDate.timeIntervalSince1970)
+                    return NSOrderedAscending;
+                return NSOrderedDescending;
+            }];
             if(assets == nil || assets.count == 0) continue;
             NSMutableDictionary * assetsDict = [NSMutableDictionary new];
             assetsDict[@"name"] = assetCollection.localizedTitle;
@@ -147,12 +197,11 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
     [self.collectionView registerNib:[UINib nibWithNibName:@"PYImagePickerCell" bundle:bundle] forCellWithReuseIdentifier:@"PYImagePickerCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"PYImagePickerReusableView" bundle:bundle] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"PYImagePickerReusableView"];
     self.edgeInsets = UIEdgeInsetsMake(2, 2, 2, 2);
-    CGFloat w = boundsWidth() / 4. - 4;
+    CGFloat w = boundsWidth() / 3. - 4;
     CGFloat h = w;
     self.cellSize = CGSizeMake(w, h);
     self.maxSelected = self.maxSelected;
 }
-
 
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -165,6 +214,7 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
     if(self.modalPresentationStyle != UIModalPresentationPopover) return;
     [[PYUtile getCurrentController]  setNeedsStatusBarAppearanceUpdate];
 }
+
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -230,12 +280,12 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if(section != self.expandSection) return 0;
-    return ((PHFetchResult *)self.datas[section][@"datas"]).count;
+    return ((NSMutableArray *)self.datas[section][@"datas"]).count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PYImagePickerCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PYImagePickerCell" forIndexPath:indexPath];
-    PHFetchResult<PHAsset *> * assets = (PHFetchResult<PHAsset *> *) self.datas[indexPath.section][@"datas"];
+    NSMutableArray<PHAsset *> * assets = (NSMutableArray<PHAsset *> *) self.datas[indexPath.section][@"datas"];
     cell.asset = [assets objectAtIndex:indexPath.row];
     cell.isSelectedData = [self.selectedAssets containsObject:cell.asset];
     cell.isLoading = [self.iCouldAssets containsObject:cell.asset] && cell.isSelectedData;
@@ -244,7 +294,7 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 
 - (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     if (kind != UICollectionElementKindSectionHeader) return  nil;
-    NSString * name = kFORMAT(@"%@(%ld)", self.datas[indexPath.section][@"name"], ((PHFetchResult *)self.datas[indexPath.section][@"datas"]).count);
+    NSString * name = kFORMAT(@"%@(%ld)", self.datas[indexPath.section][@"name"], ((NSMutableArray *)self.datas[indexPath.section][@"datas"]).count);
     PYImagePickerReusableView * reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"PYImagePickerReusableView" forIndexPath:indexPath];
     reusableview.name = name;
     reusableview.section = indexPath.section;
@@ -350,6 +400,10 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
     }else{
         blockDesmiss();
     }
+}
+
+-(void) dealloc{
+    [[UIViewController delegateViews] removeObject:self];
 }
 
 /*
