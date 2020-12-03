@@ -46,7 +46,8 @@ PYPNSNN NSArray * datas;
                    @{@"name":@"map", @"id":@"map"},
                    @{@"name":@"webview", @"id":@"webview"},
                    @{@"name":@"camera", @"id":@"PYCameraPickerController"},
-                   @{@"name":@"photo", @"id":@"PYAssetPickerController"}
+                   @{@"name":@"photo", @"id":@"PYAssetPickerController"},
+                   @{@"name":@"itemTap", @"id":@"item-tap"}
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;

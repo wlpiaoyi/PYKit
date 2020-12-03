@@ -72,6 +72,9 @@
 		156C6A6624C8037A00CF8B28 /* PYCameraPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */; };
 		156FA05A2062106C0034ED49 /* PYWebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC574A2062034600C37942 /* PYWebView.h */; };
 		1589DCC1204D160000D78784 /* PYTestImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1589DCC0204D160000D78784 /* PYTestImageController.m */; };
+		1594EBFD25762EDD008C681D /* PYLongpressMoveItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594EBFC25762EDD008C681D /* PYLongpressMoveItemView.m */; };
+		1594EC04257635A1008C681D /* PYLongpressMoveItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594EC02257635A1008C681D /* PYLongpressMoveItemCell.m */; };
+		1594EC05257635A1008C681D /* PYLongpressMoveItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1594EC03257635A1008C681D /* PYLongpressMoveItemCell.xib */; };
 		1597CB031F5D2D6300690BBB /* UITextField+PYCheck.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1555E0C81F5CF1C10017B436 /* UITextField+PYCheck.h */; };
 		1597CB0A1F5D42AE00690BBB /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */; };
 		1598847D1F6B7F6100E589D3 /* PYDisplayImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */; };
@@ -82,6 +85,10 @@
 		159F241E2397F5C600C95278 /* PYKeyboardOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 159F24192397F59700C95278 /* PYKeyboardOptionView.m */; };
 		159F24202397F5C600C95278 /* PYKeyboardControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 159F24152397F06D00C95278 /* PYKeyboardControll.m */; };
 		159F24212397F5DC00C95278 /* PYKeyboardControll.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 159F24142397F06D00C95278 /* PYKeyboardControll.h */; };
+		15A704CD2578AEB000E2F94F /* PYItemTapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A704CC2578AEB000E2F94F /* PYItemTapViewController.m */; };
+		15A704CF2578BC5500E2F94F /* PYLongpressMoveItemView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1594EBFB25762EDD008C681D /* PYLongpressMoveItemView.h */; };
+		15A704D02578BC6600E2F94F /* PYLongpressMoveItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594EC02257635A1008C681D /* PYLongpressMoveItemCell.m */; };
+		15A704D12578BC6600E2F94F /* PYLongpressMoveItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594EBFC25762EDD008C681D /* PYLongpressMoveItemView.m */; };
 		15AA334B1F160A030070631E /* PYAudio.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152C31961F0DE198006FD18C /* PYAudio.h */; };
 		15AA334C1F160A030070631E /* PYAudioTools.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15D9F32C1F0F2510002276A9 /* PYAudioTools.h */; };
 		15AA334D1F160A030070631E /* PYAudioPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15D9F32B1F0F2510002276A9 /* PYAudioPlayer.h */; };
@@ -174,6 +181,7 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				15A704CF2578BC5500E2F94F /* PYLongpressMoveItemView.h in CopyFiles */,
 				156C6A6124C8036700CF8B28 /* PYAssetPickerController.h in CopyFiles */,
 				156C6A6224C8036700CF8B28 /* PYCameraPickerController.h in CopyFiles */,
 				15D42AEF23A3A7BE00BAA1C7 /* PYNavigationStyleModel.h in CopyFiles */,
@@ -294,6 +302,11 @@
 		156C6A5E24C7DECE00CF8B28 /* PYCameraPickerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PYCameraPickerController.xib; sourceTree = "<group>"; };
 		1589DCBF204D160000D78784 /* PYTestImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestImageController.h; sourceTree = "<group>"; };
 		1589DCC0204D160000D78784 /* PYTestImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestImageController.m; sourceTree = "<group>"; };
+		1594EBFB25762EDD008C681D /* PYLongpressMoveItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYLongpressMoveItemView.h; sourceTree = "<group>"; };
+		1594EBFC25762EDD008C681D /* PYLongpressMoveItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYLongpressMoveItemView.m; sourceTree = "<group>"; };
+		1594EC01257635A1008C681D /* PYLongpressMoveItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYLongpressMoveItemCell.h; sourceTree = "<group>"; };
+		1594EC02257635A1008C681D /* PYLongpressMoveItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYLongpressMoveItemCell.m; sourceTree = "<group>"; };
+		1594EC03257635A1008C681D /* PYLongpressMoveItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PYLongpressMoveItemCell.xib; sourceTree = "<group>"; };
 		1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
 		1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageView.m; sourceTree = "<group>"; };
 		1598847F1F6B99FE00E589D3 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -302,6 +315,8 @@
 		159F24152397F06D00C95278 /* PYKeyboardControll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYKeyboardControll.m; sourceTree = "<group>"; };
 		159F24182397F59700C95278 /* PYKeyboardOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYKeyboardOptionView.h; sourceTree = "<group>"; };
 		159F24192397F59700C95278 /* PYKeyboardOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYKeyboardOptionView.m; sourceTree = "<group>"; };
+		15A704CB2578AEB000E2F94F /* PYItemTapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYItemTapViewController.h; sourceTree = "<group>"; };
+		15A704CC2578AEB000E2F94F /* PYItemTapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYItemTapViewController.m; sourceTree = "<group>"; };
 		15A91DA8238B9A3A00F5517B /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+HookView.h"; path = "../../../PYUtile/PYUtile/Source/Public/Hook/UIViewController+HookView.h"; sourceTree = "<group>"; };
 		15A91DA9238B9A3B00F5517B /* PYGraphicsThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYGraphicsThumb.h; path = ../../../PYUtile/PYUtile/Source/Public/Graphics/PYGraphicsThumb.h; sourceTree = "<group>"; };
 		15A91DAA238B9A3B00F5517B /* NSNumber+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSNumber+PYExpand.h"; sourceTree = "<group>"; };
@@ -573,6 +588,8 @@
 				15595DFE222F9C110077CB85 /* PYTestWebViewController.h */,
 				15595DFF222F9C110077CB85 /* PYTestWebViewController.m */,
 				15D584CD223605F5002A497E /* 1.html */,
+				15A704CB2578AEB000E2F94F /* PYItemTapViewController.h */,
+				15A704CC2578AEB000E2F94F /* PYItemTapViewController.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -680,6 +697,15 @@
 			path = FilePicker;
 			sourceTree = "<group>";
 		};
+		1594EBFA25762EBD008C681D /* LongpressMoveItem */ = {
+			isa = PBXGroup;
+			children = (
+				1594EBFB25762EDD008C681D /* PYLongpressMoveItemView.h */,
+				1594EBFC25762EDD008C681D /* PYLongpressMoveItemView.m */,
+			);
+			path = LongpressMoveItem;
+			sourceTree = "<group>";
+		};
 		1598847E1F6B99FE00E589D3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -706,6 +732,16 @@
 				159F24192397F59700C95278 /* PYKeyboardOptionView.m */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		15A704CE2578BC2400E2F94F /* LongpressMoveItem */ = {
+			isa = PBXGroup;
+			children = (
+				1594EC01257635A1008C681D /* PYLongpressMoveItemCell.h */,
+				1594EC02257635A1008C681D /* PYLongpressMoveItemCell.m */,
+				1594EC03257635A1008C681D /* PYLongpressMoveItemCell.xib */,
+			);
+			path = LongpressMoveItem;
 			sourceTree = "<group>";
 		};
 		15BD959020BBB5DE00A5811A /* Dep ing */ = {
@@ -839,6 +875,7 @@
 		15CC07F91EA756120006B505 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				15A704CE2578BC2400E2F94F /* LongpressMoveItem */,
 				156C6A4B24C7DB6400CF8B28 /* FilePicker */,
 				15C5F46B239F4BD60009B7E0 /* Navigation */,
 				15CB315F239B5DD1005344EF /* Hybird */,
@@ -858,6 +895,7 @@
 		15CC07FA1EA756120006B505 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				1594EBFA25762EBD008C681D /* LongpressMoveItem */,
 				156C6A5624C7DB6E00CF8B28 /* FilePicker */,
 				15C5F461239F3FB60009B7E0 /* Navigation */,
 				159F24072397E7CE00C95278 /* Keyboard */,
@@ -1014,6 +1052,7 @@
 				15D584CE223605F5002A497E /* 1.html in Resources */,
 				15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */,
 				156C6A5524C7DB6400CF8B28 /* PYImagePickerReusableView.xib in Resources */,
+				1594EC05257635A1008C681D /* PYLongpressMoveItemCell.xib in Resources */,
 				159884801F6B99FE00E589D3 /* icon.png in Resources */,
 				152289F21F4E6C9000E02321 /* timg.jpeg in Resources */,
 				156C6A5B24C7DB6E00CF8B28 /* PYAssetPickerController.xib in Resources */,
@@ -1039,6 +1078,7 @@
 				15CC07E91EA7556C0006B505 /* ViewController.m in Sources */,
 				15417B401EADCF4B009C894F /* PYCalendarParam.m in Sources */,
 				150C6EE91F4AC7B200731FC7 /* PYHybirdUtile.m in Sources */,
+				1594EC04257635A1008C681D /* PYLongpressMoveItemCell.m in Sources */,
 				159F241C2397F59700C95278 /* PYKeyboardOptionView.m in Sources */,
 				15C376191FC2D7CD0076EFA6 /* PY3DView.m in Sources */,
 				15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */,
@@ -1066,6 +1106,7 @@
 				1555E0CC1F5CF1C10017B436 /* UITextField+PYCheck.m in Sources */,
 				15417B411EADCF4B009C894F /* PYCalendarTimeView.m in Sources */,
 				1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */,
+				1594EBFD25762EDD008C681D /* PYLongpressMoveItemView.m in Sources */,
 				150D4D871F95B0720058FB83 /* PYSelectorScrollView.m in Sources */,
 				15D42AE823A3A74000BAA1C7 /* PYNavigationStyleModel.m in Sources */,
 				15595E00222F9C110077CB85 /* PYTestWebViewController.m in Sources */,
@@ -1090,6 +1131,7 @@
 				15DB8CA6210C122700AA2CF9 /* PYMapView+UserLocation.m in Sources */,
 				15D9F32D1F0F2510002276A9 /* PYAudioTools.m in Sources */,
 				15DB8CA4210C122700AA2CF9 /* PYMapView+Annotaions.m in Sources */,
+				15A704CD2578AEB000E2F94F /* PYItemTapViewController.m in Sources */,
 				151AA85720A1750600B58AB9 /* PYSliderDoubleView.m in Sources */,
 				15C376161FC2D7110076EFA6 /* PY3DParams.m in Sources */,
 				15EC574B2062034600C37942 /* PYWebView.m in Sources */,
@@ -1102,6 +1144,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15A704D02578BC6600E2F94F /* PYLongpressMoveItemCell.m in Sources */,
+				15A704D12578BC6600E2F94F /* PYLongpressMoveItemView.m in Sources */,
 				156C6A6324C8037A00CF8B28 /* PYImagePickerCell.m in Sources */,
 				156C6A6424C8037A00CF8B28 /* PYImagePickerReusableView.m in Sources */,
 				156C6A6524C8037A00CF8B28 /* PYAssetPickerController.m in Sources */,
