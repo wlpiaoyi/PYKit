@@ -12,26 +12,33 @@
 #import "pyinterflowa.h"
 
 @interface PYCameraPickerController ()<AVCapturePhotoCaptureDelegate>{
-
     NSBundle * bundle;
 }
+
 @property (weak, nonatomic) IBOutlet UIView *viewOutput;
 @property (weak, nonatomic) IBOutlet UIButton *buttonConfirm;
 @property (weak, nonatomic) IBOutlet UIView *viewShow;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lcW;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lcH;
+
 kPNSNA AVCaptureSession * session;
-kPNSNA AVCapturePhotoOutput * photoOutput;
+kPNSNA AVCaptureOutput * output;//
 kPNSNA AVCaptureDeviceInput * deviceInput;
 kPNSNA NSArray<AVCaptureDevice *> * cameras;
 kPNSNA AVCaptureVideoPreviewLayer * preview;
 kPNA AVCaptureDevicePosition position;
+
 @end
 
 @implementation PYCameraPickerController
 
 -(instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    bundle = [NSBundle bundleWithPath:kFORMAT(@"%@/PYKit.bundle", bundleDir)];
+    
+    if([kAppBundleIdentifier isEqual:@"wlpiaoyi.PYKit"])
+        bundle =  [NSBundle mainBundle];
+    else
+        bundle =  [NSBundle bundleWithPath:kFORMAT(@"%@/PYKit.bundle", bundleDir)];
+
     self = [super initWithNibName:nibNameOrNil ? : @"PYCameraPickerController" bundle:bundle];
     self.imageSize = CGSizeZero;
     self.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -42,6 +49,7 @@ kPNA AVCaptureDevicePosition position;
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     [self.buttonConfirm setCornerRadiusAndBorder:25 borderWidth:0 borderColor:nil];
+    [[self.view viewWithTag:1860202] setCornerRadiusAndBorder:28 borderWidth:2 borderColor:self.buttonConfirm.backgroundColor];
     
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
         threadJoinMain(^{
@@ -64,17 +72,19 @@ kPNA AVCaptureDevicePosition position;
         });
     }];
 }
+
 -(void) initCameraPicker{
-    self.photoOutput = [[AVCapturePhotoOutput alloc] init];
+    AVCapturePhotoOutput *output = [[AVCapturePhotoOutput alloc] init];
     NSDictionary * outputSettings;
     if (@available(iOS 11.0, *)) {
         outputSettings = @{AVVideoCodecKey:AVVideoCodecTypeJPEG};
     } else {
         outputSettings = @{AVVideoCodecKey:AVVideoCodecJPEG};
     }
-    [self.photoOutput setLivePhotoCaptureEnabled:NO];
-    [self.photoOutput connectionWithMediaType:AVMediaTypeVideo];
-    [self.photoOutput setPhotoSettingsForSceneMonitoring:[AVCapturePhotoSettings photoSettingsWithFormat:outputSettings]];
+    [output setLivePhotoCaptureEnabled:NO];
+    [output connectionWithMediaType:AVMediaTypeVideo];
+    [output setPhotoSettingsForSceneMonitoring:[AVCapturePhotoSettings photoSettingsWithFormat:outputSettings]];
+    self.output= output;
     
     NSMutableArray<AVCaptureDevice *> * cameras = [NSMutableArray new];
     AVCaptureDeviceDiscoverySession * devices = [AVCaptureDeviceDiscoverySession  discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera] mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionBack];
@@ -84,7 +94,7 @@ kPNA AVCaptureDevicePosition position;
     self.cameras = cameras;
     self.session = [[AVCaptureSession alloc] init];
     self.session.sessionPreset = AVCaptureSessionPresetHigh;
-    [self.session addOutput:self.photoOutput];
+    [self.session addOutput:self.output];
     self.position = AVCaptureDevicePositionBack;
     if(self.position != AVCaptureDevicePositionBack) return;
     self.preview = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
@@ -161,7 +171,8 @@ kPNA AVCaptureDevicePosition position;
 
 
 - (IBAction)onclickConfirm:(id)sender {
-    [self.photoOutput capturePhotoWithSettings:[AVCapturePhotoSettings photoSettings] delegate:self];
+    if(![self.output isKindOfClass:[AVCapturePhotoOutput class]]) return;
+    [((AVCapturePhotoOutput *)self.output) capturePhotoWithSettings:[AVCapturePhotoSettings photoSettings] delegate:self];
 }
 - (IBAction)onclickCancel:(id)sender {
     if(self.navigationController){
@@ -181,6 +192,10 @@ kPNA AVCaptureDevicePosition position;
 - (IBAction)onclickCheck:(id)sender {
     self.position = self.position == AVCaptureDevicePositionBack ? AVCaptureDevicePositionFront : AVCaptureDevicePositionBack;
     if(self.position != AVCaptureDevicePositionUnspecified) return;
+    
+}
+
+- (void)captureOutput:(AVCaptureOutput *)output didOutputMetadataObjects:(NSArray<__kindof AVMetadataObject *> *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
     
 }
 

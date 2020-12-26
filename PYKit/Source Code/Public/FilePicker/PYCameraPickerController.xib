@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -78,12 +79,12 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mdn-Yr-gi8">
-                    <rect key="frame" x="0.0" y="806" width="414" height="56"/>
+                    <rect key="frame" x="0.0" y="801" width="414" height="56"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ge1-pa-bne">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptF-kY-2on">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptF-kY-2on">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="56"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="eDq-IN-TEM"/>
@@ -94,19 +95,29 @@
                                         <action selector="onclickCancel:" destination="-1" eventType="touchUpInside" id="gaM-xg-nAw"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="es3-pm-FYP">
+                                <view tag="1860202" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GD0-Ae-Lsi">
+                                    <rect key="frame" x="179" y="0.0" width="56" height="56"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="56" id="7Ly-b9-cx0"/>
+                                        <constraint firstAttribute="width" constant="56" id="MiB-yL-rZM"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="es3-pm-FYP">
                                     <rect key="frame" x="182" y="3" width="50" height="50"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" systemColor="linkColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="Fdp-Ae-Ztw"/>
                                         <constraint firstAttribute="height" constant="50" id="Pxp-Fg-9ah"/>
                                     </constraints>
-                                    <state key="normal" title="🖲"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="onclickConfirm:" destination="-1" eventType="touchUpInside" id="t97-hL-nby"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcZ-w8-zDL">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcZ-w8-zDL">
                                     <rect key="frame" x="334" y="0.0" width="80" height="56"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="6U5-NS-hag"/>
@@ -123,11 +134,13 @@
                                 <constraint firstItem="ptF-kY-2on" firstAttribute="top" secondItem="ge1-pa-bne" secondAttribute="top" id="0ba-JS-fIs"/>
                                 <constraint firstItem="es3-pm-FYP" firstAttribute="centerX" secondItem="ge1-pa-bne" secondAttribute="centerX" id="1FL-Mh-hEw"/>
                                 <constraint firstItem="es3-pm-FYP" firstAttribute="centerY" secondItem="ge1-pa-bne" secondAttribute="centerY" id="3SC-XS-BVw"/>
+                                <constraint firstItem="GD0-Ae-Lsi" firstAttribute="centerY" secondItem="ge1-pa-bne" secondAttribute="centerY" id="40e-82-y7p"/>
                                 <constraint firstAttribute="bottom" secondItem="bcZ-w8-zDL" secondAttribute="bottom" id="CpE-Ye-gMj"/>
                                 <constraint firstItem="ptF-kY-2on" firstAttribute="leading" secondItem="ge1-pa-bne" secondAttribute="leading" id="Guq-YS-Af4"/>
                                 <constraint firstAttribute="trailing" secondItem="bcZ-w8-zDL" secondAttribute="trailing" id="KOb-gs-B5b"/>
                                 <constraint firstAttribute="bottom" secondItem="ptF-kY-2on" secondAttribute="bottom" id="eyI-Yx-D3O"/>
                                 <constraint firstItem="bcZ-w8-zDL" firstAttribute="top" secondItem="ge1-pa-bne" secondAttribute="top" id="gvw-sR-MnD"/>
+                                <constraint firstItem="GD0-Ae-Lsi" firstAttribute="centerX" secondItem="ge1-pa-bne" secondAttribute="centerX" id="wIM-fF-Lmh"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -141,13 +154,14 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="z4i-Xd-P5O" secondAttribute="bottom" id="1yU-OY-J9s"/>
                 <constraint firstItem="Mdn-Yr-gi8" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="2ll-tj-HZm"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="Mdn-Yr-gi8" secondAttribute="bottom" id="5mi-d1-OoV"/>
                 <constraint firstAttribute="trailing" secondItem="ykb-dh-PAq" secondAttribute="trailing" id="Db3-xC-5uR"/>
                 <constraint firstItem="z4i-Xd-P5O" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Ebw-IG-Me6"/>
+                <constraint firstItem="Mdn-Yr-gi8" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" constant="-5" id="KRA-WP-wNs"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Mdn-Yr-gi8" secondAttribute="trailing" id="QFj-VI-43g"/>
                 <constraint firstItem="ykb-dh-PAq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XZe-8T-nK8"/>
                 <constraint firstItem="z4i-Xd-P5O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fKn-ia-tKB"/>
@@ -155,8 +169,15 @@
                 <constraint firstItem="z4i-Xd-P5O" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="lh1-l8-Skb"/>
                 <constraint firstAttribute="bottom" secondItem="ykb-dh-PAq" secondAttribute="bottom" id="wER-Z3-LYI"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="-23.188405797101453" y="118.52678571428571"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

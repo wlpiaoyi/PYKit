@@ -19,7 +19,13 @@ kPNA NSInteger maxCount;
 
 kPNSNA NSMutableArray * datas;
 kPNSNA UIView * viewTail;
-kPNCNA BOOL (^blockOnDel) (id delData);
+kPNCNA id (^blockCheckData) (id data);
+kPNCNA BOOL (^blockBeforeEdit) (PYLongpressMoveItemView * itemView);
+kPNCNA void (^blockAfterEdit) (PYLongpressMoveItemView * itemView);
+kPNCNA BOOL (^blockBeforeDel) (id delData);
+kPNCNA void (^blockAfterDel) (id delData);
+kPNCNA BOOL (^blockBeforeMove) (id target, id toMove);
+kPNCNA void (^blockAfterMove) (id target, id toMove);
 
 -(void) addData:(id) data animations:(BOOL) animations;
 

@@ -17,6 +17,7 @@ kPNSNA NSString * imgUrl;
 kPNSNA UIImage * imgData;
 
 kPNCNA void (^blockDel) (PYLongpressMoveItemCell * cell);
+kPNCNA id (^blockCheckData) (id data);
 
 kPNA BOOL isDelCtx;
 kPNA BOOL isOnTap;

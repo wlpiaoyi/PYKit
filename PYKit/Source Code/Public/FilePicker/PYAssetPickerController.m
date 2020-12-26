@@ -17,6 +17,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonConfirme;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lcHeadH;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labelTag;
@@ -33,6 +34,8 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 @end
 
 @implementation PYAssetPickerController
+
+
 
 
 -(void) afterExcuteViewWillDisappearWithTarget:(nonnull UIViewController *) target{
@@ -52,7 +55,10 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
 }
 
 -(instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    bundle = [NSBundle bundleWithPath:kFORMAT(@"%@/PYKit.bundle", bundleDir)];
+    if([kAppBundleIdentifier isEqual:@"wlpiaoyi.PYKit"])
+        bundle =  [NSBundle mainBundle];
+    else
+        bundle =  [NSBundle bundleWithPath:kFORMAT(@"%@/PYKit.bundle", bundleDir)];
     self = [super initWithNibName:nibNameOrNil ? : @"PYAssetPickerController" bundle:bundle];
     self->_subtype = PHAssetCollectionSubtypeAny;
     self.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -67,6 +73,7 @@ kPNSNA PHImageRequestOptions * requestOptionsYES;
             [UIViewController addDelegateView:self];
         });
     }
+    if(boundsWidth() > 320) self.lcHeadH.constant = 56;
     [self.navigationController setNavigationBarHidden:YES];
     self.selectedAssets = [NSMutableArray new];
     self.iCouldAssets = [NSMutableArray new];

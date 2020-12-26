@@ -107,7 +107,6 @@ kINITPARAMSForType(PYItemTapView){
     if(pointY < self.itemSize.height / 2) pointY = self.itemSize.height / 2;
     else if(pointY > self->collectionView.frameHeight - self.itemSize.height/2) pointY = self->collectionView.frameHeight - self.itemSize.height/2;
     self.snapImageView.center = CGPointMake(pointX, pointY);
-    
 }
 
 -(void) tapLongPress:(UILongPressGestureRecognizer *) longPress{
@@ -116,9 +115,13 @@ kINITPARAMSForType(PYItemTapView){
     [self setSnapImagePointer:point];
     NSIndexPath * indexPath = [collectionView indexPathForItemAtPoint:CGPointMake(point.x, collectionView.frameHeight / 2 + collectionView.frameY)];
     if(indexPath == nil) return;
+    if(self.viewTail && indexPath.row >= self.datas.count) return;;
     
     if (longPress.state == UIGestureRecognizerStateBegan) {
         if(self.viewTail && indexPath.row >= self.datas.count) return;
+        if(self.isShowDelCtx == NO){
+            if(_blockBeforeEdit && !_blockBeforeEdit(self)) return;
+        }
         self.snapData = self.datas[indexPath.row];
         PYLongpressMoveItemCell * cell = [collectionView cellForItemAtIndexPath:indexPath];
         if(![cell isKindOfClass:[PYLongpressMoveItemCell class]]) return;
@@ -128,6 +131,7 @@ kINITPARAMSForType(PYItemTapView){
         imageView.contentMode = UIViewContentModeScaleToFill;
         imageView.frameSize = self.itemSize;
         self.snapImageView = imageView;
+        self.snapImageView.alpha = .7;
         [self addSubview:self.snapImageView];
         [self setSnapImagePointer:point];
         self.isShowDelCtx = YES;
@@ -151,20 +155,27 @@ kINITPARAMSForType(PYItemTapView){
 
 -(void) longPressEnd{
     
-    if(self.tapingTimer){
-        [self.tapingTimer invalidate];
-        self.tapingTimer = nil;
-    }
-    [self.snapImageView removeFromSuperview];
-    self.snapImageView = nil;
-    [self->collectionView reloadData];
-    threadJoinGlobal(^{
-        [NSThread sleepForTimeInterval:.3];
-        threadJoinMain(^{
-            [self->collectionView reloadData];
-        });
-    });
+    if(self.tapingTimer == nil) return;
+    [self.tapingTimer invalidate];
+    self.tapingTimer = nil;
     
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[self.datas indexOfObject:self.snapData] inSection:0];
+    UICollectionViewCell * cell = [collectionView cellForItemAtIndexPath:indexPath];
+    CGPoint point = [cell getAbsoluteOrigin:self.snapImageView.superview];
+    [UIView animateWithDuration:.25f animations:^{
+        self.snapImageView.frameOrigin = point;
+        self.snapImageView.alpha = 1;
+    } completion:^(BOOL finished) {
+        [self.snapImageView removeFromSuperview];
+        self.snapImageView = nil;
+        [self->collectionView reloadData];
+        threadJoinGlobal(^{
+            [NSThread sleepForTimeInterval:.3];
+            threadJoinMain(^{
+                [self->collectionView reloadData];
+            });
+        });
+    }];
 }
 
 -(void) tapingOpt{
@@ -185,8 +196,9 @@ kINITPARAMSForType(PYItemTapView){
     }
     if(data && cell && data != self.snapData){
         NSIndexPath * snapIndexPath = [NSIndexPath indexPathForRow:[self.datas indexOfObject:self.snapData] inSection:0];
-        [collectionView moveItemAtIndexPath:indexPath toIndexPath:snapIndexPath];
         id data = self.datas[indexPath.row];
+        if(_blockBeforeMove && !_blockBeforeMove(self.snapData, data)) return;
+        [collectionView moveItemAtIndexPath:indexPath toIndexPath:snapIndexPath];
         self.datas[indexPath.row] = self.snapData;
         self.datas[snapIndexPath.row] = data;
         for (UICollectionViewCell * cell in collectionView.visibleCells) {
@@ -194,6 +206,7 @@ kINITPARAMSForType(PYItemTapView){
             NSIndexPath * indexPath = [collectionView indexPathForCell:cell];
             [self synCell:cell indexPath:indexPath];
         }
+        if(_blockAfterMove) _blockAfterMove(self.snapData, data);
         
     }
     point.x -= collectionView.contentOffset.x;
@@ -204,7 +217,7 @@ kINITPARAMSForType(PYItemTapView){
         CGPoint contentOffset = collectionView.contentOffset;
         contentOffset.x += MIN(5, xOffset / collectionView.frameWidth * 100);
         if(contentOffset.x <= 0) contentOffset.x = 0;
-        [collectionView setContentOffset:contentOffset];
+        [self setItemViewContentOffset:contentOffset];
         return;
     }
 
@@ -212,12 +225,27 @@ kINITPARAMSForType(PYItemTapView){
     if(xOffset > collectionView.frameWidth){
         contentOffset.x += MIN(5, ABS(xOffset - collectionView.frameWidth) / collectionView.contentSize.width * 100);
         if(contentOffset.x >= collectionView.contentSize.width - collectionView.frameWidth) contentOffset.x = collectionView.contentSize.width - collectionView.frameWidth;
-        [collectionView setContentOffset:contentOffset];
+        [self setItemViewContentOffset:contentOffset];
 
     }
 }
 
+-(void) setItemViewContentOffset:(CGPoint) contentOffset{
+    CGFloat x = 0;
+    if(self->collectionView.contentSize.width > self->collectionView.frameWidth){
+        x = MAX(0, MIN(self->collectionView.contentSize.width - self->collectionView.frameWidth, contentOffset.x));
+    }
+    CGFloat y = 0;
+    if(self->collectionView.contentSize.height > self->collectionView.frameHeight){
+        y = MAX(0, MIN(self->collectionView.contentSize.height - self->collectionView.frameHeight, contentOffset.y));
+    }
+    [self->collectionView setContentOffset:CGPointMake(x, y)];
+}
+
 -(void) setIsShowDelCtx:(BOOL)isDelCtx{
+    if(_isShowDelCtx == NO && isDelCtx != _isShowDelCtx && _blockAfterEdit){
+        _blockAfterEdit(self);
+    }
     _isShowDelCtx = isDelCtx;
     [collectionView reloadData];
     if(!_isShowDelCtx && self.snapImageView){
@@ -271,6 +299,7 @@ kINITPARAMSForType(PYItemTapView){
 
 -(void) synCell:(PYLongpressMoveItemCell *) cell indexPath:(NSIndexPath *) indexPath{
     id data = self.datas[indexPath.row];
+    cell.blockCheckData = self.blockCheckData;
     if([data isKindOfClass:[NSString class]]){
         cell.imgUrl = data;
     }else if([data isKindOfClass:[UIImage class]]){
@@ -286,17 +315,16 @@ kINITPARAMSForType(PYItemTapView){
         cell.blockDel = ^(PYLongpressMoveItemCell * _Nonnull cell) {
             kStrong(self);
             id data = cell.imgUrl;
-            if(!data) cell.imgData;
-            if(self.blockOnDel && self.blockOnDel(data) == NO) return;
+            if(!data) data = cell.imgData;
+            if(self.blockBeforeDel && self.blockBeforeDel(data) == NO) return;
             kAssign(self);
             [self->collectionView performBatchUpdates:^{
                 kStrong(self);
-                [self->collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.datas indexOfObject:data] inSection:0]]];
-                [self.datas removeObject:data];
+                 [self->collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.datas indexOfObject:data] inSection:0]]];
+                 [self.datas removeObject:data];
             } completion:^(BOOL finished) {
-                
+                if(self.blockAfterDel) self.blockAfterDel(data);
             }];
-            
         };
     }
     cell.isDelCtx = self.isShowDelCtx;

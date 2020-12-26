@@ -24,6 +24,8 @@
 		151AA85720A1750600B58AB9 /* PYSliderDoubleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 151AA85620A1750600B58AB9 /* PYSliderDoubleView.m */; };
 		151AA85820A1A2CA00B58AB9 /* PYSliderDoubleView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 151AA85520A1750600B58AB9 /* PYSliderDoubleView.h */; };
 		151AA85920A1A2E800B58AB9 /* PYSliderDoubleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 151AA85620A1750600B58AB9 /* PYSliderDoubleView.m */; };
+		1520D28C258C77B40071640F /* PYMetadataQRController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1520D28A258C77B40071640F /* PYMetadataQRController.m */; };
+		1520D28D258C77B40071640F /* PYMetadataQRController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1520D28B258C77B40071640F /* PYMetadataQRController.xib */; };
 		152289F21F4E6C9000E02321 /* timg.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 152289F11F4E6C9000E02321 /* timg.jpeg */; };
 		1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */; };
 		15265ACA226F2204004D633C /* 100063.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15265AC9226F2204004D633C /* 100063.mp3 */; };
@@ -157,6 +159,7 @@
 		15DB8CB0210C129E00AA2CF9 /* PYMapView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15DB8C95210C120E00AA2CF9 /* PYMapView.h */; };
 		15DB8CB3210C12F300AA2CF9 /* PYTestMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DB8CB2210C12F300AA2CF9 /* PYTestMapController.m */; };
 		15E2335E1F6FB8EA00C87D9D /* SelecteBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */; };
+		15E5030E257DC28B0032DEBE /* images in Resources */ = {isa = PBXBuildFile; fileRef = 15E5030D257DC28B0032DEBE /* images */; };
 		15E668362113FA50001BC998 /* PYMapView+Annotaions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15DB8C9B210C122700AA2CF9 /* PYMapView+Annotaions.h */; };
 		15E668372113FA50001BC998 /* PYMapView+Region.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15DB8C9D210C122700AA2CF9 /* PYMapView+Region.h */; };
 		15E668382113FA50001BC998 /* PYMapView+UserLocation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15DB8C9F210C122700AA2CF9 /* PYMapView+UserLocation.h */; };
@@ -249,6 +252,9 @@
 		151AA85520A1750600B58AB9 /* PYSliderDoubleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYSliderDoubleView.h; sourceTree = "<group>"; };
 		151AA85620A1750600B58AB9 /* PYSliderDoubleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYSliderDoubleView.m; sourceTree = "<group>"; };
 		151E988325090E6700B9E222 /* UIView+LeftSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+LeftSlide.h"; path = "../../../PYInterflow/PYInterflow/Source/Public/Slide/UIView+LeftSlide.h"; sourceTree = "<group>"; };
+		1520D289258C77B40071640F /* PYMetadataQRController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYMetadataQRController.h; sourceTree = "<group>"; };
+		1520D28A258C77B40071640F /* PYMetadataQRController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYMetadataQRController.m; sourceTree = "<group>"; };
+		1520D28B258C77B40071640F /* PYMetadataQRController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PYMetadataQRController.xib; sourceTree = "<group>"; };
 		152289F11F4E6C9000E02321 /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
 		1522C7BC1F18A1BC003CB0D0 /* PYTextInputCheckParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTextInputCheckParams.h; sourceTree = "<group>"; };
 		1522C7BD1F18A1BC003CB0D0 /* PYTextInputCheckParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTextInputCheckParams.m; sourceTree = "<group>"; };
@@ -422,6 +428,7 @@
 		15DB8CB2210C12F300AA2CF9 /* PYTestMapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestMapController.m; sourceTree = "<group>"; };
 		15E2335B1F6FB8EA00C87D9D /* SelecteBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelecteBarController.h; sourceTree = "<group>"; };
 		15E2335C1F6FB8EA00C87D9D /* SelecteBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelecteBarController.m; sourceTree = "<group>"; };
+		15E5030D257DC28B0032DEBE /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		15EC57492062034600C37942 /* PYWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYWebView.m; sourceTree = "<group>"; };
 		15EC574A2062034600C37942 /* PYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYWebView.h; sourceTree = "<group>"; };
 		15EEF846202019380092620A /* PYTestCalendarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestCalendarController.h; sourceTree = "<group>"; };
@@ -693,6 +700,9 @@
 				156C6A5C24C7DECE00CF8B28 /* PYCameraPickerController.h */,
 				156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */,
 				156C6A5E24C7DECE00CF8B28 /* PYCameraPickerController.xib */,
+				1520D289258C77B40071640F /* PYMetadataQRController.h */,
+				1520D28A258C77B40071640F /* PYMetadataQRController.m */,
+				1520D28B258C77B40071640F /* PYMetadataQRController.xib */,
 			);
 			path = FilePicker;
 			sourceTree = "<group>";
@@ -807,6 +817,7 @@
 		15CC07D51EA7556C0006B505 = {
 			isa = PBXGroup;
 			children = (
+				15E5030D257DC28B0032DEBE /* images */,
 				15265AC9226F2204004D633C /* 100063.mp3 */,
 				1502A59A223A3E6B00F0787A /* Library */,
 				1502A5CF223A413B00F0787A /* PYInterflow.bundle */,
@@ -1048,6 +1059,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E5030E257DC28B0032DEBE /* images in Resources */,
 				1502A5D0223A413B00F0787A /* PYInterflow.bundle in Resources */,
 				15D584CE223605F5002A497E /* 1.html in Resources */,
 				15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */,
@@ -1055,6 +1067,7 @@
 				1594EC05257635A1008C681D /* PYLongpressMoveItemCell.xib in Resources */,
 				159884801F6B99FE00E589D3 /* icon.png in Resources */,
 				152289F21F4E6C9000E02321 /* timg.jpeg in Resources */,
+				1520D28D258C77B40071640F /* PYMetadataQRController.xib in Resources */,
 				156C6A5B24C7DB6E00CF8B28 /* PYAssetPickerController.xib in Resources */,
 				15265ACA226F2204004D633C /* 100063.mp3 in Resources */,
 				15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */,
@@ -1121,6 +1134,7 @@
 				152AAAA81FFB6EFD00370DF8 /* PYTestSelectorController.m in Sources */,
 				15CC08511EA757050006B505 /* calendar_lunar.c in Sources */,
 				150C6DA81F46D74800731FC7 /* PYSelectorBarView.m in Sources */,
+				1520D28C258C77B40071640F /* PYMetadataQRController.m in Sources */,
 				15DB8CA7210C122700AA2CF9 /* PYUserLocationView.m in Sources */,
 				154E5BDC20AD3B3A00C4E5C0 /* PYTestSliderController.m in Sources */,
 				15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */,

@@ -24,7 +24,7 @@
     PY_ASY_NODATA_IMG_DICT = @{@"default": [UIImage imageNamed:@"1.jpg"]};
     PY_ASY_LOADING_IMG_DICT = @{@"default": [UIImage imageNamed:@"2.png"]};
 //    self.imageView.imgUrl = @"https://www.google.com";
-    self.imageView.imgUrl = @"http://47.92.129.93:8090/ECPartyImage/398c79624783451781ca2e3b9728ada7.png";// @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598358502232&di=8825620081e9fe7fadf8dc47ea269036&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290";//@"http://120.24.234.64:13102/BRService/fserver/view.do?filename=&access_token=br_token__72EDDBECFCEC46D2B51D444B83564846";//
+    self.imageView.imgUrl = @"http://qn.100csc.com/1607912509959-3600.jpg?imageView2/0/format/jpg";// @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598358502232&di=8825620081e9fe7fadf8dc47ea269036&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290";//@"http://120.24.234.64:13102/BRService/fserver/view.do?filename=&access_token=br_token__72EDDBECFCEC46D2B51D444B83564846";//
 //    NSArray * a = @[
 //      @"http://img6.3lian.com/c23/desk4/05/77/d/01.jpg",
 //      @"http://www.kandianying.com/upload/201305/%E6%9D%A8%E5%B9%82%20%E4%BD%99%E6%96%87%E4%B9%90%20(3).jpg",
