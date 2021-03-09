@@ -8,6 +8,7 @@
 
 #import "PYTestImageController.h"
 #import "PYAsyImageView.h"
+#import "PYAsyGifView.h"
 #import "PYDisplayImageView.h"
 
 @interface PYTestImageController ()
@@ -19,6 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    PYAsyGifView * gifView = [PYAsyGifView new];
+    [self.view addSubview:gifView];
+    [gifView setLocatonPath:kFORMAT(@"%@/1.gif", bundleDir)];
+    [gifView py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
+        make.width.height.py_constant(200);
+        make.centerX.centerY.py_constant(0);
+    }];
+    [gifView start];
     self.view.backgroundColor = [UIColor lightGrayColor];
 //    [PYAsyImageView clearCaches];
     PY_ASY_NODATA_IMG_DICT = @{@"default": [UIImage imageNamed:@"1.jpg"]};

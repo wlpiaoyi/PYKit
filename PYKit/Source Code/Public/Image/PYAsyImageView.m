@@ -156,7 +156,6 @@ kINITPARAMS{
 -(void) setCachesPath:(NSString *)cachesUrl{
     _cachesPath = cachesUrl;
     if(_cachesPath != nil){
-//        NSLog(self.cachesPath);
         NSData * data = [NSData dataWithContentsOfFile:self.cachesPath];
         UIImage * image  = [[UIImage alloc] initWithData:data];
         if(image && image.size.width > 0 && image.size.height > 0){

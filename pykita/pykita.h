@@ -7,6 +7,7 @@
 //
 
 
+#import "PYAsyGifView.h"
 #import "PYAsyImageView.h"
 #import "PYDisplayImageView.h"
 #import "PYSelectorBarView.h"

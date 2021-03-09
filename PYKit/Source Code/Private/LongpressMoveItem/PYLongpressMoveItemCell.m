@@ -21,12 +21,15 @@
     [super awakeFromNib];
     self.isDelCtx = NO;
     self.isOnTap = NO;
+    NSString * imagePath;
 #ifdef DEBUG
-    
-    [buttonDel setImage:[UIImage imageNamed:@"PYKit.bundle/images/pykit-press-del.png"] forState:UIControlStateNormal];
+    imagePath = @"PYKit.bundle/images/pykit-press-del.png";
 #else
-    [buttonDel setImage:[UIImage imageNamed:@"images/pykit-press-del.png"] forState:UIControlStateNormal];
+    imagePath = @"PYKit.bundle/images/pykit-press-del.png";
 #endif
+    UIImage * image = [UIImage imageNamed:imagePath];
+    kPrintLogln("=====>%s : %s", imagePath.UTF8String, [image description].UTF8String);
+    [buttonDel setImage:image forState:UIControlStateNormal];
 }
 
 -(void) setImgUrl:(NSString *)imgUrl{

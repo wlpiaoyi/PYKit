@@ -80,6 +80,7 @@ kINITPARAMSForType(PYItemTapView){
     UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(tapLongPress:)];
     [collectionView addGestureRecognizer:longPress];
     self.longPress = longPress;
+    self.hasAnimation = YES;
 
 }
 
@@ -154,8 +155,12 @@ kINITPARAMSForType(PYItemTapView){
 }
 
 -(void) longPressEnd{
-    
-    if(self.tapingTimer == nil) return;
+    if(self.tapingTimer == nil){
+        [self.snapImageView removeFromSuperview];
+        [self->collectionView reloadData];
+        self.snapImageView = nil;
+        return;
+    }
     [self.tapingTimer invalidate];
     self.tapingTimer = nil;
     
@@ -198,7 +203,8 @@ kINITPARAMSForType(PYItemTapView){
         NSIndexPath * snapIndexPath = [NSIndexPath indexPathForRow:[self.datas indexOfObject:self.snapData] inSection:0];
         id data = self.datas[indexPath.row];
         if(_blockBeforeMove && !_blockBeforeMove(self.snapData, data)) return;
-        [collectionView moveItemAtIndexPath:indexPath toIndexPath:snapIndexPath];
+        if(self.hasAnimation)
+            [collectionView moveItemAtIndexPath:indexPath toIndexPath:snapIndexPath];
         self.datas[indexPath.row] = self.snapData;
         self.datas[snapIndexPath.row] = data;
         for (UICollectionViewCell * cell in collectionView.visibleCells) {
@@ -206,6 +212,9 @@ kINITPARAMSForType(PYItemTapView){
             NSIndexPath * indexPath = [collectionView indexPathForCell:cell];
             [self synCell:cell indexPath:indexPath];
         }
+        
+        if(self.hasAnimation == NO)
+            [collectionView reloadData];
         if(_blockAfterMove) _blockAfterMove(self.snapData, data);
         
     }
@@ -320,8 +329,11 @@ kINITPARAMSForType(PYItemTapView){
             kAssign(self);
             [self->collectionView performBatchUpdates:^{
                 kStrong(self);
-                 [self->collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.datas indexOfObject:data] inSection:0]]];
-                 [self.datas removeObject:data];
+                if(self.hasAnimation)
+                    [self->collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.datas indexOfObject:data] inSection:0]]];
+                [self.datas removeObject:data];
+                if(self.hasAnimation == NO)
+                    [self->collectionView reloadData];
             } completion:^(BOOL finished) {
                 if(self.blockAfterDel) self.blockAfterDel(data);
             }];

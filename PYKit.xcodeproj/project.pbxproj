@@ -77,6 +77,10 @@
 		1594EBFD25762EDD008C681D /* PYLongpressMoveItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594EBFC25762EDD008C681D /* PYLongpressMoveItemView.m */; };
 		1594EC04257635A1008C681D /* PYLongpressMoveItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594EC02257635A1008C681D /* PYLongpressMoveItemCell.m */; };
 		1594EC05257635A1008C681D /* PYLongpressMoveItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1594EC03257635A1008C681D /* PYLongpressMoveItemCell.xib */; };
+		1596B5A625AEC1EB00B39AF4 /* PYAsyGifView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1596B5A525AEC1EB00B39AF4 /* PYAsyGifView.m */; };
+		1596B5A825AEC39300B39AF4 /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1596B5A725AEC39300B39AF4 /* 1.gif */; };
+		1596B5A925AEC9C400B39AF4 /* PYAsyGifView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1596B5A525AEC1EB00B39AF4 /* PYAsyGifView.m */; };
+		1596B5AA25AEC9D700B39AF4 /* PYAsyGifView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1596B5A425AEC1EB00B39AF4 /* PYAsyGifView.h */; };
 		1597CB031F5D2D6300690BBB /* UITextField+PYCheck.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1555E0C81F5CF1C10017B436 /* UITextField+PYCheck.h */; };
 		1597CB0A1F5D42AE00690BBB /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */; };
 		1598847D1F6B7F6100E589D3 /* PYDisplayImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */; };
@@ -184,6 +188,7 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				1596B5AA25AEC9D700B39AF4 /* PYAsyGifView.h in CopyFiles */,
 				15A704CF2578BC5500E2F94F /* PYLongpressMoveItemView.h in CopyFiles */,
 				156C6A6124C8036700CF8B28 /* PYAssetPickerController.h in CopyFiles */,
 				156C6A6224C8036700CF8B28 /* PYCameraPickerController.h in CopyFiles */,
@@ -313,6 +318,9 @@
 		1594EC01257635A1008C681D /* PYLongpressMoveItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYLongpressMoveItemCell.h; sourceTree = "<group>"; };
 		1594EC02257635A1008C681D /* PYLongpressMoveItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYLongpressMoveItemCell.m; sourceTree = "<group>"; };
 		1594EC03257635A1008C681D /* PYLongpressMoveItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PYLongpressMoveItemCell.xib; sourceTree = "<group>"; };
+		1596B5A425AEC1EB00B39AF4 /* PYAsyGifView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYAsyGifView.h; sourceTree = "<group>"; };
+		1596B5A525AEC1EB00B39AF4 /* PYAsyGifView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYAsyGifView.m; sourceTree = "<group>"; };
+		1596B5A725AEC39300B39AF4 /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
 		1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
 		1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageView.m; sourceTree = "<group>"; };
 		1598847F1F6B99FE00E589D3 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -646,6 +654,8 @@
 				15CC07FC1EA756120006B505 /* PYAsyImageView.m */,
 				1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */,
 				1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */,
+				1596B5A425AEC1EB00B39AF4 /* PYAsyGifView.h */,
+				1596B5A525AEC1EB00B39AF4 /* PYAsyGifView.m */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -817,6 +827,7 @@
 		15CC07D51EA7556C0006B505 = {
 			isa = PBXGroup;
 			children = (
+				1596B5A725AEC39300B39AF4 /* 1.gif */,
 				15E5030D257DC28B0032DEBE /* images */,
 				15265AC9226F2204004D633C /* 100063.mp3 */,
 				1502A59A223A3E6B00F0787A /* Library */,
@@ -1063,6 +1074,7 @@
 				1502A5D0223A413B00F0787A /* PYInterflow.bundle in Resources */,
 				15D584CE223605F5002A497E /* 1.html in Resources */,
 				15CC07F11EA7556C0006B505 /* LaunchScreen.storyboard in Resources */,
+				1596B5A825AEC39300B39AF4 /* 1.gif in Resources */,
 				156C6A5524C7DB6400CF8B28 /* PYImagePickerReusableView.xib in Resources */,
 				1594EC05257635A1008C681D /* PYLongpressMoveItemCell.xib in Resources */,
 				159884801F6B99FE00E589D3 /* icon.png in Resources */,
@@ -1136,6 +1148,7 @@
 				150C6DA81F46D74800731FC7 /* PYSelectorBarView.m in Sources */,
 				1520D28C258C77B40071640F /* PYMetadataQRController.m in Sources */,
 				15DB8CA7210C122700AA2CF9 /* PYUserLocationView.m in Sources */,
+				1596B5A625AEC1EB00B39AF4 /* PYAsyGifView.m in Sources */,
 				154E5BDC20AD3B3A00C4E5C0 /* PYTestSliderController.m in Sources */,
 				15D9F32E1F0F2510002276A9 /* PYAudioPlayer.m in Sources */,
 				1589DCC1204D160000D78784 /* PYTestImageController.m in Sources */,
@@ -1158,6 +1171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1596B5A925AEC9C400B39AF4 /* PYAsyGifView.m in Sources */,
 				15A704D02578BC6600E2F94F /* PYLongpressMoveItemCell.m in Sources */,
 				15A704D12578BC6600E2F94F /* PYLongpressMoveItemView.m in Sources */,
 				156C6A6324C8037A00CF8B28 /* PYImagePickerCell.m in Sources */,

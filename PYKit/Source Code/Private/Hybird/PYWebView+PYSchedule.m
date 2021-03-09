@@ -38,7 +38,7 @@ kPNSNA NSTimer * timer;
     self.progressView.schedule = progeress;
     self.progressView.hidden = NO;
     self.progressView.alpha = 1;
-#pragma NSTimer导致的处理内存溢出
+    #pragma NSTimer导致的处理内存溢出
     kAssign(self);
     self.progressView.block = ^{
         kStrong(self);

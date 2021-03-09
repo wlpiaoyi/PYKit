@@ -14,6 +14,7 @@
 @end
 
 @interface __PYGestureRecognizerDelegate : NSObject <UIGestureRecognizerDelegate>
+kPNANA UINavigationController * nvc;
 +(nullable instancetype) shareDelegate;
 @end
 
@@ -27,7 +28,8 @@
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-    return YES;
+    kPrintLogln("cur nvc vcs count :%ld", self.nvc.viewControllers.count);
+    return self.nvc && self.nvc.viewControllers.count > 1;
 }
 
 @end
@@ -129,7 +131,9 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
             }
             backButtonItem = nil;
         }
-        target.navigationController.interactivePopGestureRecognizer.delegate = [__PYGestureRecognizerDelegate shareDelegate];
+        __PYGestureRecognizerDelegate * rdelegate = [__PYGestureRecognizerDelegate shareDelegate];
+        rdelegate.nvc = target.navigationController;
+        target.navigationController.interactivePopGestureRecognizer.delegate = rdelegate;
     }else if(target.navigationController.presentingViewController
              && target.navigationController.viewControllers.count == 1
              && target.navigationController.viewControllers.firstObject == target){

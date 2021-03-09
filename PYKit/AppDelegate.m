@@ -46,6 +46,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     PYNavigationStyleModel * styleModel = [[PYNavigationStyleModel alloc] initForDefault];
     PYNET_OUTTIME = 30;
+    styleModel.itemStyle.font = [UIFont boldSystemFontOfSize:10];
     styleModel.dismissStyle.normalImage = [UIImage imageNamed:@"WechatIMG272"];
     styleModel.dismissStyle.tintColor = [UIColor redColor];
         styleModel.blockSetNavigationBarStyle = ^BOOL(PYNavigationStyleModel * _Nonnull styleModel, UIViewController * _Nonnull target) {

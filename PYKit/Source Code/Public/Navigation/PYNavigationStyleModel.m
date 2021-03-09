@@ -185,8 +185,9 @@
 @implementation PYNavigationItemStyleModel
 
 -(void) setStyleWithButtonItem:(UIBarButtonItem *) buttonItem{
-    NSMutableDictionary * textNormalAttributes = [buttonItem titleTextAttributesForState:UIControlStateNormal].mutableCopy;
-    NSMutableDictionary * textHighlightedAttributes = [buttonItem titleTextAttributesForState:UIControlStateHighlighted].mutableCopy;
+    NSMutableDictionary * textNormalAttributes = [buttonItem titleTextAttributesForState:UIControlStateNormal].mutableCopy ? : [NSMutableDictionary new];
+    NSMutableDictionary * textHighlightedAttributes = [buttonItem titleTextAttributesForState:UIControlStateHighlighted].mutableCopy ? : [NSMutableDictionary new];
+    
 //    NSShadow * shadowNormal =  textNormalAttributes[NSShadowAttributeName];
 //    NSShadow * shadowHighlighted =  textNormalAttributes[NSShadowAttributeName];
 //    if(!shadowNormal) shadowNormal = [[NSShadow alloc] init];

@@ -22,6 +22,7 @@ kPNSNA NSMutableArray * datas;
     [button setTitle:@"xxx" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(onclickAdd) forControlEvents:UIControlEventTouchUpInside];
     self.itemTapView.viewTail = button;
+    self.itemTapView.itemSize = CGSizeMake(76, 76);
     self.datas = @[
         @"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1705581946,4177791147&fm=26&gp=0.jpg",
         @"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1464095493,1223754104&fm=26&gp=0.jpg",

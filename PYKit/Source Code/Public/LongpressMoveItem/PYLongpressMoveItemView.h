@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 kPNA BOOL isShowDelCtx;
 kPNA CGSize itemSize;
 kPNA NSInteger maxCount;
+kPNA BOOL hasAnimation;
 
 kPNSNA NSMutableArray * datas;
 kPNSNA UIView * viewTail;

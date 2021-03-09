@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"积分明细" style:UIBarButtonItemStylePlain target:self action:@selector(onclickInfoDetail)];
     NSMutableArray * labels = [NSMutableArray new];
     for (int i = 0; i<self.bar.buttons.count; i++) {
         UILabel * label = [UILabel new];
