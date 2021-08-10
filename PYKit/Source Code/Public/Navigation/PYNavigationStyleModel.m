@@ -7,6 +7,7 @@
 //
 
 #import "PYNavigationStyleModel.h"
+#import "UIView+PYLayoutOption.h"
 
 @implementation PYNavigationStyleModel
 
@@ -252,9 +253,24 @@
     if(self.highlightedImage){
         [button setImage:self.highlightedImage forState:UIControlStateHighlighted];
     }
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     if([NSString isEnabled:self.title]){
         [button setTitle:self.title forState:UIControlStateNormal];
+    }else if(self.normalImage){
+        if(![button py_getItemLayoutWithFirstAttribute:NSLayoutAttributeWidth firstItem:button secondItem:nil constraints:button.constraints]){
+            NSLayoutConstraint * lcMinWidth = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44];
+            [button addConstraint:lcMinWidth];
+        }
+        if(self.normalImage.size.width  < 44){
+            [button setImageEdgeInsets:UIEdgeInsetsMake(0, -(44 - self.normalImage.size.width - [UIScreen mainScreen].scale), 0, 0)];
+        }
     }
+    if(![button py_getItemLayoutWithFirstAttribute:NSLayoutAttributeHeight firstItem:button secondItem:nil constraints:button.constraints]){
+        NSLayoutConstraint * lcMinHeight = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:34];
+        [button addConstraint:lcMinHeight];
+    }
+    
+    
 }
 -(void) setStyleWithButtonItem:(UIBarButtonItem *) buttonItem{
     if(self.normalImage){

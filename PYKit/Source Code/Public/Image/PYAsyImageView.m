@@ -9,27 +9,39 @@
 #import "PYAsyImageView.h"
 #import "pyutilea.h"
 #import "PYNetDownload.h"
+#import "PYAsyImageView+Delegate.h"
+
+
+NSMutableDictionary * PY_ASY_DICT_DOWNLOADS;
+CFStringRef PY_ASYIMG_PERCENT_FIELD = CFSTR(":/?#[]@!$&’()*+,;=");
 
 NSString * PY_ASY_DICT_DEFAULT_KEY;
 NSDictionary<NSString*, UIImage *> * PY_ASY_NODATA_IMG_DICT;
 NSDictionary<NSString*, UIImage *> * PY_ASY_LOADING_IMG_DICT;
+void (^PY_ASY_BLOCK_OPTION) (UIImageView * _Nonnull imageView);
 
-CFStringRef PY_ASYIMG_PERCENT_FIELD = CFSTR(":/?#[]@!$&’()*+,;=");
 
 static NSString * PYAsyImageViewDataCaches;
+
 
 @interface PYAsyImageView(){
     NSTimeInterval static_pre_time_interval;
 }
+
+
+kPNSNN PYNetDownload * download;
+kPNSNA PYGraphicsThumb * graphicsThumb;
+
 kPNSNN UIActivityIndicatorView * activityIndicator;
 kPNSNN UIView * activityView;
 kPNSNN UILabel * activityLabel;
-kPNSNN PYNetDownload * dnw;
-kPNSNA NSString * cachesPath;
+
 kPNSNN NSLock * lock;
-kPNSNA PYGraphicsThumb * graphicsThumb;
+kPNSNA NSString * cachesPath;
+kPNSNA NSString * cacheTag;
 kPNA int64_t currentBytes;
 kPNA int64_t totalBytes;
+
 kPNSNN UIColor * strokeColor;
 kPNSNN UIColor * fillColor;
 @end
@@ -39,64 +51,10 @@ kPNSNN UIColor * fillColor;
 +(void) initialize{
    static dispatch_once_t onceToken; dispatch_once(&onceToken,^{
         [PYUtile class];
+       PY_ASY_DICT_DOWNLOADS = @{}.mutableCopy;
         [PYAsyImageView checkCachesPath];
         PY_ASY_DICT_DEFAULT_KEY = @"default";
     });
-}
--(void) imageDownloadIng:(PYNetDownload * _Nonnull) target  currentBytes:(int64_t) currentBytes totalBytes:(int64_t) totalBytes{
-    [self.lock lock];
-    if(self.blockProgress){
-        self.blockProgress((double)currentBytes/(double)totalBytes, self);
-    }
-    if(self.hasPercentage){
-        if([NSDate timeIntervalSinceReferenceDate] - static_pre_time_interval > 0.2){
-            self.currentBytes = currentBytes;
-            self.totalBytes = totalBytes;
-            [self.graphicsThumb executDisplay:nil];
-            if(self.currentBytes < 1024 * 1024)
-                self.activityLabel.text = kFORMAT(@"%.2fKB", (double)self.currentBytes / (double)1024);
-            else
-                self.activityLabel.text = kFORMAT(@"%.2fMB", (double)self.currentBytes / (double)(1024 * 1024));
-            static_pre_time_interval = [NSDate timeIntervalSinceReferenceDate];
-        }
-    }
-    [self.lock unlock];
-}
--(void) imageDownloadComplete:(PYNetwork * _Nonnull) target data:(id  _Nullable) data response:(NSURLResponse * _Nullable) response{
-    [self.lock lock];
-    @try{
-        [self.activityIndicator stopAnimating];
-        self.activityView.hidden = YES;
-        self.image = self.imageNoData;
-        self.cachesPath = nil;
-        if(data  != nil && [data isKindOfClass:[NSError class]]){
-            NSLog(@"[erro code:%ld] [erro domain;%@] [erro description:%@]", (long)((NSError*)data).code, ((NSError*)data).domain, ((NSError*)data).description);
-            return;
-        }
-        if(data == nil || ![data isKindOfClass:[NSString class]]){
-            return;
-        }
-        BOOL isDirectory = false;
-        if(![[NSFileManager defaultManager] fileExistsAtPath:data isDirectory:&isDirectory] || isDirectory){
-            return;
-        }
-        NSString * imagePath = [PYAsyImageView getCachePathWithUrl:self.imgUrl];
-        if(![NSString isEnabled:imagePath]){
-            NSLog(@"create image path erro!!");
-            return;
-        }
-        NSError * erro;
-        if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]) [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&erro];
-        if(erro) NSLog(@"[erro code:%ld] [erro domain;%@] [erro description:%@] imagePath:%@", (long)((NSError*)erro).code, ((NSError*)data).domain, ((NSError*)erro).description, imagePath);
-        
-        erro = nil;
-        [[NSFileManager defaultManager] moveItemAtPath:data toPath:imagePath error:&erro];
-        if(erro) NSLog(@"%@ image errocode:%ld, errodomain:%@",NSStringFromClass([PYAsyImageView class]), (long)[erro code], [erro domain]);
-        self.cachesPath = imagePath;
-        if(self.blockDisplay) self.blockDisplay(true,false, self);
-    }@finally{
-        [self.lock unlock];
-    }
 }
 
 kINITPARAMS{
@@ -139,6 +97,7 @@ kINITPARAMS{
     self.showType = self.showType;
 }
 
+
 -(void) setShowType:(NSString *)showType{
     _showType = showType;
     if(PY_ASY_NODATA_IMG_DICT && self.showType){
@@ -152,6 +111,15 @@ kINITPARAMS{
     if(self.imageLoading == nil) self.imageLoading = self.imageNoData;
 }
 
+-(void) notifyImageDownloadComplete:(NSNotification *) notify{
+    id object = notify.object;
+    id  _Nullable data = object[@0];
+    NSURLResponse * response = object[@1];
+    PYNetwork * target = object[@2];
+    void * pointer = (__bridge void *)(self);
+    [PYAsyImageView removeSelfFromDownload:self.cacheTag download:_download pointer:pointer];
+    [self imageDownloadComplete:target data:data response:response];
+}
 
 -(void) setCachesPath:(NSString *)cachesUrl{
     _cachesPath = cachesUrl;
@@ -167,32 +135,61 @@ kINITPARAMS{
     }else self.image = self.imageNoData;
 }
 
--(PYNetDownload *) createDnw{
-    PYNetDownload * dnw = [PYNetDownload new];
-    [dnw setBlockReceiveChallenge:^BOOL(id  _Nullable data, PYNetwork * _Nonnull target) {
-        return true;
-    }];
-    kAssign(self);
-    [dnw setBlockDownloadProgress:^(PYNetDownload * _Nonnull target, int64_t currentBytes, int64_t totalBytes) {
-        kStrong(self);
-        [self imageDownloadIng:target currentBytes:currentBytes totalBytes:totalBytes];
-    }];
-    [dnw setBlockComplete:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetwork * _Nonnull target) {
-        kStrong(self);
-        [self imageDownloadComplete:target data:data response:response];
-    }];
-    [dnw setBlockCancel:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetDownload * _Nonnull target) {
-        kStrong(self);
-        [self.lock lock];
-        [self.activityIndicator stopAnimating];
-        if(self.image == nil || self.image == self.imageLoading) self.image = self.imageNoData;
-        self.activityView.hidden = YES;
-        if(self.blockDisplay){
-            self.blockDisplay(false,false, self);
-        }
-        [self.lock unlock];
-    }];
-    return dnw;
+//-(id) getObjValue:(NSDictionary *) objs index:(NSInteger) index{
+//    return objs[@(index)];
+//}
+
+-(PYNetDownload *) download{
+    if(_download) return _download;
+    if(![NSString isEnabled:_cacheTag]) return nil;
+    PYNetDownload * dnw = [PY_ASY_DICT_DOWNLOADS objectForKey:_cacheTag];
+    NSString * cacheTag = _cacheTag;
+    if(_download.state != PYNetworkStateResume){
+    }
+    if(dnw == nil){
+        dnw = [PYNetDownload new];
+        dnw.url = _imgUrl;
+        PYNetDownload * download = dnw;
+        [dnw setBlockReceiveChallenge:^BOOL(id  _Nullable data, PYNetwork * _Nonnull target) {
+            return true;
+        }];
+        kAssign(self);
+        [dnw setBlockDownloadProgress:^(PYNetDownload * _Nonnull target, int64_t currentBytes, int64_t totalBytes) {
+            kStrong(self);
+            [self imageDownloadIng:target currentBytes:currentBytes totalBytes:totalBytes];
+        }];
+        [dnw setBlockComplete:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetwork * _Nonnull target) {
+            NSMutableDictionary * dict = @{}.mutableCopy;
+            if(data) dict[@0] = data;
+            if(response) dict[@1] = response;
+            if(target) dict[@2] = target;
+            kNOTIF_POST(cacheTag, dict);
+//            NSArray<NSNumber *> * objs = [target.userInfo mutableCopy];
+//            @synchronized (objs) {
+//                for (NSNumber * pointer in objs) {
+//                    void * p = pointer.integerValue;
+//                    PYAsyImageView * aiv = (__bridge PYAsyImageView *)(p);
+//                    [aiv notifyImageDownloadComplete:dict];
+//                }
+//            }
+        }];
+        void * pointer = (__bridge void *)(self);
+        [dnw setBlockCancel:^(id  _Nullable data, NSURLResponse * _Nullable response, PYNetDownload * _Nonnull target) {
+            kStrong(self);
+            [PYAsyImageView removeSelfFromDownload:cacheTag download:_download pointer:pointer];
+            [self.lock lock];
+            [self.activityIndicator stopAnimating];
+            if(self.image == nil || self.image == self.imageLoading || self.image.size.width == 0) self.image = self.imageNoData;
+            self.activityView.hidden = YES;
+            if(self.blockDisplay){
+                self.blockDisplay(false,false, self);
+            }
+            [self.lock unlock];
+        }];
+    }
+    _download = dnw;
+    [self addSelfFromDownload];
+    return _download;
 }
 
 +(NSString *) getCachePathWithUrl:(nonnull NSString *) url{
@@ -205,24 +202,41 @@ kINITPARAMS{
 }
 
 -(void) setImgUrl:(NSString *)imgUrl{
-    _imgUrl = [imgUrl pyEncodeToPercentEscapeString:@"!*'();@&=+$,%#[]"];
+    _imgUrl = imgUrl;
+    if([NSString isEnabled:_imgUrl]){
+        if(PY_ASY_BLOCK_OPTION){
+            PY_ASY_BLOCK_OPTION(self);
+            return;
+        }
+        if([_imgUrl isEqual:[_imgUrl pyDecodeFromPercentEscapeString]]){
+            _imgUrl = [_imgUrl pyEncodeToPercentEscapeString:@"!*'();@+$,%#[]`_-"];
+        }
+        self.cacheTag = [PYUtile MD5ForLower32Bate:self.imgUrl];
+        kNOTIF_REMV(self, self.cacheTag);
+        kNOTIF_ADD(self, self.cacheTag, notifyImageDownloadComplete:);
+    }else{
+        _imgUrl = nil;
+        self.cacheTag = nil;
+    }
     self.showType = self.showType;
     self.image = self.imageNoData;
     if(_imgUrl == nil || _imgUrl.length == 0) return;
-    if(self.dnw) [self.dnw stop];
-    else self.dnw = [self createDnw];
     self.image = self.imageLoading;
     NSString * imagePath = [PYAsyImageView getCachePathWithUrl:_imgUrl];
-    
     if([[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:nil]){
         self.cachesPath = imagePath;
         if(self.blockDisplay) _blockDisplay(true,true, self);
         return;
     }
-    
+    if(_download){
+        [_download setBlockCancel:nil];
+        [_download setBlockReceiveChallenge:nil];
+        [_download setBlockSendProgress:nil];
+        [_download setBlockDownloadProgress:nil];
+    }
+    _download = nil;
+    if(self.download.state == PYNetworkStateUnkwon || self.download.state == PYNetworkStateCancel || self.download.state == PYNetworkStateInterrupt) [self.download resume];
     static_pre_time_interval = 0;
-    self.dnw.url = _imgUrl;
-    [self.dnw resume];
     [self.activityIndicator startAnimating];
     self.activityView.hidden = NO;
 }
@@ -261,18 +275,45 @@ kINITPARAMS{
     }
 }
 
+-(void) addSelfFromDownload{
+    if(![NSString isEnabled:_cacheTag]) return;
+    if(_download == nil) return;
+    NSMutableArray * objs = _download.userInfo;
+    if(objs == nil){
+        objs = @[].mutableCopy;
+        _download.userInfo = objs;
+    }
+    PY_ASY_DICT_DOWNLOADS[_cacheTag] = _download;
+    void * pointer = (__bridge void *)(self);
+    NSInteger i = pointer;
+    if([objs containsObject:@(i)]) return;
+    [objs addObject:@(i)];
+}
+
++(void) removeSelfFromDownload:(nonnull NSString *) cacheTag download:(PYNetDownload *) download pointer:(void *) pointer{
+    if(![NSString isEnabled:cacheTag]) return;
+    if(download == nil) return;
+    NSMutableArray * objs = download.userInfo;
+    NSInteger i = pointer;
+    [objs removeObject:@(i)];
+    if(!objs || objs.count == 0){
+        [PY_ASY_DICT_DOWNLOADS removeObjectForKey:cacheTag];
+    }
+}
+
 -(void) dealloc{
     [self.lock lock];
-    [self.dnw setBlockCancel:nil];
-    [self.dnw setBlockComplete:nil];
-    [self.dnw setBlockReceiveChallenge:nil];
-    [self.dnw setBlockComplete:nil];
-    [self.dnw setBlockSendProgress:nil];
-    [self.dnw setBlockDownloadProgress:nil];
-    [self.dnw stop];
-    [self.activityIndicator stopAnimating];
-    self.activityView.hidden = YES;
-    [self.lock unlock];
+    kNOTIF_REMV(self, self.cacheTag);
+    [self.class removeSelfFromDownload:self.cacheTag download:_download pointer:(__bridge void *)(self)];
+    [_download setBlockCancel:nil];
+//    [_download setBlockComplete:nil];
+    [_download setBlockReceiveChallenge:nil];
+    [_download setBlockSendProgress:nil];
+    [_download setBlockDownloadProgress:nil];
+    [_download stop];
+    [_activityIndicator stopAnimating];
+    _activityView.hidden = YES;
+    [_lock unlock];
 }
 
 @end

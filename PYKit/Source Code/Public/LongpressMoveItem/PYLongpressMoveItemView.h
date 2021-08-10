@@ -17,10 +17,12 @@ kPNA BOOL isShowDelCtx;
 kPNA CGSize itemSize;
 kPNA NSInteger maxCount;
 kPNA BOOL hasAnimation;
+kPNA BOOL isCanDelCtx;
 
 kPNSNA NSMutableArray * datas;
 kPNSNA UIView * viewTail;
 kPNCNA id (^blockCheckData) (id data);
+kPNCNA void (^blockAfterSetItem) (PYLongpressMoveItemView * itemView, UIImageView * imageView, NSIndexPath * indexPath);
 kPNCNA BOOL (^blockBeforeEdit) (PYLongpressMoveItemView * itemView);
 kPNCNA void (^blockAfterEdit) (PYLongpressMoveItemView * itemView);
 kPNCNA BOOL (^blockBeforeDel) (id delData);

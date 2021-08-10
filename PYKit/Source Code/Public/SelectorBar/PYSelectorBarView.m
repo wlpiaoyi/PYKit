@@ -33,6 +33,7 @@ kPNSNA NSMutableArray<  NSLayoutConstraint *> * lcDisplays;
 
 @implementation PYSelectorBarView
 kINITPARAMSForType(PYSelectorBarView){
+    _itemTitleOffset = 10;
     _lcDisplays = [NSMutableArray new];
     _lcButtons = [NSMutableArray new];
     _contentView = [UIView new];
@@ -105,7 +106,7 @@ kINITPARAMSForType(PYSelectorBarView){
     }else if(self.autoItemWith){
         UIView * leftTag;
         for (UIButton * button in buttons) {
-            CGFloat wValue = [PYSelectorBarView getWidthWithButton:button minWith:44];
+            CGFloat wValue = [PYSelectorBarView getWidthWithButton:button minWith:44 offset:self.itemTitleOffset];
             [button py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
                 make.left.py_toItem(leftTag).py_constant(0);
                 make.top.bottom.py_constant(0);
@@ -189,6 +190,7 @@ kINITPARAMSForType(PYSelectorBarView){
 }
 
 -(void) setSelectIndex:(NSUInteger)selectIndex animation:(BOOL) animation{
+    animation = NO;
     if(self.buttons.count == 0) return;
     NSInteger orgSelectIndex = _selectIndex;
     _selectIndex = MAX(0, MIN(self.buttons.count - 1, selectIndex));
@@ -247,12 +249,8 @@ kINITPARAMSForType(PYSelectorBarView){
         };
         
         if(animation){
-            blockBefore();
-            [UIView animateWithDuration:.125f animations:^{
-                self.userInteractionEnabled = NO;
-                blockStart();
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:.125f animations:^{
+            if(self.animateType == 1){
+                [UIView animateWithDuration:.25f animations:^{
                     blockEnd();
                 } completion:^(BOOL finished) {
                     self.userInteractionEnabled = YES;
@@ -260,7 +258,22 @@ kINITPARAMSForType(PYSelectorBarView){
                         self.blockSelectedOpt(self.selectIndex);
                     }
                 }];
-            }];
+            }else{
+                blockBefore();
+                [UIView animateWithDuration:.125f animations:^{
+                    self.userInteractionEnabled = NO;
+                    blockStart();
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:.125f animations:^{
+                        blockEnd();
+                    } completion:^(BOOL finished) {
+                        self.userInteractionEnabled = YES;
+                        if(self.blockSelectedOpt){
+                            self.blockSelectedOpt(self.selectIndex);
+                        }
+                    }];
+                }];
+            }
         }else{
             self.userInteractionEnabled = YES;
             blockEnd();
@@ -287,17 +300,17 @@ kSOULDLAYOUTMEND
     
 }
 
-+(CGFloat) getWidthWithButton:(nonnull UIButton  *) button minWith:(CGFloat) minWith{
++(CGFloat) getWidthWithButton:(nonnull UIButton  *) button minWith:(CGFloat) minWith offset:(CGFloat) offset{
     CGSize size = CGSizeMake(9999, 1);
-    size.width = MAX(minWith, [PYUtile getBoundSizeWithTxt:[button titleForState:UIControlStateNormal] font:button.titleLabel.font size:size].width + 10);
+    size.width = MAX(minWith, [PYUtile getBoundSizeWithTxt:[button titleForState:UIControlStateNormal] font:button.titleLabel.font size:size].width + offset);
     CGFloat width = size.width;
     return width;
 }
 
-+(CGFloat) getWidthWithButtons:(nonnull NSArray<UIButton *> *) buttons minWith:(CGFloat) minWith{
++(CGFloat) getWidthWithButtons:(nonnull NSArray<UIButton *> *) buttons minWith:(CGFloat) minWith offset:(CGFloat) offset{
     CGFloat width = 0;
     for (UIButton * button in buttons) {
-        width += [self getWidthWithButton:button minWith:minWith];
+        width += [self getWidthWithButton:button minWith:minWith offset:offset];
     }
     return width;
 }

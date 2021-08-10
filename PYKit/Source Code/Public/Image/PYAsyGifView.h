@@ -17,8 +17,10 @@ kPNA CGFloat interval;
 
 kPNCNA void(^blockPlayStart)(void);
 kPNCNA void(^blockPlayEnd)(void);
- 
+
+-(void) setLoadingImage:(nullable UIImage *) image;
 -(void) setLocatonPath:(nonnull NSString *) path;
+-(void) setImgUrl:(nonnull NSString *) url;
 
 -(CGImageRef) imageRefWithIndex:(NSInteger) index;
  

@@ -27,6 +27,10 @@ kPNRNN UIView * contentView;
 /**
  当前选择第几个
  */
+kPNA int animateType;
+/**
+ 自动宽度
+ */
 kPNA BOOL autoItemWith;
 /**
  按钮集合
@@ -55,6 +59,12 @@ kPNA CGFloat selectorTagHeight;
  */
 kPNA CGFloat  selectorTagOffWidth;
 /**
+ Item文字间距
+ 默认10；
+ 仅当自动宽度时有效
+ */
+kPNA CGFloat itemTitleOffset;
+/**
  当前选择第几个
  */
 kPNA NSUInteger selectIndex;
@@ -77,5 +87,5 @@ kPNCNA void (^blockSelectedOpt)(NSUInteger index);
 #pragma mark 用于二次开发,重写此类将contentView添加到指定的地方, 由于使用了自动布局不建议直接加在scorllview中
 -(void) addContentView:(nonnull UIView *) contentView;
 
-+(CGFloat) getWidthWithButtons:(nonnull NSArray<UIButton *> *) buttons minWith:(CGFloat) minWith;
++(CGFloat) getWidthWithButtons:(nonnull NSArray<UIButton *> *) buttons minWith:(CGFloat) minWith  offset:(CGFloat) offset;
 @end

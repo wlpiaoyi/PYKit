@@ -47,23 +47,26 @@
     }];
     
     NSMutableArray * btns = [NSMutableArray new];
-    for (int i = 0; i<5; i++) {
+    for (int i = 0; i<10; i++) {
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
-        [btn setTitle:@"xx" forState:UIControlStateNormal];
+        [btn setTitle:@"xx23423" forState:UIControlStateNormal];
         if(i == 1){
-            [btn setTitle:@"xxxxxxxxxxxxxxxxx" forState:UIControlStateNormal];
+            [btn setTitle:@"xxxxxx" forState:UIControlStateNormal];
         }
         if(i == 3){
-            [btn setTitle:@"xxxxxxxxxx" forState:UIControlStateNormal];
+            [btn setTitle:@"xxxxxx" forState:UIControlStateNormal];
         }
         if(i == 2){
-            [btn setTitle:@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" forState:UIControlStateNormal];
+            [btn setTitle:@"xxxx" forState:UIControlStateNormal];
         }
         [btns addObject:btn];
     }
     self.scroll.buttons = btns;
-    self.scroll.contentWidth = 80 * 5;
-    self.scroll.isScorllSelected = YES;
+    self.scroll.isScorllSelected = NO;
+//    self.scroll.contentWidth = 80 * 5;
+    self.scroll.blockSelectedOpt = ^(NSUInteger index) {
+
+    };
 }
 
 -(void) viewWillAppear:(BOOL)animated{

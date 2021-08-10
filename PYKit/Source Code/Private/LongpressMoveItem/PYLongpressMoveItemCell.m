@@ -16,11 +16,15 @@
     __weak IBOutlet UIView *viewCtx;
     NSTimer * timerRatation;
 }
+-(UIImageView *) imageShowView{
+    return imageCtxView;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.isDelCtx = NO;
     self.isOnTap = NO;
+    [imageCtxView.superview setCornerRadiusAndBorder:4 borderWidth:0 borderColor:nil];
     NSString * imagePath;
 #ifdef DEBUG
     imagePath = @"PYKit.bundle/images/pykit-press-del.png";
@@ -31,6 +35,7 @@
     kPrintLogln("=====>%s : %s", imagePath.UTF8String, [image description].UTF8String);
     [buttonDel setImage:image forState:UIControlStateNormal];
 }
+
 
 -(void) setImgUrl:(NSString *)imgUrl{
     _imgUrl = imgUrl;

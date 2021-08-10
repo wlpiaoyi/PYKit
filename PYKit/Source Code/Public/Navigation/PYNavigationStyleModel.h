@@ -82,6 +82,7 @@ kPNCNA UIView * _Nullable (^blockCreateNavigationBarBackgrand) (UIViewController
  @return YES:允许退出 NO:反之
  */
 //==========================================================>
+-(BOOL) hasPopOrDismissItem:(nonnull UIViewController *) vc;
 -(BOOL) beforeOnclikPop:(nonnull UIViewController *) vc;
 -(BOOL) beforeOnclickDismiss:(nonnull UIViewController *) vc;
 ///<==========================================================

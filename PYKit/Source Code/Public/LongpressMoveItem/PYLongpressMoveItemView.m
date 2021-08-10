@@ -51,7 +51,7 @@ kPNSNA NSTimer * tapingTimer;
 }
 
 kINITPARAMSForType(PYItemTapView){
-    
+    self.isCanDelCtx = YES;
     NSBundle * boundle;
     if([kAppBundleIdentifier isEqual:@"wlpiaoyi.PYKit"])
         boundle =  [NSBundle mainBundle];
@@ -111,6 +111,7 @@ kINITPARAMSForType(PYItemTapView){
 }
 
 -(void) tapLongPress:(UILongPressGestureRecognizer *) longPress{
+    if(self.isCanDelCtx == NO) return;
     if(self.longPress.state == UIGestureRecognizerStatePossible) return;
     CGPoint point = [longPress locationOfTouch:0 inView:longPress.view];
     [self setSnapImagePointer:point];
@@ -291,17 +292,25 @@ kINITPARAMSForType(PYItemTapView){
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return MIN(self.maxCount, self.datas.count + (self.viewTail ? 1 : 0));
+    NSInteger count =MIN(self.maxCount, self.datas.count + (self.viewTail ? 1 : 0));
+    return count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row >= self.datas.count){
         PYItemTapTailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PYItemTapTailCell" forIndexPath:indexPath];
         cell.viewTail = self.viewTail;
+        CGPoint point = cell.frameOrigin;
+        point.x = indexPath.row * (self.itemSize.width);
+        cell.frameOrigin = point;
         return cell;
     }
     PYLongpressMoveItemCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PYLongpressMoveItemCell" forIndexPath:indexPath];
     [self synCell:cell indexPath:indexPath];
+    CGPoint point = cell.frameOrigin;
+    point.x = indexPath.row * (self.itemSize.width);
+    cell.frameOrigin = point;
+    if(self.blockAfterSetItem) self.blockAfterSetItem(self, cell.imageShowView, indexPath);
     return cell;
     
 }
@@ -326,17 +335,23 @@ kINITPARAMSForType(PYItemTapView){
             id data = cell.imgUrl;
             if(!data) data = cell.imgData;
             if(self.blockBeforeDel && self.blockBeforeDel(data) == NO) return;
-            kAssign(self);
-            [self->collectionView performBatchUpdates:^{
-                kStrong(self);
-                if(self.hasAnimation)
-                    [self->collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.datas indexOfObject:data] inSection:0]]];
-                [self.datas removeObject:data];
-                if(self.hasAnimation == NO)
+            if(self.hasAnimation && kSystemVersion.floatValue >= 13){
+                kAssign(self);
+                [self->collectionView performBatchUpdates:^{
+                    kStrong(self);
+                    NSInteger index = [self.datas indexOfObject:data];
+                    [self->collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]];
+                    [self.datas removeObject:data];
+                } completion:^(BOOL finished) {
+                    kStrong(self);
+                    if(self.blockAfterDel) self.blockAfterDel(data);
                     [self->collectionView reloadData];
-            } completion:^(BOOL finished) {
+                }];
+            }else{
+                [self.datas removeObject:data];
                 if(self.blockAfterDel) self.blockAfterDel(data);
-            }];
+                [self->collectionView reloadData];
+            }
         };
     }
     cell.isDelCtx = self.isShowDelCtx;

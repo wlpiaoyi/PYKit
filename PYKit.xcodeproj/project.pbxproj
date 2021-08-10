@@ -73,6 +73,9 @@
 		156C6A6524C8037A00CF8B28 /* PYAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5824C7DB6E00CF8B28 /* PYAssetPickerController.m */; };
 		156C6A6624C8037A00CF8B28 /* PYCameraPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */; };
 		156FA05A2062106C0034ED49 /* PYWebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC574A2062034600C37942 /* PYWebView.h */; };
+		1579054E262E639400CCD37F /* PYAsyImageView+Delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1579054D262E639400CCD37F /* PYAsyImageView+Delegate.m */; };
+		15790551262E648B00CCD37F /* PYAsyImageView+Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 15790550262E648B00CCD37F /* PYAsyImageView+Data.m */; };
+		1579055F262EC0BF00CCD37F /* PYAsyImageView+Delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1579054D262E639400CCD37F /* PYAsyImageView+Delegate.m */; };
 		1589DCC1204D160000D78784 /* PYTestImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1589DCC0204D160000D78784 /* PYTestImageController.m */; };
 		1594EBFD25762EDD008C681D /* PYLongpressMoveItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594EBFC25762EDD008C681D /* PYLongpressMoveItemView.m */; };
 		1594EC04257635A1008C681D /* PYLongpressMoveItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594EC02257635A1008C681D /* PYLongpressMoveItemCell.m */; };
@@ -85,6 +88,7 @@
 		1597CB0A1F5D42AE00690BBB /* PYDisplayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */; };
 		1598847D1F6B7F6100E589D3 /* PYDisplayImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */; };
 		159884801F6B99FE00E589D3 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1598847F1F6B99FE00E589D3 /* icon.png */; };
+		159A732B260C5C8E009CCCA4 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 159A732A260C5C8E009CCCA4 /* LocationViewController.m */; };
 		159C3A811F555B9800167B3E /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 159C3A801F555B9800167B3E /* 1.jpg */; };
 		159F24162397F06D00C95278 /* PYKeyboardControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 159F24152397F06D00C95278 /* PYKeyboardControll.m */; };
 		159F241C2397F59700C95278 /* PYKeyboardOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 159F24192397F59700C95278 /* PYKeyboardOptionView.m */; };
@@ -100,6 +104,7 @@
 		15AA334D1F160A030070631E /* PYAudioPlayer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15D9F32B1F0F2510002276A9 /* PYAudioPlayer.h */; };
 		15AA334E1F160A030070631E /* PYAudioRecord.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 152C31921F0DD6EC006FD18C /* PYAudioRecord.h */; };
 		15B8D6681EA8859200B8487E /* PYAsyImageView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15CC07FB1EA756120006B505 /* PYAsyImageView.h */; };
+		15BC087C26203804000A0D18 /* libpyutilea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15BC085126203803000A0D18 /* libpyutilea.a */; };
 		15BD959720BC048100A5811A /* PYTestCheckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BD959620BC048100A5811A /* PYTestCheckController.m */; };
 		15BFD8A32227DCC1009E3C88 /* PYWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BFD8A22227DCC1009E3C88 /* PYWebViewDelegate.m */; };
 		15C376131FC283600076EFA6 /* PY3DOrthogonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C376121FC283600076EFA6 /* PY3DOrthogonView.m */; };
@@ -125,6 +130,7 @@
 		15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CC08481EA757050006B505 /* PYCalendarLunar.m */; };
 		15CC08511EA757050006B505 /* calendar_lunar.c in Sources */ = {isa = PBXBuildFile; fileRef = 15CC084A1EA757050006B505 /* calendar_lunar.c */; };
 		15CC087A1EA7595A0006B505 /* PYKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15CC08791EA7595A0006B505 /* PYKit.bundle */; };
+		15CF44BF2643DD81006DD8ED /* PYImageDownloadTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CF44BE2643DD81006DD8ED /* PYImageDownloadTools.m */; };
 		15D42AE823A3A74000BAA1C7 /* PYNavigationStyleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D42AE723A3A73F00BAA1C7 /* PYNavigationStyleModel.m */; };
 		15D42AEB23A3A74E00BAA1C7 /* __PY__UIViewcontrollerNavigationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D42AE923A3A74D00BAA1C7 /* __PY__UIViewcontrollerNavigationImpl.m */; };
 		15D42AEC23A3A77E00BAA1C7 /* __PY__UIViewcontrollerNavigationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D42AE923A3A74D00BAA1C7 /* __PY__UIViewcontrollerNavigationImpl.m */; };
@@ -282,9 +288,6 @@
 		15417B3B1EADCF4B009C894F /* PYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalendarView.m; sourceTree = "<group>"; };
 		15417B3C1EADCF4B009C894F /* PYCalenderDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYCalenderDrawView.h; sourceTree = "<group>"; };
 		15417B3D1EADCF4B009C894F /* PYCalenderDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYCalenderDrawView.m; sourceTree = "<group>"; };
-		154455262501477F0080291A /* UIView+PYAutolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+PYAutolayout.h"; path = "../../../PYUtile/PYUtile/Source/Public/ViewAutolayout/UIView+PYAutolayout.h"; sourceTree = "<group>"; };
-		154455272501477F0080291A /* PYAutolayoutUtilites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYAutolayoutUtilites.h; path = ../../../PYUtile/PYUtile/Source/Public/ViewAutolayout/PYAutolayoutUtilites.h; sourceTree = "<group>"; };
-		154455282501477F0080291A /* PYConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYConstraintMaker.h; path = ../../../PYUtile/PYUtile/Source/Public/ViewAutolayout/PYConstraintMaker.h; sourceTree = "<group>"; };
 		154E5BDA20AD3B3A00C4E5C0 /* PYTestSliderController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestSliderController.h; sourceTree = "<group>"; };
 		154E5BDB20AD3B3A00C4E5C0 /* PYTestSliderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestSliderController.m; sourceTree = "<group>"; };
 		154E5BDD20AD3C5000C4E5C0 /* PYSliderSingleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYSliderSingleView.h; sourceTree = "<group>"; };
@@ -311,6 +314,11 @@
 		156C6A5C24C7DECE00CF8B28 /* PYCameraPickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYCameraPickerController.h; sourceTree = "<group>"; };
 		156C6A5D24C7DECE00CF8B28 /* PYCameraPickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYCameraPickerController.m; sourceTree = "<group>"; };
 		156C6A5E24C7DECE00CF8B28 /* PYCameraPickerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PYCameraPickerController.xib; sourceTree = "<group>"; };
+		1576B0B3269D3C9B00C9B8D8 /* UIView+PYLayoutOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+PYLayoutOption.h"; sourceTree = "<group>"; };
+		1579054C262E639400CCD37F /* PYAsyImageView+Delegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PYAsyImageView+Delegate.h"; sourceTree = "<group>"; };
+		1579054D262E639400CCD37F /* PYAsyImageView+Delegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PYAsyImageView+Delegate.m"; sourceTree = "<group>"; };
+		1579054F262E648B00CCD37F /* PYAsyImageView+Data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PYAsyImageView+Data.h"; sourceTree = "<group>"; };
+		15790550262E648B00CCD37F /* PYAsyImageView+Data.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PYAsyImageView+Data.m"; sourceTree = "<group>"; };
 		1589DCBF204D160000D78784 /* PYTestImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestImageController.h; sourceTree = "<group>"; };
 		1589DCC0204D160000D78784 /* PYTestImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestImageController.m; sourceTree = "<group>"; };
 		1594EBFB25762EDD008C681D /* PYLongpressMoveItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYLongpressMoveItemView.h; sourceTree = "<group>"; };
@@ -324,6 +332,8 @@
 		1597CB081F5D42AE00690BBB /* PYDisplayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYDisplayImageView.h; sourceTree = "<group>"; };
 		1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYDisplayImageView.m; sourceTree = "<group>"; };
 		1598847F1F6B99FE00E589D3 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		159A7329260C5C8E009CCCA4 /* LocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
+		159A732A260C5C8E009CCCA4 /* LocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
 		159C3A801F555B9800167B3E /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		159F24142397F06D00C95278 /* PYKeyboardControll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYKeyboardControll.h; sourceTree = "<group>"; };
 		159F24152397F06D00C95278 /* PYKeyboardControll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYKeyboardControll.m; sourceTree = "<group>"; };
@@ -331,41 +341,48 @@
 		159F24192397F59700C95278 /* PYKeyboardOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYKeyboardOptionView.m; sourceTree = "<group>"; };
 		15A704CB2578AEB000E2F94F /* PYItemTapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYItemTapViewController.h; sourceTree = "<group>"; };
 		15A704CC2578AEB000E2F94F /* PYItemTapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYItemTapViewController.m; sourceTree = "<group>"; };
-		15A91DA8238B9A3A00F5517B /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+HookView.h"; path = "../../../PYUtile/PYUtile/Source/Public/Hook/UIViewController+HookView.h"; sourceTree = "<group>"; };
-		15A91DA9238B9A3B00F5517B /* PYGraphicsThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYGraphicsThumb.h; path = ../../../PYUtile/PYUtile/Source/Public/Graphics/PYGraphicsThumb.h; sourceTree = "<group>"; };
-		15A91DAA238B9A3B00F5517B /* NSNumber+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSNumber+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DAB238B9A3B00F5517B /* PYUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYUtile.h; path = ../../../PYUtile/PYUtile/Source/Public/Utile/PYUtile.h; sourceTree = "<group>"; };
-		15A91DAC238B9A3B00F5517B /* NSData+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSData+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DAD238B9A3B00F5517B /* PYMotionNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMotionNotification.h; path = ../../../PYUtile/PYUtile/Source/Public/Notification/PYMotionNotification.h; sourceTree = "<group>"; };
-		15A91DAE238B9A3B00F5517B /* PYHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYHook.h; path = ../../../PYUtile/PYUtile/Source/Public/Hook/PYHook.h; sourceTree = "<group>"; };
-		15A91DAF238B9A3B00F5517B /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = metamacros.h; path = ../../../PYUtile/PYUtile/Source/Public/EXTScope/metamacros.h; sourceTree = "<group>"; };
-		15A91DB0238B9A3B00F5517B /* UIViewController+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Hook.h"; path = "../../../PYUtile/PYUtile/Source/Public/Hook/UIViewController+Hook.h"; sourceTree = "<group>"; };
-		15A91DB1238B9A3B00F5517B /* NSDate+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSDate+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DB2238B9A3B00F5517B /* PYUtileMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYUtileMacro.h; path = ../../../PYUtile/PYUtile/Source/Public/Utile/PYUtileMacro.h; sourceTree = "<group>"; };
-		15A91DB3238B9A3C00F5517B /* UIImage+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/UIImage+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DB4238B9A3C00F5517B /* PYInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYInvoke.h; path = ../../../PYUtile/PYUtile/Source/Public/Invoke/PYInvoke.h; sourceTree = "<group>"; };
-		15A91DB5238B9A3C00F5517B /* NSDictionary+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSDictionary+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DB6238B9A3C00F5517B /* NSObject+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSObject+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DB7238B9A3C00F5517B /* NSObject+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+Hook.h"; path = "../../../PYUtile/PYUtile/Source/Public/Hook/NSObject+Hook.h"; sourceTree = "<group>"; };
-		15A91DB8238B9A3C00F5517B /* UILable+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILable+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/UILable+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DB9238B9A3C00F5517B /* PYOrientationNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYOrientationNotification.h; path = ../../../PYUtile/PYUtile/Source/Public/Notification/PYOrientationNotification.h; sourceTree = "<group>"; };
-		15A91DBA238B9A3C00F5517B /* PYUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYUncaughtExceptionHandler.h; path = ../../../PYUtile/PYUtile/Source/Public/Utile/PYUncaughtExceptionHandler.h; sourceTree = "<group>"; };
-		15A91DBB238B9A3C00F5517B /* PYGraphicsDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYGraphicsDraw.h; path = ../../../PYUtile/PYUtile/Source/Public/Graphics/PYGraphicsDraw.h; sourceTree = "<group>"; };
-		15A91DBC238B9A3D00F5517B /* UIResponder+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIResponder+Hook.h"; path = "../../../PYUtile/PYUtile/Source/Public/Hook/UIResponder+Hook.h"; sourceTree = "<group>"; };
-		15A91DBD238B9A3D00F5517B /* NSString+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSString+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DBE238B9A3D00F5517B /* UIColor+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/UIColor+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DBF238B9A3D00F5517B /* PYXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYXml.h; path = ../../../PYUtile/PYUtile/Source/Public/Xml/PYXml.h; sourceTree = "<group>"; };
-		15A91DC0238B9A3D00F5517B /* UIView+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/UIView+PYExpand.h"; sourceTree = "<group>"; };
-		15A91DC1238B9A3D00F5517B /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = metamacros.h; path = ../../../../git/transferpassengerforios/Transfer/Transfer/Lib/PYLib/pyutile/pyutilea/metamacros.h; sourceTree = "<group>"; };
-		15A91DC2238B9A3D00F5517B /* PYKeyboardNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYKeyboardNotification.h; path = ../../../PYUtile/PYUtile/Source/Public/Notification/PYKeyboardNotification.h; sourceTree = "<group>"; };
-		15A91DC3238B9A3D00F5517B /* UIViewController+HookOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+HookOrientation.h"; path = "../../../PYUtile/PYUtile/Source/Public/Hook/UIViewController+HookOrientation.h"; sourceTree = "<group>"; };
-		15A91DC4238B9A3E00F5517B /* PYKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYKeychain.h; path = ../../../PYUtile/PYUtile/Source/Public/Keychain/PYKeychain.h; sourceTree = "<group>"; };
-		15A91DC5238B9A3E00F5517B /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EXTScope.h; path = ../../../PYUtile/PYUtile/Source/Public/EXTScope/EXTScope.h; sourceTree = "<group>"; };
-		15A91DC6238B9A3E00F5517B /* UIView+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Hook.h"; path = "../../../PYUtile/PYUtile/Source/Public/Hook/UIView+Hook.h"; sourceTree = "<group>"; };
-		15A91DC7238B9A3E00F5517B /* PYViewAutolayoutCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYViewAutolayoutCenter.h; path = ../../../PYUtile/PYUtile/Source/Public/ViewAutolayout/PYViewAutolayoutCenter.h; sourceTree = "<group>"; };
-		15A91E0A238B9B8800F5517B /* pyutilea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pyutilea.h; path = ../../../PYUtile/pyutilea/pyutilea.h; sourceTree = "<group>"; };
-		15A91E0E238B9D4500F5518B /* UIButton+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/UIButton+PYExpand.h"; sourceTree = "<group>"; };
-		15A91E0F238B9D5A00F5517B /* NSArray+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/NSArray+PYExpand.h"; sourceTree = "<group>"; };
+		15BC085126203803000A0D18 /* libpyutilea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpyutilea.a; sourceTree = "<group>"; };
+		15BC085326203803000A0D18 /* NSObject+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Hook.h"; sourceTree = "<group>"; };
+		15BC085426203803000A0D18 /* NSDate+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PYExpand.h"; sourceTree = "<group>"; };
+		15BC085526203803000A0D18 /* PYMotionNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYMotionNotification.h; sourceTree = "<group>"; };
+		15BC085626203803000A0D18 /* PYXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYXml.h; sourceTree = "<group>"; };
+		15BC085726203803000A0D18 /* UIImage+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PYExpand.h"; sourceTree = "<group>"; };
+		15BC085826203804000A0D18 /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookView.h"; sourceTree = "<group>"; };
+		15BC085926203804000A0D18 /* PYGraphicsThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsThumb.h; sourceTree = "<group>"; };
+		15BC085A26203804000A0D18 /* NSArray+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PYExpand.h"; sourceTree = "<group>"; };
+		15BC085B26203804000A0D18 /* UIView+NoUse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NoUse.h"; sourceTree = "<group>"; };
+		15BC085C26203804000A0D18 /* UIView+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PYExpand.h"; sourceTree = "<group>"; };
+		15BC085D26203804000A0D18 /* PYOrientationNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYOrientationNotification.h; sourceTree = "<group>"; };
+		15BC085E26203804000A0D18 /* PYKeyboardNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYKeyboardNotification.h; sourceTree = "<group>"; };
+		15BC085F26203804000A0D18 /* UIView+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hook.h"; sourceTree = "<group>"; };
+		15BC086026203804000A0D18 /* UIButton+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PYExpand.h"; sourceTree = "<group>"; };
+		15BC086126203804000A0D18 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
+		15BC086226203804000A0D18 /* PYConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYConstraintMaker.h; sourceTree = "<group>"; };
+		15BC086326203804000A0D18 /* PYUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		15BC086426203804000A0D18 /* PYConstraintCtx2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYConstraintCtx2.h; sourceTree = "<group>"; };
+		15BC086526203804000A0D18 /* PYGraphicsDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsDraw.h; sourceTree = "<group>"; };
+		15BC086626203804000A0D18 /* PYHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYHook.h; sourceTree = "<group>"; };
+		15BC086726203804000A0D18 /* NSString+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PYExpand.h"; sourceTree = "<group>"; };
+		15BC086826203804000A0D18 /* NSData+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+PYExpand.h"; sourceTree = "<group>"; };
+		15BC086926203804000A0D18 /* UIView+PYLayoutGet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PYLayoutGet.h"; sourceTree = "<group>"; };
+		15BC086A26203804000A0D18 /* UIViewController+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Hook.h"; sourceTree = "<group>"; };
+		15BC086B26203804000A0D18 /* NSNumber+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+PYExpand.h"; sourceTree = "<group>"; };
+		15BC086C26203804000A0D18 /* PYKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYKeychain.h; sourceTree = "<group>"; };
+		15BC086D26203804000A0D18 /* PYViewAutolayoutCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYViewAutolayoutCenter.h; sourceTree = "<group>"; };
+		15BC086E26203804000A0D18 /* PYInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYInvoke.h; sourceTree = "<group>"; };
+		15BC086F26203804000A0D18 /* PYUtileMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUtileMacro.h; sourceTree = "<group>"; };
+		15BC087026203804000A0D18 /* UIViewController+HookOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookOrientation.h"; sourceTree = "<group>"; };
+		15BC087126203804000A0D18 /* PYUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUtile.h; sourceTree = "<group>"; };
+		15BC087226203804000A0D18 /* NSDictionary+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+PYExpand.h"; sourceTree = "<group>"; };
+		15BC087326203804000A0D18 /* UIView+PYLayoutRemove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PYLayoutRemove.h"; sourceTree = "<group>"; };
+		15BC087426203804000A0D18 /* UIColor+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PYExpand.h"; sourceTree = "<group>"; };
+		15BC087526203804000A0D18 /* UIResponder+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+Hook.h"; sourceTree = "<group>"; };
+		15BC087626203804000A0D18 /* UIView+PYAutolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PYAutolayout.h"; sourceTree = "<group>"; };
+		15BC087726203804000A0D18 /* NSObject+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PYExpand.h"; sourceTree = "<group>"; };
+		15BC087826203804000A0D18 /* PYAutolayoutUtilites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYAutolayoutUtilites.h; sourceTree = "<group>"; };
+		15BC087926203804000A0D18 /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
+		15BC087A26203804000A0D18 /* pyutilea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pyutilea.h; sourceTree = "<group>"; };
+		15BC087B26203804000A0D18 /* UILable+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILable+PYExpand.h"; sourceTree = "<group>"; };
 		15BD959520BC048100A5811A /* PYTestCheckController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYTestCheckController.h; sourceTree = "<group>"; };
 		15BD959620BC048100A5811A /* PYTestCheckController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYTestCheckController.m; sourceTree = "<group>"; };
 		15BFD8A12227DCC1009E3C88 /* PYWebViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYWebViewDelegate.h; sourceTree = "<group>"; };
@@ -407,6 +424,8 @@
 		15CC08601EA757A60006B505 /* libpykita.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpykita.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CC08621EA757A60006B505 /* pykita.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pykita.h; sourceTree = "<group>"; };
 		15CC08791EA7595A0006B505 /* PYKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PYKit.bundle; sourceTree = "<group>"; };
+		15CF44BD2643DD81006DD8ED /* PYImageDownloadTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYImageDownloadTools.h; sourceTree = "<group>"; };
+		15CF44BE2643DD81006DD8ED /* PYImageDownloadTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYImageDownloadTools.m; sourceTree = "<group>"; };
 		15D42AE223A37AB600BAA1C7 /* PYLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PYLocation.gpx; sourceTree = "<group>"; };
 		15D42AE723A3A73F00BAA1C7 /* PYNavigationStyleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYNavigationStyleModel.m; sourceTree = "<group>"; };
 		15D42AE923A3A74D00BAA1C7 /* __PY__UIViewcontrollerNavigationImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = __PY__UIViewcontrollerNavigationImpl.m; sourceTree = "<group>"; };
@@ -448,6 +467,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15BC087C26203804000A0D18 /* libpyutilea.a in Frameworks */,
 				1502A5D5223A428C00F0787A /* libmp3lame.a in Frameworks */,
 				1502A5CA223A3FE600F0787A /* libpyinterflowa.a in Frameworks */,
 				1502A5CC223A3FE600F0787A /* libpynetworka.a in Frameworks */,
@@ -473,57 +493,12 @@
 		1502A59A223A3E6B00F0787A /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				15BC085026203803000A0D18 /* pyutile */,
 				1502A5D2223A428C00F0787A /* libmp3lame */,
 				1502A5C4223A3F7000F0787A /* PYNetwork */,
 				1502A5BC223A3ED600F0787A /* PYInterflow */,
-				1502A59B223A3E7500F0787A /* PYUtile */,
 			);
 			path = Library;
-			sourceTree = "<group>";
-		};
-		1502A59B223A3E7500F0787A /* PYUtile */ = {
-			isa = PBXGroup;
-			children = (
-				154455272501477F0080291A /* PYAutolayoutUtilites.h */,
-				154455282501477F0080291A /* PYConstraintMaker.h */,
-				154455262501477F0080291A /* UIView+PYAutolayout.h */,
-				15A91E0E238B9D4500F5518B /* UIButton+PYExpand.h */,
-				15A91E0F238B9D5A00F5517B /* NSArray+PYExpand.h */,
-				15A91E0A238B9B8800F5517B /* pyutilea.h */,
-				15A91DC5238B9A3E00F5517B /* EXTScope.h */,
-				15A91DC1238B9A3D00F5517B /* metamacros.h */,
-				15A91DAF238B9A3B00F5517B /* metamacros.h */,
-				15A91DAC238B9A3B00F5517B /* NSData+PYExpand.h */,
-				15A91DB1238B9A3B00F5517B /* NSDate+PYExpand.h */,
-				15A91DB5238B9A3C00F5517B /* NSDictionary+PYExpand.h */,
-				15A91DAA238B9A3B00F5517B /* NSNumber+PYExpand.h */,
-				15A91DB7238B9A3C00F5517B /* NSObject+Hook.h */,
-				15A91DB6238B9A3C00F5517B /* NSObject+PYExpand.h */,
-				15A91DBD238B9A3D00F5517B /* NSString+PYExpand.h */,
-				15A91DBB238B9A3C00F5517B /* PYGraphicsDraw.h */,
-				15A91DA9238B9A3B00F5517B /* PYGraphicsThumb.h */,
-				15A91DAE238B9A3B00F5517B /* PYHook.h */,
-				15A91DB4238B9A3C00F5517B /* PYInvoke.h */,
-				15A91DC2238B9A3D00F5517B /* PYKeyboardNotification.h */,
-				15A91DC4238B9A3E00F5517B /* PYKeychain.h */,
-				15A91DAD238B9A3B00F5517B /* PYMotionNotification.h */,
-				15A91DB9238B9A3C00F5517B /* PYOrientationNotification.h */,
-				15A91DBA238B9A3C00F5517B /* PYUncaughtExceptionHandler.h */,
-				15A91DAB238B9A3B00F5517B /* PYUtile.h */,
-				15A91DB2238B9A3B00F5517B /* PYUtileMacro.h */,
-				15A91DC7238B9A3E00F5517B /* PYViewAutolayoutCenter.h */,
-				15A91DBF238B9A3D00F5517B /* PYXml.h */,
-				15A91DBE238B9A3D00F5517B /* UIColor+PYExpand.h */,
-				15A91DB3238B9A3C00F5517B /* UIImage+PYExpand.h */,
-				15A91DB8238B9A3C00F5517B /* UILable+PYExpand.h */,
-				15A91DBC238B9A3D00F5517B /* UIResponder+Hook.h */,
-				15A91DC6238B9A3E00F5517B /* UIView+Hook.h */,
-				15A91DC0238B9A3D00F5517B /* UIView+PYExpand.h */,
-				15A91DB0238B9A3B00F5517B /* UIViewController+Hook.h */,
-				15A91DC3238B9A3D00F5517B /* UIViewController+HookOrientation.h */,
-				15A91DA8238B9A3A00F5517B /* UIViewController+HookView.h */,
-			);
-			path = PYUtile;
 			sourceTree = "<group>";
 		};
 		1502A5BC223A3ED600F0787A /* PYInterflow */ = {
@@ -656,6 +631,12 @@
 				1597CB091F5D42AE00690BBB /* PYDisplayImageView.m */,
 				1596B5A425AEC1EB00B39AF4 /* PYAsyGifView.h */,
 				1596B5A525AEC1EB00B39AF4 /* PYAsyGifView.m */,
+				1579054C262E639400CCD37F /* PYAsyImageView+Delegate.h */,
+				1579054D262E639400CCD37F /* PYAsyImageView+Delegate.m */,
+				1579054F262E648B00CCD37F /* PYAsyImageView+Data.h */,
+				15790550262E648B00CCD37F /* PYAsyImageView+Data.m */,
+				15CF44BD2643DD81006DD8ED /* PYImageDownloadTools.h */,
+				15CF44BE2643DD81006DD8ED /* PYImageDownloadTools.m */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -762,6 +743,64 @@
 				1594EC03257635A1008C681D /* PYLongpressMoveItemCell.xib */,
 			);
 			path = LongpressMoveItem;
+			sourceTree = "<group>";
+		};
+		15BC085026203803000A0D18 /* pyutile */ = {
+			isa = PBXGroup;
+			children = (
+				15BC085126203803000A0D18 /* libpyutilea.a */,
+				15BC085226203803000A0D18 /* pyutilea */,
+			);
+			path = pyutile;
+			sourceTree = "<group>";
+		};
+		15BC085226203803000A0D18 /* pyutilea */ = {
+			isa = PBXGroup;
+			children = (
+				1576B0B3269D3C9B00C9B8D8 /* UIView+PYLayoutOption.h */,
+				15BC085326203803000A0D18 /* NSObject+Hook.h */,
+				15BC085426203803000A0D18 /* NSDate+PYExpand.h */,
+				15BC085526203803000A0D18 /* PYMotionNotification.h */,
+				15BC085626203803000A0D18 /* PYXml.h */,
+				15BC085726203803000A0D18 /* UIImage+PYExpand.h */,
+				15BC085826203804000A0D18 /* UIViewController+HookView.h */,
+				15BC085926203804000A0D18 /* PYGraphicsThumb.h */,
+				15BC085A26203804000A0D18 /* NSArray+PYExpand.h */,
+				15BC085B26203804000A0D18 /* UIView+NoUse.h */,
+				15BC085C26203804000A0D18 /* UIView+PYExpand.h */,
+				15BC085D26203804000A0D18 /* PYOrientationNotification.h */,
+				15BC085E26203804000A0D18 /* PYKeyboardNotification.h */,
+				15BC085F26203804000A0D18 /* UIView+Hook.h */,
+				15BC086026203804000A0D18 /* UIButton+PYExpand.h */,
+				15BC086126203804000A0D18 /* metamacros.h */,
+				15BC086226203804000A0D18 /* PYConstraintMaker.h */,
+				15BC086326203804000A0D18 /* PYUncaughtExceptionHandler.h */,
+				15BC086426203804000A0D18 /* PYConstraintCtx2.h */,
+				15BC086526203804000A0D18 /* PYGraphicsDraw.h */,
+				15BC086626203804000A0D18 /* PYHook.h */,
+				15BC086726203804000A0D18 /* NSString+PYExpand.h */,
+				15BC086826203804000A0D18 /* NSData+PYExpand.h */,
+				15BC086926203804000A0D18 /* UIView+PYLayoutGet.h */,
+				15BC086A26203804000A0D18 /* UIViewController+Hook.h */,
+				15BC086B26203804000A0D18 /* NSNumber+PYExpand.h */,
+				15BC086C26203804000A0D18 /* PYKeychain.h */,
+				15BC086D26203804000A0D18 /* PYViewAutolayoutCenter.h */,
+				15BC086E26203804000A0D18 /* PYInvoke.h */,
+				15BC086F26203804000A0D18 /* PYUtileMacro.h */,
+				15BC087026203804000A0D18 /* UIViewController+HookOrientation.h */,
+				15BC087126203804000A0D18 /* PYUtile.h */,
+				15BC087226203804000A0D18 /* NSDictionary+PYExpand.h */,
+				15BC087326203804000A0D18 /* UIView+PYLayoutRemove.h */,
+				15BC087426203804000A0D18 /* UIColor+PYExpand.h */,
+				15BC087526203804000A0D18 /* UIResponder+Hook.h */,
+				15BC087626203804000A0D18 /* UIView+PYAutolayout.h */,
+				15BC087726203804000A0D18 /* NSObject+PYExpand.h */,
+				15BC087826203804000A0D18 /* PYAutolayoutUtilites.h */,
+				15BC087926203804000A0D18 /* EXTScope.h */,
+				15BC087A26203804000A0D18 /* pyutilea.h */,
+				15BC087B26203804000A0D18 /* UILable+PYExpand.h */,
+			);
+			path = pyutilea;
 			sourceTree = "<group>";
 		};
 		15BD959020BBB5DE00A5811A /* Dep ing */ = {
@@ -871,6 +910,8 @@
 				15DA7DAF1F09E899002FE132 /* TextFieldCheckController.h */,
 				15DA7DB01F09E899002FE132 /* TextFieldCheckController.m */,
 				15DA7DB11F09E899002FE132 /* TextFieldCheckController.xib */,
+				159A7329260C5C8E009CCCA4 /* LocationViewController.h */,
+				159A732A260C5C8E009CCCA4 /* LocationViewController.m */,
 			);
 			path = PYKit;
 			sourceTree = "<group>";
@@ -1035,7 +1076,7 @@
 				TargetAttributes = {
 					15CC07DD1EA7556C0006B505 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = TVXZ27JPZ9;
+						DevelopmentTeam = 495X2M9F8V;
 						ProvisioningStyle = Automatic;
 					};
 					15CC085F1EA757A60006B505 = {
@@ -1108,6 +1149,7 @@
 				15C376191FC2D7CD0076EFA6 /* PY3DView.m in Sources */,
 				15CC084E1EA757050006B505 /* PYCalendarGraphics.m in Sources */,
 				15CC08501EA757050006B505 /* PYCalendarLunar.m in Sources */,
+				1579054E262E639400CCD37F /* PYAsyImageView+Delegate.m in Sources */,
 				15DB8CA5210C122700AA2CF9 /* PYMapView+Region.m in Sources */,
 				15CB315D239B5A74005344EF /* PYWebView+PYSchedule.m in Sources */,
 				15DB8CA3210C122700AA2CF9 /* PYAnnotation.m in Sources */,
@@ -1129,6 +1171,7 @@
 				15CC084D1EA757050006B505 /* PYDatePikerView.m in Sources */,
 				154E5BE220AD3CD900C4E5C0 /* PYSliderParams.m in Sources */,
 				1555E0CC1F5CF1C10017B436 /* UITextField+PYCheck.m in Sources */,
+				15790551262E648B00CCD37F /* PYAsyImageView+Data.m in Sources */,
 				15417B411EADCF4B009C894F /* PYCalendarTimeView.m in Sources */,
 				1522C7BE1F18A1BC003CB0D0 /* PYTextInputCheckParams.m in Sources */,
 				1594EBFD25762EDD008C681D /* PYLongpressMoveItemView.m in Sources */,
@@ -1144,6 +1187,7 @@
 				15417B3F1EADCF4B009C894F /* PYCalendarHeadView.m in Sources */,
 				15CC07E31EA7556C0006B505 /* main.m in Sources */,
 				152AAAA81FFB6EFD00370DF8 /* PYTestSelectorController.m in Sources */,
+				15CF44BF2643DD81006DD8ED /* PYImageDownloadTools.m in Sources */,
 				15CC08511EA757050006B505 /* calendar_lunar.c in Sources */,
 				150C6DA81F46D74800731FC7 /* PYSelectorBarView.m in Sources */,
 				1520D28C258C77B40071640F /* PYMetadataQRController.m in Sources */,
@@ -1159,6 +1203,7 @@
 				15D9F32D1F0F2510002276A9 /* PYAudioTools.m in Sources */,
 				15DB8CA4210C122700AA2CF9 /* PYMapView+Annotaions.m in Sources */,
 				15A704CD2578AEB000E2F94F /* PYItemTapViewController.m in Sources */,
+				159A732B260C5C8E009CCCA4 /* LocationViewController.m in Sources */,
 				151AA85720A1750600B58AB9 /* PYSliderDoubleView.m in Sources */,
 				15C376161FC2D7110076EFA6 /* PY3DParams.m in Sources */,
 				15EC574B2062034600C37942 /* PYWebView.m in Sources */,
@@ -1171,6 +1216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1579055F262EC0BF00CCD37F /* PYAsyImageView+Delegate.m in Sources */,
 				1596B5A925AEC9C400B39AF4 /* PYAsyGifView.m in Sources */,
 				15A704D02578BC6600E2F94F /* PYLongpressMoveItemCell.m in Sources */,
 				15A704D12578BC6600E2F94F /* PYLongpressMoveItemView.m in Sources */,
@@ -1344,7 +1390,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Leo Cloudless (SFR9NKH7W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TVXZ27JPZ9;
+				DEVELOPMENT_TEAM = 495X2M9F8V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1374,6 +1420,7 @@
 					"$(PROJECT_DIR)/lib/pyutile",
 					"$(PROJECT_DIR)/lib/pyipa",
 					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/libmp3lame",
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/pyutile",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1391,7 +1438,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Leo Cloudless (SFR9NKH7W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TVXZ27JPZ9;
+				DEVELOPMENT_TEAM = 495X2M9F8V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1421,6 +1468,7 @@
 					"$(PROJECT_DIR)/lib/pyutile",
 					"$(PROJECT_DIR)/lib/pyipa",
 					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/libmp3lame",
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/pyutile",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYKit;

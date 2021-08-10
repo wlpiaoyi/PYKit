@@ -21,6 +21,7 @@ int kSelectorbarviewtag = 1860005;
     UIView * _ssv_contentView;
     PYGraphicsThumb * _graphicsThumb;
     BOOL _isfistsetcontentwidth;
+    void (^blockSelectedOpt2)(NSUInteger index);
 }
 kSOULDLAYOUTPForType(PYSelectorScrollView)
 @end
@@ -59,12 +60,18 @@ kINITPARAMSForType(PYSelectorScrollView){
     [_scrollView addSubview:_ssv_contentView];
     _isfistsetcontentwidth = true;
     _isScorllSelected = true;
-    [self setBlockSelectedOpt:^(NSUInteger index) {
+    [super setBlockSelectedOpt:^(NSUInteger index) {
         kStrong(self);
         [self setContentWidth:self.contentWidth animation:!(self->_isfistsetcontentwidth)];
         self->_isfistsetcontentwidth = false;
+        if(self->blockSelectedOpt2) self->blockSelectedOpt2(index);
     }];
 }
+
+-(void) setBlockSelectedOpt:(void (^)(NSUInteger))blockSelectedOpt{
+    blockSelectedOpt2 = blockSelectedOpt;
+}
+
 -(void) setButtons:(NSArray *)buttons{
     [super setButtons:buttons];
     self.isScorllSelected = _isScorllSelected;
@@ -99,7 +106,7 @@ kINITPARAMSForType(PYSelectorScrollView){
 
 -(void) setContentWidth:(CGFloat)contentWidth{
     if(self.autoItemWith){
-        contentWidth = [self.class getWidthWithButtons:self.buttons minWith:44];
+        contentWidth = [self.class getWidthWithButtons:self.buttons minWith:44 offset:self.itemTitleOffset];
     }
     _contentWidth = contentWidth;
     [self setContentWidth:contentWidth animation:NO];

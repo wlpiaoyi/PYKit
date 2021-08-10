@@ -23,7 +23,9 @@
 #import "PYAssetPickerController.h"
 #import "PYCameraPickerController.h"
 #import "PYNavigationControll.h"
+#import "LocationViewController.h"
 
+#import <CoreLocation/CoreLocation.h>
 
 @interface ViewController () <UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,PYNavigationSetterTag>{
 @private
@@ -31,6 +33,7 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 PYPNSNN NSArray * datas;
+@property (strong,nonatomic) CLLocationManager *locationManager;
 @end
 
 @implementation ViewController
@@ -47,7 +50,8 @@ PYPNSNN NSArray * datas;
                    @{@"name":@"webview", @"id":@"webview"},
                    @{@"name":@"camera", @"id":@"PYCameraPickerController"},
                    @{@"name":@"photo", @"id":@"PYAssetPickerController"},
-                   @{@"name":@"itemTap", @"id":@"item-tap"}
+                   @{@"name":@"itemTap", @"id":@"item-tap"},
+                   @{@"name":@"location", @"id":@"LocationViewController"},
                    ];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -101,6 +105,8 @@ PYPNSNN NSArray * datas;
     a3dView.viewDown = view;
     [a3dView syn3DTranslate];
 }
+- (IBAction)onclickInit:(id)sender {
+}
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 }
@@ -143,6 +149,15 @@ PYPNSNN NSArray * datas;
         }];
         return;
     }
+    
+    if([(self.datas[indexPath.row][@"id"]) isEqual:@"LocationViewController"]){
+        LocationViewController * vc = [LocationViewController new];
+        [self presentViewController:vc animated:YES completion:^{
+            
+        }];
+        return;
+    }
+    
     [self performSegueWithIdentifier:self.datas[indexPath.row][@"id"] sender:nil];
 }
 - (void)didReceiveMemoryWarning {

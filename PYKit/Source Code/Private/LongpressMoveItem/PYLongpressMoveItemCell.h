@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PYLongpressMoveItemCell : UICollectionViewCell
-
+kPNRNA UIImageView * imageShowView;
 kPNSNA NSString * imgUrl;
 kPNSNA UIImage * imgData;
 

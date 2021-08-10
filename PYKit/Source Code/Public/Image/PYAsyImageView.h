@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "PYNetwork.h"
+
+
 extern NSDictionary<NSString*, UIImage *> * _Nullable PY_ASY_NODATA_IMG_DICT;
 extern NSDictionary<NSString*, UIImage *> * _Nullable PY_ASY_LOADING_IMG_DICT;
+extern void (^PY_ASY_BLOCK_OPTION) (UIImageView * _Nonnull imageView);
 
 @interface PYAsyImageView : UIImageView
 
@@ -29,5 +32,6 @@ kPCNRA NSString * dictDefaultKey;
 +(nullable NSString *) getCachePathWithUrl:(nonnull NSString *) url;
 +(bool) clearCache:(nonnull NSString *) imgUrl;
 +(bool) clearCaches;
++(void) checkCachesPath;
 
 @end

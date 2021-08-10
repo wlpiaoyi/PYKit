@@ -102,60 +102,71 @@ void __py_navigation_dismissvc(UIViewController * self, SEL _cmd){
 
 -(void)  excuteSetterBackItem:(nonnull UIViewController *) target{
     if(!target.navigationController) return;
-    PYBackButtonItem * backButtonItem;
-    for (UIBarButtonItem * buttonItem in target.navigationItem.leftBarButtonItems) {
-        if([buttonItem isKindOfClass:[PYBackButtonItem class]]){
-            backButtonItem = buttonItem;
-            break;
+    PYBackButtonItem * backButtonItem = nil;
+    BOOL hasPopOrDismissItem = YES;
+    if([target conformsToProtocol:@protocol(PYNavigationSetterTag)] && [target respondsToSelector:@selector(hasPopOrDismissItem:)]){
+        hasPopOrDismissItem = [((id<PYNavigationSetterTag>) target) hasPopOrDismissItem:target];
+    }
+    [target.navigationItem setHidesBackButton:hasPopOrDismissItem == NO];
+    if(hasPopOrDismissItem){
+        for (UIBarButtonItem * buttonItem in target.navigationItem.leftBarButtonItems) {
+            if([buttonItem isKindOfClass:[PYBackButtonItem class]]){
+                backButtonItem = (PYBackButtonItem *)buttonItem;
+                break;
+            }
         }
     }
-    if(target.navigationController.childViewControllers
-       && target.navigationController.childViewControllers.count > 1) {
-        SEL popSel = sel_getUid("__py_navigatioin_popvc");
-        if(![target respondsToSelector:popSel]){
-            class_addMethod([target class], popSel, (IMP)__py_navigatioin_popvc, "v@:");
-        };
-        PYNavigationBackItemStyleModel * popStyle = self.navigationStyle.popStyle;
-        if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigatonPopStyle:)]){
-            popStyle = [((id<PYNavigationSetterTag>)target) pyNavigatonPopStyle:popStyle] ? : popStyle;
-        }
-        if(!popStyle) return;
-        if(!backButtonItem){
-            UIButton * backButton = [popStyle createButton];
-            backButtonItem = [[PYBackButtonItem alloc] initWithCustomView:backButton];
-        }else{
-            if(backButtonItem.customView && [backButtonItem.customView isKindOfClass:[UIButton class]]){
-                UIButton * backButton = backButtonItem.customView;
-                [popStyle setStyleWithButton:backButton];
+    if(hasPopOrDismissItem){
+        if(target.navigationController.childViewControllers
+           && target.navigationController.childViewControllers.count > 1) {
+            SEL popSel = sel_getUid("__py_navigatioin_popvc");
+            if(![target respondsToSelector:popSel]){
+                class_addMethod([target class], popSel, (IMP)__py_navigatioin_popvc, "v@:");
+            };
+            PYNavigationBackItemStyleModel * popStyle = self.navigationStyle.popStyle;
+            if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigatonPopStyle:)]){
+                popStyle = [((id<PYNavigationSetterTag>)target) pyNavigatonPopStyle:popStyle] ? : popStyle;
+            }
+            if(!popStyle) return;
+            if(!backButtonItem){
+                UIButton * backButton = [popStyle createButton];
                 [backButton addTarget:target action:popSel forControlEvents:UIControlEventTouchUpInside];
+                backButtonItem = [[PYBackButtonItem alloc] initWithCustomView:backButton];
+            }else{
+                if(backButtonItem.customView && [backButtonItem.customView isKindOfClass:[UIButton class]]){
+                    UIButton * backButton = backButtonItem.customView;
+                    [popStyle setStyleWithButton:backButton];
+                    [backButton addTarget:target action:popSel forControlEvents:UIControlEventTouchUpInside];
+                }
+                backButtonItem = nil;
             }
-            backButtonItem = nil;
-        }
-        __PYGestureRecognizerDelegate * rdelegate = [__PYGestureRecognizerDelegate shareDelegate];
-        rdelegate.nvc = target.navigationController;
-        target.navigationController.interactivePopGestureRecognizer.delegate = rdelegate;
-    }else if(target.navigationController.presentingViewController
-             && target.navigationController.viewControllers.count == 1
-             && target.navigationController.viewControllers.firstObject == target){
-        SEL dismessSel = sel_getUid("__py_navigation_dismissvc");
-        if(![target respondsToSelector:dismessSel]){
-            class_addMethod([target class], dismessSel, (IMP)__py_navigation_dismissvc, "v@:");
-        }
-        PYNavigationBackItemStyleModel * dismissStyle = self.navigationStyle.dismissStyle;
-        if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigatonDismissStyle:)]){
-            dismissStyle = [((id<PYNavigationSetterTag>)target) pyNavigatonDismissStyle:dismissStyle] ? : dismissStyle;
-        }
-        if(!dismissStyle) return;
-        if(!backButtonItem){
-            UIButton * backButton  = [dismissStyle createButton];
-            backButtonItem = [[PYBackButtonItem alloc] initWithCustomView:backButton];
-        }else{
-            if(backButtonItem.customView && [backButtonItem.customView isKindOfClass:[UIButton class]]){
-                UIButton * backButton = backButtonItem.customView;
-                [dismissStyle setStyleWithButton:backButton];
+            __PYGestureRecognizerDelegate * rdelegate = [__PYGestureRecognizerDelegate shareDelegate];
+            rdelegate.nvc = target.navigationController;
+            target.navigationController.interactivePopGestureRecognizer.delegate = rdelegate;
+        }else if(target.navigationController.presentingViewController
+                 && target.navigationController.viewControllers.count == 1
+                 && target.navigationController.viewControllers.firstObject == target){
+            SEL dismessSel = sel_getUid("__py_navigation_dismissvc");
+            if(![target respondsToSelector:dismessSel]){
+                class_addMethod([target class], dismessSel, (IMP)__py_navigation_dismissvc, "v@:");
+            }
+            PYNavigationBackItemStyleModel * dismissStyle = self.navigationStyle.dismissStyle;
+            if([((id<PYNavigationSetterTag>)target) respondsToSelector:@selector(pyNavigatonDismissStyle:)]){
+                dismissStyle = [((id<PYNavigationSetterTag>)target) pyNavigatonDismissStyle:dismissStyle] ? : dismissStyle;
+            }
+            if(!dismissStyle) return;
+            if(!backButtonItem){
+                UIButton * backButton  = [dismissStyle createButton];
                 [backButton addTarget:target action:dismessSel forControlEvents:UIControlEventTouchUpInside];
+                backButtonItem = [[PYBackButtonItem alloc] initWithCustomView:backButton];
+            }else{
+                if(backButtonItem.customView && [backButtonItem.customView isKindOfClass:[UIButton class]]){
+                    UIButton * backButton = backButtonItem.customView;
+                    [dismissStyle setStyleWithButton:backButton];
+                    [backButton addTarget:target action:dismessSel forControlEvents:UIControlEventTouchUpInside];
+                }
+                backButtonItem = nil;
             }
-            backButtonItem = nil;
         }
     }
     if(backButtonItem){
