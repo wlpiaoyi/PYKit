@@ -83,10 +83,10 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
     self.keyboardType = UIKeyboardTypePhonePad;
     NSDictionary * matchIng = @{
                                 @(1):@"^(\\+|1){1}$",
-                                @(2):@"^((\\+(\\d{1,2})){1})|((13)|(14)|(15)|(18)|(19)|(17))$",
-                                @(3):@"^(\\+(\\d{1,2}))|((13)|(14)|(15)|(18)|(19)|(17))\\d{1}$",
-                                @(4):@"^(\\+(\\d{1,2})1)|((13)|(14)|(15)|(18)|(19)|(17))\\d{2}$",
-                                @(5):@"^(\\+(\\d{2})){0,1}((13)|(14)|(15)|(18)|(19)|(17))\\d{0,9}$"
+                                @(2):@"^((\\+(\\d{1,2})){1})|((13)|(14)|(15)|(18)|(19)|(17)|(16)|(12)|(12))$",
+                                @(3):@"^(\\+(\\d{1,2}))|((13)|(14)|(15)|(18)|(19)|(17)|(16)|(12))\\d{1}$",
+                                @(4):@"^(\\+(\\d{1,2})1)|((13)|(14)|(15)|(18)|(19)|(17)|(16)|(12))\\d{2}$",
+                                @(5):@"^(\\+(\\d{2})){0,1}((13)|(14)|(15)|(18)|(19)|(17)|(16)|(12))\\d{0,9}$"
                                  };
     NSString * matchEnd = @"^(\\+(\\d{2})){0,1}((13)|(14)|(15)|(18)|(19)|(17))\\d{9}$";
     [self pyCheckMatchWithIdentify:_UITextInputCheckDictKeyMobilePhone inputing:matchIng inputEnd:matchEnd];
@@ -143,9 +143,20 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
                     class_addMethod([delegate class], action1, imp, "c24@0:4@8{_NSRange=II}12@20");
                 }else{
                     IMP imp = (IMP)_pytextfield_shouldChangeCharactersInRange_replacementString;
-                    class_addMethod([delegate class], action2, imp, "c24@0:4@8{_NSRange=II}12@20");
-                    Method m1 = class_getInstanceMethod([delegate class], action1);
-                    Method m2 = class_getInstanceMethod([delegate class], action2);
+                    Class clazz = [delegate class];
+                    Method m1 = class_getInstanceMethod(clazz, action1);
+                    BOOL flag = YES;
+                    while (flag) {
+                        Class super_clazz = class_getSuperclass(clazz);
+                        Method m = class_getInstanceMethod(super_clazz, action1);
+                        if(m){
+                            m1 = m;
+                            clazz = super_clazz;
+                        }else break;
+                    }
+                    class_addProtocol(clazz, @protocol(UITextInputCheckDelegateHookTag));
+                    class_addMethod(clazz, action2, imp, "c24@0:4@8{_NSRange=II}12@20");
+                    Method m2 = class_getInstanceMethod(clazz, action2);
                     method_exchangeImplementations(m1, m2);
                 }
                 action1 = @selector(textFieldShouldEndEditing:);
@@ -155,9 +166,20 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
                     class_addMethod([delegate class], action1, imp, "c12@0:4@8");
                 }else{
                     IMP imp = (IMP)_pytextField_shouldEndEditing;
-                    class_addMethod([delegate class], action2, imp, "c12@0:4@8");
-                    Method m1 = class_getInstanceMethod([delegate class], action1);
-                    Method m2 = class_getInstanceMethod([delegate class], action2);
+                    Class clazz = [delegate class];
+                    Method m1 = class_getInstanceMethod(clazz, action1);
+                    BOOL flag = YES;
+                    while (flag) {
+                        Class super_clazz = class_getSuperclass(clazz);
+                        Method m = class_getInstanceMethod(super_clazz, action1);
+                        if(m){
+                            m1 = m;
+                            clazz = super_clazz;
+                        }else break;
+                    }
+                    class_addProtocol(clazz, @protocol(UITextInputCheckDelegateHookTag));
+                    class_addMethod(clazz, action2, imp, "c12@0:4@8");
+                    Method m2 = class_getInstanceMethod(clazz, action2);
                     method_exchangeImplementations(m1, m2);
                 }
             }
@@ -177,6 +199,7 @@ BOOL _pyexchangetextFieldShouldEndEditing(id target, SEL action, UITextField *te
 
 BOOL _pytextfield_shouldChangeCharactersInRange_replacementString(id target, SEL action, UITextField * textField, NSRange range, NSString * string){
     BOOL result = _pyexchangetextfield_shouldChangeCharactersInRange_replacementString(target, action, textField, range, string);
+    if(result == NO) return NO;
     action = @selector(checktextField:shouldChangeCharactersInRange:replacementString:);
     BOOL usrResult;
     _pytextinput_shouldchangecharactersinrange_replacementstring(target, action, textField, range, string, &usrResult);
