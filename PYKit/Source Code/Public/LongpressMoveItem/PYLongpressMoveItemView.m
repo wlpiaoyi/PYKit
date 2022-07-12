@@ -41,6 +41,7 @@ kPNSNA UIImageView * snapImageView;
 kPNSNA id snapData;
 
 kPNSNA UILongPressGestureRecognizer * longPress;
+kPNSNA UITapGestureRecognizer * clickPress;
 kPNSNA NSTimer * tapingTimer;
 
 @end
@@ -76,7 +77,6 @@ kINITPARAMSForType(PYItemTapView){
     [collectionView py_makeConstraints:^(PYConstraintMaker * _Nonnull make) {
         make.left.right.top.bottom.py_constant(0);
     }];
-    
     UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(tapLongPress:)];
     [collectionView addGestureRecognizer:longPress];
     self.longPress = longPress;
@@ -109,6 +109,7 @@ kINITPARAMSForType(PYItemTapView){
     else if(pointY > self->collectionView.frameHeight - self.itemSize.height/2) pointY = self->collectionView.frameHeight - self.itemSize.height/2;
     self.snapImageView.center = CGPointMake(pointX, pointY);
 }
+
 
 -(void) tapLongPress:(UILongPressGestureRecognizer *) longPress{
     if(self.isCanDelCtx == NO) return;
@@ -273,6 +274,7 @@ kINITPARAMSForType(PYItemTapView){
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    if(self.blockSelected) _blockSelected(indexPath.row);
 }
 
 

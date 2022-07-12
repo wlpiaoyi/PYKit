@@ -29,6 +29,7 @@ kPNCNA BOOL (^blockBeforeDel) (id delData);
 kPNCNA void (^blockAfterDel) (id delData);
 kPNCNA BOOL (^blockBeforeMove) (id target, id toMove);
 kPNCNA void (^blockAfterMove) (id target, id toMove);
+kPNCNA void (^blockSelected) (NSInteger index);
 
 -(void) addData:(id) data animations:(BOOL) animations;
 

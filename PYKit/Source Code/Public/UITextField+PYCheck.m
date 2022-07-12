@@ -36,24 +36,24 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
 @implementation UITextField(PYCheck)
 -(void) pyClearTextFieldCheck{
     self.keyboardType = UIKeyboardTypeDefault;
-    PYTextInputCheckParams * params = self._pytextinputcheckparams;
-    if(params == nil){
-        @synchronized ([UITextField class]) {
-            params = self._pytextinputcheckparams;
-            if(params == nil){
-                params = [PYTextInputCheckParams new];
-                objc_setAssociatedObject(self, PYTextFieldCheckParamPointer, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-                static dispatch_once_t ui_textfiled_check_once_token;
-                dispatch_once(&ui_textfiled_check_once_token, ^{
-                    [UITextField hookMethodWithName:@"setDelegate:"];
-                });
-            }
-        }
-    }
-    [self._pytextinputcheckparams.dictMatch removeAllObjects];
-    if(!self.delegate){
-        self.delegate = [self._pytextinputcheckparams getDelegateWithTextInput:self];
-    }
+//    PYTextInputCheckParams * params = self._pytextinputcheckparams;
+//    if(params == nil){
+//        @synchronized ([UITextField class]) {
+//            params = self._pytextinputcheckparams;
+//            if(params == nil){
+//                params = [PYTextInputCheckParams new];
+//                objc_setAssociatedObject(self, PYTextFieldCheckParamPointer, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//                static dispatch_once_t ui_textfiled_check_once_token;
+//                dispatch_once(&ui_textfiled_check_once_token, ^{
+//                    [UITextField hookMethodWithName:@"setDelegate:"];
+//                });
+//            }
+//        }
+//    }
+//    [self._pytextinputcheckparams.dictMatch removeAllObjects];
+//    if(!self.delegate){
+//        self.delegate = [self._pytextinputcheckparams getDelegateWithTextInput:self];
+//    }
 }
 -(void) pyCheckInteger{
     [self pyCheckIntegerForMax:0 min:0];
@@ -132,59 +132,59 @@ BOOL _pytextField_shouldEndEditing(id target, SEL action, UITextField *textField
 
 -(void) exchangeSetDelegate:(id<UITextFieldDelegate>) delegate{
     [self exchangeSetDelegate:delegate];
-    if(delegate && ![delegate conformsToProtocol:@protocol(UITextInputCheckDelegateHookTag)]){
-        @synchronized ([delegate class]) {
-            if(![delegate conformsToProtocol:@protocol(UITextInputCheckDelegateHookTag)]){
-                class_addProtocol([delegate class], @protocol(UITextInputCheckDelegateHookTag));
-                SEL action1 = @selector(textField:shouldChangeCharactersInRange:replacementString:);
-                SEL action2 = @selector(checktextField:shouldChangeCharactersInRange:replacementString:);
-                if(![delegate respondsToSelector:action1]){
-                    IMP imp = (IMP)_pyexchangetextfield_shouldChangeCharactersInRange_replacementString;
-                    class_addMethod([delegate class], action1, imp, "c24@0:4@8{_NSRange=II}12@20");
-                }else{
-                    IMP imp = (IMP)_pytextfield_shouldChangeCharactersInRange_replacementString;
-                    Class clazz = [delegate class];
-                    Method m1 = class_getInstanceMethod(clazz, action1);
-                    BOOL flag = YES;
-                    while (flag) {
-                        Class super_clazz = class_getSuperclass(clazz);
-                        Method m = class_getInstanceMethod(super_clazz, action1);
-                        if(m){
-                            m1 = m;
-                            clazz = super_clazz;
-                        }else break;
-                    }
-                    class_addProtocol(clazz, @protocol(UITextInputCheckDelegateHookTag));
-                    class_addMethod(clazz, action2, imp, "c24@0:4@8{_NSRange=II}12@20");
-                    Method m2 = class_getInstanceMethod(clazz, action2);
-                    method_exchangeImplementations(m1, m2);
-                }
-                action1 = @selector(textFieldShouldEndEditing:);
-                action2 = @selector(checktextFieldShouldEndEditing:);
-                if(![delegate respondsToSelector:action1]){
-                    IMP imp = (IMP)_pyexchangetextFieldShouldEndEditing;
-                    class_addMethod([delegate class], action1, imp, "c12@0:4@8");
-                }else{
-                    IMP imp = (IMP)_pytextField_shouldEndEditing;
-                    Class clazz = [delegate class];
-                    Method m1 = class_getInstanceMethod(clazz, action1);
-                    BOOL flag = YES;
-                    while (flag) {
-                        Class super_clazz = class_getSuperclass(clazz);
-                        Method m = class_getInstanceMethod(super_clazz, action1);
-                        if(m){
-                            m1 = m;
-                            clazz = super_clazz;
-                        }else break;
-                    }
-                    class_addProtocol(clazz, @protocol(UITextInputCheckDelegateHookTag));
-                    class_addMethod(clazz, action2, imp, "c12@0:4@8");
-                    Method m2 = class_getInstanceMethod(clazz, action2);
-                    method_exchangeImplementations(m1, m2);
-                }
-            }
-        }
-    }
+//    if(delegate && ![delegate conformsToProtocol:@protocol(UITextInputCheckDelegateHookTag)]){
+//        @synchronized ([delegate class]) {
+//            if(![delegate conformsToProtocol:@protocol(UITextInputCheckDelegateHookTag)]){
+//                class_addProtocol([delegate class], @protocol(UITextInputCheckDelegateHookTag));
+//                SEL action1 = @selector(textField:shouldChangeCharactersInRange:replacementString:);
+//                SEL action2 = @selector(checktextField:shouldChangeCharactersInRange:replacementString:);
+//                if(![delegate respondsToSelector:action1]){
+//                    IMP imp = (IMP)_pyexchangetextfield_shouldChangeCharactersInRange_replacementString;
+//                    class_addMethod([delegate class], action1, imp, "c24@0:4@8{_NSRange=II}12@20");
+//                }else{
+//                    IMP imp = (IMP)_pytextfield_shouldChangeCharactersInRange_replacementString;
+//                    Class clazz = [delegate class];
+//                    Method m1 = class_getInstanceMethod(clazz, action1);
+//                    BOOL flag = YES;
+//                    while (flag) {
+//                        Class super_clazz = class_getSuperclass(clazz);
+//                        Method m = class_getInstanceMethod(super_clazz, action1);
+//                        if(m){
+//                            m1 = m;
+//                            clazz = super_clazz;
+//                        }else break;
+//                    }
+//                    class_addProtocol(clazz, @protocol(UITextInputCheckDelegateHookTag));
+//                    class_addMethod(clazz, action2, imp, "c24@0:4@8{_NSRange=II}12@20");
+//                    Method m2 = class_getInstanceMethod(clazz, action2);
+//                    method_exchangeImplementations(m1, m2);
+//                }
+//                action1 = @selector(textFieldShouldEndEditing:);
+//                action2 = @selector(checktextFieldShouldEndEditing:);
+//                if(![delegate respondsToSelector:action1]){
+//                    IMP imp = (IMP)_pyexchangetextFieldShouldEndEditing;
+//                    class_addMethod([delegate class], action1, imp, "c12@0:4@8");
+//                }else{
+//                    IMP imp = (IMP)_pytextField_shouldEndEditing;
+//                    Class clazz = [delegate class];
+//                    Method m1 = class_getInstanceMethod(clazz, action1);
+//                    BOOL flag = YES;
+//                    while (flag) {
+//                        Class super_clazz = class_getSuperclass(clazz);
+//                        Method m = class_getInstanceMethod(super_clazz, action1);
+//                        if(m){
+//                            m1 = m;
+//                            clazz = super_clazz;
+//                        }else break;
+//                    }
+//                    class_addProtocol(clazz, @protocol(UITextInputCheckDelegateHookTag));
+//                    class_addMethod(clazz, action2, imp, "c12@0:4@8");
+//                    Method m2 = class_getInstanceMethod(clazz, action2);
+//                    method_exchangeImplementations(m1, m2);
+//                }
+//            }
+//        }
+//    }
 }
 @end
 

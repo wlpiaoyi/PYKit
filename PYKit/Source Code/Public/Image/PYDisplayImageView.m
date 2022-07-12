@@ -58,6 +58,8 @@ kINITPARAMS{
 
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
+
+    printf("touchesBegan%ld\n", touches.count);
     _touchIndex += touches.count;
     _movePoint = [touches.anyObject locationInView: self];
     if(_touchState != PYDisplayImageTouchUnkown){
